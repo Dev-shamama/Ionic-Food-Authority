@@ -18,12 +18,21 @@ img {
 }
 
 ion-list.md.list-md.hydrated {
+    --border: none;
     background: #014122;
 }
 
 ion-item {
     --background: #014122;
     --color: white;
+    --border: none;
+}
+
+
+.item-inner {
+    border-width: none !important;
+    border-style: none !important;
+    border-color: none !important;
 }
 
 ion-label.sc-ion-label-md-h.sc-ion-label-md-s.md.hydrated {

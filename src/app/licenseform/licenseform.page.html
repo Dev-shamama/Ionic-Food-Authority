@@ -1,0 +1,184 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="dashboard-container">
+    <h2 class="section-title">License Registration Form</h2>
+
+    <div class="wrapper">
+      <div class="top-content-header">
+        <div class="logo-one">
+          <ion-img
+            src="./assets/img/logo-1.png"
+            alt="The Wisconsin State Capitol building in Madison, WI at night"
+          ></ion-img>
+        </div>
+
+        <div class="main-heading">
+          <h2>SINDH FOOD AUTHORITY</h2>
+          <p>APPLICATION FOR LICENSE OF FOOD BUSINESS</p>
+          <p>UNDER SECTION 19 OF SINDH FOOD AUTHORITY ACT 2016</p>
+        </div>
+
+        <div class="logo-two">
+          <ion-img
+            src="./assets/img/logo-2.png"
+            alt="The Wisconsin State Capitol building in Madison, WI at night"
+          ></ion-img>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <form action="" id="license_form">
+          <div class="inputField applicant">
+            <div class="inputPlaceholer">Name of Applicant</div>
+            <input type="text" placeholder="Enter Your Name Of Applicant" />
+          </div>
+
+          <div class="inputField cnic">
+            <div class="inputPlaceholer">CNIC #</div>
+            <input type="text" placeholder="Enter Your CNIC" />
+          </div>
+
+          <div class="inputField phone">
+            <div class="inputPlaceholer">Ph #</div>
+            <input type="text" placeholder="Enter Phone #" />
+          </div>
+
+          <div class="inputField cell">
+            <div class="inputPlaceholer">Cell #</div>
+            <input type="text" placeholder="Enter Your Cell No" />
+          </div>
+
+          <div class="inputField food-name">
+            <div class="inputPlaceholer">Name of Food Business</div>
+            <input type="text" placeholder="Enter Your Name of Food Business" />
+          </div>
+
+          <div class="inputField nature">
+            <div class="inputPlaceholer">Nature of Business</div>
+            <input type="text" placeholder="Enter Your Nature of Business" />
+          </div>
+
+          <div class="inputField category">
+            <div class="inputPlaceholer">Category</div>
+            <input type="text" placeholder="Enter Category" />
+          </div>
+
+          <div class="inputField district">
+            <div class="inputPlaceholer">District</div>
+            <input type="text" placeholder="Enter District" />
+          </div>
+
+          <div class="inputField secp">
+            <div class="inputPlaceholer">SECP</div>
+            <input type="text" placeholder="Enter Your SECP" />
+          </div>
+
+          <div class="inputField ntn">
+            <div class="inputPlaceholer">NTN</div>
+            <input type="text" placeholder="Enter NTN" />
+          </div>
+
+          <div class="inputField srb">
+            <div class="inputPlaceholer">SRB</div>
+            <input type="text" placeholder="Enter SECP" />
+          </div>
+
+          <div class="inputField tax">
+            <div class="inputPlaceholer">SALES TAX</div>
+            <input type="text" placeholder="Enter TAX" />
+          </div>
+
+          <div class="inputField area">
+            <div class="inputPlaceholer">Area Measurement (sq. ft)</div>
+            <input
+              type="text"
+              placeholder="Enter Your Area Measurement (sq. ft)"
+            />
+          </div>
+
+          <div class="inputField address">
+            <div class="inputPlaceholer">Address</div>
+            <input type="text" placeholder="Enter Your Address" />
+          </div>
+        </form>
+
+        <div class="check-sure-question">
+          <p>Already Registered with Food Authority</p>
+          <div class="checkbox-content">
+            <ion-radio-group value="custom-checked">
+              <div class="checkbox-btn">
+                <ion-radio
+                  value="custom"
+                  aria-label="Custom checkbox"
+                ></ion-radio
+                >Yes
+              </div>
+              <div class="checkbox-btn">
+                <ion-radio
+                  value="custom-checked"
+                  aria-label="Custom checkbox that is checked"
+                ></ion-radio
+                >No
+              </div>
+            </ion-radio-group>
+          </div>
+        </div>
+
+        <div class="date-of-registration">
+          <div class="left-side"><p>If yes date of Registration</p></div>
+          <div class="right-side">
+            <p>If registered with any other</p>
+            <p>Authority/organization,</p>
+            <p>attach the copy of certificate.</p>
+          </div>
+
+        </div>
+
+        <form action="" id="license_form_bottom">
+          <div class="inputField registrationName">
+            <div class="inputPlaceholer">Registration in the name of</div>
+            <input type="text" placeholder="Enter Your Registration in the name of" />
+          </div>
+
+          <div class="inputField currentPayment">
+            <div class="inputPlaceholer">Current Payment Details</div>
+            <input type="text" placeholder="Enter Your Current Payment Details" />
+          </div>
+
+          <div class="inputField ChallanNo">
+            <div class="inputPlaceholer">Challan No.</div>
+            <input type="text" placeholder="Enter Challan No." />
+          </div>
+
+          <div class="inputField amountPaid">
+            <div class="inputPlaceholer">Amount Paid Rs</div>
+            <input type="text" placeholder="Enter Your Cell No" />
+          </div>
+
+          <div class="inputField dateOfPayment">
+            <div class="inputPlaceholer">Date of Payment</div>
+            <input type="text" placeholder="--/--/----" />
+          </div>
+
+        </form>
+
+        <div class="restaurant-section">
+          <p>Any other Restaurant / food business owned by the applicant, if yes details thereof:</p>
+        </div>
+
+        <div class="declaration-section">
+          <h5>Declaration</h5>
+          <p>I hereby undertake that the information provided in this registration form is correct and no material information and date is concealed intentionally from the Authority. I request to kindly register my food business and issue license as stipulated under section 19 of the Sindh Food Authority Act 2016. </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bottom-submit-button">
+      <ion-button>Save and generate Challan <span><ion-icon name="chevron-forward-outline"></ion-icon></span></ion-button>
+    </div>
+
+
+  </div>
+</ion-content>
