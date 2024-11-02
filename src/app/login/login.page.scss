@@ -1,0 +1,113 @@
+// .dyanmic-changer {
+//     display: none;
+// }
+
+.center-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #F9F9F9;
+}
+
+.center-container .logo {
+    width: 300px;
+    height: 100px;
+}
+
+.login-content {
+    min-width: 320px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 24px;
+}
+.login-content h1 {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+
+#login-form label {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    color: #5C5C5C;
+    font-size: 12px;
+}
+
+#login-form label input {
+    min-width: 310px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background-color: #EAEAEA;
+    border: none;
+    margin: 4px 0 6px 0;
+}
+
+
+
+#login-form .forgot-password {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin: 4px 0 6px 0;
+    font-size: 12px;
+}
+
+#login-form .forgot-password a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+#login-form .form-btn {
+    width: 100%;
+    padding: 12px 0;
+    background: var(--primary-color);
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 300ms ease-in-out;
+}
+
+#login-form .form-btn:hover {
+    background: var(--primary-color-active);
+}
+
+#login-form .form-new-account {
+    margin-top: 14px;
+}
+
+#login-form .form-new-account * {
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
+}
+
+#login-form .form-new-account .or {
+    color: #5C5C5C;
+
+}
+#login-form .form-new-account p a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 450px) {
+    .center-container .logo {
+        width: 250px;
+    }
+    
+    .login-content {
+        min-width: 300px;
+    }   
+    #login-form label input {
+        min-width: 250px !important;
+    }
+}

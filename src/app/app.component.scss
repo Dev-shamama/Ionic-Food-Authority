@@ -1,0 +1,64 @@
+#sidebar-main-container {
+    --border: none;
+}
+
+.main-top-logo {
+    width: 200px;
+    padding-left: 20px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#sidebar-content-menu {
+    --background: #014122;
+}
+
+ion-list.md.list-md.hydrated {
+    background: #014122;
+}
+
+ion-item {
+    --background: #014122;
+    --color: white;
+}
+
+ion-label.sc-ion-label-md-h.sc-ion-label-md-s.md.hydrated {
+    background: rgba(255, 255, 255, 0.27);
+    padding: 13px 11px;
+    height: 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 4px;
+}
+
+ion-label .item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ion-label .item .item-left-side {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+ion-label .item .item-left-side .item-icon {
+    padding-right: 6px;
+    display: flex;
+    font-size: 20px;
+}
+ion-label .item .item-left-side .item-text {
+    font-size: 14px;
+}
+
+ion-label.item-logout.sc-ion-label-md-h.sc-ion-label-md-s.md.hydrated {
+    background: rgba(255, 0, 0, 0.61);
+}

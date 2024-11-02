@@ -1,3 +1,103 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane when="md" contentId="main">
+
+    <ion-menu contentId="main" id="sidebar-main-container">
+      <ion-header>
+        <ion-toolbar color="white">
+          <div class="main-top-logo">
+            <img [src]="imagePath" alt="logo" />
+          </div>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding" id="sidebar-content-menu"> <ion-list>
+          <ion-item>
+            <ion-label>
+              <div class="item">
+                <div class="item-left-side">
+                  <div class="item-icon"><ion-icon name="apps-outline"></ion-icon></div>
+                  <div class="item-text">
+                    Dashboard
+                  </div>
+                </div>
+                <div class="icon"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <div class="item">
+                <div class="item-left-side">
+                  <div class="item-icon"><ion-icon name="cube-outline"></ion-icon></div>
+                  <div class="item-text">
+                    Apply For License
+                  </div>
+                </div>
+                <div class="icon"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+              </div>
+                
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <div class="item">
+                <div class="item-left-side">
+                  <div class="item-icon"><ion-icon name="list-outline"></ion-icon></div>
+                  <div class="item-text">
+                    Challan List
+                  </div>
+                </div>
+                <div class="icon"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <div class="item">
+                <div class="item-left-side">
+                  <div class="item-icon"><ion-icon name="trophy-outline"></ion-icon></div>
+                  <div class="item-text">
+                    My Food License
+                  </div>
+                </div>
+                <div class="icon"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+              </div>
+                    
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <div class="item">
+                <div class="item-left-side">
+                  <div class="item-icon"><ion-icon name="information-circle-outline"></ion-icon></div>
+                  <div class="item-text">
+                    Procedure
+                  </div>
+                </div>
+                <div class="icon"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="item-logout">
+              <div class="item">
+                <div class="item-left-side">
+                  <div class="item-icon"><ion-icon name="log-out-outline"></ion-icon></div>
+                  <div class="item-text">
+                    Logout
+                  </div>
+                </div>
+                <div class="icon"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ion-list> </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+  </ion-split-pane>
+
+
 </ion-app>
