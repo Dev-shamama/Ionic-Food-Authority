@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-licenseform',
   templateUrl: './licenseform.page.html',
   styleUrls: ['./licenseform.page.scss'],
 })
-export class LicenseformPage implements OnInit {
+export class LicenseformPage{
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  
 }
