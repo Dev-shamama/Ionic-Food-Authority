@@ -38,14 +38,28 @@ ion-radio.radio-checked::part(mark) {
 
 ion-item {
   --border-color: transparent;
-  --background: #F2F2F2;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0px;
+  // --background: #F2F2F2;
 }
 
 ion-input {
+  --width: 100%;
   --border-color: transparent;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --background: none;
+}
+
+.item-inner {
+  padding-right: 0px !important;
+}
+
+ion-label {
   --padding-start: 0;
   --padding-end: 0;
-  --background: none;
+  --padding-right: 0;
 }
 ion-select {
   padding: 0 0;
@@ -53,7 +67,7 @@ ion-select {
 
 ion-item ion-input,
 ion-item ion-select {
-  width: 100%;
+  --width: 100%;
   --color: rgba(137, 137, 137, 1);
   --highlight-color-focused: var(--primary-color);
 }
@@ -135,7 +149,7 @@ ion-item ion-select {
       grid-template-columns: repeat(8, 1fr);
       grid-template-rows: repeat(8, 1fr);
       gap: 8px;
-      margin-bottom: 30px;
+      margin-bottom: 60px;
 
       .inputField.applicant {
         grid-column: span 8 / span 8;
@@ -207,6 +221,7 @@ ion-item ion-select {
       justify-content: space-between;
       align-items: center;
       flex-direction: row;
+      margin-bottom: 12px;
       p {
         font-size: 14px;
       }
@@ -235,7 +250,7 @@ ion-item ion-select {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 10px 0;
+      padding: 20px 0;
 
       .left-side p {
         font-size: 14px;
@@ -294,7 +309,7 @@ ion-item ion-select {
     .declaration-section {
       width: 100%;
       border: 1px solid #888888;
-      padding: 0 10px;
+      padding: 5px 10px;
       margin: 20px 0;
       h5 {
         color: #be0000;

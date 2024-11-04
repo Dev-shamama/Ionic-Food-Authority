@@ -1,130 +1,452 @@
 ion-content {
-    --background: #eaeaea;
+  --background: #eaeaea;
 }
 
-ion-button {
-    --background: rgba(9, 120, 66, 1);
-    --background-hover: #076a3a;
-    --background-activated: #014122;
-    --background-focused: #014122;
-    --color: #FFFFFF;
+ion-button.most-used {
+  --background: #014122;
+  --background-hover: #076a3a;
+  --background-activated: #014122;
+  --background-focused: #014122;
 
-    --border-radius: 6px;
-    --border-color: rgba(9, 120, 66, 1);
-    --border-style: solid;
-    --border-width: 1px;
+  --color: #ffffff;
 
-    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+  --border-radius: 6px;
+  --border-color: #014122;
+  --border-style: solid;
+  --border-width: 1px;
 
-    --ripple-color: rgba(9, 120, 66, 1);
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
 
-    --padding-top: 6px;
-    --padding-bottom: 6px;
+  --ripple-color: #014122;
+
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-start: 4px;
+  --padding-end: 4px;
+
+  ion-icon {
+    margin-right: 6px;
+  }
+
+  span {
+    font-size: 12px;
+  }
 }
 
 .license-container {
-    width: 100%;
+  width: 100%;
 }
 
 .license-container .section-title {
-    margin-top: 0;
-    font-weight: 600;
+  margin-top: 0;
+  font-weight: 600;
 }
 
 .wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .wrapper-one {
+  width: 100%;
+  padding: 20px;
+  border-radius: 18px;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  margin-bottom: 15px;
+
+  .item {
+    border-right: 1.5px solid #888888;
+    h5 {
+      font-weight: 600;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    &.checklist {
+      width: 100%;
+      grid-column: span 6 / span 6;
+      // background: pink;
+      padding: 0 20px;
+
+      .checklist-content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        .item-checklist {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+          align-items: center;
+          background: #dedede;
+          border-radius: 8px;
+          padding: 0 10px;
+          margin-bottom: 12px;
+
+          .left-side {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            align-items: center;
+
+            .icon {
+              display: flex;
+              font-size: 30px;
+              margin-right: 8px;
+              ion-icon {
+                --ionicon-stroke-width: 36px;
+              }
+            }
+
+            .text {
+              font-weight: 600;
+              font-size: 12px;
+              max-width: 300px;
+            }
+          }
+
+          .right-side {
+            ion-button {
+              --background: #000000;
+              --background-hover: #076a3a;
+              --background-activated: #014122;
+              --background-focused: #014122;
+
+              --color: #ffffff;
+
+              --border-radius: 6px;
+              --border-color: #000000;
+              --border-style: solid;
+              --border-width: 1px;
+
+              --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+              --ripple-color: #000000;
+
+              --padding-top: 0px;
+              --padding-bottom: 0px;
+              --padding-start: 4px;
+              --padding-end: 4px;
+
+              ion-icon {
+                margin-right: 6px;
+              }
+
+              span {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        // Active
+        .item-checklist.active {
+          .left-side {
+            .icon {
+              color: #097842;
+            }
+            .text {
+              color: #097842;
+            }
+          }
+          .right-side {
+            ion-button {
+              --background: rgba(9, 120, 66, 1);
+              --background-hover: #076a3a;
+              --background-activated: #014122;
+              --background-focused: #014122;
+              --border-color: rgba(9, 120, 66, 1);
+            }
+          }
+        }
+      }
+    }
+
+    &.completeIn {
+      grid-column: span 3 / span 3;
+      grid-column-start: 7;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+
+      .completeIn-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0 15px;
+
+        .totalDay {
+          color: #014122;
+          margin-bottom: 0;
+          margin-top: 20px;
+          font-size: 18px;
+        }
+
+        .daysLeft {
+          color: #014122;
+          font-size: 140px;
+          margin: 0;
+          font-weight: 800;
+          letter-spacing: 6px;
+        }
+
+        .daysAreLeft {
+          font-weight: 600;
+          margin: 0;
+        }
+
+        .progress-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 20px;
+          .progress-bar {
+            width: 100%;
+            background-color: #1ca16045;
+            height: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            .progress {
+              width: 10%;
+              height: 100%;
+              background: #014122;
+              border-radius: 30px;
+            }
+          }
+        }
+      }
+    }
+
+    &.documentStatus {
+      grid-column: span 3 / span 3;
+      grid-column-start: 10;
+
+      .documentStatus-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0 15px;
+
+        h4 {
+          color: #014122;
+          margin-bottom: 0;
+          font-weight: 600;
+        }
+        p {
+          color: #737373;
+          margin-top: 0;
+          font-size: 14px;
+        }
+
+        @keyframes growProgressBar {
+          0%,
+          33% {
+            --pgPercentage: 0;
+          }
+          100% {
+            --pgPercentage: var(--value);
+          }
+        }
+
+        @property --pgPercentage {
+          syntax: "<number>";
+          inherits: false;
+          initial-value: 0;
+        }
+
+        div[role="progressbar"] {
+          --size: 12rem;
+          --fg: #1CA160;
+          --bg: #FFEBAB;
+          --pgPercentage: var(--value);
+          animation: growProgressBar 3s 1 forwards;
+          width: var(--size);
+          height: var(--size);
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
+          background: radial-gradient(
+              closest-side,
+              white 80%,
+              transparent 0 99.9%,
+              white 0
+            ),
+            conic-gradient(
+              var(--fg) calc(var(--pgPercentage) * 1%),
+              var(--bg) 0
+            );
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: calc(var(--size) / 5);
+          color: var(--fg);
+        }
+
+        div[role="progressbar"]::before {
+          counter-reset: percentage var(--value);
+          content: counter(percentage) "%";
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+
+  .item:last-child {
+    border: none;
+  }
+}
+
+.wrapper-two {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  column-gap: 15px;
+
+  .item {
     width: 100%;
     padding: 20px;
     border-radius: 18px;
     background-color: #ffffff;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    gap: 8px;
 
-    .item {
-        border-right: 2px solid rgba(136, 136, 136, 1);
+    &.expiredDate {
+      grid-column: span 2 / span 2;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      margin-top: 0;
+      margin-bottom: 0;
+      * {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+      .title {
+        font-weight: 700;
+      }
+      .date {
+        color: #e10000;
+
+        padding: 20px 0;
+        border-bottom: 1.5px solid #808080;
+        font-weight: 700;
+        font-size: 30px;
+      }
+      .totalRemaining {
+        font-weight: 700;
+        padding-top: 20px;
+      }
+
+      .totalDay {
+        color: #e10000;
+        font-weight: 700;
+        font-size: 30px;
+        margin-top: 10px;
+        margin-bottom: 18px;
+      }
+
+      .progress-container {
+        width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        .progress-bar {
+          width: 100%;
+          background-color: #ffc5c5;
+          height: 26px;
+          border-radius: 20px;
+          overflow: hidden;
+          .progress {
+            width: 65%;
+            height: 100%;
+            background: #d20707;
+            border-radius: 30px;
+          }
+        }
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 20px;
+        margin-top: 15px;
+
+        ion-button {
+          --border-radius: 20px;
+          --padding-top: 6px;
+          --padding-bottom: 6px;
+          --padding-start: 25px;
+          --padding-end: 25px;
+
+          ion-icon {
+            --ionicon-stroke-width: 40px;
+          }
+
+          span {
+            margin-right: 6px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    &.certificate {
+      grid-column: span 4 / span 4;
+      grid-column-start: 3;
+
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+
+      .license-view-image {
+        grid-column: span 4 / span 4;
+        border-right: 1.5px solid #808080;
+        margin-right: 14px;
+        padding-right: 14px;
+
+        h4 {
+          margin-top: 0;
+          text-align: center;
+          font-weight: 700;
+        }
+      }
+
+      .license-operation {
+        grid-column: span 2 / span 2;
+        grid-column-start: 5;
+
+        display: flex;
+        justify-content: center;
         align-items: center;
         flex-direction: column;
 
-        &.checklist {
-            width: 100%;
-            grid-column: span 6 / span 6;
-            // background: pink;
-            padding: 0 20px;
+        ion-button {
+          --border-radius: 16px;
+          --ripple-color: #000000;
 
-            .checklist-content {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-                align-items: center;
+          --padding-top: 10px;
+          --padding-bottom: 10px;
+          --padding-start: 0;
+          --padding-end: 0;
+          width: 160px;
 
-                .item-checklist {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    flex-direction: row;
-                    align-items: center;
-                    background: #DEDEDE;
-                    border-radius: 8px;
-                    padding: 0 10px;
-                    margin-bottom: 12px;
-
-                    .left-side {
-                        display: flex;
-                        justify-content: center;
-                        align-items: flex-start;
-                        flex-direction: row;
-                        align-items: center;
-
-                        .icon {
-                            display: flex;
-                            font-size: 30px;
-                            color: var(--primary-color);
-                            margin-right: 8px;
-                        }
-
-                        .text {
-                            color: var(--primary-color);
-                            font-weight: 700;
-                        }
-                    }
-
-                    .right-side {
-                        ion-button {
-                            ion-icon {
-                                margin-right: 6px;
-                            }
-                        }
-                    }
-
-                }
-            }
-
+          span {
+            margin-right: 6px;
+          }
+          ion-icon {
+            --ionicon-stroke-width: 42px;
+          }
         }
-
-        &.completeIn {
-            background: red;
-            grid-column: span 3 / span 3;
-            grid-column-start: 7;
-        }
-
-        &.documentStatus {
-            background: rgb(122, 0, 21);
-            grid-column: span 3 / span 3;
-            grid-column-start: 10;
-        }
+      }
     }
-
-
-
-    .item:last-child {
-        border: none;
-    }
+  }
 }

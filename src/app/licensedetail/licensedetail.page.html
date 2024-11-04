@@ -1,74 +1,186 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-
   <div class="license-container">
     <h2 class="section-title">License Details</h2>
-
 
     <div class="wrapper wrapper-one">
       <div class="item checklist">
         <h5>CHECKLIST</h5>
 
         <div class="checklist-content">
-          <div class="item-checklist">
+          <div class="item-checklist active">
             <div class="left-side">
-              <div class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
+              <div class="icon">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+              </div>
               <div class="text">
                 <p>Copy of CNIC.</p>
               </div>
             </div>
             <div class="right-side">
-              <ion-button><ion-icon name="cloud-download-outline"></ion-icon> <span>Uploaded</span></ion-button>
-            </div>
-          </div>
-          
-          <div class="item-checklist">
-            <div class="left-side">
-              <div class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
-              <div class="text">
-                <p>Copy of CNIC.</p>
-              </div>
-            </div>
-            <div class="right-side">
-              <ion-button><ion-icon name="cloud-download-outline"></ion-icon> <span>Uploaded</span></ion-button>
+              <ion-button
+                ><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>Uploaded</span></ion-button
+              >
             </div>
           </div>
 
           <div class="item-checklist">
             <div class="left-side">
-              <div class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
+              <div class="icon">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+              </div>
               <div class="text">
-                <p>Copy of CNIC.</p>
+                <p>Copy of Challan form</p>
               </div>
             </div>
             <div class="right-side">
-              <ion-button><ion-icon name="cloud-download-outline"></ion-icon> <span>Uploaded</span></ion-button>
+              <ion-button
+                ><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>Upload</span></ion-button
+              >
             </div>
           </div>
 
           <div class="item-checklist">
             <div class="left-side">
-              <div class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
+              <div class="icon">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+              </div>
               <div class="text">
-                <p>Copy of CNIC.</p>
+                <p>
+                  Documents of the property/tenancy agreement or affidavit
+                  showing ownership
+                </p>
               </div>
             </div>
             <div class="right-side">
-              <ion-button><ion-icon name="cloud-download-outline"></ion-icon> <span>Uploaded</span></ion-button>
+              <ion-button
+                ><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>Upload</span></ion-button
+              >
+            </div>
+          </div>
+
+          <div class="item-checklist">
+            <div class="left-side">
+              <div class="icon">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+              </div>
+              <div class="text">
+                <p>
+                  Previous registration certificate (if any) with any authority.
+                </p>
+              </div>
+            </div>
+            <div class="right-side">
+              <ion-button
+                ><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>Upload</span></ion-button
+              >
+            </div>
+          </div>
+
+          <div class="item-checklist">
+            <div class="left-side">
+              <div class="icon">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+              </div>
+              <div class="text">
+                <p>Lab testing reports (where required as per SOPs)</p>
+              </div>
+            </div>
+            <div class="right-side">
+              <ion-button
+                ><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>Upload</span></ion-button
+              >
             </div>
           </div>
         </div>
-
       </div>
       <div class="item completeIn">
         <h5>Complete In</h5>
+
+        <div class="completeIn-content">
+          <h5 class="totalDay">Total Day 14</h5>
+          <h1 class="daysLeft">12</h1>
+          <h3 class="daysAreLeft">Days Are Left</h3>
+
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress"></div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="item documentStatus">
         <h5>Document Status</h5>
+
+        <div class="documentStatus-content">
+          <h4>1 Uploaded</h4>
+          <p>Progress ratio</p>
+
+          <div
+            role="progressbar"
+            aria-valuenow="65"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="--value: 65"
+          ></div>
+        </div>
       </div>
     </div>
 
-  </div>
+    <div class="wrapper wrapper-two">
+      <div class="item expiredDate">
+        <h4 class="title">Expiry Date</h4>
+        <h2 class="date">10 , Oct , 2028</h2>
 
+        <h4 class="totalRemaining">Total Remaining Days</h4>
+        <h4 class="totalDay">304 Day</h4>
+
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress"></div>
+          </div>
+        </div>
+
+        <div class="btn-container">
+          <ion-button class="most-used">
+            <span>Renew</span>
+            <ion-icon name="refresh-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="item certificate">
+        <div class="license-view-image">
+          <h4 class="title">License View</h4>
+          <div class="certificate-image">
+            <ion-img
+              src="/assets/img/certificate.png"
+              alt="certificate image"
+            ></ion-img>
+          </div>
+        </div>
+
+        <div class="license-operation">
+          <ion-button class="most-used">
+            <span>View</span>
+            <ion-icon name="eye-outline"></ion-icon>
+          </ion-button>
+          <ion-button class="most-used">
+            <span>Download</span>
+            <ion-icon name="cloud-download-outline"></ion-icon>
+          </ion-button>
+          <ion-button class="most-used">
+            <span>Print</span>
+            <ion-icon name="print-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
