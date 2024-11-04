@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'licenseform',
     loadChildren: () => import('./licenseform/licenseform.module').then( m => m.LicenseformPageModule)
   },
+  {
+    path: 'licensedetail',
+    loadChildren: () => import('./licensedetail/licensedetail.module').then( m => m.LicensedetailPageModule)
+  },
 
 ];
 
