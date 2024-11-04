@@ -38,6 +38,10 @@ const routes: Routes = [
     path: 'challanlist',
     loadChildren: () => import('./challanlist/challanlist.module').then( m => m.ChallanlistPageModule)
   },
+  {
+    path: 'verificationprocess',
+    loadChildren: () => import('./verificationprocess/verificationprocess.module').then( m => m.VerificationprocessPageModule)
+  },
 
 ];
 

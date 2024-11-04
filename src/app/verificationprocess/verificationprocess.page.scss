@@ -1,0 +1,43 @@
+ion-content {
+    --background: #eaeaea;
+  }
+  
+
+  .verification-container {
+    width: 100%;
+  }
+  
+  .verification-container .section-title {
+    margin-top: 0;
+    font-weight: 600;
+  }
+  
+  .wrapper {
+    width: 100%;
+  }
+
+  .wrapper-one {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 30px 20px;
+    background: #fff;
+    border-radius: 18px;
+
+    h3 {
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 14px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+
