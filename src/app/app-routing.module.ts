@@ -30,6 +30,14 @@ const routes: Routes = [
     path: 'licensedetail',
     loadChildren: () => import('./licensedetail/licensedetail.module').then( m => m.LicensedetailPageModule)
   },
+  {
+    path: 'success',
+    loadChildren: () => import('./success/success.module').then( m => m.SuccessPageModule)
+  },
+  {
+    path: 'challanlist',
+    loadChildren: () => import('./challanlist/challanlist.module').then( m => m.ChallanlistPageModule)
+  },
 
 ];
 
