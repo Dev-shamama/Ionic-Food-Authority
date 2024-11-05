@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'verificationprocess',
     loadChildren: () => import('./verificationprocess/verificationprocess.module').then( m => m.VerificationprocessPageModule)
   },
+  {
+    path: 'uploaddocument',
+    loadChildren: () => import('./uploaddocument/uploaddocument.module').then( m => m.UploaddocumentPageModule)
+  },
 
 ];
 
