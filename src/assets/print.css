@@ -1,0 +1,250 @@
+.w-100 {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.b-1 {
+  border-bottom: 1.5px solid #000000;
+}
+
+.challan-content {
+  width: 8.3in;
+  height: 11.7in;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.water-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.challan-content .top-logo {
+  width: 94%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.challan-content .top-logo .logo {
+  width: 270px;
+  height: 100px;
+}
+
+.challan-content .top-logo .logo.right-logo {
+    width: 200px;
+    height: 100px;
+  }
+
+.challan-content .top-logo .logo img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.challan-content h2 {
+  font-weight: 600;
+}
+
+.challan-content .content {
+  width: 94%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.challan-content .content .mangerSindhBankLtd {
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  flex-direction: row;
+  margin: 10px 0;
+}
+
+.challan-content .content .mangerSindhBankLtd .textMangerSindhBankLtd {
+  text-align: left;
+  border-bottom: 1.5px solid #000000;
+  padding-bottom: 24px;
+  padding-right: 34px;
+  padding-top: 17px;
+}
+
+.challan-content .content .mangerSindhBankLtd p {
+  margin: 0;
+}
+
+.challan-content .content .mangerSindhBankLtd strong {
+  font-size: 18px;
+}
+
+.challan-content .content .form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.challan-content .content .form .inputField {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.challan-content .content .form .inputField label {
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.challan-content .content .form .inputField input {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-bottom: 1.5px solid #000000;
+}
+
+.challan-content .content .form .mr-mrs {
+  grid-column: span 3 / span 3;
+}
+
+.challan-content .content .form .firm {
+  grid-column: span 3 / span 3;
+  grid-column-start: 4;
+}
+
+.challan-content .content .form .category {
+  grid-column: span 6 / span 6;
+  grid-row-start: 2;
+}
+
+.challan-content .content .form .address {
+  grid-column: span 6 / span 6;
+  grid-row-start: 3;
+}
+
+.challan-content .content .form .cnic {
+  grid-column: span 6 / span 6;
+  grid-row-start: 4;
+}
+
+.challan-content .content .table {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.challan-content .content .table table,
+.challan-content .content .table th,
+.challan-content .content .table td {
+  border: 1px solid black;
+}
+
+.challan-content .content .table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.challan-content .content .table table tr * {
+  height: 34px;
+  padding: 0 10px;
+}
+
+.challan-content .content .table tbody tr td:nth-child(1) {
+  text-align: left;
+}
+
+.challan-content .content .signature-bottom-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.challan-content .content .signature-bottom-content .inputField {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.challan-content .content .signature-bottom-content .inputField label {
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.challan-content .content .signature-bottom-content .inputField input {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-bottom: 1.5px solid #000000;
+}
+
+.challan-content .content .signature-bottom-content .signature-one {
+  grid-column: span 4 / span 4;
+}
+
+.challan-content .content .signature-bottom-content .signature-two {
+  grid-column: span 4 / span 4;
+  grid-column-start: 5;
+}
+
+.challan-content .content .signature-bottom-content .dd-ops {
+  grid-column: span 5 / span 5;
+  grid-row-start: 2;
+}
+
+.challan-content .content .signature-bottom-content .officer {
+  grid-column: span 3 / span 3;
+  grid-column-start: 6;
+  grid-row-start: 2;
+}
+
+.challan-content .content .signature-bottom-content .district {
+  grid-column: span 4 / span 4;
+  grid-row-start: 3;
+}
+
+.challan-content .content .signature-bottom-content .text {
+  grid-column: span 4 / span 4;
+  grid-column-start: 5;
+  grid-row-start: 3;
+  text-align: right;
+}

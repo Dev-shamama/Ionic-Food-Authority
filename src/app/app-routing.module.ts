@@ -46,6 +46,10 @@ const routes: Routes = [
     path: 'uploaddocument',
     loadChildren: () => import('./uploaddocument/uploaddocument.module').then( m => m.UploaddocumentPageModule)
   },
+  {
+    path: 'paychallan',
+    loadChildren: () => import('./paychallan/paychallan.module').then( m => m.PaychallanPageModule)
+  },
 
 ];
 

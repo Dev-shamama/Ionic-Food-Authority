@@ -1,0 +1,411 @@
+ion-content {
+  --background: #eaeaea;
+}
+
+// Challan Print Content
+// #divContents {
+//   display: none;
+// }
+
+// Challan Print Content
+
+.w-100 {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.b-1 {
+  border-bottom: 1.5px solid #000000;
+}
+
+// Challan Print Content
+
+.payChallen-container {
+  width: 100%;
+}
+
+.payChallen-container .section-title {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.wrapper-one {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 20px;
+  background: #fff;
+  border-radius: 18px;
+}
+
+.wrapper-one {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .top-heading-content {
+    width: 100%;
+    margin-bottom: 18px;
+    .title h3 {
+      margin: 0 auto;
+      font-weight: 600;
+      font-size: 28px;
+      text-align: center;
+      color: #097842;
+    }
+  }
+
+  .challan-content {
+    width: 8.3in;
+    height: 11.7in;
+    border: 1.5px solid #000000;
+    padding: 0 10px 10px 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+
+    .water-mark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .top-logo {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        width: 270px;
+        height: 100px;
+        img {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      
+      .logo.right-logo {
+        width: 200px;
+        height: 100px;
+        img {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    h2 {
+      font-weight: 600;
+    }
+
+    .content {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 10px 40px;
+
+      .mangerSindhBankLtd {
+        display: flex;
+        align-items: flex-end;
+        text-align: center;
+        flex-direction: row;
+        margin: 10px 0;
+
+        .textMangerSindhBankLtd {
+          text-align: left;
+          border-bottom: 1.5px solid #000000;
+          padding-bottom: 24px;
+          padding-right: 34px;
+          padding-top: 17px;
+        }
+        p {
+          margin: 0;
+        }
+
+        strong {
+          font-size: 18px;
+        }
+      }
+
+      .form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+
+        .inputField {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 0;
+          padding: 4px 0;
+
+          label {
+            font-weight: 600;
+            font-size: 18px;
+            margin: 0;
+            white-space: nowrap;
+          }
+          input {
+            width: 100%;
+            margin: 0;
+            border: none;
+            border-bottom: 1.5px solid #000000;
+          }
+        }
+
+        .mr-mrs {
+          grid-column: span 3 / span 3;
+        }
+
+        .firm {
+          grid-column: span 3 / span 3;
+          grid-column-start: 4;
+        }
+
+        .category {
+          grid-column: span 6 / span 6;
+          grid-row-start: 2;
+        }
+
+        .address {
+          grid-column: span 6 / span 6;
+          grid-row-start: 3;
+        }
+
+        .cnic {
+          grid-column: span 6 / span 6;
+          grid-row-start: 4;
+        }
+      }
+
+      .table {
+        width: 100%;
+        margin: 10px 0;
+
+        table,
+        th,
+        td {
+          border: 1px solid black;
+        }
+        table {
+          width: 100%;
+          tr * {
+            height: 34px;
+            padding: 0 10px;
+          }
+          tbody {
+            tr {
+              td:nth-child(1) {
+                text-align: left;
+              }
+            }
+          }
+        }
+      }
+
+      .signature-bottom-content {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+
+        .inputField {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          margin: 0;
+          padding: 4px 0;
+
+          label {
+            font-weight: 600;
+            font-size: 18px;
+            margin: 0;
+            white-space: nowrap;
+          }
+          input {
+            width: 100%;
+            margin: 0;
+            border: none;
+            border-bottom: 1.5px solid #000000;
+          }
+        }
+
+        .signature-one {
+          grid-column: span 4 / span 4;
+        }
+        .signature-two {
+          grid-column: span 4 / span 4;
+          grid-column-start: 5;
+        }
+        .dd-ops {
+          grid-column: span 5 / span 5;
+          grid-row-start: 2;
+        }
+        .officer {
+          grid-column: span 3 / span 3;
+          grid-column-start: 6;
+          grid-row-start: 2;
+        }
+        .district {
+          grid-column: span 4 / span 4;
+          grid-row-start: 3;
+        }
+        .text {
+          grid-column: span 4 / span 4;
+          grid-column-start: 5;
+          grid-row-start: 3;
+          text-align: right;
+        }
+      }
+    }
+
+   
+  }
+
+  .bottom-content {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  p {
+    color: #ea0404;
+    strong {
+        color: #000000;
+        font-size: 20px;
+    }
+  }
+
+  .challan-download-btn {
+    ion-button {
+        --background: #014122;
+        --background-hover: #076a3a;
+        --background-activated: #014122;
+        --background-focused: #014122;
+
+        --color: #ffffff;
+
+        --border-radius: 6px;
+        --border-color: #014122;
+        --border-style: solid;
+        --border-width: 1px;
+
+        --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+        --ripple-color: #0a482a;
+
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+
+        ion-icon {
+          font-size: 15px;
+          margin-left: 4px;
+          --ionicon-stroke-width: 40px;
+        }
+      }
+  }
+}
+
+}
+
+
+.bottom-submit-button {
+    width: calc(100% + 10px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: #ffffff;
+    padding: 12px;
+    margin-top: 15px;
+    position: absolute;
+    left: -10px;
+  
+    ion-button {
+      --background: #014122;
+      --background-hover: #076a3a;
+      --background-activated: #014122;
+      --background-focused: #014122;
+  
+      --color: #ffffff;
+  
+      --border-radius: 6px;
+      --border-color: #014122;
+      --border-style: solid;
+      --border-width: 1px;
+  
+      --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+  
+      --ripple-color: #0a482a;
+  
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+  
+      ion-icon {
+        font-size: 15px;
+        margin-left: 4px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1234px) {
+    #divContents {
+      zoom: 0.5;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    #divContents {
+      zoom: 0.4;
+    }
+  }
+
+  @media only screen and (max-width: 320px) {
+    #divContents {
+      zoom: 0.34;
+    }
+  }
