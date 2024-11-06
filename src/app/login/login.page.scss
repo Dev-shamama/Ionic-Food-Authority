@@ -10,6 +10,15 @@ ion-input {
   padding-right: 0px !important;
 }
 
+
+ion-item {
+  --border-color: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0px;
+  // --background: #F2F2F2;
+}
+
 ion-label {
   --padding-start: 0;
   --padding-end: 0;
@@ -32,6 +41,7 @@ ion-button {
     --background-hover: #076a3a;
     --background-activated: #014122;
     --background-focused: #014122;
+    width: 100%;
 
     --color: #ffffff;
 
@@ -51,6 +61,10 @@ ion-button {
       font-size: 15px;
       margin-left: 4px;
     }
+  }
+
+  .inputField {
+    margin-bottom: 10px;
   }
 
 .center-container {
@@ -115,18 +129,6 @@ ion-button {
   text-decoration: none;
 }
 
-#login-form .form-btn {
-  width: 100%;
-  padding: 12px 0;
-  background: var(--primary-color);
-  border-radius: 6px;
-  font-weight: 600;
-  transition: all 300ms ease-in-out;
-}
-
-#login-form .form-btn:hover {
-  background: var(--primary-color-active);
-}
 
 #login-form .form-new-account {
   margin-top: 14px;

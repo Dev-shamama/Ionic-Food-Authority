@@ -409,3 +409,31 @@ ion-content {
       zoom: 0.34;
     }
   }
+
+
+  @media print {
+    /* Set margins */
+    body {
+      margin: 0.5in; /* half-inch margins */
+    }
+  
+    /* Hide specific elements */
+    .header, .footer, .navigation {
+      display: none;
+    }
+  
+    /* Page breaks for structured layout */
+    h1, h2 {
+      page-break-after: avoid;
+    }
+  
+    .new-page {
+      page-break-before: always;
+    }
+  
+    /* Adjust font sizes and colors for print */
+    body {
+      color: #000;
+      font-size: 12pt;
+    }
+  }

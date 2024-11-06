@@ -8,40 +8,56 @@
       <h1>Create Your Account</h1>
       <form id="login-form" action="">
 
-        <label for="cnic"><span>CNIC <ion-icon name="checkmark-circle-outline"></ion-icon></span>
-          <input type="text" appCnicNumberMask maxlength="15" id="cnic" placeholder="Enter Your CNIC">
-        </label>
 
-        <label for="email"><span>Email <small>(optional)</small></span>
-          <input type="email" id="email" placeholder="Enter Your Email Address">
-        </label>
-
-        <label for="phone" class="phone-content-label">Phone
-          <div class="phone-content">
-            <input type="number" id="phone" placeholder="Enter Your Phone#">
-            <button>GET OTP</button>
-          </div>
-        </label>
-
-        <label for="otp"><span>OTP Code <ion-icon name="checkmark-circle-outline"></ion-icon></span>
-          <input type="number" id="otp" placeholder="Enter Your OTP Code">
-        </label>
-
-        <label for="password">password
-          <input type="password" id="password" placeholder="Enter Your Password">
-        </label>
-
-
-        <label for="confirm_password">Confirm Password
-          <input type="password" id="confirm_password" placeholder="Enter Your Confirm Password">
-        </label>
-
-
-        <div class="forgot-password">
-          <a href="#">Forgot Password?</a>
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input id="cnic" label="CNIC" label-placement="floating" fill="solid" placeholder="Enter Your CNIC"  (input)="cnicMasking($event)"></ion-input>
+          </ion-item>
         </div>
 
-        <button class="form-btn">Sign Up</button>
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input label="Email (optional)" label-placement="floating" fill="solid"
+              placeholder="Enter Your Email"></ion-input>
+          </ion-item>
+        </div>
+
+
+
+        <div class="inputField phone-content-label">
+          <ion-item class="no-border">
+            <div class="phone-content">
+              <ion-input label="Phone" label-placement="floating" fill="solid"
+                placeholder="Enter Your Phone"></ion-input>
+              <ion-button>GET OTP</ion-button>
+            </div>
+          </ion-item>
+        </div>
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input label="OTP Code" label-placement="floating" fill="solid"
+              placeholder="Enter Your OTP Code"></ion-input>
+          </ion-item>
+        </div>
+
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input label="Password" label-placement="floating" fill="solid"
+              placeholder="Enter Your Password"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input label="Confirm Password" label-placement="floating" fill="solid"
+              placeholder="Enter Your Confirm Password"></ion-input>
+          </ion-item>
+        </div>
+
+        <ion-button class="form-btn">Sign Up</ion-button>
         <div class="form-new-account">
           <p class="or">OR</p>
           <p class=""><a routerLink="/login">Login Your Account</a></p>

@@ -8,34 +8,36 @@
       <h1>Login Your Account</h1>
       <form id="login-form" action="">
 
-        <div>
+        <div class="inputField">
           <ion-item class="no-border">
             <ion-input
-              label="Name of Applicant"
+              id="cnic"
+              label="CNIC"
               label-placement="floating"
               fill="solid"
-              placeholder="Enter Your Name of Applicant"
+              placeholder="Enter Your CNIC"
+              (input)="cnicMasking($event)"
             ></ion-input>
           </ion-item>
         </div>
 
-        <div>
+        <div class="inputField">
           <ion-item class="no-border">
             <ion-input
-              label="Name of Applicant"
+              label="Password"
               label-placement="floating"
               fill="solid"
-              placeholder="Enter Your Name of Applicant"
+              placeholder="Enter Your Password"
             ></ion-input>
           </ion-item>
         </div>
 
         
         <div class="forgot-password">
-          <a href="#">Forgot Password?</a>
+          <a routerLink="/forgetpassword">Forgot Password?</a>
         </div> 
 
-        <button class="form-btn">Login</button>
+        <ion-button class="form-btn">Login</ion-button>
         <div class="form-new-account">
           <p class="or">OR</p>
           <p class=""><a routerLink="/register">Create New Account</a></p>

@@ -50,6 +50,14 @@ const routes: Routes = [
     path: 'paychallan',
     loadChildren: () => import('./paychallan/paychallan.module').then( m => m.PaychallanPageModule)
   },
+  {
+    path: 'forgetpassword',
+    loadChildren: () => import('./forgetpassword/forgetpassword.module').then( m => m.ForgetpasswordPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
 
 ];
 

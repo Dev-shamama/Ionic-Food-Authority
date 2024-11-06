@@ -1,0 +1,117 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="dashboard-container">
+    <h2 class="section-title">Profile</h2>
+
+    <div class="wrapper wrapper-one">
+
+      <div class="profile-content left-side">
+        <h5>Profile</h5>
+        <div class="profile-image">
+          <ion-img
+            src="/assets/img/profile.png"
+            alt="Profile Image"
+          ></ion-img>
+        </div>
+
+        <div class="profile-info">
+          <small>Arbab Qurain</small>
+        </div>
+      </div>
+      <div class="profile-content right-side">
+        <h5>Edit Details</h5>
+
+        <div class="profile-basic-info">
+          <form action="">
+
+            <div class="inputField cnic">
+              <ion-item class="no-border">
+                <ion-input
+                  label="CNIC"
+                  label-placement="floating"
+                  fill="solid"
+                  placeholder="Enter Your CNIC Number"
+                ></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField email">
+              <ion-item class="no-border">
+                <ion-input
+                  label="Email"
+                  label-placement="floating"
+                  fill="solid"
+                  placeholder="Enter Your Name of Email"
+                ></ion-input>
+              </ion-item>
+            </div>
+
+            
+            <div class="inputField phone">
+              <ion-item class="no-border">
+                <ion-input
+                  label="Phone"
+                  label-placement="floating"
+                  fill="solid"
+                  placeholder="Enter Your Name of Phone"
+                ></ion-input>
+              </ion-item>
+            </div>
+  
+            <ion-button>Save</ion-button>
+
+          </form>
+          
+          
+        </div>
+        
+        <h5 style="margin-top: 20px;">Change Password</h5>
+
+        <div class="profile-password-update">
+          <form action="">
+
+            <div class="inputField currentPassword">
+              <ion-item class="no-border">
+                <ion-input
+                  label="Current Password"
+                  label-placement="floating"
+                  fill="solid"
+                  placeholder="Enter Your Current Password"
+                ></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField newPassword">
+              <ion-item class="no-border">
+                <ion-input
+                  label="New Password"
+                  label-placement="floating"
+                  fill="solid"
+                  placeholder="Enter Your New Password"
+                ></ion-input>
+              </ion-item>
+            </div>
+
+            
+            <div class="inputField confirmPassword">
+              <ion-item class="no-border">
+                <ion-input
+                  label="Confirm Password"
+                  label-placement="floating"
+                  fill="solid"
+                  placeholder="Enter Your Confirm Password"
+                ></ion-input>
+              </ion-item>
+            </div>
+  
+            <ion-button>Password Update</ion-button>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</ion-content>
