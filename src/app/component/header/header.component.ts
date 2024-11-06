@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent{
 
   constructor() { }
+  imagePath: string = 'assets/img/logo.png';
 
 
   

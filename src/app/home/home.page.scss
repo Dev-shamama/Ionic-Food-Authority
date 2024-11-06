@@ -321,9 +321,13 @@ ion-content {
 
 @media only screen and (max-width: 590px) {
   .wrapper-two {
+    padding: 12px;
     .license-item-content {
       .license-item {
+        border-radius: 10px;
+        padding: 12px;
         .top-content {
+          flex-direction: column;
           .right-side {
             align-items: flex-start;
             margin-top: 10px;

@@ -200,6 +200,7 @@ ion-button.most-used {
         .daysAreLeft {
           font-weight: 600;
           margin: 0;
+          text-align: center;
         }
 
         .progress-container {
@@ -265,8 +266,8 @@ ion-button.most-used {
 
         div[role="progressbar"] {
           --size: 12rem;
-          --fg: #1CA160;
-          --bg: #FFEBAB;
+          --fg: #1ca160;
+          --bg: #ffebab;
           --pgPercentage: var(--value);
           animation: growProgressBar 3s 1 forwards;
           width: var(--size);
@@ -449,4 +450,110 @@ ion-button.most-used {
       }
     }
   }
+}
+
+@media screen and (max-width: 1240px) {
+  .wrapper-one {
+    padding: 10px 0;
+
+    .item {
+      padding: 0 10px;
+      h5 {
+        font-size: 18px;
+      }
+
+      &.checklist {
+        padding: 0 10px;
+        .checklist-content {
+          .item-checklist {
+            margin-bottom: 4px;
+            padding: 0 4px 0 10px;
+          }
+        }
+      }
+
+      &.completeIn {
+        .completeIn-content {
+          .daysLeft {
+            font-size: 100px;
+          }
+          .daysAreLeft {
+            font-size: 18px;
+          }
+        }
+      }
+
+      &.documentStatus {
+        .documentStatus-content {
+          div[role="progressbar"] {
+            --size: 8rem;
+          }
+        }
+      }
+    }
+  }
+
+  .wrapper-two {
+    .item {
+      &.expiredDate {
+        grid-column: span 3 / span 3;
+      }
+      &.certificate {
+        grid-column: span 5 / span 5;
+        grid-column-start: 4;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .license-view-image {
+          margin-bottom: 15px;
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 946px) {
+  .wrapper-one {
+    display: block;
+
+    .item {
+      border: none;
+      border-bottom: 1.5px solid #888888;
+
+    &.checklist {
+      padding: 20px 10px;
+    }
+    
+    &.completeIn {
+      padding: 20px 10px;
+    }
+
+    &.documentStatus{
+      padding: 20px 10px;
+    }
+
+    }
+  }
+
+  .wrapper-two {
+    .item {
+      &.expiredDate {
+        grid-column: span 6 / span 6;
+        margin-bottom: 15px;
+      }
+      &.certificate {
+        grid-column: span 6 / span 6;
+        grid-row-start: 2;
+        .license-view-image {
+          margin-bottom: 15px;
+        }
+      }
+      
+    }
+  }
+
 }

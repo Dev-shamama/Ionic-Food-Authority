@@ -1,5 +1,233 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <div class="challanlist-container">
+    <h2 class="section-title">Upload Document</h2>
 
+    <div class="wrapper wrapper-one">
+      <!-- CNIC -->
+      <div class="item">
+        <div class="top-heading">
+          <h2>Upload Copy of CNIC</h2>
+        </div>
+        <input
+          type="file"
+          (change)="cnicDocumentInput($event)"
+          accept="image/*"
+          id="cnic-input"
+          hidden
+        />
+
+        <div class="uploaded-document" (click)="cnicDocument()">
+          <div class="show" id="cnic-show">
+            <h4 id="cnic-text">Drag And Drop</h4>
+            <ion-icon id="cnic-icon" name="cloud-upload-outline"></ion-icon>
+          </div>
+          <div class="hide" id="cnic-hide">
+            <div class="image-detail">
+              <div class="image-name" id="cnic-image-name"></div>
+              <div class="image-size" id="cnic-image-size"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-message">
+          <strong>Note: </strong>
+          <p>Make sure that no CNIC is expired</p>
+        </div>
+      </div>
+
+      <!-- Tenancy -->
+      <div class="item">
+        <div class="top-heading">
+          <h2>
+            Documents of the property/tenancy agreement or affidavit showing
+            ownership
+          </h2>
+        </div>
+        <input
+          type="file"
+          (change)="tenancyDocumentInput($event)"
+          accept="image/*"
+          id="tenancy-input"
+          hidden
+        />
+
+        <div class="uploaded-document" (click)="tenancyDocument()">
+          <div class="show" id="tenancy-show">
+            <h4 id="tenancy-text">Drag And Drop</h4>
+            <ion-icon id="tenancy-icon" name="cloud-upload-outline"></ion-icon>
+          </div>
+          <div class="hide" id="tenancy-hide">
+            <div class="image-detail">
+              <div class="image-name" id="tenancy-image-name"></div>
+              <div class="image-size" id="tenancy-image-size"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-message">
+          <strong>Note: </strong>
+          <div>
+            <p>* Documents should be properly signed and stamped</p>
+            <p>* Documents should be in legible writing and language</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificate -->
+      <div class="item">
+        <div class="top-heading">
+          <h2>Previous registration certificate (if any) with any authority</h2>
+        </div>
+        <input
+          type="file"
+          (change)="certificateDocumentInput($event)"
+          accept="image/*"
+          id="certificate-input"
+          hidden
+        />
+
+        <div class="uploaded-document" (click)="certificateDocument()">
+          <div class="show" id="certificate-show">
+            <h4 id="certificate-text">Drag And Drop</h4>
+            <ion-icon
+              id="certificate-icon"
+              name="cloud-upload-outline"
+            ></ion-icon>
+          </div>
+          <div class="hide" id="certificate-hide">
+            <div class="image-detail">
+              <div class="image-name" id="certificate-image-name"></div>
+              <div class="image-size" id="certificate-image-size"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-message">
+          <strong>Note: </strong>
+          <div>
+            <p>* Documents should be properly signed and stamped</p>
+            <p>* Documents should be in legible writing and language</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challan -->
+      <div class="item">
+        <div class="top-heading">
+          <h2>Copy of Challan form</h2>
+        </div>
+        <input
+          type="file"
+          (change)="challanDocumentInput($event)"
+          accept="image/*"
+          id="challan-input"
+          hidden
+        />
+
+        <div class="uploaded-document" (click)="challanDocument()">
+          <div class="show" id="challan-show">
+            <h4 id="challan-text">Drag And Drop</h4>
+            <ion-icon id="challan-icon" name="cloud-upload-outline"></ion-icon>
+          </div>
+          <div class="hide" id="challan-hide">
+            <div class="image-detail">
+              <div class="image-name" id="challan-image-name"></div>
+              <div class="image-size" id="challan-image-size"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-message">
+          <strong>Note: </strong>
+          <div>
+            <p>* Documents should be properly signed and stamped</p>
+            <p>* Documents should be in legible writing and language</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lab Testing -->
+
+      <div class="item">
+        <div class="top-heading">
+          <h2>Lab testing reports (where required as per SOPs)</h2>
+        </div>
+        <input
+          type="file"
+          (change)="labTestingDocumentInput($event)"
+          accept="image/*"
+          id="labTesting-input"
+          hidden
+        />
+
+        <div class="uploaded-document" (click)="labTestingDocument()">
+          <div class="show" id="labTesting-show">
+            <h4 id="labTesting-text">Drag And Drop</h4>
+            <ion-icon
+              id="labTesting-icon"
+              name="cloud-upload-outline"
+            ></ion-icon>
+          </div>
+          <div class="hide" id="labTesting-hide">
+            <div class="image-detail">
+              <div class="image-name" id="labTesting-image-name"></div>
+              <div class="image-size" id="labTesting-image-size"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-message">
+          <strong>Note: </strong>
+          <div>
+            <p>* Documents should be properly signed and stamped</p>
+            <p>* Documents should be in legible writing and language</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medical -->
+
+      <div class="item">
+        <div class="top-heading">
+          <h2>Medical reports of the staff/food handlers (where required as per SOPs)</h2>
+        </div>
+        <input
+          type="file"
+          (change)="medicalDocumentInput($event)"
+          accept="image/*"
+          id="medical-input"
+          hidden
+        />
+
+        <div class="uploaded-document" (click)="medicalDocument()">
+          <div class="show" id="medical-show">
+            <h4 id="medical-text">Drag And Drop</h4>
+            <ion-icon id="medical-icon" name="cloud-upload-outline"></ion-icon>
+          </div>
+          <div class="hide" id="medical-hide">
+            <div class="image-detail">
+              <div class="image-name" id="medical-image-name"></div>
+              <div class="image-size" id="medical-image-size"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-message">
+          <strong>Note: </strong>
+          <div>
+            <p>* Documents should be properly signed and stamped</p>
+            <p>* Documents should be in legible writing and language</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="bottom-submit-button">
+        <ion-button>Submit For Review <span><ion-icon
+              name="chevron-forward-outline"></ion-icon></span></ion-button>
+      </div>
+  </div>
 </ion-content>

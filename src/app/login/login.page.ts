@@ -10,7 +10,7 @@ export class LoginPage implements OnInit {
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    const s: any = document.getElementById('main-container-split');
+    const s: any = document.getElementById('sidebar-main-container');
     // s.style.width = '0'
     s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
     console.log(s)

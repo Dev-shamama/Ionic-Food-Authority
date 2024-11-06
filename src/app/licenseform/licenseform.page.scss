@@ -72,7 +72,6 @@ ion-item ion-select {
   --highlight-color-focused: var(--primary-color);
 }
 
-
 .dashboard-container {
   width: 100%;
 }
@@ -80,6 +79,7 @@ ion-item ion-select {
 .dashboard-container .section-title {
   margin-top: 0;
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .wrapper {
@@ -141,7 +141,6 @@ ion-item ion-select {
     padding: 45px 20px 70px 20px;
     border: 2px solid black;
     /* Responsive styles */
-  
 
     #license_form {
       width: 100%;
@@ -359,12 +358,31 @@ ion-item ion-select {
   }
 }
 
-
 @media screen and (max-width: 768px) {
-    #license_form {
-      display: unset !important;
-      .inputField {
-          margin-bottom: 10px !important;
+  #license_form {
+    display: unset !important;
+    .inputField {
+      margin-bottom: 10px !important;
+    }
+  }
+
+  #license_form_bottom {
+    display: unset !important;
+    .inputField {
+      margin: 10px 0 !important;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .date-of-registration {
+    flex-direction: column;
+
+    .right-side {
+      margin-top: 10px;
+      p {
+        text-align: left !important;
       }
     }
   }
+}

@@ -1,8 +1,25 @@
 .top-menu-account {
-    padding-right: 20px;
+  padding-right: 20px;
 }
 .top-menu-account ion-icon,
 .top-menu-account ion-menu-button {
-    font-size: 30px;
-    color: rgba(1, 65, 34, 1);
+  font-size: 30px;
+  color: rgba(1, 65, 34, 1);
+}
+
+.logo-container {
+  width: 200px;
+  padding-left: 20px;
+  display: none;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 767px) {
+  .logo-container {
+    display: block;
+  }
 }
