@@ -1,3 +1,8 @@
+
+ion-content {
+  --background: #eaeaea;
+}
+
 ion-input {
   --width: 100%;
   --border-color: transparent;
@@ -9,7 +14,6 @@ ion-input {
 .item-inner {
   padding-right: 0px !important;
 }
-
 
 ion-item {
   --border-color: transparent;
@@ -35,37 +39,36 @@ ion-item ion-select {
   --highlight-color-focused: var(--primary-color);
 }
 
-
 ion-button {
-    --background: #014122;
-    --background-hover: #076a3a;
-    --background-activated: #014122;
-    --background-focused: #014122;
-    width: 100%;
+  --background: #014122;
+  --background-hover: #076a3a;
+  --background-activated: #014122;
+  --background-focused: #014122;
+  width: 100%;
 
-    --color: #ffffff;
+  --color: #ffffff;
 
-    --border-radius: 6px;
-    --border-color: #014122;
-    --border-style: solid;
-    --border-width: 1px;
+  --border-radius: 6px;
+  --border-color: #014122;
+  --border-style: solid;
+  --border-width: 1px;
 
-    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
 
-    --ripple-color: #0a482a;
+  --ripple-color: #0a482a;
 
-    --padding-top: 10px;
-    --padding-bottom: 10px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
 
-    ion-icon {
-      font-size: 15px;
-      margin-left: 4px;
-    }
+  ion-icon {
+    font-size: 15px;
+    margin-left: 4px;
   }
+}
 
-  .inputField {
-    margin-bottom: 10px;
-  }
+.inputField {
+  margin-bottom: 10px;
+}
 
 .center-container {
   width: 100%;
@@ -78,12 +81,12 @@ ion-button {
 }
 
 .center-container .logo {
-  width: 300px;
+  width: 320px;
   height: 100px;
 }
 
 .login-content {
-  min-width: 320px;
+  width: 400px;
   background: #fff;
   display: flex;
   justify-content: center;
@@ -96,6 +99,10 @@ ion-button {
   margin-bottom: 15px;
   font-weight: bold;
   font-size: 22px;
+}
+
+#login-form {
+  width: 100%;
 }
 
 #login-form label {
@@ -129,7 +136,6 @@ ion-button {
   text-decoration: none;
 }
 
-
 #login-form .form-new-account {
   margin-top: 14px;
 }
@@ -154,7 +160,7 @@ ion-button {
   }
 
   .login-content {
-    min-width: 300px;
+    width: 95%;
   }
   #login-form label input {
     min-width: 250px !important;
