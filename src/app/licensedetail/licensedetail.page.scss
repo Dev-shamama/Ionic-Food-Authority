@@ -30,8 +30,8 @@ ion-button.most-used {
 
   --padding-top: 0px;
   --padding-bottom: 0px;
-  --padding-start: 4px;
-  --padding-end: 4px;
+  --padding-start: 14px;
+  --padding-end: 14px;
 
   ion-icon {
     margin-right: 6px;
@@ -225,7 +225,6 @@ ion-button.most-used {
             border-radius: 20px;
             overflow: hidden;
             .progress {
-              width: 10%;
               height: 100%;
               background: #014122;
               border-radius: 30px;
@@ -599,7 +598,7 @@ ion-button.most-used {
   top: 50%;
   left: 50%;
   transition: all 400ms ease-in-out;
-  transform: translate(0%, -50%);
+  transform: translate(-50%, -70%);
 }
 
 .model-container.active .modal {

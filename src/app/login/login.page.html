@@ -1,16 +1,18 @@
 <ion-content [fullscreen]="true">
-
   <div class="center-container">
     <div class="logo">
-      <img src="./assets/img/logo.png" alt="Logo">
+      <img src="./assets/img/logo.png" alt="Logo" />
     </div>
     <div class="login-content">
       <h1>Login Your Account</h1>
-      <form id="login-form" action="">
-
+      <form id="login-form" #userLogin="ngForm" (ngSubmit)="onSubmit()">
         <div class="inputField">
           <ion-item class="no-border">
             <ion-input
+              [(ngModel)]="dataset.cnic"
+              name="cnic"
+              required
+              type="text"
               id="cnic"
               label="CNIC"
               label-placement="floating"
@@ -24,6 +26,10 @@
         <div class="inputField">
           <ion-item class="no-border">
             <ion-input
+              [(ngModel)]="dataset.password"
+              name="password"
+              required
+              type="text"
               label="Password"
               label-placement="floating"
               fill="solid"
@@ -32,19 +38,18 @@
           </ion-item>
         </div>
 
-        
         <div class="forgot-password">
           <a routerLink="/forgetpassword">Forgot Password?</a>
-        </div> 
+        </div>
 
-        <ion-button class="form-btn">Login</ion-button>
+        <ion-button type="submit" [disabled]="!userLogin.valid" class="form-btn"
+          >Login</ion-button
+        >
         <div class="form-new-account">
           <p class="or">OR</p>
           <p class=""><a routerLink="/register">Create New Account</a></p>
         </div>
-
-      </form> 
+      </form>
     </div>
   </div>
-  
 </ion-content>

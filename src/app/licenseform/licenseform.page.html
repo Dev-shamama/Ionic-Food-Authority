@@ -1,8 +1,132 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <ion-modal trigger="open-modal" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title style="padding-left: 15px">Review Form</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel(false)">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding model-content">
+        <div class="review-item-container">
+          <div class="review-item applicant">
+            <h5>Name of Applicant</h5>
+            <p>{{dataset.applicant}}</p>
+          </div>
+
+          <div class="review-item cnic">
+            <h5>CNIC #</h5>
+            <p>{{dataset.cnic}}</p>
+          </div>
+
+          <div class="review-item phone">
+            <h5>Ph #</h5>
+            <p>{{dataset.phone}}</p>
+          </div>
+
+          <div class="review-item cell">
+            <h5>Cell #</h5>
+            <p>{{dataset.cell}}</p>
+          </div>
+
+          <div class="review-item food-name">
+            <h5>Name of Food Business</h5>
+            <p>{{dataset.foodBusiness}}</p>
+          </div>
+
+          <div class="review-item nature">
+            <h5>Nature of Business</h5>
+            <p>{{dataset.natureBusiness}}</p>
+          </div>
+
+          <div class="review-item category">
+            <h5>Category</h5>
+            <p>{{dataset.category}}</p>
+          </div>
+
+          <div class="review-item district">
+            <h5>District</h5>
+            <p>{{dataset.district}}</p>
+          </div>
+
+          <div class="review-item secp">
+            <h5>NTN</h5>
+            <p>{{dataset.ntn}}</p>
+          </div>
+
+          <div class="review-item ntn">
+            <h5>SECP</h5>
+            <p>{{dataset.secp}}</p>
+          </div>
+
+          <div class="review-item srb">
+            <h5>SRB</h5>
+            <p>{{dataset.srb}}</p>
+          </div>
+
+          <div class="review-item tax">
+            <h5>SALES TAX</h5>
+            <p>{{dataset.salesTax}}</p>
+          </div>
+
+          <div class="review-item area">
+            <h5>Area Measurement (sq. ft)</h5>
+            <p>{{dataset.areaMeasurement}}</p>
+          </div>
+
+          <div class="review-item address">
+            <h5>Address</h5>
+            <p>{{dataset.address}}</p>
+          </div>
+
+          <div class="review-item sureAnswer">
+            <h5>Already Registered with Food Authority</h5>
+            <p>{{dataset.sureAnswer}}</p>
+          </div>
+
+          <div class="review-item registrationName">
+            <h5>Registration in the name of</h5>
+            <p>{{dataset.registrationName}}</p>
+          </div>
+          <div class="review-item currentPayment">
+            <h5>Current Payment Details</h5>
+            <p>{{dataset.currentPayment}}</p>
+          </div>
+          <div class="review-item challanNo">
+            <h5>Challan No.</h5>
+            <p>{{dataset.challanNo}}</p>
+          </div>
+          <div class="review-item amountPaid">
+            <h5>Amount Paid Rs</h5>
+            <p>{{dataset.amountPaid}}</p>
+          </div>
+          <div class="review-item datePayment">
+            <h5>Date of Payment</h5>
+            <p>{{dataset.datePayment}}</p>
+          </div>
+        </div>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-title slot="start"></ion-title>
+          <ion-button
+            slot="end"
+            (click)="FormOnSubmitted()"
+            class="most-used"
+            style="padding: 20px"
+            >Submit</ion-button
+          >
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
   <div class="dashboard-container">
-    <form  #licenseForm="ngForm" (ngSubmit)="onSubmit()">
+    <form #licenseForm="ngForm" (ngSubmit)="onSubmit()">
       <h2 class="section-title">License Registration Form</h2>
 
       <div class="wrapper wrapper-one">
@@ -34,6 +158,7 @@
               <ion-item class="no-border">
                 <ion-input
                   [(ngModel)]="dataset.applicant"
+                  type="text"
                   name="applicant"
                   label="Name of Applicant"
                   label-placement="floating"
@@ -47,10 +172,16 @@
             <div class="inputField cnic">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.cnic"
+                  name="cnic"
                   label="CNIC #"
+                  type="text"
                   label-placement="floating"
                   fill="solid"
                   placeholder="Enter Your CNIC #"
+                  id="cnic"
+                  (input)="cnicMasking($event)"
+                  required
                 ></ion-input>
               </ion-item>
             </div>
@@ -58,6 +189,10 @@
             <div class="inputField phone">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.phone"
+                  name="phone"
+                  required
+                  type="number"
                   label="Ph #"
                   label-placement="floating"
                   fill="solid"
@@ -69,6 +204,10 @@
             <div class="inputField cell">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.cell"
+                  name="cell"
+                  required
+                  type="number"
                   label="Cell #"
                   label-placement="floating"
                   fill="solid"
@@ -80,6 +219,10 @@
             <div class="inputField food-name">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.foodBusiness"
+                  name="foodBusiness"
+                  type="text"
+                  required
                   label="Name of Food Business"
                   label-placement="floating"
                   fill="solid"
@@ -90,6 +233,9 @@
 
             <div class="inputField nature">
               <ion-select
+                [(ngModel)]="dataset.natureBusiness"
+                name="natureBusiness"
+                required
                 label="Nature of Business"
                 interface="popover"
                 fill="solid"
@@ -103,6 +249,9 @@
 
             <div class="inputField category">
               <ion-select
+                [(ngModel)]="dataset.category"
+                name="category"
+                required
                 label="Category"
                 interface="popover"
                 fill="solid"
@@ -116,6 +265,9 @@
 
             <div class="inputField district">
               <ion-select
+                [(ngModel)]="dataset.district"
+                name="district"
+                required
                 label="District"
                 interface="popover"
                 fill="solid"
@@ -130,6 +282,10 @@
             <div class="inputField secp">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.secp"
+                  type="text"
+                  name="secp"
+                  required
                   label="SECP"
                   label-placement="floating"
                   fill="solid"
@@ -141,6 +297,10 @@
             <div class="inputField ntn">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.ntn"
+                  name="ntn"
+                  type="text"
+                  required
                   label="NTN"
                   label-placement="floating"
                   fill="solid"
@@ -152,6 +312,10 @@
             <div class="inputField srb">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.srb"
+                  name="srb"
+                  type="text"
+                  required
                   label="SRB"
                   label-placement="floating"
                   fill="solid"
@@ -163,6 +327,10 @@
             <div class="inputField tax">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.salesTax"
+                  name="salesTax"
+                  type="text"
+                  required
                   label="SALES TAX"
                   label-placement="floating"
                   fill="solid"
@@ -174,6 +342,10 @@
             <div class="inputField area">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.areaMeasurement"
+                  name="areaMeasurement"
+                  type="text"
+                  required
                   label="Area Measurement (sq. ft)"
                   label-placement="floating"
                   fill="solid"
@@ -185,6 +357,10 @@
             <div class="inputField address">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.address"
+                  type="text"
+                  name="address"
+                  required
                   label="Address"
                   label-placement="floating"
                   fill="solid"
@@ -197,20 +373,24 @@
           <div class="check-sure-question">
             <p>Already Registered with Food Authority</p>
             <div class="checkbox-content">
-              <ion-radio-group value="custom-checked">
+              <ion-radio-group
+                [(ngModel)]="dataset.sureAnswer"
+                name="sureAnswer"
+                required
+              >
                 <div class="checkbox-btn">
                   <ion-radio
-                    value="custom"
+                    value="Yes"
                     aria-label="Custom checkbox"
-                  ></ion-radio
-                  >Yes
+                  ></ion-radio>
+                  Yes
                 </div>
                 <div class="checkbox-btn">
                   <ion-radio
-                    value="custom-checked"
+                    value="No"
                     aria-label="Custom checkbox that is checked"
-                  ></ion-radio
-                  >No
+                  ></ion-radio>
+                  No
                 </div>
               </ion-radio-group>
             </div>
@@ -231,6 +411,10 @@
             <div class="inputField registrationName">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.registrationName"
+                  name="registrationName"
+                  type="text"
+                  required
                   label="Registration in the name of"
                   label-placement="floating"
                   fill="solid"
@@ -242,6 +426,10 @@
             <div class="inputField currentPayment">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.currentPayment"
+                  name="currentPayment"
+                  type="text"
+                  required
                   label="Current Payment Details"
                   label-placement="floating"
                   fill="solid"
@@ -253,6 +441,10 @@
             <div class="inputField ChallanNo">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.challanNo"
+                  name="challanNo"
+                  type="number"
+                  required
                   label="Challan No."
                   label-placement="floating"
                   fill="solid"
@@ -264,6 +456,10 @@
             <div class="inputField amountPaid">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.amountPaid"
+                  name="amountPaid"
+                  required
+                  type="number"
                   label="Amount Paid Rs"
                   label-placement="floating"
                   fill="solid"
@@ -275,6 +471,10 @@
             <div class="inputField dateOfPayment">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="dataset.datePayment"
+                  name="datePayment"
+                  required
+                  type="date"
                   label="Date of Payment"
                   label-placement="floating"
                   fill="solid"
@@ -305,8 +505,12 @@
       </div>
 
       <div class="bottom-submit-button">
-        
-        <ion-button type="submit" [disabled]="!licenseForm.valid">
+        <ion-button
+          type="submit"
+          expand="block"
+          (click)="setOpen(true)"
+          [disabled]="!licenseForm.valid"
+        >
           Save and generate Challan
           <span><ion-icon name="chevron-forward-outline"></ion-icon></span>
         </ion-button>

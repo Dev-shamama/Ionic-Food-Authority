@@ -5,14 +5,10 @@
     <h2 class="section-title">Profile</h2>
 
     <div class="wrapper wrapper-one">
-
       <div class="profile-content left-side">
         <h5>Profile</h5>
         <div class="profile-image">
-          <ion-img
-            src="/assets/img/profile.png"
-            alt="Profile Image"
-          ></ion-img>
+          <ion-img src="/assets/img/profile.png" alt="Profile Image"></ion-img>
         </div>
 
         <div class="profile-info">
@@ -23,15 +19,20 @@
         <h5>Edit Details</h5>
 
         <div class="profile-basic-info">
-          <form action="">
-
+          <form #userProfile="ngForm" (ngSubmit)="onSubmitUserProfile()">
             <div class="inputField cnic">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="profileDataset.cnic"
+                  name="cnic"
+                  id="cnic"
+                  required
+                  type="text"
                   label="CNIC"
                   label-placement="floating"
                   fill="solid"
                   placeholder="Enter Your CNIC Number"
+                  (input)="cnicMasking($event)"
                 ></ion-input>
               </ion-item>
             </div>
@@ -39,6 +40,10 @@
             <div class="inputField email">
               <ion-item class="no-border">
                 <ion-input
+                  type="email"
+                  [(ngModel)]="profileDataset.email"
+                  name="email"
+                  required
                   label="Email"
                   label-placement="floating"
                   fill="solid"
@@ -47,10 +52,12 @@
               </ion-item>
             </div>
 
-            
             <div class="inputField phone">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="profileDataset.phone"
+                  name="phone"
+                  required
                   label="Phone"
                   label-placement="floating"
                   fill="solid"
@@ -58,22 +65,24 @@
                 ></ion-input>
               </ion-item>
             </div>
-  
-            <ion-button>Save</ion-button>
 
+            <ion-button type="submit" [disabled]="!userProfile.valid"
+              >Save</ion-button
+            >
           </form>
-          
-          
         </div>
-        
-        <h5 style="margin-top: 20px;">Change Password</h5>
+
+        <h5 style="margin-top: 20px">Change Password</h5>
 
         <div class="profile-password-update">
-          <form action="">
-
+          <form #changePassword="ngForm" (ngSubmit)="onSubmitPassword()">
             <div class="inputField currentPassword">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="passwordDataset.currentPassword"
+                  name="currentPassword"
+                  required
+                  type="text"
                   label="Current Password"
                   label-placement="floating"
                   fill="solid"
@@ -85,6 +94,10 @@
             <div class="inputField newPassword">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="passwordDataset.newPassword"
+                  name="newPassword"
+                  required
+                  type="text"
                   label="New Password"
                   label-placement="floating"
                   fill="solid"
@@ -93,10 +106,13 @@
               </ion-item>
             </div>
 
-            
             <div class="inputField confirmPassword">
               <ion-item class="no-border">
                 <ion-input
+                  [(ngModel)]="passwordDataset.confirmPassword"
+                  name="confirmPassword"
+                  required
+                  type="text"
                   label="Confirm Password"
                   label-placement="floating"
                   fill="solid"
@@ -104,14 +120,13 @@
                 ></ion-input>
               </ion-item>
             </div>
-  
-            <ion-button>Password Update</ion-button>
 
+            <ion-button type="submit" [disabled]="!changePassword.valid"
+              >Password Update</ion-button
+            >
           </form>
         </div>
-
       </div>
-
     </div>
   </div>
 </ion-content>

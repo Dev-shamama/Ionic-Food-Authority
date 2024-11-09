@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-licensedetail',
@@ -6,24 +6,77 @@ import { Component} from '@angular/core';
   styleUrls: ['./licensedetail.page.scss'],
 })
 export class LicensedetailPage {
+  documentUniqueName = '';
 
-  constructor() { }
+  activeCnic = '';
+  fileNameCnic = '';
 
-  
-  openModel(event: any) {
-    let typeAPICall = 1;
-    const button = event.target.dataset;
-    if(button == 'cnic') {
-      typeAPICall = 1
+  activeChallan = '';
+  activeDocuments = '';
+  activePrevious = '';
+  activeLab = '';
+
+  fileObject: any = {
+    cnic: null,
+    challan: null,
+    documents: null,
+    previous: null,
+    lab: null,
+  };
+  constructor() {
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const documentUniqueName = this.documentUniqueName;
+    if (input && input.files) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (documentUniqueName === 'cnic') {
+            this.activeCnic = 'active';
+            this.fileObject.cnic = reader.result;
+          }
+
+          if (documentUniqueName === 'challan') {
+            this.activeChallan = 'active';
+            this.fileObject.challan = reader.result;
+          }
+
+          if (documentUniqueName === 'documents') {
+            this.activeDocuments = 'active';
+            this.fileObject.documents = reader.result;
+          }
+
+          if (documentUniqueName === 'previous') {
+            this.activePrevious = 'active';
+            this.fileObject.previous = reader.result;
+          }
+
+          if (documentUniqueName === 'lab') {
+            this.activeLab = 'active';
+            this.fileObject.lab = reader.result;
+          }
+
+       
+          console.log(this.fileObject)
+
+          this.closeModel();
+        };
+        reader.readAsDataURL(file);
+      }
     }
+  }
 
-    
+  openModel(event: any, modaltype: any) {
+    console.log('data-pop value:', modaltype);
+    document.getElementById('model-container')?.classList.add('active');
 
-    document.getElementById('model-container')?.classList.add('active')
+    this.documentUniqueName = modaltype;
   }
 
   closeModel() {
-    document.getElementById('model-container')?.classList.remove('active')
+    document.getElementById('model-container')?.classList.remove('active');
   }
-
 }

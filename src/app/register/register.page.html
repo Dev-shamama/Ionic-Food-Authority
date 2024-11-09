@@ -1,70 +1,121 @@
 <ion-content [fullscreen]="true">
-
   <div class="center-container">
     <div class="logo">
-      <img src="./assets/img/logo.png" alt="Logo">
+      <img src="./assets/img/logo.png" alt="Logo" />
     </div>
     <div class="login-content">
       <h1>Create Your Account</h1>
-      <form id="login-form" action="">
-
-
+      <form id="login-form" #halfForm="ngForm" (ngSubmit)="onSubmitHalfForm()">
         <div class="inputField">
           <ion-item class="no-border">
-            <ion-input id="cnic" label="CNIC" label-placement="floating" fill="solid" placeholder="Enter Your CNIC"  (input)="cnicMasking($event)"></ion-input>
+            <ion-input
+              [(ngModel)]="halfDataset.cnic"
+              name="cnic"
+              type="text"
+              id="cnic"
+              label="CNIC"
+              label-placement="floating"
+              fill="solid"
+              placeholder="Enter Your CNIC"
+              (input)="cnicMasking($event)"
+              required
+            ></ion-input>
           </ion-item>
         </div>
 
-
         <div class="inputField">
           <ion-item class="no-border">
-            <ion-input label="Email (optional)" label-placement="floating" fill="solid"
-              placeholder="Enter Your Email"></ion-input>
+            <ion-input
+              [(ngModel)]="halfDataset.email"
+              name="email"
+              type="email"
+              label="Email (optional)"
+              label-placement="floating"
+              fill="solid"
+              placeholder="Enter Your Email"
+            ></ion-input>
           </ion-item>
         </div>
-
-
 
         <div class="inputField phone-content-label">
           <ion-item class="no-border">
             <div class="phone-content">
-              <ion-input label="Phone" label-placement="floating" fill="solid"
-                placeholder="Enter Your Phone"></ion-input>
-              <ion-button>GET OTP</ion-button>
+              <ion-input
+                [(ngModel)]="halfDataset.phone"
+                name="phone"
+                type="number"
+                required
+                label="Phone"
+                label-placement="floating"
+                fill="solid"
+                placeholder="Enter Your Phone"
+              ></ion-input>
+              <ion-button type="submit" [disabled]="!halfForm.valid"
+                >GET OTP</ion-button
+              >
             </div>
           </ion-item>
         </div>
-
-        <div class="inputField">
-          <ion-item class="no-border">
-            <ion-input label="OTP Code" label-placement="floating" fill="solid"
-              placeholder="Enter Your OTP Code"></ion-input>
-          </ion-item>
-        </div>
-
-
-        <div class="inputField">
-          <ion-item class="no-border">
-            <ion-input label="Password" label-placement="floating" fill="solid"
-              placeholder="Enter Your Password"></ion-input>
-          </ion-item>
-        </div>
-
-        <div class="inputField">
-          <ion-item class="no-border">
-            <ion-input label="Confirm Password" label-placement="floating" fill="solid"
-              placeholder="Enter Your Confirm Password"></ion-input>
-          </ion-item>
-        </div>
-
-        <ion-button class="form-btn">Sign Up</ion-button>
-        <div class="form-new-account">
-          <p class="or">OR</p>
-          <p class=""><a routerLink="/login">Login Your Account</a></p>
-        </div>
-
       </form>
+
+      <form id="login-form" #fullForm="ngForm" (ngSubmit)="onSubmitFullForm()">
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input
+              [(ngModel)]="fullDataset.otp"
+              name="otp"
+              type="text"
+              required
+              label="OTP Code"
+              label-placement="floating"
+              fill="solid"
+              placeholder="Enter Your OTP Code"
+              disabled="{{formActiveDetail}}"
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input
+              [(ngModel)]="fullDataset.password"
+              name="password"
+              type="password"
+              required
+              label="Password"
+              label-placement="floating"
+              fill="solid"
+              placeholder="Enter Your Password"
+              disabled="{{formActiveDetail}}"
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input
+              [(ngModel)]="fullDataset.confirmPassword"
+              name="confirmPassword"
+              type="password"
+              required
+              label="Confirm Password"
+              label-placement="floating"
+              fill="solid"
+              placeholder="Enter Your Confirm Password"
+              disabled="{{formActiveDetail}}"
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <ion-button type="submit" [disabled]="!fullForm.valid" class="form-btn"
+          >Sign Up</ion-button
+        >
+      </form>
+
+      <div class="form-new-account">
+        <p class="or">OR</p>
+        <p class=""><a routerLink="/login">Login Your Account</a></p>
+      </div>
     </div>
   </div>
-
 </ion-content>

@@ -7,6 +7,33 @@ ion-content {
   --background: #eaeaea;
 }
 
+ion-content.model-content {
+  --background: #ffffff !important;
+}
+
+ion-button.most-used {
+  --background: #014122;
+  --background-hover: #076a3a;
+  --background-activated: #014122;
+  --background-focused: #014122;
+
+  --color: #ffffff;
+
+  --border-radius: 6px;
+  --border-color: #014122;
+  --border-style: solid;
+  --border-width: 1px;
+
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+  --ripple-color: #014122;
+
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+}
+
 ion-radio::part(container) {
   width: 25px;
   height: 25px;
@@ -70,6 +97,12 @@ ion-item ion-select {
   --width: 100%;
   --color: rgba(137, 137, 137, 1);
   --highlight-color-focused: var(--primary-color);
+}
+
+ion-modal {
+  --width: 800px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .dashboard-container {
@@ -383,6 +416,123 @@ ion-item ion-select {
       p {
         text-align: left !important;
       }
+    }
+  }
+}
+.review-item-container {
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 6px;
+
+  .review-item {
+    margin-bottom: 15px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    border-bottom: 1.5px solid #000;
+
+    h5 {
+      font-size: 16px;
+      font-size: 600;
+    }
+    p {
+      font-size: 14px;
+    }
+
+    &.applicant {
+      grid-column: span 8 / span 8;
+    }
+
+    &.cnic {
+      grid-column: span 3 / span 3;
+      grid-row-start: 2;
+    }
+
+    &.phone {
+      grid-column: span 2 / span 2;
+      grid-column-start: 4;
+      grid-row-start: 2;
+    }
+    &.cell {
+      grid-column: span 3 / span 3;
+      grid-column-start: 6;
+      grid-row-start: 2;
+    }
+    &.food-name {
+      grid-column: span 8 / span 8;
+      grid-row-start: 3;
+    }
+    &.nature {
+      grid-column: span 5 / span 5;
+      grid-row-start: 4;
+    }
+    &.category {
+      grid-column: span 3 / span 3;
+      grid-column-start: 6;
+      grid-row-start: 4;
+    }
+    &.district {
+      grid-column: span 8 / span 8;
+      grid-row-start: 5;
+    }
+    &.secp {
+      grid-column: span 2 / span 2;
+      grid-row-start: 6;
+    }
+    &.ntn {
+      grid-column: span 2 / span 2;
+      grid-column-start: 3;
+      grid-row-start: 6;
+    }
+    &.srb {
+      grid-column: span 2 / span 2;
+      grid-column-start: 5;
+      grid-row-start: 6;
+    }
+    &.tax {
+      grid-column: span 2 / span 2;
+      grid-column-start: 7;
+      grid-row-start: 6;
+    }
+    &.area {
+      grid-column: span 8 / span 8;
+      grid-row-start: 7;
+    }
+    &.address {
+      grid-column: span 8 / span 8;
+      grid-row-start: 8;
+    }
+
+    &.sureAnswer {
+      grid-column: span 8 / span 8;
+    }
+
+    &.registrationName {
+      grid-column: span 8 / span 8;
+      grid-row-start: 10;
+    }
+
+    &.currentPayment {
+      grid-column: span 8 / span 8;
+      grid-row-start: 11;
+    }
+
+    &.challanNo {
+      grid-column: span 2 / span 2;
+      grid-row-start: 12;
+    }
+
+    &.amountPaid {
+      grid-column: span 3 / span 3;
+      grid-column-start: 3;
+      grid-row-start: 12;
+    }
+
+    &.datePayment {
+      grid-column: span 3 / span 3;
+      grid-column-start: 6;
+      grid-row-start: 12;
     }
   }
 }

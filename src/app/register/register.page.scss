@@ -133,21 +133,21 @@ ion-button.form-btn {
   background: var(--primary-color-active);
 }
 
-#login-form .form-new-account {
+.form-new-account {
   margin-top: 14px;
 }
 
-#login-form .form-new-account * {
+.form-new-account * {
   text-align: center;
   margin: 0;
   font-size: 12px;
 }
 
-#login-form .form-new-account .or {
+.form-new-account .or {
   color: #5c5c5c;
 }
 
-#login-form .form-new-account p a {
+.form-new-account p a {
   color: var(--primary-color);
   text-decoration: none;
 }
