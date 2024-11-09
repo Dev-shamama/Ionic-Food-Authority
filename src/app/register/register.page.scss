@@ -1,169 +1,163 @@
 ion-content {
-    --background: #eaeaea;
-  }
-  
+  --background: #eaeaea;
+}
+
 ion-input {
-    --width: 100%;
-    --border-color: transparent;
-    --padding-start: 0px;
-    --padding-end: 0px;
-    --background: none;
+  --width: 100%;
+  --border-color: transparent;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --background: none;
 }
 
 .item-inner {
-    padding-right: 0px !important;
+  padding-right: 0px !important;
 }
 
-
 ion-item {
-    --border-color: transparent;
-    --padding-start: 0;
-    --padding-end: 0;
-    --inner-padding-end: 0px;
-    // --background: #F2F2F2;
+  --border-color: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0px;
+  // --background: #F2F2F2;
 }
 
 ion-label {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-right: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-right: 0;
 }
 
 ion-select {
-    padding: 0 0;
+  padding: 0 0;
 }
 
 ion-item ion-input,
 ion-item ion-select {
-    --width: 100%;
-    --color: rgba(137, 137, 137, 1);
-    --highlight-color-focused: var(--primary-color);
+  --width: 100%;
+  --color: rgba(137, 137, 137, 1);
+  --highlight-color-focused: var(--primary-color);
 }
 
-
-
-
 .inputField {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .center-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: #F9F9F9;
-    padding: 30px 0;
-
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #f9f9f9;
+  padding: 30px 0;
 }
 
 .center-container .logo {
-    width: 300px;
-    height: 100px;
+  width: 300px;
+  height: 100px;
 }
 
 .login-content {
-    min-width: 300px;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-    border-radius: 24px;
+  width: 400px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 24px;
 }
 
 .login-content h1 {
-    margin-bottom: 15px;
-    font-weight: bold;
-    font-size: 22px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 22px;
 }
 
 #login-form {
-    width: 100%;
+  width: 100%;
 }
 
-
 .phone-content {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    grid-column-gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 8px;
 }
 
 .phone-content ion-input {
-    grid-column: span 4 / span 4;
+  grid-column: span 4 / span 4;
 }
 
 .phone-content ion-button {
-    grid-column-start: 5;
-    white-space: nowrap;
-    border-radius: 8px;
-    font-weight: 600;
+  grid-column-start: 5;
+  white-space: nowrap;
+  border-radius: 8px;
+  font-weight: 600;
 
-    --background: #EB9E00;
-    --background-hover: #f3b22e;
-    --background-activated: #EB9E00;
-    --background-focused: #EB9E00;
-    --padding-top: 0;
-    --padding-bottom: 0;
-    margin: 0;
+  --background: #eb9e00;
+  --background-hover: #f3b22e;
+  --background-activated: #eb9e00;
+  --background-focused: #eb9e00;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  margin: 0;
 }
 
-
 ion-button.form-btn {
-    --background: #014122;
-    --background-hover: #076a3a;
-    --background-activated: #014122;
-    --background-focused: #014122;
-    width: 100%;
+  --background: #014122;
+  --background-hover: #076a3a;
+  --background-activated: #014122;
+  --background-focused: #014122;
+  width: 100%;
 
-    --color: #ffffff;
+  --color: #ffffff;
 
-    --border-radius: 6px;
-    --border-color: #014122;
-    --border-style: solid;
-    --border-width: 1px;
+  --border-radius: 6px;
+  --border-color: #014122;
+  --border-style: solid;
+  --border-width: 1px;
 
-    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
 
-    --ripple-color: #0a482a;
+  --ripple-color: #0a482a;
 
-    --padding-top: 10px;
-    --padding-bottom: 10px;
-
+  --padding-top: 10px;
+  --padding-bottom: 10px;
 }
 
 #login-form .form-btn:hover {
-    background: var(--primary-color-active);
+  background: var(--primary-color-active);
 }
 
 #login-form .form-new-account {
-    margin-top: 14px;
+  margin-top: 14px;
 }
 
 #login-form .form-new-account * {
-    text-align: center;
-    margin: 0;
-    font-size: 12px;
+  text-align: center;
+  margin: 0;
+  font-size: 12px;
 }
 
 #login-form .form-new-account .or {
-    color: #5C5C5C;
-
+  color: #5c5c5c;
 }
 
 #login-form .form-new-account p a {
-    color: var(--primary-color);
-    text-decoration: none;
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 450px) {
-    .center-container .logo {
-        width: 250px;
-    }
+  .center-container .logo {
+    width: 250px;
+  }
 
-
+  .login-content {
+    width: 95%;
+  }
 }

@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true">
+
+  <div class="center-container">
+    <div class="logo">
+      <img src="./assets/img/logo.png" alt="Logo">
+    </div>
+    <div class="login-content">
+      <h1>Select Send OTP</h1>
+      <form id="login-form" action="">
+
+        <div class="inputField checkbox-content">
+          <ion-radio-group value="custom-checked">
+            <div class="checkbox-btn">
+              <ion-radio
+                value="custom"
+                aria-label="Custom checkbox"
+              ></ion-radio
+              ><strong>Email</strong> <span id="email">dev.shamama&#64;gmail.com</span>
+            </div>
+            <div class="checkbox-btn">
+              <ion-radio
+                value="custom-checked"
+                aria-label="Custom checkbox that is checked"
+              ></ion-radio
+              ><strong>Number</strong> <span id="number">0312931283</span>
+            </div>
+          </ion-radio-group>
+        </div>
+
+        
+        <ion-button class="form-btn">Send OTP</ion-button>
+
+      </form> 
+    </div>
+  </div>
+  
+</ion-content>

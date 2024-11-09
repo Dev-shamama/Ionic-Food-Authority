@@ -58,6 +58,18 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'sendotp',
+    loadChildren: () => import('./sendotp/sendotp.module').then( m => m.SendotpPageModule)
+  },
+  {
+    path: 'verifyotp',
+    loadChildren: () => import('./verifyotp/verifyotp.module').then( m => m.VerifyotpPageModule)
+  },
+  {
+    path: 'resetpassword',
+    loadChildren: () => import('./resetpassword/resetpassword.module').then( m => m.ResetpasswordPageModule)
+  },
 
 ];
 
