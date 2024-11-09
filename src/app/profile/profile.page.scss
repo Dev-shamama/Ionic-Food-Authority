@@ -79,7 +79,7 @@ ion-button {
 
 .wrapper {
     width: 100%;
-    display: grid;
+    // display: grid;
     align-items: flex-start;
     justify-content: flex-start;
     grid-template-columns: repeat(7, 1fr);
@@ -178,3 +178,27 @@ ion-button {
 
 
 }
+
+@media  only screen and (max-width: 600px) {
+    .wrapper {
+        display: block;
+
+        .left-side {
+            margin-bottom: 15px;
+        }
+    }
+}
+@media  only screen and (max-width: 450px) {
+    .wrapper {
+        .right-side {
+            #userProfile {
+                display: block;
+                .inputField {
+                    margin-bottom: 10px;
+                }
+            }            
+
+        }
+    }
+}
+
