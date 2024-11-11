@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-licensedetail',
@@ -23,7 +24,16 @@ export class LicensedetailPage {
     previous: null,
     lab: null,
   };
-  constructor() {
+
+  image: string; 
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.image = 'http://localhost:8100/assets/img/certificate.png';
+  }
+
+  getDownloadUrl(): SafeUrl {
+    const dataUrl = 'data:image/jpeg;base64,'; 
+    return this.sanitizer.bypassSecurityTrustUrl(dataUrl + this.image);
   }
 
   onFileSelected(event: Event): void {
