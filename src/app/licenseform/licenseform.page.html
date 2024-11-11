@@ -113,13 +113,7 @@
       <ion-footer>
         <ion-toolbar>
           <ion-title slot="start"></ion-title>
-          <ion-button
-            slot="end"
-            (click)="FormOnSubmitted()"
-            class="most-used"
-            style="padding: 20px"
-            >Submit</ion-button
-          >
+          <ion-button slot="end" (click)="FormOnSubmitted()" class="most-used" style="padding: 20px">Submit</ion-button>
         </ion-toolbar>
       </ion-footer>
     </ng-template>
@@ -132,10 +126,8 @@
       <div class="wrapper wrapper-one">
         <div class="top-content-header">
           <div class="logo-one">
-            <ion-img
-              src="./assets/img/logo-1.png"
-              alt="The Wisconsin State Capitol building in Madison, WI at night"
-            ></ion-img>
+            <ion-img src="./assets/img/logo-1.png"
+              alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
           </div>
 
           <div class="main-heading">
@@ -145,10 +137,8 @@
           </div>
 
           <div class="logo-two">
-            <ion-img
-              src="./assets/img/logo-2.png"
-              alt="The Wisconsin State Capitol building in Madison, WI at night"
-            ></ion-img>
+            <ion-img src="./assets/img/logo-2.png"
+              alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
           </div>
         </div>
 
@@ -156,216 +146,116 @@
           <div id="license_form">
             <div class="inputField applicant">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.applicant"
-                  type="text"
-                  name="applicant"
-                  label="Name of Applicant"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your Name of Applicant"
-                  required
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.applicant" type="text" name="applicant" label="Name of Applicant"
+                  label-placement="floating" fill="solid" placeholder="Enter Your Name of Applicant"
+                  required></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField cnic">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.cnic"
-                  name="cnic"
-                  label="CNIC #"
-                  type="text"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your CNIC #"
-                  id="cnic"
-                  (input)="cnicMasking($event)"
-                  required
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.cnic" name="cnic" label="CNIC #" type="text" label-placement="floating"
+                  fill="solid" placeholder="Enter Your CNIC #" id="cnic" (input)="cnicMasking($event)"
+                  required></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField phone">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.phone"
-                  name="phone"
-                  required
-                  type="number"
-                  label="Ph #"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Phone #"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.phone" name="phone" required type="number" label="Ph #"
+                  label-placement="floating" fill="solid" placeholder="Enter Phone #"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField cell">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.cell"
-                  name="cell"
-                  required
-                  type="number"
-                  label="Cell #"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your Cell No"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.cell" name="cell" required type="number" label="Cell #"
+                  label-placement="floating" fill="solid" placeholder="Enter Your Cell No"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField food-name">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.foodBusiness"
-                  name="foodBusiness"
-                  type="text"
-                  required
-                  label="Name of Food Business"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your Name of Food Business"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.foodBusiness" name="foodBusiness" type="text" required
+                  label="Name of Food Business" label-placement="floating" fill="solid"
+                  placeholder="Enter Your Name of Food Business"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField nature">
-              <ion-select
-                [(ngModel)]="dataset.natureBusiness"
-                name="natureBusiness"
-                required
-                label="Nature of Business"
-                interface="popover"
-                fill="solid"
-                placeholder="Select One"
-              >
-                <ion-select-option value="apple">Apple</ion-select-option>
-                <ion-select-option value="banana">Banana</ion-select-option>
-                <ion-select-option value="orange">Orange</ion-select-option>
+
+              <ion-select [(ngModel)]="dataset.natureBusiness" name="natureBusiness" required label="Nature of Business"
+                interface="popover" fill="solid" label-placement="floating" fill="solid">
+                <ion-select-option value="business1">Business 1</ion-select-option>
+                <ion-select-option value="business2">Business 2</ion-select-option>
+                <ion-select-option value="business3">Business 3</ion-select-option>
               </ion-select>
+
+
             </div>
 
             <div class="inputField category">
-              <ion-select
-                [(ngModel)]="dataset.category"
-                name="category"
-                required
-                label="Category"
-                interface="popover"
-                fill="solid"
-                placeholder="Select One"
-              >
-                <ion-select-option value="apple">Apple</ion-select-option>
-                <ion-select-option value="banana">Banana</ion-select-option>
-                <ion-select-option value="orange">Orange</ion-select-option>
+
+
+              <ion-select [(ngModel)]="dataset.category" name="category" required label="Category" interface="popover"
+                fill="solid" label-placement="floating" fill="solid">
+                <ion-select-option value="category1">Category 1</ion-select-option>
+                <ion-select-option value="category2">Category 2</ion-select-option>
+                <ion-select-option value="category3">Category 3</ion-select-option>
               </ion-select>
+
             </div>
 
             <div class="inputField district">
-              <ion-select
-                [(ngModel)]="dataset.district"
-                name="district"
-                required
-                label="District"
-                interface="popover"
-                fill="solid"
-                placeholder="Select One"
-              >
-                <ion-select-option value="apple">Apple</ion-select-option>
-                <ion-select-option value="banana">Banana</ion-select-option>
-                <ion-select-option value="orange">Orange</ion-select-option>
+              <ion-select [(ngModel)]="dataset.district" name="district" required label="District" interface="popover"
+                fill="solid" label-placement="floating" fill="solid">
+                <ion-select-option value="district1">District 1</ion-select-option>
+                <ion-select-option value="district2">District 2</ion-select-option>
+                <ion-select-option value="district3">District 3</ion-select-option>
               </ion-select>
+
             </div>
 
             <div class="inputField secp">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.secp"
-                  type="text"
-                  name="secp"
-                  required
-                  label="SECP"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your SECP"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.secp" type="text" name="secp" required label="SECP"
+                  label-placement="floating" fill="solid" placeholder="Enter Your SECP"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField ntn">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.ntn"
-                  name="ntn"
-                  type="text"
-                  required
-                  label="NTN"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter NTN"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.ntn" name="ntn" type="text" required label="NTN"
+                  label-placement="floating" fill="solid" placeholder="Enter NTN"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField srb">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.srb"
-                  name="srb"
-                  type="text"
-                  required
-                  label="SRB"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter SRB"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.srb" name="srb" type="text" required label="SRB"
+                  label-placement="floating" fill="solid" placeholder="Enter SRB"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField tax">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.salesTax"
-                  name="salesTax"
-                  type="text"
-                  required
-                  label="SALES TAX"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter TAX"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.salesTax" name="salesTax" type="text" required label="SALES TAX"
+                  label-placement="floating" fill="solid" placeholder="Enter TAX"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField area">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.areaMeasurement"
-                  name="areaMeasurement"
-                  type="text"
-                  required
-                  label="Area Measurement (sq. ft)"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your Area Measurement (sq. ft)"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="text" required
+                  label="Area Measurement (sq. ft)" label-placement="floating" fill="solid"
+                  placeholder="Enter Your Area Measurement (sq. ft)"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField address">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.address"
-                  type="text"
-                  name="address"
-                  required
-                  label="Address"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your Address"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.address" type="text" name="address" required label="Address"
+                  label-placement="floating" fill="solid" placeholder="Enter Your Address"></ion-input>
               </ion-item>
             </div>
           </div>
@@ -373,23 +263,13 @@
           <div class="check-sure-question">
             <p>Already Registered with Food Authority</p>
             <div class="checkbox-content">
-              <ion-radio-group
-                [(ngModel)]="dataset.sureAnswer"
-                name="sureAnswer"
-                required
-              >
+              <ion-radio-group [(ngModel)]="dataset.sureAnswer" name="sureAnswer" required>
                 <div class="checkbox-btn">
-                  <ion-radio
-                    value="Yes"
-                    aria-label="Custom checkbox"
-                  ></ion-radio>
+                  <ion-radio value="Yes" aria-label="Custom checkbox"></ion-radio>
                   Yes
                 </div>
                 <div class="checkbox-btn">
-                  <ion-radio
-                    value="No"
-                    aria-label="Custom checkbox that is checked"
-                  ></ion-radio>
+                  <ion-radio value="No" aria-label="Custom checkbox that is checked"></ion-radio>
                   No
                 </div>
               </ion-radio-group>
@@ -410,76 +290,39 @@
           <div id="license_form_bottom">
             <div class="inputField registrationName">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.registrationName"
-                  name="registrationName"
-                  type="text"
-                  required
-                  label="Registration in the name of"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your Registration in the name of"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.registrationName" name="registrationName" type="text" required
+                  label="Registration in the name of" label-placement="floating" fill="solid"
+                  placeholder="Enter Your Registration in the name of"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField currentPayment">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.currentPayment"
-                  name="currentPayment"
-                  type="text"
-                  required
-                  label="Current Payment Details"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your Current Payment Details"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.currentPayment" name="currentPayment" type="text" required
+                  label="Current Payment Details" label-placement="floating" fill="solid"
+                  placeholder="Enter Your Current Payment Details"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField ChallanNo">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.challanNo"
-                  name="challanNo"
-                  type="number"
-                  required
-                  label="Challan No."
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Challan No."
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.challanNo" name="challanNo" type="number" required label="Challan No."
+                  label-placement="floating" fill="solid" placeholder="Enter Challan No."></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField amountPaid">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.amountPaid"
-                  name="amountPaid"
-                  required
-                  type="number"
-                  label="Amount Paid Rs"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Amount Paid Rs"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.amountPaid" name="amountPaid" required type="number"
+                  label="Amount Paid Rs" label-placement="floating" fill="solid"
+                  placeholder="Enter Amount Paid Rs"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField dateOfPayment">
               <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="dataset.datePayment"
-                  name="datePayment"
-                  required
-                  type="date"
-                  label="Date of Payment"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="--/--/----"
-                ></ion-input>
+                <ion-input [(ngModel)]="dataset.datePayment" name="datePayment" required type="date"
+                  label="Date of Payment" label-placement="floating" fill="solid" placeholder="--/--/----"></ion-input>
               </ion-item>
             </div>
           </div>
@@ -505,12 +348,7 @@
       </div>
 
       <div class="bottom-submit-button">
-        <ion-button
-          type="submit"
-          expand="block"
-          (click)="setOpen(true)"
-          [disabled]="!licenseForm.valid"
-        >
+        <ion-button type="submit" expand="block" (click)="setOpen(true)" [disabled]="!licenseForm.valid">
           Save and generate Challan
           <span><ion-icon name="chevron-forward-outline"></ion-icon></span>
         </ion-button>
