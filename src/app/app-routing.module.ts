@@ -70,6 +70,10 @@ const routes: Routes = [
     path: 'resetpassword',
     loadChildren: () => import('./resetpassword/resetpassword.module').then( m => m.ResetpasswordPageModule)
   },
+  {
+    path: 'licenseview',
+    loadChildren: () => import('./licenseview/licenseview.module').then( m => m.LicenseviewPageModule)
+  },
 
 ];
 
