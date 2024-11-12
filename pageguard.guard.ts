@@ -9,6 +9,10 @@ import { ApiService } from './api.service';
 export class PageguardGuard implements CanActivate {
   constructor (private api_service:ApiService ,   private router : Router){
 
+    const s: any = document.getElementById('sidebar-main-container');
+    // s.style.width = '0'
+    s.setAttribute('style', '--side-min-width: 18%; --side-max-width: 18%');
+
   }
 
   canActivate(

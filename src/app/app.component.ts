@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiService } from 'api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
-  imagePath: string = 'assets/img/logo.png';
+  constructor(private apiService: ApiService, private route: Router) {}
+
+  logout() {
+    this.apiService.removeTokens();
+    this.apiService.displayToast(
+      'Logout successfully',
+      'bottom',
+      'toast-succes',
+      'checkmark-circle-sharp',
+      'success'
+    );
+    this.route.navigate(['/login']);
+  }
 }

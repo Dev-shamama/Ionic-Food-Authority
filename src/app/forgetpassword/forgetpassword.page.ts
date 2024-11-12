@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from 'api.service';
 
 @Component({
   selector: 'app-forgetpassword',
@@ -10,7 +12,8 @@ export class ForgetpasswordPage implements OnInit {
   @ViewChild('forgetPassword')
   forgetPassword: NgForm | undefined;
 
-  constructor() { }
+  constructor(private apiService: ApiService, private route: Router) {}
+
   ngOnInit(): void {
     const s: any = document.getElementById('sidebar-main-container');
     // s.style.width = '0'
@@ -25,6 +28,7 @@ export class ForgetpasswordPage implements OnInit {
   onSubmit() {
     console.log(this.dataset);
     // console.log(this.dataset.cnic.slice(0, 15));
+    this.route.navigate(['/sendotp']);
   }
 
   cnicMasking(event: any): void {

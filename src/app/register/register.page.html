@@ -6,6 +6,39 @@
     <div class="login-content">
       <h1>Create Your Account</h1>
       <form id="login-form" #halfForm="ngForm" (ngSubmit)="onSubmitHalfForm()">
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input
+            name="logo"
+            type="file"
+            id="logo"
+            (change)="onFileChange($event)"
+            label="Logo"
+            label-placement="floating"
+            fill="solid"
+            placeholder="Enter Your Logo"
+            required
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="inputField">
+          <ion-item class="no-border">
+            <ion-input
+              [(ngModel)]="halfDataset.name"
+              name="name"
+              type="text"
+              id="name"
+              label="Name"
+              label-placement="floating"
+              fill="solid"
+              placeholder="Enter Your Name"
+              required
+            ></ion-input>
+          </ion-item>
+        </div>
+
         <div class="inputField">
           <ion-item class="no-border">
             <ion-input

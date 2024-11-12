@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { ApiService } from 'api.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -12,7 +16,7 @@ export class RegisterPage implements OnInit {
   @ViewChild('fullForm')
   fullForm: NgForm | undefined;
 
-  constructor() {}
+  constructor(private apiService: ApiService , private route : Router) {}
 
   ngOnInit(): void {
     const s: any = document.getElementById('sidebar-main-container');
@@ -21,10 +25,25 @@ export class RegisterPage implements OnInit {
   }
 
   halfDataset = {
+    logo: '',
+    name: '',
     cnic: '',
     email: '',
     phone: '',
   };
+
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    console.log(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.halfDataset.logo = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+ 
+    }
+  }
 
   formActiveDetail = true;
 
@@ -43,6 +62,19 @@ export class RegisterPage implements OnInit {
 
   onSubmitFullForm() {
     console.log(this.fullDataset);
+
+    const data = {...this.halfDataset, ...this.fullDataset}
+    console.log(data)
+
+    this.apiService.signup(data).then(async (res:any) => {
+      if (res.reponse_type == "success") {
+        this.route.navigate(['/profile'])
+      }
+    
+    }).catch(async (err:any) => {
+      console.log(err)
+
+    })
 
     // console.log(this.dataset.cnic.slice(0, 15));
   }
@@ -65,4 +97,6 @@ export class RegisterPage implements OnInit {
     let x: any = document.getElementById('cnic');
     x.value = formattedValue;
   }
+
+
 }

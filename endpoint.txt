@@ -1,0 +1,13 @@
+# user api url 
+    path('login/', views.UserLoginView.as_view(), name='login'),
+    path('signup/', views.UserSignupView.as_view(), name='signup'),
+    path('refrashToken/', views.RefrashTokenApi.as_view(), name='refrashToken'),
+    path('Tokenvalidcheck/', views.TokenValidCheck.as_view(), name='TokenValidCheck'),
+    # path('profile/', views.UserProfileView.as_view(), name='profile'),
+    path('changepassword/', views.UserChangePasswordView.as_view(), name='changepassword'),
+
+    
+    path('send-reset-password-email/', views.SendPasswordResetEmailView.as_view(), name='send-reset-password-email'),
+    path('reset-password/<uid>/<token>/', views.UserPasswordResetView.as_view(), name='reset-password'),
+    path('forget-change-password/<uid>/<token>/', views.forget_change_password , name='forget-change-password'),
+    path('change-password-success/', views.change_password_success , name='change-password-success'),

@@ -5,7 +5,7 @@
       <ion-header>
         <ion-toolbar color="white">
           <div class="main-top-logo">
-            <img [src]="imagePath" alt="logo" />
+            <img src="assets/img/logo.png" alt="logo" />
           </div>
         </ion-toolbar>
       </ion-header>
@@ -109,7 +109,7 @@
 
           <ion-item>
             <ion-label class="item-logout">
-              <div class="item">
+              <div class="item" (click)="logout()">
                 <div class="item-left-side">
                   <div class="item-icon"><ion-icon name="log-out-outline"></ion-icon></div>
                   <div class="item-text">

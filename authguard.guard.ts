@@ -8,7 +8,10 @@ import { ApiService } from './api.service';
 })
 export class AuthguardGuard implements CanActivate {
   constructor (private api_service:ApiService ,   private router : Router){
-
+    const s: any = document.getElementById('sidebar-main-container');
+    // s.style.width = '0'
+    s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
+    
   }
 
   canActivate(
@@ -19,7 +22,7 @@ export class AuthguardGuard implements CanActivate {
     var status = true
 
     this.api_service.getToken().then((res:any) => {  
-      
+      console.log(res);
       if (res.access_token,  res.refrash_token){
         this.api_service.AccessTokenvalid(res.access_token,  res.refrash_token).then((resp) => {
 
