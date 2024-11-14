@@ -11,3 +11,102 @@
     path('reset-password/<uid>/<token>/', views.UserPasswordResetView.as_view(), name='reset-password'),
     path('forget-change-password/<uid>/<token>/', views.forget_change_password , name='forget-change-password'),
     path('change-password-success/', views.change_password_success , name='change-password-success'),
+
+
+
+    
+1 url => login/
+
+payload_data {
+    'username':'',
+    'password':'',
+}
+
+--------------------
+2 url => signup/
+
+payload_data {
+    'cnic':'',
+    'logo':'',
+    'name':'',
+    'email':'',
+    'phone':'',
+    'password':'',
+}
+
+--------------------
+
+3 url => refrashToken/
+
+payload_data {
+    'RefrashToken':'',
+}
+
+4 url => Tokenvalidcheck/
+
+payload_data {
+    'BerearToken':'',
+}
+---------------------
+
+5 url => changepassword/
+
+payload_data {
+    'BerearToken':'',
+    'current_password':'' , 
+    'password':'' ,
+    'password2':''
+}
+--------------------
+
+6 url => forgot-password/
+payload_data {
+    'username':'',
+    
+}
+--------------------
+7 url => send-otp/
+
+payload_data {
+    'uid':'',
+    'otp_type':'',
+    
+}
+---------------------
+8 url => reset-password/
+
+payload_data {
+    'uid':'',
+    'otp_code':'',
+    'password':'',
+    'password2':'',
+    
+}
+----------------------
+
+9 url => check-uid/
+
+payload_data {
+    'uid':'',
+}
+
+----------------------
+
+10 url => check-otp/
+
+payload_data {
+    'uid':'',
+    'otp_code':''
+}
+
+----------------------
+
+11 url => 2fv-otp/
+
+payload_data {
+    'username':'',
+    'password':'',
+    'otp_code':'',
+}
+
+-----------------------

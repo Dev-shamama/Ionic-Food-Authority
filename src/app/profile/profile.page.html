@@ -20,6 +20,25 @@
 
         <div class="profile-basic-info">
           <form id="userProfile" #userProfile="ngForm" (ngSubmit)="onSubmitUserProfile()">
+
+
+            <div class="inputField name">
+              <ion-item class="no-border">
+                <ion-input
+                  [(ngModel)]="profileDataset.name"
+                  name="name"
+                  id="name"
+                  required
+                  type="text"
+                  label="Name"
+                  label-placement="floating"
+                  fill="solid"
+                  placeholder="Enter Your Name"
+                ></ion-input>
+              </ion-item>
+            </div>
+
+
             <div class="inputField cnic">
               <ion-item class="no-border">
                 <ion-input
@@ -57,6 +76,7 @@
                 <ion-input
                   [(ngModel)]="profileDataset.phone"
                   name="phone"
+                  type="number"
                   required
                   label="Phone"
                   label-placement="floating"

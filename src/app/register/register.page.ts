@@ -10,13 +10,10 @@ import { ApiService } from 'api.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  @ViewChild('halfForm')
-  halfForm: NgForm | undefined;
-
   @ViewChild('fullForm')
   fullForm: NgForm | undefined;
 
-  constructor(private apiService: ApiService , private route : Router) {}
+  constructor(private apiService: ApiService, private route: Router) { }
 
   ngOnInit(): void {
     const s: any = document.getElementById('sidebar-main-container');
@@ -24,59 +21,52 @@ export class RegisterPage implements OnInit {
     s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
   }
 
-  halfDataset = {
-    logo: '',
+  dataset = {
+    logo: '/assets/img/profile.png',
     name: '',
     cnic: '',
     email: '',
     phone: '',
-  };
-
-  onFileChange(event: any): void {
-    const file = event.target.files[0];
-    console.log(file);
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.halfDataset.logo = reader.result as string;
-      };
-      reader.readAsDataURL(file);
- 
-    }
-  }
-
-  formActiveDetail = true;
-
-  onSubmitHalfForm() {
-    console.log(this.halfDataset);
-    this.formActiveDetail = false;
-
-    // console.log(this.dataset.cnic.slice(0, 15));
-  }
-
-  fullDataset = {
-    otp: '',
     password: '',
     confirmPassword: '',
   };
 
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.dataset.logo = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+
+    }
+  }
+
+  onSubmitHalfForm() {
+    console.log(this.dataset);
+
+    // console.log(this.dataset.cnic.slice(0, 15));
+  }
+
+
   onSubmitFullForm() {
-    console.log(this.fullDataset);
-
-    const data = {...this.halfDataset, ...this.fullDataset}
-    console.log(data)
-
-    this.apiService.signup(data).then(async (res:any) => {
+    console.log(this.dataset)
+    this.apiService.signup(this.dataset).then(async (res: any) => {
       if (res.reponse_type == "success") {
         this.route.navigate(['/profile'])
       }
-    
-    }).catch(async (err:any) => {
+
+    }).catch(async (err: any) => {
       console.log(err)
 
     })
 
     // console.log(this.dataset.cnic.slice(0, 15));
+  }
+
+  get passwordsMatch(): boolean {
+    return this.dataset.password === this.dataset.confirmPassword;
   }
 
   cnicMasking(event: any): void {
@@ -98,5 +88,8 @@ export class RegisterPage implements OnInit {
     x.value = formattedValue;
   }
 
+  fileInput() {
+    document.getElementById('logoFileInput')?.click();
+  }
 
 }

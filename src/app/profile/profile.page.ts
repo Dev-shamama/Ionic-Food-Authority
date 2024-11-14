@@ -16,6 +16,7 @@ export class ProfilePage {
   constructor() { }
 
   profileDataset = {
+    name: null,
     cnic: null,
     email: null,
     phone: null,
