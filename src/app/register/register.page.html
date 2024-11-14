@@ -1,9 +1,11 @@
 <ion-content [fullscreen]="true">
   <div class="center-container">
+    
     <div class="logo">
       <img src="./assets/img/logo.png" alt="Logo" />
     </div>
-    <div class="login-content">
+    <!-- register -->
+    <div *ngIf="show_otp_page_box == false" class="login-content">
       <form #fullForm="ngForm" (ngSubmit)="onSubmitFullForm()">
         <h1 style="text-align: center;">Create Your Account</h1>
         <div id="login-form">
@@ -83,5 +85,17 @@
         <p class=""><a routerLink="/login">Login Your Account</a></p>
       </div>
     </div>
+
+    <!-- OTP type  -->
+    <div *ngIf="show_otp_page_box == true">
+
+      <app-otp-type [uid]="uid">
+      </app-otp-type>
+
+
+    </div>
+
+
+
   </div>
 </ion-content>

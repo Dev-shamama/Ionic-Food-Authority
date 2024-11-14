@@ -89,10 +89,6 @@ export class ApiService {
               'checkmark-circle-sharp',
               'success'
             );
-            var access_token = data.token.access;
-            var refrash_token = data.token.refresh;
-            this.saveTokens(access_token, refrash_token);
-
             resolve(data);
           } else {
             this.displayToast(
@@ -110,6 +106,102 @@ export class ApiService {
         });
     });
   }
+
+  async checkUserId(credentials: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const data = credentials;
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/check-uid/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log('user id check: ', data);
+          if (data.reponse_type == 'success') {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  async otpType(credentials: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const data = credentials;
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/send-otp/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log('user id check: ', data);
+          if (data.reponse_type == 'success') {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  // async signup(credentials: any): Promise<any> {
+  //   return new Promise<any>((resolve) => {
+  //     const data = credentials;
+  //     const options = {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(data),
+  //     };
+  //     fetch(`${this.localhost}/signup/`, options)
+  //       .then(async (response) => {
+  //         const data = await response.json();
+  //         console.log('API', data);
+  //         if (data.reponse_type == 'success') {
+  //           this.displayToast(
+  //             data.msg,
+  //             'bottom',
+  //             'toast-succes',
+  //             'checkmark-circle-sharp',
+  //             'success'
+  //           );
+  //           var access_token = data.token.access;
+  //           var refrash_token = data.token.refresh;
+  //           this.saveTokens(access_token, refrash_token);
+
+  //           resolve(data);
+  //         } else {
+  //           this.displayToast(
+  //             data.msg,
+  //             'bottom',
+  //             'toast-error',
+  //             'warning-outline',
+  //             'danger'
+  //           );
+  //           resolve(data);
+  //         }
+  //       })
+  //       .catch((e) => {
+  //         resolve(e);
+  //       });
+  //   });
+  // }
 
   async login(credentials: any): Promise<any> {
     return new Promise<any>((resolve) => {

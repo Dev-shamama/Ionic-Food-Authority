@@ -1,3 +1,4 @@
+import { OtpTypeComponent } from './../otp-type/otp-type.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,13 +14,19 @@ export class RegisterPage implements OnInit {
   @ViewChild('fullForm')
   fullForm: NgForm | undefined;
 
-  constructor(private apiService: ApiService, private route: Router) { }
+  show_otp_page_box =false
+
+  uid:any = "MTg"
+
+  constructor(private apiService: ApiService, private route: Router ) { }
 
   ngOnInit(): void {
     const s: any = document.getElementById('sidebar-main-container');
     // s.style.width = '0'
     s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
   }
+
+
 
   dataset = {
     logo: '/assets/img/profile.png',
@@ -49,17 +56,28 @@ export class RegisterPage implements OnInit {
     // console.log(this.dataset.cnic.slice(0, 15));
   }
 
+  SendOTPbtn(){
+    
+  }
+
+
+
 
   onSubmitFullForm() {
     console.log(this.dataset)
     this.apiService.signup(this.dataset).then(async (res: any) => {
+      console.log(res);
       if (res.reponse_type == "success") {
-        this.route.navigate(['/profile'])
+        this.uid = res.uid
+        this.show_otp_page_box = true
+      }else{
+        this.show_otp_page_box = false
+        this.uid = ''
       }
 
     }).catch(async (err: any) => {
       console.log(err)
-
+      this.show_otp_page_box = false
     })
 
     // console.log(this.dataset.cnic.slice(0, 15));
@@ -70,7 +88,7 @@ export class RegisterPage implements OnInit {
   }
 
   cnicMasking(event: any): void {
-    const input: HTMLInputElement = event.target as HTMLInputElement;
+    const input = event.target;
     const value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
 
     let formattedValue = value;

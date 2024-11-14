@@ -93,6 +93,7 @@ const routes: Routes = [
       import('./forgetpassword/forgetpassword.module').then(
         (m) => m.ForgetpasswordPageModule
       ),
+      canActivate: [AuthguardGuard],
   },
   {
     path: 'profile',
@@ -101,14 +102,16 @@ const routes: Routes = [
     canActivate: [PageguardGuard],
   },
   {
-    path: 'sendotp',
+    path: 'sendotp/:uid',
     loadChildren: () =>
       import('./sendotp/sendotp.module').then((m) => m.SendotpPageModule),
+    canActivate: [AuthguardGuard],
   },
   {
     path: 'verifyotp',
     loadChildren: () =>
       import('./verifyotp/verifyotp.module').then((m) => m.VerifyotpPageModule),
+    canActivate: [AuthguardGuard],
   },
   {
     path: 'resetpassword',
@@ -116,6 +119,7 @@ const routes: Routes = [
       import('./resetpassword/resetpassword.module').then(
         (m) => m.ResetpasswordPageModule
       ),
+      canActivate: [AuthguardGuard],
   },
   {
     path: 'licenseview',

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { ApiService } from 'api.service';
 
 @Component({
   selector: 'app-sendotp',
@@ -6,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sendotp.page.scss'],
 })
 export class SendotpPage implements OnInit {
-  constructor() {}
+  @ViewChild('otpType')
+  otpType: NgForm | undefined;
+  uid:any
+  otp_type:any = "email"
+
+  constructor(
+    private apiService: ApiService,
+    private route: Router,
+    private urlParam: ActivatedRoute
+  ) {
+    // this.urlParam.paramMap.subscribe((params) => {
+    //   // this.dataset.uid = params.get('uid')!;
+    // });
+  }
+
+  checkUserIdFunction() {
+    this.apiService
+      .checkUserId({ uid: this.uid})
+      .then(async (res: any) => {
+        if (res.reponse_type == 'success') {
+        }
+        // this.route.navigate(['/register'])
+      })
+      .catch(async (err: any) => {
+        // this.route.navigate(['/register'])
+      });
+  }
 
   ngOnInit(): void {
+    this.uid = this.urlParam.snapshot.paramMap.get('uid');
+
+    this.checkUserIdFunction();
+
     const s: any = document.getElementById('sidebar-main-container');
     // s.style.width = '0'
     s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
@@ -21,6 +55,29 @@ export class SendotpPage implements OnInit {
 
     const maskedPhone = this.maskPhoneNumber(numberSecure?.textContent);
     numberSecure.innerHTML = String(maskedPhone);
+  }
+
+  onSubmitFullForm() {
+
+    this.apiService
+      .otpType({uid: this.uid, otp_type: this.otp_type})
+      .then(async (res: any) => {
+        console.log(res);
+        if (res.reponse_type == 'success') {
+          this.apiService.displayToast(
+            res.msg,
+            'bottom',
+            'toast-succes',
+            'checkmark-circle-sharp',
+            'success'
+          );
+          this.route.navigate(['/verifyotp'])
+          // this.route.navigate([`/sendotp/${res.uid}`])
+        }
+      })
+      .catch(async (err: any) => {
+        console.log(err);
+      });
   }
 
   maskEmail(email: string) {
