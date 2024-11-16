@@ -80,7 +80,8 @@ export class PageguardGuard implements CanActivate {
       status = false;
     })
 
-    return status;
+    // return status;
+    return true;
 
 
   }

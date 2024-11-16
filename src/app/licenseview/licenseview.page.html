@@ -1,12 +1,138 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="license-view-container">
+  <div class="payChallen-container">
+    <h2 class="section-title">License View</h2>
 
-    <div class="image-container">
-      <ion-img [src]="image" alt="License View Image"></ion-img>
+    <div class="wrapper wrapper-one">
+      <div id="divContents">
+        <div class="border-image">
+        <div class="challan-content">
+
+          <div class="top-logo">
+            <div class="logo left-logo">
+              <img src="http://localhost:8100/assets/img/logo-1.png" alt="logo" />
+            </div>
+
+            <div class="heading center-text">
+              <h2 class="heading">SINDH FOOD AUTHORITY</h2>
+              <h2 class="subHeading">GOVERNMENT OF SINDH</h2>
+            </div>
+
+
+            <div class="logo right-logo">
+              <img
+                src="http://localhost:8100/assets/img/logo-2.png"
+                alt="logo"
+              />
+            </div>
+          </div>
+
+          <h2 class="foodBusinessHeading">FOOD BUSINESS LICENSE</h2>
+
+          <div class="barCode">
+            <img
+            src="http://localhost:8100/assets/img/barcode.png"
+            alt="logo"
+          />
+          </div>
+
+
+          <div class="content">
+
+       
+
+            <div class="form">
+              <div class="inputField mr-mrs">
+                <label for="mr-mrs">License Number</label>
+                <input type="text" />
+              </div>
+
+              <div class="inputField firm">
+                <label for="firm">District</label>
+                <input type="text" />
+              </div>
+
+              <div class="inputField category">
+                <label for="firm">Owner's Name</label>
+                <input type="text" />
+              </div>
+
+              <div class="inputField address">
+                <label for="firm">CNIC Number</label>
+                <input type="text" />
+              </div>
+
+              <div class="inputField cnic">
+                <label for="firm">Business Name</label>
+                <input type="text" />
+              </div>
+
+              <div class="inputField cnic">
+                <label for="firm">Nature of Business</label>
+                <input type="text" />
+              </div>
+
+              <div class="inputField cnic">
+                <label for="firm">Address</label>
+                <input type="text" />
+              </div>
+
+              <div class="inputField cnic">
+                <label for="firm">This License is valid for</label>
+                <input type="text" />
+              </div>
+            </div>
+
+            <p class="important-message-license-view">
+              This license is issued under section 19(i) of Sindh Food Authority Act 2016. This license can be canceled or suspended any time as per section 20(2) of Sindh Food Authority Act 2016, if the Food Business Operator fails to comply with the improvement notices.
+            </p>
+
+
+            <div class="bottom-stamp">
+              <div class="qrCode">
+                <img
+                  src="http://localhost:8100/assets/img/qrcode.webp"
+                  alt="logo"
+                />
+              </div>
+              <div class="goldenStamp">
+                <img
+                  src="http://localhost:8100/assets/img/goldenstamp.webp"
+                  alt="logo"
+                />
+              </div>
+              <div class="ownerName">
+                <h3>Director General</h3>
+                <h3>SINDH FOOD AUTHORITY</h3>
+              </div>
+            </div>
+
+          
+          </div>
+
+
+        </div>
+      </div>
+      </div>
+
+      
+
+      <div class="bottom-content">
+        <div
+          class="challan-download-btn w-100 d-flex justify-content-center flex-direction-row align-items-center"
+        >
+          <ion-button
+            ><span>Download</span>
+            <ion-icon name="cloud-download-outline"></ion-icon
+          ></ion-button>
+
+          <ion-button (click)="myFunc()"
+            ><span>Print License</span>
+            <ion-icon name="print-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
     </div>
-
-    <ion-button type="button" class="most-used" routerLink="/licensedetail" ><ion-icon name="arrow-back-outline"></ion-icon> Go To Back </ion-button>
   </div>
 </ion-content>

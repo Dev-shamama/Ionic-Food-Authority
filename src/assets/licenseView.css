@@ -1,0 +1,226 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.w-100 {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.b-1 {
+  border-bottom: 1.5px solid #000000;
+}
+
+.border-image {
+  width: 8.3in;
+  height: 11.7in;
+  border: 1.5px solid #000000;
+  padding: 78px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  position: relative;
+  background-image: url(http://localhost:8100/assets/img/SFA_LICENSE_BG.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.border-image .challan-content {
+  width: 100%;
+  height: 11.7in;
+}
+
+.border-image .challan-content .water-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+}
+
+.barCode{
+  margin: 20px 0;
+}
+
+.border-image .challan-content .water-mark img {
+  width: 100%;
+  filter: opacity(0.15);
+}
+
+.border-image .challan-content .top-logo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.border-image .challan-content .top-logo .logo img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.border-image .challan-content .top-logo .heading.center-text h2 {
+  margin: 4px 0;
+  color: #005028;
+  word-spacing: 2.2px;
+}
+
+.border-image .challan-content .top-logo .heading.center-text h2.heading {
+  font-family: "Taviraj", serif;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.border-image .challan-content .top-logo .heading.center-text h2.subHeading {
+  font-family: "Taviraj", serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.border-image .challan-content .foodBusinessHeading {
+  font-family: "Merriweather", serif;
+  font-weight: bold;
+  color: #2e4689;
+  margin-top: 0;
+  font-size: 32px;
+}
+
+.border-image .challan-content .barCode img {
+  width: 210px;
+}
+
+.border-image .challan-content .content {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.border-image .challan-content .content .mangerSindhBankLtd {
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  flex-direction: row;
+  margin: 10px 0;
+}
+
+.border-image .challan-content .content .mangerSindhBankLtd .textMangerSindhBankLtd {
+  text-align: left;
+  border-bottom: 1.5px solid #000000;
+  padding: 24px 0 17px 0;
+  padding-right: 34px;
+}
+
+.border-image .challan-content .content .mangerSindhBankLtd p {
+  margin: 0;
+}
+
+.border-image .challan-content .content .mangerSindhBankLtd strong {
+  font-size: 18px;
+}
+
+.border-image .challan-content .content .form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 80px;
+}
+
+.border-image .challan-content .content .form .inputField {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.border-image .challan-content .content .form .inputField label {
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  white-space: nowrap;
+  font-family: "Merriweather", serif;
+  min-width: 200px;
+  text-align: left;
+}
+
+.border-image .challan-content .content .form .inputField input {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-bottom: 1.5px solid #000000;
+  background: none;
+  text-align: center;
+  font-weight: bold;
+  outline: none;
+}
+
+.border-image .challan-content .content .important-message-license-view {
+  font-style: italic;
+  font-size: 13px;
+  padding: 0 80px;
+  font-weight: 600;
+}
+
+.border-image .challan-content .content .important-message-license-view p {
+  margin: 0;
+}
+
+.border-image .challan-content .content .bottom-stamp {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: row;
+  padding: 80px 0px 0 38px;
+}
+
+.border-image .challan-content .content .bottom-stamp .qrCode {
+  margin-right: 20px;
+}
+
+.border-image .challan-content .content .bottom-stamp .qrCode img {
+  width: 140px;
+}
+
+.border-image .challan-content .content .bottom-stamp .goldenStamp img {
+  width: 154px;
+}
+
+.border-image .challan-content .content .bottom-stamp .ownerName h3 {
+  margin: 0;
+  font-family: "Merriweather", serif;
+  font-weight: bold;
+}

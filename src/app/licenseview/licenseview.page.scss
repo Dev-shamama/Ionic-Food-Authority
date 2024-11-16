@@ -1,52 +1,415 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Taviraj:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap");
+
 ion-content {
   --background: #eaeaea;
 }
 
-ion-button.most-used {
-  --background: #014122;
-  --background-hover: #076a3a;
-  --background-activated: #014122;
-  --background-focused: #014122;
+// Challan Print Content
+// #divContents {
+//   display: none;
+// }
 
-  --color: #ffffff;
+// Challan Print Content
 
-  --border-radius: 6px;
-  --border-color: #014122;
-  --border-style: solid;
-  --border-width: 1px;
+.w-100 {
+  width: 100%;
+}
 
-  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+.d-flex {
+  display: flex;
+}
 
-  --ripple-color: #014122;
+.justify-content-center {
+  justify-content: center;
+}
 
-  --padding-top: 0px;
-  --padding-bottom: 0px;
-  --padding-start: 14px;
-  --padding-end: 14px;
+.justify-content-between {
+  justify-content: space-between;
+}
 
-  ion-icon {
-    margin-right: 6px;
+.align-items-center {
+  align-items: center;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.b-1 {
+  border-bottom: 1.5px solid #000000;
+}
+
+// Challan Print Content
+
+.payChallen-container {
+  width: 100%;
+}
+
+.payChallen-container .section-title {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.wrapper-one {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 20px;
+  background: #fff;
+  border-radius: 18px;
+}
+
+.wrapper-one {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .border-image {
+    width: 8.3in;
+    height: 11.7in;
+    border: 1.5px solid #000000;
+    padding: 78px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+    background-image: url(http://localhost:8100/assets/img/SFA_LICENSE_BG.png);
+    background-repeat: none;
+    background-size: contain;
+
+    .challan-content {
+      width: 100%;
+      height: 11.7in;
+      // border-top: 50px solid transparent;
+      // border-image: url(http://localhost:8100/assets/img/lineV.jpeg) 70 round;
+
+      // background: white;
+
+      .water-mark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+        img {
+          width: 100%;
+          filter: opacity(0.15);
+        }
+      }
+
+      .top-logo {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+          img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .heading.center-text {
+          h2 {
+            margin: 4px 0;
+            color: #005028;
+            word-spacing: 2.2px;
+          }
+
+          h2.heading {
+            font-family: "Taviraj", serif;
+            font-weight: 600;
+            font-size: 28px;
+          }
+
+          h2.subHeading {
+            font-family: "Taviraj", serif;
+            font-weight: 600;
+            font-size: 24px;
+          }
+        }
+
+        .logo.right-logo {
+          img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      .foodBusinessHeading {
+        font-family: "Merriweather", serif;
+        font-weight: bold;
+        color: #2e4689;
+        margin-top: 0;
+        font-size: 32px;
+      }
+
+      .barCode {
+        width: 100%;
+        img {
+          width: 210px;
+        }
+      }
+
+      .content {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        z-index: 2;
+
+        .mangerSindhBankLtd {
+          display: flex;
+          align-items: flex-end;
+          text-align: center;
+          flex-direction: row;
+          margin: 10px 0;
+
+          .textMangerSindhBankLtd {
+            text-align: left;
+            border-bottom: 1.5px solid #000000;
+            padding-bottom: 24px;
+            padding-right: 34px;
+            padding-top: 17px;
+          }
+          p {
+            margin: 0;
+          }
+
+          strong {
+            font-size: 18px;
+          }
+        }
+
+        .form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 10px 80px;
+
+          .inputField {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            margin: 0;
+            padding: 10px 0;
+
+            label {
+              font-weight: 600;
+              font-size: 18px;
+              margin: 0;
+              white-space: nowrap;
+              font-family: "Merriweather", serif;
+              min-width: 200px;
+              text-align: left;
+            }
+            input {
+              width: 100%;
+              margin: 0;
+              border: none;
+              border-bottom: 1.5px solid #000000;
+              background: none;
+              text-align: center;
+              font-weight: bold;
+              outline: none;
+            }
+          }
+        }
+
+        .important-message-license-view {
+          font-style: italic;
+          font-size: 13px;
+          padding: 0 80px;
+          font-weight: 600;
+          p {
+            margin: 0;
+          }
+        }
+
+        .bottom-stamp {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          flex-direction: row;
+          // margin-top: 80px;
+          // padding: 35px 30px 0 54px;
+          padding: 0px 0px 0 38px;
+
+          .qrCode {
+            margin-right: 20px;
+            img {
+              width: 140px;
+            }
+          }
+          .goldenStamp {
+            img {
+              width: 154px;
+            }
+          }
+          .ownerName {
+            h3 {
+              margin: 0;
+              font-family: "Merriweather", serif;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
   }
 
-  span {
-    font-size: 12px;
+  .bottom-content {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    p {
+      color: #ea0404;
+      strong {
+        color: #000000;
+        font-size: 20px;
+      }
+    }
+
+    .challan-download-btn {
+      ion-button {
+        --background: #014122;
+        --background-hover: #076a3a;
+        --background-activated: #014122;
+        --background-focused: #014122;
+
+        --color: #ffffff;
+
+        --border-radius: 6px;
+        --border-color: #014122;
+        --border-style: solid;
+        --border-width: 1px;
+
+        --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+        --ripple-color: #0a482a;
+
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+
+        ion-icon {
+          font-size: 15px;
+          margin-left: 4px;
+          --ionicon-stroke-width: 40px;
+        }
+      }
+    }
   }
 }
 
-.license-view-container {
-  width: 100%;
+.bottom-submit-button {
+  width: calc(100% + 10px);
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  flex-direction: column;
   background: #ffffff;
-  padding: 20px;
-  border-radius: 18px;
+  padding: 12px;
+  margin-top: 15px;
+  position: absolute;
+  left: -10px;
 
-  .image-container{
-    border: 1.5px solid #000000;
-    padding: 8px;
-    border-radius: 8px;
-    margin-bottom: 8px;
+  ion-button {
+    --background: #014122;
+    --background-hover: #076a3a;
+    --background-activated: #014122;
+    --background-focused: #014122;
+
+    --color: #ffffff;
+
+    --border-radius: 6px;
+    --border-color: #014122;
+    --border-style: solid;
+    --border-width: 1px;
+
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+    --ripple-color: #0a482a;
+
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+
+    ion-icon {
+      font-size: 15px;
+      margin-left: 4px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1234px) {
+  #divContents {
+    zoom: 0.5;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #divContents {
+    zoom: 0.4;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #divContents {
+    zoom: 0.34;
+  }
+}
+
+@media print {
+  /* Set margins */
+  body {
+    margin: 0.5in; /* half-inch margins */
+  }
+
+  /* Hide specific elements */
+  .header,
+  .footer,
+  .navigation {
+    display: none;
+  }
+
+  /* Page breaks for structured layout */
+  h1,
+  h2 {
+    page-break-after: avoid;
+  }
+
+  .new-page {
+    page-break-before: always;
+  }
+
+  /* Adjust font sizes and colors for print */
+  body {
+    color: #000;
+    font-size: 12pt;
   }
 }
