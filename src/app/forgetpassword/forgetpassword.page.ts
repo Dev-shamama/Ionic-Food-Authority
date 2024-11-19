@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'api.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-forgetpassword',
@@ -12,7 +13,7 @@ export class ForgetpasswordPage implements OnInit {
   @ViewChild('forgetPassword')
   forgetPassword: NgForm | undefined;
 
-  constructor(private apiService: ApiService, private route: Router) {}
+  constructor(private apiService: ApiService, private route: Router, public MainApp: AppComponent) {}
 
   ngOnInit(): void {
     const s: any = document.getElementById('sidebar-main-container');
@@ -25,13 +26,13 @@ export class ForgetpasswordPage implements OnInit {
   };
 
   onSubmit() {
-    console.log(this.dataset);
     // console.log(this.dataset.cnic.slice(0, 15));
+    this.MainApp.showLoading();
 
     this.apiService
       .ForgetPassword({ username: this.dataset.cnic })
       .then(async (res: any) => {
-        console.log(res)
+        this.MainApp.hideLoading();
         if (res.reponse_type == 'success') {
             this.route.navigate(['/sendotp/'+res.data.uid+'/forgetPassword'])
         } else {
@@ -45,6 +46,7 @@ export class ForgetpasswordPage implements OnInit {
         }
       })
       .catch(async (err: any) => {
+        this.MainApp.hideLoading();
         console.log(err);
       });
   }

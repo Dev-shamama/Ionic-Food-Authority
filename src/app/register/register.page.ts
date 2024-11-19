@@ -57,6 +57,7 @@ export class RegisterPage implements OnInit {
         } 
       })
       .catch(async (err: any) => {
+        this.MainApp.hideLoading();
         console.log(err);
       });
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'api.service';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.page.html',
@@ -17,7 +18,8 @@ export class ResetpasswordPage implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: Router,
-    private urlParam: ActivatedRoute
+    private urlParam: ActivatedRoute,
+    public MainApp: AppComponent
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +28,7 @@ export class ResetpasswordPage implements OnInit {
 
     const s: any = document.getElementById('sidebar-main-container');
     s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
-   
+
     this.checkUserIdFunction();
   }
 
@@ -35,25 +37,22 @@ export class ResetpasswordPage implements OnInit {
     confirmPassword: '',
   };
 
-
-  
   checkUserIdFunction() {
+    this.MainApp.showLoading();
     this.apiService
       .checkUserId({ uid: this.uid })
       .then(async (res: any) => {
-        console.log(res);
-        
+        this.MainApp.hideLoading();
         if (res.reponse_type == 'success') {
-        }else {
-          this.route.navigate(['/register'])
+        } else {
+          this.route.navigate(['/register']);
         }
-        
       })
       .catch(async (err: any) => {
-        this.route.navigate(['/register'])
+        this.MainApp.hideLoading();
+        this.route.navigate(['/register']);
       });
   }
-
 
   onSubmit() {
     const data = {

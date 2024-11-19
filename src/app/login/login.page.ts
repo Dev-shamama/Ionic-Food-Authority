@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'api.service';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -10,7 +11,7 @@ import { ApiService } from 'api.service';
 export class LoginPage implements OnInit {
   @ViewChild('userLogin')
   userLogin: NgForm | undefined;
-  constructor(private apiService: ApiService, private route: Router) {}
+  constructor(private apiService: ApiService, private route: Router , public MainApp: AppComponent) {}
 
   ngOnInit(): void {
     const s: any = document.getElementById('sidebar-main-container');
@@ -24,14 +25,14 @@ export class LoginPage implements OnInit {
   };
 
   onSubmit() {
-    console.log(this.dataset);
 
     // console.log(this.dataset.cnic.slice(0, 15));
+    this.MainApp.showLoading();
 
     this.apiService
       .login(this.dataset)
       .then(async (res: any) => {
-        console.log(res);
+        this.MainApp.hideLoading();
         if (res.success.msg == 'Login Success') {
           this.route.navigate(['/profile']);
         } else {
@@ -39,6 +40,7 @@ export class LoginPage implements OnInit {
         }
       })
       .catch(async (err: any) => {
+        this.MainApp.hideLoading();
         return 
       });
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'api.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-verifyotp',
@@ -20,7 +21,8 @@ export class VerifyotpPage implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: Router,
-    private urlParam: ActivatedRoute
+    private urlParam: ActivatedRoute,
+    public MainApp: AppComponent
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class VerifyotpPage implements OnInit {
     this.apiService
       .checkUserId({ uid: this.uid })
       .then(async (res: any) => {
+        this.MainApp.hideLoading();
         if (res.reponse_type == 'success') {
           if (this.form === 'forgetPassword') {
             this.username = res.data.username;
@@ -58,63 +61,69 @@ export class VerifyotpPage implements OnInit {
   }
 
   onSubmitFullForm() {
+    this.MainApp.showLoading();
     let data = {};
 
     if (this.form == 'signup') {
       data = { username: this.username, otp_code: this.otp_code };
       this.apiService
-      .TwoFvOtp(data)
-      .then(async (res: any) => {
-        if (res.reponse_type == 'success') {
-          this.apiService.displayToast(
-            res.msg,
-            'bottom',
-            'toast-succes',
-            'checkmark-circle-sharp',
-            'success'
-          );
-          this.route.navigate(['/home']);
-        } else {
-          this.apiService.displayToast(
-            res.msg,
-            'bottom',
-            'toast-error',
-            'warning-outline',
-            'danger'
-          );
-        }
-      })
-      .catch(async (err: any) => {
-        console.log(err);
-      });
+        .TwoFvOtp(data)
+        .then(async (res: any) => {
+          this.MainApp.hideLoading();
+          if (res.reponse_type == 'success') {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-succes',
+              'checkmark-circle-sharp',
+              'success'
+            );
+            this.route.navigate(['/home']);
+          } else {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+          }
+        })
+        .catch(async (err: any) => {
+          this.MainApp.hideLoading();
+          console.log(err);
+        });
     }
     if (this.form == 'forgetPassword') {
       this.apiService
-      .VerifyOtp({ uid: this.uid, otp_code: this.otp_code })
-      .then(async (res: any) => {
-        if (res.reponse_type == 'success') {
-          this.apiService.displayToast(
-            res.msg,
-            'bottom',
-            'toast-succes',
-            'checkmark-circle-sharp',
-            'success'
-          );
-          this.route.navigate([`/resetpassword/${this.uid}/${this.otp_code}`]);
-        } else {
-          this.apiService.displayToast(
-            res.msg,
-            'bottom',
-            'toast-error',
-            'warning-outline',
-            'danger'
-          );
-        }
-      })
-      .catch(async (err: any) => {
-        console.log(err);
-      });
+        .VerifyOtp({ uid: this.uid, otp_code: this.otp_code })
+        .then(async (res: any) => {
+          this.MainApp.hideLoading();
+          if (res.reponse_type == 'success') {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-succes',
+              'checkmark-circle-sharp',
+              'success'
+            );
+            this.route.navigate([
+              `/resetpassword/${this.uid}/${this.otp_code}`,
+            ]);
+          } else {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+          }
+        })
+        .catch(async (err: any) => {
+          this.MainApp.hideLoading();
+          console.log(err);
+        });
     }
-
   }
 }

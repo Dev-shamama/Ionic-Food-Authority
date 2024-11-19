@@ -73,7 +73,6 @@ export class SendotpPage implements OnInit {
     this.apiService
       .otpType({ uid: this.uid, otp_type: this.otp_type })
       .then(async (res: any) => {
-        console.log(res);
         this.MainApp.hideLoading();
 
         if (res.reponse_type == 'success') {
@@ -89,11 +88,10 @@ export class SendotpPage implements OnInit {
             'warning-outline',
             'danger');
         }
-        // this.MainApp.hideLoading();
 
       })
       .catch(async (err: any) => {
-        // this.MainApp.hideLoading();
+        this.MainApp.hideLoading();
         console.log(err);
 
       });
