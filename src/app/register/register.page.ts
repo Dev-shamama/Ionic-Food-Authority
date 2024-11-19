@@ -46,10 +46,12 @@ export class RegisterPage implements OnInit {
   }
 
   onSubmitFullForm() {
-    console.log(this.dataset);
+    this.MainApp.showLoading();
     this.apiService
       .signup(this.dataset)
       .then(async (res: any) => {
+        this.MainApp.hideLoading();
+
         if (res.reponse_type == 'success') {
           this.route.navigate(['/sendotp/'+res.uid+'/signup'])
         } 
