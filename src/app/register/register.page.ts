@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ApiService } from 'api.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-register',
@@ -13,12 +14,8 @@ import { ApiService } from 'api.service';
 export class RegisterPage implements OnInit {
   @ViewChild('fullForm')
   fullForm: NgForm | undefined;
-
-  show_otp_page_box =false
-
-  uid:any = "MTg"
-
-  constructor(private apiService: ApiService, private route: Router ) { }
+  uid: any;
+  constructor(private apiService: ApiService, private route: Router, public MainApp: AppComponent) {}
 
   ngOnInit(): void {
     const s: any = document.getElementById('sidebar-main-container');
@@ -27,9 +24,8 @@ export class RegisterPage implements OnInit {
   }
 
 
-
   dataset = {
-    logo: '/assets/img/profile.png',
+    logo: '',
     name: '',
     cnic: '',
     email: '',
@@ -46,39 +42,21 @@ export class RegisterPage implements OnInit {
         this.dataset.logo = reader.result as string;
       };
       reader.readAsDataURL(file);
-
     }
   }
 
-  onSubmitHalfForm() {
-    console.log(this.dataset);
-
-    // console.log(this.dataset.cnic.slice(0, 15));
-  }
-
-  SendOTPbtn(){
-    
-  }
-
-
-
-
   onSubmitFullForm() {
-    console.log(this.dataset)
-    this.apiService.signup(this.dataset).then(async (res: any) => {
-      console.log(res);
-      if (res.reponse_type == "success") {
-        this.uid = res.uid
-        this.show_otp_page_box = true
-      }else{
-        this.show_otp_page_box = false
-        this.uid = ''
-      }
-
-    }).catch(async (err: any) => {
-      console.log(err)
-      this.show_otp_page_box = false
-    })
+    console.log(this.dataset);
+    this.apiService
+      .signup(this.dataset)
+      .then(async (res: any) => {
+        if (res.reponse_type == 'success') {
+          this.route.navigate(['/sendotp/'+res.uid+'/signup'])
+        } 
+      })
+      .catch(async (err: any) => {
+        console.log(err);
+      });
 
     // console.log(this.dataset.cnic.slice(0, 15));
   }
@@ -109,5 +87,4 @@ export class RegisterPage implements OnInit {
   fileInput() {
     document.getElementById('logoFileInput')?.click();
   }
-
 }

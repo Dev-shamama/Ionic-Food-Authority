@@ -1,77 +1,100 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthguardGuard implements CanActivate {
-  constructor (private api_service:ApiService ,   private router : Router){
+  constructor(private api_service: ApiService, private router: Router) {
     const s: any = document.getElementById('sidebar-main-container');
     // s.style.width = '0'
     s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
-    
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
-  
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    var status = true
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    var status = true;
 
-    this.api_service.getToken().then((res:any) => {  
-      console.log(res);
-      if (res.access_token,  res.refrash_token){
-        this.api_service.AccessTokenvalid(res.access_token,  res.refrash_token).then((resp) => {
+    this.api_service
+      .getToken()
+      .then((res: any) => {
+        console.log(res);
+        if ((res.access_token, res.refrash_token)) {
+          this.api_service
+            .AccessTokenvalid(res.access_token, res.refrash_token)
+            .then((resp) => {
+              console.log("resp", resp);
 
-          if (resp.success === 'You are authenticated!'){
-            status = false;
-            this.router.navigate(['/profile'])
-          }
-     
-          else{
-            this.api_service.RefrashTokenvalid(res.refrash_token).then((ref) => {
+              if (resp.success === 'You are authenticated!') {
+                if (resp.verification == 'Unverified') {
+                  status = true;
+                  this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
+                }else {
+                  this.router.navigate(['/login'])
     
-              if (ref.reponse_type === 'success'){
-                status = false;
-                this.router.navigate(['/profile'])
-              }else{
-                status = true;
-              }
-            }).catch((e) => {
-              status = true;
-            })
-          }
-          }).catch((e) => {
-           
-            this.api_service.RefrashTokenvalid(res.refrash_token).then((ref) => {
-              if (ref.reponse_type === 'success'){
-                status = false;
-                this.router.navigate(['/profile'])
-              }else{
-                status = true;
-              }
-            }).catch((e) => {
-              status = true;
-            })
+                }
+              } else {
+                this.api_service
+                  .RefrashTokenvalid(res.refrash_token)
+                  .then((ref) => {
+                    
 
-          })
-
-      }else{
-      
+                    if (ref.reponse_type === 'success') {
+                      if (resp.verification == 'Unverified') {
+                        status = true;
+                        this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
+                      }else {
+                        this.router.navigate(['/login'])
+          
+                      }
+                    } else {
+                      status = true;
+                    }
+                  })
+                  .catch((e) => {
+                    status = true;
+                  });
+              }
+            })
+            .catch((e) => {
+              this.api_service
+                .RefrashTokenvalid(res.refrash_token)
+                .then((ref) => {
+                  if (ref.reponse_type === 'success') {
+                    status = false;
+                    this.router.navigate(['/home']);
+                  } else {
+                    status = true;
+                  }
+                })
+                .catch((e) => {
+                  status = true;
+                });
+            });
+        } else {
+          status = true;
+        }
+      })
+      .catch((err: any) => {
         status = true;
-      }
-    }).catch((err:any) => {
-      status = true;
-    })
+      });
 
-
-   
-    // return status;
-    return false;
-
+    return status;
+    // return false;
   }
-  
 }

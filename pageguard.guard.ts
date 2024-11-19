@@ -26,16 +26,32 @@ export class PageguardGuard implements CanActivate {
       if (res.access_token,  res.refrash_token){
 
         this.api_service.AccessTokenvalid(res.access_token,  res.refrash_token).then((resp) => {
+
+         
           
           if (resp.success === 'You are authenticated!'){
-            status = true;
+            if (resp.verification == "Unverified"){
+              status = false;
+              this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
+            }else {
+              this.router.navigate(['/login'])
+
+            }
           }
 
           else{
             this.api_service.RefrashTokenvalid(res.refrash_token).then((ref) => {
          
+              
+
               if (ref.reponse_type === 'success'){
-                status = true;
+                if (ref.verification == "Unverified"){
+                  status = false;
+                  this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
+                }else {
+                  this.router.navigate(['/login'])
+    
+                }
               }else{
                 this.api_service.removeLoading()
                 status = false;
@@ -80,8 +96,8 @@ export class PageguardGuard implements CanActivate {
       status = false;
     })
 
-    // return status;
-    return true;
+    return status;
+    // return true;
 
 
   }

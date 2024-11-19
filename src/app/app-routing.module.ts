@@ -31,7 +31,6 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterPageModule),
-    canActivate: [AuthguardGuard],
   },
   {
     path: 'licenseform',
@@ -93,7 +92,6 @@ const routes: Routes = [
       import('./forgetpassword/forgetpassword.module').then(
         (m) => m.ForgetpasswordPageModule
       ),
-      canActivate: [AuthguardGuard],
   },
   {
     path: 'profile',
@@ -102,24 +100,21 @@ const routes: Routes = [
     canActivate: [PageguardGuard],
   },
   {
-    path: 'sendotp/:uid',
+    path: 'sendotp/:uid/:form',
     loadChildren: () =>
       import('./sendotp/sendotp.module').then((m) => m.SendotpPageModule),
-    canActivate: [AuthguardGuard],
   },
   {
-    path: 'verifyotp',
+    path: 'verifyotp/:uid/:form',
     loadChildren: () =>
       import('./verifyotp/verifyotp.module').then((m) => m.VerifyotpPageModule),
-    canActivate: [AuthguardGuard],
   },
   {
-    path: 'resetpassword',
+    path: 'resetpassword/:uid/:otp',
     loadChildren: () =>
       import('./resetpassword/resetpassword.module').then(
         (m) => m.ResetpasswordPageModule
       ),
-      canActivate: [AuthguardGuard],
   },
   {
     path: 'licenseview',

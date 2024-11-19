@@ -105,7 +105,6 @@ payload_data {
 
 payload_data {
     'username':'',
-    'password':'',
     'otp_code':'',
 }
 

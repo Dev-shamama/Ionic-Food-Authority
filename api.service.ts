@@ -80,7 +80,9 @@ export class ApiService {
       fetch(`${this.localhost}/signup/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log('API', data);
+          var access_token = data.token.access;
+          var refrash_token = data.token.refresh;
+          this.saveTokens(access_token, refrash_token);
           if (data.reponse_type == 'success') {
             this.displayToast(
               data.msg,
@@ -159,6 +161,84 @@ export class ApiService {
     });
   }
 
+  async TwoFvOtp(credentials: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const data = credentials;
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/2fv-otp/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          if (data.reponse_type == 'success') {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+  async VerifyOtp(credentials: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const data = credentials;
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/check-otp/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          if (data.reponse_type == 'success') {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+  async resetPasswordAPI(credentials: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const data = credentials;
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/reset-password/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          if (data.reponse_type == 'success') {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
   // async signup(credentials: any): Promise<any> {
   //   return new Promise<any>((resolve) => {
   //     const data = credentials;
@@ -204,6 +284,8 @@ export class ApiService {
   // }
 
   async login(credentials: any): Promise<any> {
+   
+   
     return new Promise<any>((resolve) => {
       const data = credentials;
       const options = {
@@ -369,7 +451,7 @@ export class ApiService {
         },
         body: JSON.stringify(data),
       };
-      fetch(`${this.localhost}/send-reset-password-email/`, options)
+      fetch(`${this.localhost}/forgot-password/`, options)
         .then(async (response) => {
           const data = await response.json();
           if (data.reponse_type == 'success') {
@@ -378,7 +460,6 @@ export class ApiService {
           } else {
             if (data.msg == 'login_not') {
               this.loadingCtrl.dismiss();
-              this.router.navigate(['/login']);
               this.displayToast(
                 'Session Expaired Login Again',
                 'bottom',
@@ -402,7 +483,6 @@ export class ApiService {
         })
         .catch(async (e) => {
           this.loadingCtrl.dismiss();
-          alert('Something went wrong');
           this.displayToast(
             e,
             'bottom',
