@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
-import { OTPTypePageModule } from '../otp-type/otp-type.module';
 
 @NgModule({
   imports: [
@@ -15,7 +14,6 @@ import { OTPTypePageModule } from '../otp-type/otp-type.module';
     FormsModule,
     IonicModule,
     RegisterPageRoutingModule,
-    OTPTypePageModule
   ],
   declarations: [RegisterPage],
   schemas:[CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
