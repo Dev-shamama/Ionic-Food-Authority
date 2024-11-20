@@ -4,7 +4,7 @@
   <div class="payChallen-container">
     <h2 class="section-title">Challan</h2>
 
-    <div class="wrapper wrapper-one">
+    <div class="wrapper wrapper-one" *ngFor="let challan of challanList">
       <div class="top-heading-content">
         <div class="title">
           <h3>Challan Generated Successfully</h3>
@@ -34,11 +34,11 @@
             <div class="d-flex justify-content-between w-100">
               <div class="left-side">
                 <strong>Deposit Slip No. </strong
-                ><span class="b-1">0002312</span>
+                ><span class="b-1">{{challan.Deposit_Slip_No}}</span>
               </div>
               <div class="right-side">
                 <strong>Challan No. </strong
-                ><strong style="color: #dd0000" class="b-1">0002312</strong>
+                ><strong style="color: #dd0000" class="b-1">{{challan.Challan_ID}}</strong>
               </div>
             </div>
 
@@ -47,15 +47,16 @@
                 <div class="textMangerSindhBankLtd">
                   <p>The Manager,</p>
                   <p>Sindh Bank Ltd.</p>
+                  <p>{{challan.challan[0].Bank_details}}</p>
                 </div>
                 <strong>Branch</strong>
               </div>
               <div class="right-side">
                 <div>
-                  <strong>Issue Date. </strong><span class="b-1">10/20/24</span>
+                  <strong>Issue Date. </strong><span class="b-1">{{challan.issue_date}}</span>
                 </div>
                 <div>
-                  <strong>Valid Date. </strong><span class="b-1">10/30/24</span>
+                  <strong>Valid Date. </strong><span class="b-1">{{challan.Valid_date}}</span>
                 </div>
               </div>
             </div>
@@ -70,27 +71,28 @@
             <div class="form">
               <div class="inputField mr-mrs">
                 <label for="mr-mrs">MR/Mrs</label>
-                <input type="text" />
+                <!-- <input type="text" value="{{applicantName}}" /> -->
+                 <span>{{applicantName}}</span>
               </div>
 
               <div class="inputField firm">
                 <label for="firm">of M's (firm)</label>
-                <input type="text" />
-              </div>
+                 <span>{{Name_of_Food_Business}}</span>
+                </div>
 
               <div class="inputField category">
                 <label for="firm">Category of Food Business</label>
-                <input type="text" />
-              </div>
+                 <span>{{categoryName}}</span>
+                </div>
 
               <div class="inputField address">
                 <label for="firm">Address</label>
-                <input type="text" />
-              </div>
+                 <span>{{address}}</span>
+                </div>
 
               <div class="inputField cnic">
                 <label for="firm">CNIC No#:</label>
-                <input type="text" />
+                 <span>{{CNIC}}</span>
               </div>
             </div>
 
@@ -105,16 +107,13 @@
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>1. License Fee (Annual Fee)</td>
-                    <td><strong>Rs.60,000</strong></td>
+
+                  <tr *ngFor="let sub_challan of challan.challan; let id = index">
+                    <td>{{id + 1}}. {{sub_challan.Particulars_of_Payment}}</td>
+                    <td><strong>Rs.{{sub_challan.Amount}}</strong></td>
                     <td></td>
                   </tr>
-                  <tr>
-                    <td>2. Renewal Fee</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+
                   <tr>
                     <td></td>
                     <td></td>
@@ -140,7 +139,7 @@
                           Received Amount in cash P.O No
                         </p>
                       </div>
-                      <strong class="b-1">Rs.60,000/-</strong>
+                      <strong class="b-1">Rs.{{challan.total_amount}}/-</strong>
                     </td>
                   </tr>
                   <tr>
@@ -149,16 +148,16 @@
                   </tr>
                   <tr>
                     <td>Total :</td>
-                    <td><strong>Rs.60,000</strong></td>
+                    <td><strong>Rs.{{challan.total_amount}}</strong></td>
                   </tr>
 
                   <tr>
-                    <td colspan="3">Amount to be paid Rs.60,000</td>
+                    <td colspan="3">Amount to be paid Rs.{{challan.total_amount}}</td>
                   </tr>
 
                   <tr>
                     <td colspan="3">
-                      In words Kupees : <strong>Sixty thousand</strong>
+                      In words Rupees : <strong>{{challan.in_word}}</strong>
                     </td>
                   </tr>
                 </tbody>
@@ -177,7 +176,7 @@
               </div>
 
               <div class="inputField dd-ops">
-                <label for="dd-ops">Name of DD OPS</label>
+                <label for="dd-ops">Name of DG OPS</label>
                 <input type="text" />
               </div>
 
@@ -188,7 +187,7 @@
 
               <div class="inputField district">
                 <label for="district">District</label>
-                <input type="text" />
+                <span>{{districtName}}</span>
               </div>
 
               <div class="text">

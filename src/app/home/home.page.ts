@@ -1,4 +1,5 @@
-import { Component, OnInit} from '@angular/core';
+import { ApiService } from 'api.service';
+import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
@@ -6,15 +7,22 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  constructor(public menuBar: MenuController, private apiService: ApiService) {}
 
-
-  constructor(public menuBar: MenuController) {
-   
-  }
-
-  ngOnInit () {
+  ngOnInit() {
     this.menuBar.close();
-    console.log('close');
+
+    this.apiService.getToken().then((e: any) => {
+      this.apiService
+        .getLicense(e.access_token)
+        .then(async (res: any) => {
+          if (res.reponse_type == 'success') {
+          }
+        })
+        .catch(async (err: any) => {
+          console.log(err);
+        });
+    });
   }
 
   handleRefresh(event: any) {
@@ -23,7 +31,4 @@ export class HomePage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-
-
-
 }

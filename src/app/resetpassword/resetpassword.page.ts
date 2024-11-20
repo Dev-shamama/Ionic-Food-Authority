@@ -26,8 +26,8 @@ export class ResetpasswordPage implements OnInit {
     this.uid = this.urlParam.snapshot.paramMap.get('uid');
     this.otp = this.urlParam.snapshot.paramMap.get('otp');
 
-    const s: any = document.getElementById('sidebar-main-container');
-    s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
+    // const s: any = document.getElementById('sidebar-main-container');
+    // s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
 
     this.checkUserIdFunction();
   }

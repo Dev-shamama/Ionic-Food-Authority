@@ -36,9 +36,9 @@ export class VerifyotpPage implements OnInit {
 
     this.checkUserIdFunction();
 
-    const s: any = document.getElementById('sidebar-main-container');
-    // s.style.width = '0'
-    s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
+    // const s: any = document.getElementById('sidebar-main-container');
+    // // s.style.width = '0'
+    // s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
   }
 
   checkUserIdFunction() {
@@ -83,6 +83,10 @@ export class VerifyotpPage implements OnInit {
               'checkmark-circle-sharp',
               'success'
             );
+                    
+            const s: any = document.getElementById('sidebar-main-container');
+            // s.style.width = '0'
+            s.setAttribute('style', '--side-min-width: 18%; --side-max-width: 18%');
             this.route.navigate(['/home']);
           } else {
             this.apiService.displayToast(

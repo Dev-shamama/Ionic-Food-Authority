@@ -138,6 +138,14 @@
   border-bottom: 1.5px solid #000000;
 }
 
+.challan-content .content .form .inputField span {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-bottom: 1.5px solid #000000;
+}
+
+
 .challan-content .content .form .mr-mrs {
   grid-column: span 3 / span 3;
 }
@@ -208,6 +216,14 @@
   font-size: 18px;
   margin: 0;
   white-space: nowrap;
+}
+
+
+.challan-content .content .signature-bottom-content .inputField span {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-bottom: 1.5px solid #000000;
 }
 
 .challan-content .content .signature-bottom-content .inputField input {

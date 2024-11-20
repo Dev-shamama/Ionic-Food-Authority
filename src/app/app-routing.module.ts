@@ -31,6 +31,7 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterPageModule),
+    canActivate: [AuthguardGuard],
   },
   {
     path: 'licenseform',
@@ -79,7 +80,7 @@ const routes: Routes = [
     canActivate: [PageguardGuard],
   },
   {
-    path: 'paychallan',
+    path: 'paychallan/:id',
     loadChildren: () =>
       import('./paychallan/paychallan.module').then(
         (m) => m.PaychallanPageModule
@@ -92,6 +93,7 @@ const routes: Routes = [
       import('./forgetpassword/forgetpassword.module').then(
         (m) => m.ForgetpasswordPageModule
       ),
+      canActivate: [AuthguardGuard],
   },
   {
     path: 'profile',
@@ -119,6 +121,7 @@ const routes: Routes = [
       import('./resetpassword/resetpassword.module').then(
         (m) => m.ResetpasswordPageModule
       ),
+      canActivate: [AuthguardGuard],
   },
   {
     path: 'licenseview',

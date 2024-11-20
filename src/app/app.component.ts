@@ -14,7 +14,12 @@ export class AppComponent {
     private apiService: ApiService,
     private route: Router,
     private loadingCtrl: LoadingController
-  ) {}
+  ) {
+
+    this.checklogin();
+
+
+  }
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
@@ -27,6 +32,24 @@ export class AppComponent {
   async hideLoading() {
     await this.loadingCtrl.dismiss();
   }
+
+  auth = false;
+
+  checklogin(){
+    this.apiService.getToken().then((res:any) => {
+
+      if (res.access_token && res.refrash_token){
+
+        this.auth = true
+      }else{
+        this.auth = false
+      }
+
+    }).catch((err:any) => {
+      this.auth = false
+    })
+  }
+  
 
   logout() {
     this.apiService.removeTokens();

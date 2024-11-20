@@ -80,13 +80,12 @@ export class ApiService {
       fetch(`${this.localhost}/signup/`, options)
         .then(async (response) => {
           const data = await response.json();
-          
-          if (data.reponse_type == 'success') {
 
+          if (data.reponse_type == 'success') {
             var access_token = data.token.access;
             var refrash_token = data.token.refresh;
             this.tempSaveTokens(access_token, refrash_token);
-            
+
             resolve(data);
           } else {
             this.displayToast(
@@ -174,7 +173,7 @@ export class ApiService {
             var access_token = data.token.access;
             var refrash_token = data.token.refresh;
             this.saveTokens(access_token, refrash_token);
-            this.tempRemoveTokens()
+            this.tempRemoveTokens();
             resolve(data);
           } else {
             resolve(data);
@@ -200,7 +199,6 @@ export class ApiService {
         .then(async (response) => {
           const data = await response.json();
           if (data.reponse_type == 'success') {
-
             resolve(data);
           } else {
             resolve(data);
@@ -300,7 +298,7 @@ export class ApiService {
             var refrash_token = data.success.token.refresh;
             this.tempSaveTokens(access_token, refrash_token);
 
-          resolve(data);
+            resolve(data);
           } else {
             this.displayToast(
               data.errors.non_field_errors[0],
@@ -483,6 +481,233 @@ export class ApiService {
     });
   }
 
+  // Dashboard API
+
+  async getLicense(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-license/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data)
+          if (data.success) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+
+  
+  async getCategoryList(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-category/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  async getNatureList(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-nature/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data)
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  async getDistricList(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-distric/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data)
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+  async getAutoSRB(access_token: string, data: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/get-srb/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data)
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+  async AddLicenseAPI(access_token: string, data: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/add-license/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data)
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+  async getAllLicenseChallan(access_token: string, id: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/License-challan/${id}/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data)
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
   // token handel
   async saveTokens(access: string, refresh: string): Promise<void> {
     await SecureStoragePlugin.set({ key: 'access_token', value: access });
@@ -511,11 +736,16 @@ export class ApiService {
   // Temp Token
   async tempSaveTokens(access: string, refresh: string): Promise<void> {
     await SecureStoragePlugin.set({ key: 'temp_access_token', value: access });
-    await SecureStoragePlugin.set({ key: 'temp_refresh_token', value: refresh });
+    await SecureStoragePlugin.set({
+      key: 'temp_refresh_token',
+      value: refresh,
+    });
   }
 
   async tempGetToken(): Promise<Object> {
-    const access_token = await SecureStoragePlugin.get({ key: 'temp_access_token' });
+    const access_token = await SecureStoragePlugin.get({
+      key: 'temp_access_token',
+    });
     const refrash_token = await SecureStoragePlugin.get({
       key: 'temp_refresh_token',
     });

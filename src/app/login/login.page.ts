@@ -14,9 +14,9 @@ export class LoginPage implements OnInit {
   constructor(private apiService: ApiService, private route: Router , public MainApp: AppComponent) {}
 
   ngOnInit(): void {
-    const s: any = document.getElementById('sidebar-main-container');
-    // s.style.width = '0'
-    s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
+    // const s: any = document.getElementById('sidebar-main-container');
+    // // s.style.width = '0'
+    // s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
   }
 
   dataset = {

@@ -92,22 +92,7 @@
             <h5>Registration in the name of</h5>
             <p>{{dataset.registrationName}}</p>
           </div>
-          <div class="review-item currentPayment">
-            <h5>Current Payment Details</h5>
-            <p>{{dataset.currentPayment}}</p>
-          </div>
-          <div class="review-item challanNo">
-            <h5>Challan No.</h5>
-            <p>{{dataset.challanNo}}</p>
-          </div>
-          <div class="review-item amountPaid">
-            <h5>Amount Paid Rs</h5>
-            <p>{{dataset.amountPaid}}</p>
-          </div>
-          <div class="review-item datePayment">
-            <h5>Date of Payment</h5>
-            <p>{{dataset.datePayment}}</p>
-          </div>
+         
         </div>
       </ion-content>
       <ion-footer>
@@ -184,11 +169,9 @@
 
             <div class="inputField nature">
 
-              <ion-select [(ngModel)]="dataset.natureBusiness" name="natureBusiness" required label="Nature of Business"
-                interface="popover" fill="solid" label-placement="floating" fill="solid">
-                <ion-select-option value="business1">Business 1</ion-select-option>
-                <ion-select-option value="business2">Business 2</ion-select-option>
-                <ion-select-option value="business3">Business 3</ion-select-option>
+              <ion-select [(ngModel)]="dataset.natureBusiness" (input)="autoSRB()" name="natureBusiness" required label="Nature of Business"
+                interface="popover" fill="solid" label-placement="floating" fill="solid" >
+                <ion-select-option  *ngFor="let nature of natureList" value="{{ nature.id }}">{{ nature.Nature_of_Business_Title }}</ion-select-option>
               </ion-select>
 
 
@@ -198,10 +181,8 @@
 
 
               <ion-select [(ngModel)]="dataset.category" name="category" required label="Category" interface="popover"
-                fill="solid" label-placement="floating" fill="solid">
-                <ion-select-option value="category1">Category 1</ion-select-option>
-                <ion-select-option value="category2">Category 2</ion-select-option>
-                <ion-select-option value="category3">Category 3</ion-select-option>
+                fill="solid" label-placement="floating" fill="solid" >
+                <ion-select-option  *ngFor="let category of categoryList" value="{{ category.id }}">{{ category.Category_Title }}</ion-select-option>
               </ion-select>
 
             </div>
@@ -209,44 +190,43 @@
             <div class="inputField district">
               <ion-select [(ngModel)]="dataset.district" name="district" required label="District" interface="popover"
                 fill="solid" label-placement="floating" fill="solid">
-                <ion-select-option value="district1">District 1</ion-select-option>
-                <ion-select-option value="district2">District 2</ion-select-option>
-                <ion-select-option value="district3">District 3</ion-select-option>
+                <ion-select-option *ngFor="let distric of districList" value="{{ distric.id }}">{{ distric.District_Name }}</ion-select-option>
+
               </ion-select>
 
             </div>
 
             <div class="inputField secp">
               <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.secp" type="text" name="secp" required label="SECP"
+                <ion-input [(ngModel)]="dataset.secp" type="number" name="secp" required label="SECP"
                   label-placement="floating" fill="solid" placeholder="Enter Your SECP"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField ntn">
               <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.ntn" name="ntn" type="text" required label="NTN"
+                <ion-input [(ngModel)]="dataset.ntn" name="ntn" type="number" required label="NTN"
                   label-placement="floating" fill="solid" placeholder="Enter NTN"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField srb">
               <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.srb" name="srb" type="text" required label="SRB"
-                  label-placement="floating" fill="solid" placeholder="Enter SRB"></ion-input>
+                <ion-input [(ngModel)]="dataset.srb" name="srb" type="number" required label="SRB"
+                  label-placement="floating" fill="solid" placeholder="Auto SRB" readonly></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField tax">
               <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.salesTax" name="salesTax" type="text" required label="SALES TAX"
+                <ion-input [(ngModel)]="dataset.salesTax" name="salesTax" type="number" required label="SALES TAX"
                   label-placement="floating" fill="solid" placeholder="Enter TAX"></ion-input>
               </ion-item>
             </div>
 
             <div class="inputField area">
               <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="text" required
+                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="number" (input)="autoSRB()" required
                   label="Area Measurement (sq. ft)" label-placement="floating" fill="solid"
                   placeholder="Enter Your Area Measurement (sq. ft)"></ion-input>
               </ion-item>
@@ -296,35 +276,7 @@
               </ion-item>
             </div>
 
-            <div class="inputField currentPayment">
-              <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.currentPayment" name="currentPayment" type="text" required
-                  label="Current Payment Details" label-placement="floating" fill="solid"
-                  placeholder="Enter Your Current Payment Details"></ion-input>
-              </ion-item>
-            </div>
-
-            <div class="inputField ChallanNo">
-              <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.challanNo" name="challanNo" type="number" required label="Challan No."
-                  label-placement="floating" fill="solid" placeholder="Enter Challan No."></ion-input>
-              </ion-item>
-            </div>
-
-            <div class="inputField amountPaid">
-              <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.amountPaid" name="amountPaid" required type="number"
-                  label="Amount Paid Rs" label-placement="floating" fill="solid"
-                  placeholder="Enter Amount Paid Rs"></ion-input>
-              </ion-item>
-            </div>
-
-            <div class="inputField dateOfPayment">
-              <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.datePayment" name="datePayment" required type="date"
-                  label="Date of Payment" label-placement="floating" fill="solid" placeholder="--/--/----"></ion-input>
-              </ion-item>
-            </div>
+    
           </div>
 
           <div class="restaurant-section">

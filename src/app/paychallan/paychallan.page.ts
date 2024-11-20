@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from 'api.service';
+import { AppComponent } from '../app.component';
+import * as numberToWords from 'number-to-words';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-paychallan',
@@ -6,17 +11,165 @@ import { Component } from '@angular/core';
   styleUrls: ['./paychallan.page.scss'],
 })
 export class PaychallanPage {
-  constructor() {}
+  @ViewChild('payChallan')
+  payChallan: NgForm | undefined;
+
+
+
+  natureList: any[] = [];
+  categoryList: any[] = [];
+  districList: any[] = [];
+  challanList: any[] = [];
+  numberToWordsValue: any;
+
+  applicantName = null;
+  address = null;
+  CNIC = null;
+  Name_of_Food_Business = null;
+  category = null;
+  categoryName = null;
+  district = null;
+  districtName = null;
+
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private urlParam: ActivatedRoute,
+    public MainApp: AppComponent
+  ) {
+    const licenceId = this.urlParam.snapshot.paramMap.get('id');
+
+    this.apiService
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .getAllLicenseChallan(e.access_token, licenceId)
+          .then(async (res: any) => {
+            console.log(res);
+            if (res.reponse_type == 'success') {
+              this.challanList = res.data.challan;
+
+              for(let i of this.challanList){
+                var total_amt = 0
+                for (let x of i.challan){
+                  total_amt +=  Number(x.Amount)
+
+                }
+
+                i.total_amount = total_amt
+                i.in_word = numberToWords
+                .toWords(total_amt)
+                .toUpperCase();
+
+              }
+              
+              this.numberToWordsValue = numberToWords
+                .toWords(res.data.challan[0].challan[0].Amount)
+                .toUpperCase();
+
+              this.address = res.data.license[0].Address;
+              this.applicantName = res.data.license[0].Name_of_Applicant;
+              this.CNIC = res.data.license[0].CNIC;
+              this.Name_of_Food_Business = res.data.license[0].Name_of_Food_Business;
+              this.category = res.data.license[0].category;
+              this.district = res.data.license[0].district;
+              
+            }
+          })
+          .catch(async (err: any) => {
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        console.error(err);
+      });
+
+    this.getNature();
+    this.getCategory(this.category);
+    this.getDistric(this.district);
+  }
+
+  getNature() {
+    this.apiService
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .getNatureList(e.access_token)
+          .then(async (res: any) => {
+            console.log(res);
+            if (res.reponse_type == 'success') {
+              this.natureList = res.data;
+            }
+          })
+          .catch(async (err: any) => {
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        console.error(err);
+      });
+  }
+
+  getCategory(_category: any) {
+    this.apiService
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .getCategoryList(e.access_token)
+          .then(async (res: any) => {
+            console.log(res);
+            if (res.reponse_type == 'success') {
+              res.data.map((item:any) => {
+                if(this.category == item.id) {
+                  this.categoryName = item.Category_Title
+
+                }
+              })
+            }
+          })
+          .catch(async (err: any) => {
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        console.error(err);
+      });
+  }
+
+  getDistric(_district: any) {
+    this.apiService
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .getDistricList(e.access_token)
+          .then(async (res: any) => {
+            console.log(res);
+            if (res.reponse_type == 'success') {
+              res.data.map((item:any) => {
+                if(this.district == item.id) {
+                  this.districtName = item.District_Name
+
+                }
+              })
+            }
+          })
+          .catch(async (err: any) => {
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        console.error(err);
+      });
+  }
 
   /**
    * Opens the print dialog for the current page.
    */
   myFunc() {
-
     var divContents = document.getElementById('divContents')?.innerHTML;
     let printWindow: any = window.open('', '', 'height=800,width=1000');
     printWindow.document.write(`<html><head><title>Reports</title>
-      <link rel="stylesheet" href="assets/print.css">
+      <link rel="stylesheet" href="http://localhost:8100/assets/print.css">
 
 
       <style>
@@ -41,7 +194,7 @@ export class PaychallanPage {
 
     printWindow.document.close();
     setTimeout(() => {
-        printWindow.print();
-    },3500)
+      printWindow.print();
+    }, 3500);
   }
 }

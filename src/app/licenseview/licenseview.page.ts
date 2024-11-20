@@ -40,7 +40,7 @@ export class LicenseviewPage {
     printWindow.document.close();
     setTimeout(() => {
         printWindow.print();
-    },3500)
+    },2000)
   }
 
 }
