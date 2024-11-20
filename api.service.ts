@@ -80,17 +80,13 @@ export class ApiService {
       fetch(`${this.localhost}/signup/`, options)
         .then(async (response) => {
           const data = await response.json();
-          var access_token = data.token.access;
-          var refrash_token = data.token.refresh;
-          this.saveTokens(access_token, refrash_token);
+          
           if (data.reponse_type == 'success') {
-            this.displayToast(
-              data.msg,
-              'bottom',
-              'toast-succes',
-              'checkmark-circle-sharp',
-              'success'
-            );
+
+            var access_token = data.token.access;
+            var refrash_token = data.token.refresh;
+            this.tempSaveTokens(access_token, refrash_token);
+            
             resolve(data);
           } else {
             this.displayToast(
@@ -175,6 +171,10 @@ export class ApiService {
         .then(async (response) => {
           const data = await response.json();
           if (data.reponse_type == 'success') {
+            var access_token = data.token.access;
+            var refrash_token = data.token.refresh;
+            this.saveTokens(access_token, refrash_token);
+            this.tempRemoveTokens()
             resolve(data);
           } else {
             resolve(data);
@@ -185,7 +185,6 @@ export class ApiService {
         });
     });
   }
-
 
   async VerifyOtp(credentials: any): Promise<any> {
     return new Promise<any>((resolve) => {
@@ -201,6 +200,7 @@ export class ApiService {
         .then(async (response) => {
           const data = await response.json();
           if (data.reponse_type == 'success') {
+
             resolve(data);
           } else {
             resolve(data);
@@ -211,7 +211,6 @@ export class ApiService {
         });
     });
   }
-
 
   async resetPasswordAPI(credentials: any): Promise<any> {
     return new Promise<any>((resolve) => {
@@ -237,7 +236,6 @@ export class ApiService {
         });
     });
   }
-
 
   // async signup(credentials: any): Promise<any> {
   //   return new Promise<any>((resolve) => {
@@ -284,8 +282,6 @@ export class ApiService {
   // }
 
   async login(credentials: any): Promise<any> {
-   
-   
     return new Promise<any>((resolve) => {
       const data = credentials;
       const options = {
@@ -300,18 +296,11 @@ export class ApiService {
           const data = await response.json();
           console.log(data);
           if (data.success) {
-            this.displayToast(
-              data.success.msg,
-              'bottom',
-              'toast-succes',
-              'checkmark-circle-sharp',
-              'success'
-            );
             var access_token = data.success.token.access;
             var refrash_token = data.success.token.refresh;
-            this.saveTokens(access_token, refrash_token);
+            this.tempSaveTokens(access_token, refrash_token);
 
-            resolve(data);
+          resolve(data);
           } else {
             this.displayToast(
               data.errors.non_field_errors[0],
@@ -505,6 +494,7 @@ export class ApiService {
     const refrash_token = await SecureStoragePlugin.get({
       key: 'refresh_token',
     });
+
     return {
       access_token: access_token.value,
       refrash_token: refrash_token.value,
@@ -516,6 +506,29 @@ export class ApiService {
     await SecureStoragePlugin.remove({ key: 'refrash_token' });
     // this.displayToast("Account Logout" , 'bottom' , 'toast-success' , 'checkmark-circle-sharp' , 'success')
     this.router.navigate(['/login']);
+  }
+
+  // Temp Token
+  async tempSaveTokens(access: string, refresh: string): Promise<void> {
+    await SecureStoragePlugin.set({ key: 'temp_access_token', value: access });
+    await SecureStoragePlugin.set({ key: 'temp_refresh_token', value: refresh });
+  }
+
+  async tempGetToken(): Promise<Object> {
+    const access_token = await SecureStoragePlugin.get({ key: 'temp_access_token' });
+    const refrash_token = await SecureStoragePlugin.get({
+      key: 'temp_refresh_token',
+    });
+
+    return {
+      temp_access_token: access_token.value,
+      temp_refresh_token: refrash_token.value,
+    };
+  }
+
+  async tempRemoveTokens(): Promise<void> {
+    await SecureStoragePlugin.remove({ key: 'temp_access_token' });
+    await SecureStoragePlugin.remove({ key: 'temp_refresh_token' });
   }
 
   displayToast(msg: any, pos: any, tclass: any, type: any, color: any) {

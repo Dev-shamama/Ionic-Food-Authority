@@ -28,13 +28,12 @@ export class LoginPage implements OnInit {
 
     // console.log(this.dataset.cnic.slice(0, 15));
     this.MainApp.showLoading();
-
     this.apiService
       .login(this.dataset)
       .then(async (res: any) => {
         this.MainApp.hideLoading();
         if (res.success.msg == 'Login Success') {
-          this.route.navigate(['/profile']);
+          this.route.navigate([`/sendotp/${res.success.uid}/login`]);
         } else {
           return;
         }

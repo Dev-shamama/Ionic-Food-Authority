@@ -20,8 +20,6 @@ export class PageguardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     var status = true
 
-    // this.api_service.removeTokens()
-
     this.api_service.getToken().then((res:any) => {  
       if (res.access_token,  res.refrash_token){
 
@@ -34,8 +32,7 @@ export class PageguardGuard implements CanActivate {
               status = false;
               this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
             }else {
-              this.router.navigate(['/login'])
-
+               status = true;
             }
           }
 
@@ -49,8 +46,7 @@ export class PageguardGuard implements CanActivate {
                   status = false;
                   this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
                 }else {
-                  this.router.navigate(['/login'])
-    
+                  status = true;
                 }
               }else{
                 this.api_service.removeLoading()
@@ -68,9 +64,13 @@ export class PageguardGuard implements CanActivate {
         }).catch((e) => {
 
           this.api_service.RefrashTokenvalid(res.refrash_token).then((ref) => {
-            console.log('call 2')
             if (ref.reponse_type === 'success'){
-              status = true;
+              if (ref.verification == "Unverified"){
+                status = false;
+                this.router.navigate(['/sendotp/'+ref.uid+'/signup'])
+              }else {
+                status = true;
+              }
             }else{
               this.api_service.removeLoading()
               status = false;

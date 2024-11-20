@@ -103,11 +103,15 @@ const routes: Routes = [
     path: 'sendotp/:uid/:form',
     loadChildren: () =>
       import('./sendotp/sendotp.module').then((m) => m.SendotpPageModule),
+    canActivate: [AuthguardGuard],
+
   },
   {
     path: 'verifyotp/:uid/:form',
     loadChildren: () =>
       import('./verifyotp/verifyotp.module').then((m) => m.VerifyotpPageModule),
+    canActivate: [AuthguardGuard],
+
   },
   {
     path: 'resetpassword/:uid/:otp',

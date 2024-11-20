@@ -29,7 +29,7 @@ export class VerifyotpPage implements OnInit {
     this.form = this.urlParam.snapshot.paramMap.get('form');
     this.uid = this.urlParam.snapshot.paramMap.get('uid');
 
-    if (this.form !== 'signup' && this.form !== 'forgetPassword') {
+    if (this.form !== 'signup' && this.form !== 'forgetPassword' && this.form !== 'login') {
       this.route.navigate(['/register']);
       return;
     }
@@ -47,10 +47,9 @@ export class VerifyotpPage implements OnInit {
       .then(async (res: any) => {
         this.MainApp.hideLoading();
         if (res.reponse_type == 'success') {
-          if (this.form === 'forgetPassword') {
+          if (this.form === 'signup' || this.form === 'login') {
             this.username = res.data.username;
           }
-          return;
         } else {
           this.route.navigate(['/register']);
         }
@@ -64,8 +63,14 @@ export class VerifyotpPage implements OnInit {
     this.MainApp.showLoading();
     let data = {};
 
-    if (this.form == 'signup') {
-      data = { username: this.username, otp_code: this.otp_code };
+    if (this.form == 'signup' || this.form == 'login') {
+      this.apiService.tempGetToken().then((resp:any) => {
+        if (resp.temp_access_token){
+          var temp_token:any = resp.temp_access_token
+        }else{
+          var temp_token:any = ''
+        }
+      data = { username: this.username, otp_code: this.otp_code , token:temp_token ,  reason:this.form};
       this.apiService
         .TwoFvOtp(data)
         .then(async (res: any) => {
@@ -93,10 +98,22 @@ export class VerifyotpPage implements OnInit {
           this.MainApp.hideLoading();
           console.log(err);
         });
+        
+        }).catch((err:any) => {
+          this.apiService.displayToast(
+            "Invalid Token",
+            'bottom',
+            'toast-error',
+            'warning-outline',
+            'danger');
+        })
     }
+
+
     if (this.form == 'forgetPassword') {
+
       this.apiService
-        .VerifyOtp({ uid: this.uid, otp_code: this.otp_code })
+        .VerifyOtp({ uid: this.uid, otp_code: this.otp_code})
         .then(async (res: any) => {
           this.MainApp.hideLoading();
           if (res.reponse_type == 'success') {
@@ -125,5 +142,7 @@ export class VerifyotpPage implements OnInit {
           console.log(err);
         });
     }
+
+
   }
 }

@@ -41,27 +41,16 @@ export class AuthguardGuard implements CanActivate {
               console.log("resp", resp);
 
               if (resp.success === 'You are authenticated!') {
-                if (resp.verification == 'Unverified') {
-                  status = true;
-                  this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
-                }else {
-                  this.router.navigate(['/login'])
-    
-                }
+                status = false;
+                this.router.navigate(['/home'])
               } else {
                 this.api_service
                   .RefrashTokenvalid(res.refrash_token)
                   .then((ref) => {
                     
-
                     if (ref.reponse_type === 'success') {
-                      if (resp.verification == 'Unverified') {
-                        status = true;
-                        this.router.navigate(['/sendotp/'+resp.uid+'/signup'])
-                      }else {
-                        this.router.navigate(['/login'])
-          
-                      }
+                      status = false;
+                      this.router.navigate(['/home'])
                     } else {
                       status = true;
                     }
@@ -77,7 +66,7 @@ export class AuthguardGuard implements CanActivate {
                 .then((ref) => {
                   if (ref.reponse_type === 'success') {
                     status = false;
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/home'])
                   } else {
                     status = true;
                   }

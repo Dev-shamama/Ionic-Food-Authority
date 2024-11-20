@@ -89,4 +89,10 @@ export class ResetpasswordPage implements OnInit {
 
     // console.log(this.dataset.cnic.slice(0, 15));
   }
+
+
+  
+  get passwordsMatch(): boolean {
+    return this.dataset.newPassword === this.dataset.confirmPassword;
+  }
 }

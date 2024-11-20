@@ -28,12 +28,15 @@ export class SendotpPage implements OnInit {
     public MainApp: AppComponent
   ) {}
 
-
-  
   ngOnInit(): void {
     this.uid = this.urlParam.snapshot.paramMap.get('uid');
     this.form = this.urlParam.snapshot.paramMap.get('form');
-    if (this.form !== 'signup' && this.form !== 'forgetPassword') {
+
+    if (
+      this.form !== 'signup' &&
+      this.form !== 'forgetPassword' &&
+      this.form !== 'login'
+    ) {
       this.route.navigate(['/register']);
       return;
     }
@@ -50,55 +53,114 @@ export class SendotpPage implements OnInit {
       .checkUserId({ uid: this.uid })
       .then(async (res: any) => {
         console.log(res);
-        
+
         if (res.reponse_type == 'success') {
-          this.userEmail = res.data.email
-          this.userNumber = res.data.phone
-          this.cnic = res.data.username
-      
-        }else {
-          this.route.navigate(['/register'])
+          this.userEmail = res.data.email;
+          this.userNumber = res.data.phone;
+          this.cnic = res.data.username;
+        } else {
+          this.route.navigate(['/register']);
         }
-        
       })
       .catch(async (err: any) => {
-        this.route.navigate(['/register'])
+        this.route.navigate(['/register']);
       });
   }
-
-
 
   onSubmitFullForm() {
     this.MainApp.showLoading();
-    this.apiService
-      .otpType({ uid: this.uid, otp_type: this.otp_type })
-      .then(async (res: any) => {
-        this.MainApp.hideLoading();
 
-        if (res.reponse_type == 'success') {
-          this.apiService.displayToast(res.msg,'bottom','toast-succes', 'checkmark-circle-sharp','success');
-          this.route.navigate(['/verifyotp/'+this.uid+'/'+this.form])
-        }
+    if (this.form === 'signup' || this.form === 'login') {
+      this.apiService
+        .tempGetToken()
+        .then((resp: any) => {
+          if (resp.temp_access_token) {
+            var temp_token: any = resp.temp_access_token;
+          } else {
+            var temp_token: any = '';
+          }
 
-        else{
+          this.apiService
+            .otpType({
+              uid: this.uid,
+              otp_type: this.otp_type,
+              token: temp_token,
+              reason: this.form,
+            })
+            .then(async (res: any) => {
+              this.MainApp.hideLoading();
+
+              if (res.reponse_type == 'success') {
+                this.apiService.displayToast(
+                  res.msg,
+                  'bottom',
+                  'toast-succes',
+                  'checkmark-circle-sharp',
+                  'success'
+                );
+                this.route.navigate([
+                  '/verifyotp/' + this.uid + '/' + this.form,
+                ]);
+              } else {
+                this.apiService.displayToast(
+                  res.msg,
+                  'bottom',
+                  'toast-error',
+                  'warning-outline',
+                  'danger'
+                );
+              }
+            })
+            .catch(async (err: any) => {
+              this.MainApp.hideLoading();
+              console.log(err);
+            });
+        })
+        .catch((err: any) => {
+          this.MainApp.hideLoading();
           this.apiService.displayToast(
-            res.msg, 
+            'Invalid Token',
             'bottom',
             'toast-error',
             'warning-outline',
-            'danger');
-        }
+            'danger'
+          );
+        });
+    }
 
-      })
-      .catch(async (err: any) => {
-        this.MainApp.hideLoading();
-        console.log(err);
-
-      });
+    if (this.form === 'forgetPassword') {
+      this.apiService
+        .otpType({
+          uid: this.uid,
+          otp_type: this.otp_type,
+          token: '',
+          reason: this.form,
+        })
+        .then(async (res: any) => {
+          this.MainApp.hideLoading();
+          if (res.reponse_type == 'success') {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-succes',
+              'checkmark-circle-sharp',
+              'success'
+            );
+            this.route.navigate(['/verifyotp/' + this.uid + '/' + this.form]);
+          } else {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+          }
+        })
+        .catch(async (err: any) => {
+          this.MainApp.hideLoading();
+          console.log(err);
+        });
+    }
   }
-
-
- 
-
 }
-
