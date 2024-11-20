@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,17 +10,11 @@ import { AppComponent } from '../app.component';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage  {
   @ViewChild('fullForm')
   fullForm: NgForm | undefined;
   uid: any;
   constructor(private apiService: ApiService, private route: Router, public MainApp: AppComponent) {}
-
-  ngOnInit(): void {
-    // const s: any = document.getElementById('sidebar-main-container');
-    // // s.style.width = '0'
-    // s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
-  }
 
 
   dataset = {

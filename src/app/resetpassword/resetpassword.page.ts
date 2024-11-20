@@ -19,16 +19,12 @@ export class ResetpasswordPage implements OnInit {
     private apiService: ApiService,
     private route: Router,
     private urlParam: ActivatedRoute,
-    public MainApp: AppComponent
-  ) {}
+    public MainApp: AppComponent,
+  ) { }
 
   ngOnInit(): void {
     this.uid = this.urlParam.snapshot.paramMap.get('uid');
     this.otp = this.urlParam.snapshot.paramMap.get('otp');
-
-    // const s: any = document.getElementById('sidebar-main-container');
-    // s.setAttribute('style', '--side-min-width: 0; --side-max-width: 0');
-
     this.checkUserIdFunction();
   }
 
@@ -38,23 +34,21 @@ export class ResetpasswordPage implements OnInit {
   };
 
   checkUserIdFunction() {
-    this.MainApp.showLoading();
     this.apiService
       .checkUserId({ uid: this.uid })
       .then(async (res: any) => {
-        this.MainApp.hideLoading();
         if (res.reponse_type == 'success') {
         } else {
           this.route.navigate(['/register']);
         }
       })
       .catch(async (err: any) => {
-        this.MainApp.hideLoading();
         this.route.navigate(['/register']);
       });
   }
 
   onSubmit() {
+    this.MainApp.showLoading();
     const data = {
       uid: this.uid,
       otp_code: this.otp,
@@ -64,6 +58,8 @@ export class ResetpasswordPage implements OnInit {
     this.apiService
       .resetPasswordAPI(data)
       .then(async (res: any) => {
+        this.MainApp.hideLoading();
+
         if (res.reponse_type == 'success') {
           this.apiService.displayToast(
             res.msg,
@@ -84,14 +80,13 @@ export class ResetpasswordPage implements OnInit {
         }
       })
       .catch(async (err: any) => {
+        this.MainApp.hideLoading();
         console.log(err);
       });
-
-    // console.log(this.dataset.cnic.slice(0, 15));
   }
 
 
-  
+
   get passwordsMatch(): boolean {
     return this.dataset.newPassword === this.dataset.confirmPassword;
   }

@@ -16,8 +16,8 @@ import { Location } from '@angular/common';
   providedIn: 'root',
 })
 export class ApiService {
-  public domain = 'http://192.168.18.116:8888';
-  localhost: string = 'http://192.168.18.116:8888';
+  public domain = 'https://sfa.pythonanywhere.com';
+  localhost: string = 'https://sfa.pythonanywhere.com';
   previousUrl: string = '';
   plt: string;
   web_get_restricted = 0;
@@ -50,8 +50,25 @@ export class ApiService {
       : this.platform.is('ios')
       ? 'ios'
       : 'android';
-    this.localhost = 'http://192.168.18.116:8888'; // put your IP here
+    this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
     // this.initStorage()
+  }
+
+
+  getCookie(name: any) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
   }
 
   async showLoading() {
