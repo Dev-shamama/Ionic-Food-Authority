@@ -16,8 +16,11 @@ import { Location } from '@angular/common';
   providedIn: 'root',
 })
 export class ApiService {
-  public domain = 'https://sfa.pythonanywhere.com';
-  localhost: string = 'https://sfa.pythonanywhere.com';
+  // public domain = 'https://sfa.pythonanywhere.com';
+  // localhost: string = 'https://sfa.pythonanywhere.com';
+  public domain = 'http://192.168.18.116:8888';
+  localhost: string = 'http://192.168.18.116:8888';
+  
   previousUrl: string = '';
   plt: string;
   web_get_restricted = 0;
@@ -50,7 +53,9 @@ export class ApiService {
       : this.platform.is('ios')
       ? 'ios'
       : 'android';
-    this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
+    // this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
+    this.localhost = 'http://192.168.18.116:8888'; // put your IP here
+    
     // this.initStorage()
   }
 
@@ -345,7 +350,6 @@ export class ApiService {
       fetch(`${this.localhost}/Tokenvalidcheck/`, options)
         .then(async (response) => {
           const data = await response.json();
-
           resolve(data);
         })
         .catch((e) => {
@@ -512,19 +516,7 @@ export class ApiService {
       fetch(`${this.localhost}/get-license/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data)
-          if (data.success) {
-            resolve(data);
-          } else {
-            this.displayToast(
-              data.errors.non_field_errors[0],
-              'bottom',
-              'toast-error',
-              'warning-outline',
-              'danger'
-            );
-            resolve(data);
-          }
+          resolve(data);
         })
         .catch((e) => {
           resolve(e);
@@ -745,6 +737,133 @@ export class ApiService {
         });
     });
   }
+
+
+  async getStatusAPI(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-status/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  async getBankAPI(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-bank/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  async getDashboardDetailsAPI(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/dashboard-details/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  
+  async getProfileAPI(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-profile/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+  async profileUpdate(access_token: string, data: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/update-profile/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+
+  async changePasswordAPI(access_token: string, data: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/changepassword/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
 
 
   // token handel

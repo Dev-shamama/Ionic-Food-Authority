@@ -10,6 +10,7 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  auth = false;
   constructor(
     private apiService: ApiService,
     private route: Router,
@@ -33,7 +34,6 @@ export class AppComponent {
     await this.loadingCtrl.dismiss();
   }
 
-  auth = false;
 
   checklogin(){
     this.apiService.getToken().then((res:any) => {
@@ -62,4 +62,8 @@ export class AppComponent {
     );
     this.route.navigate(['/login']);
   }
+
+
+  
+
 }

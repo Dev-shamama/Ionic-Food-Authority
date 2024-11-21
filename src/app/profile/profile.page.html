@@ -7,20 +7,41 @@
     <div class="wrapper wrapper-one">
       <div class="profile-content left-side">
         <h5>Profile</h5>
-        <div class="profile-image">
-          <ion-img src="/assets/img/profile.png" alt="Profile Image"></ion-img>
+        <div class="profile-image" (click)="fileInput()">
+          <ion-img src="{{profileLogo}}" alt="Profile Image"></ion-img>
         </div>
 
         <div class="profile-info">
           <small>SAF User</small>
         </div>
+
+        <ion-button
+        type="submit"
+        *ngIf="userProfileStatus == false"
+        [disabled]="userProfileBtnStatus"
+        >update</ion-button
+      >
       </div>
       <div class="profile-content right-side">
         <h5>Edit Details</h5>
 
         <div class="profile-basic-info">
-          <form id="userProfile" #userProfile="ngForm" (ngSubmit)="onSubmitUserProfile()">
-
+          <form
+            id="userProfile"
+            #userProfile="ngForm"
+            (ngSubmit)="onSubmitUserProfile()"
+          >
+            <input
+              type="file"
+              [(ngModel)]="profileDataset.logo"
+              name="logo"
+              id="logoFileInputProfile"
+              hidden
+              readonly="{{userProfileStatus}}"
+                  disabled="{{userProfileStatus}}"
+                  (change)="onFileChange($event)"
+              required
+            />
 
             <div class="inputField name">
               <ion-item class="no-border">
@@ -28,30 +49,13 @@
                   [(ngModel)]="profileDataset.name"
                   name="name"
                   id="name"
-                  required
                   type="text"
                   label="Name"
                   label-placement="floating"
                   fill="solid"
+                  readonly="{{userProfileStatus}}"
+                  disabled="{{userProfileStatus}}"
                   placeholder="Enter Your Name"
-                ></ion-input>
-              </ion-item>
-            </div>
-
-
-            <div class="inputField cnic">
-              <ion-item class="no-border">
-                <ion-input
-                  [(ngModel)]="profileDataset.cnic"
-                  name="cnic"
-                  id="cnic"
-                  required
-                  type="text"
-                  label="CNIC"
-                  label-placement="floating"
-                  fill="solid"
-                  placeholder="Enter Your CNIC Number"
-                  (input)="cnicMasking($event)"
                 ></ion-input>
               </ion-item>
             </div>
@@ -62,8 +66,9 @@
                   type="email"
                   [(ngModel)]="profileDataset.email"
                   name="email"
-                  required
                   label="Email"
+                  readonly="{{userProfileStatus}}"
+                  disabled="{{userProfileStatus}}"
                   label-placement="floating"
                   fill="solid"
                   placeholder="Enter Your Name of Email"
@@ -77,16 +82,27 @@
                   [(ngModel)]="profileDataset.phone"
                   name="phone"
                   type="number"
-                  required
                   label="Phone"
                   label-placement="floating"
                   fill="solid"
+                  readonly="{{userProfileStatus}}"
+                  disabled="{{userProfileStatus}}"
                   placeholder="Enter Your Name of Phone"
                 ></ion-input>
               </ion-item>
             </div>
 
-            <ion-button type="submit" [disabled]="!userProfile.valid"
+            <ion-button
+              type="button"
+              *ngIf="userProfileStatus == true"
+              (click)="editClick()"
+              >Edit</ion-button
+            >
+
+            <ion-button
+              type="submit"
+              *ngIf="userProfileStatus == false"
+              [disabled]="userProfileBtnStatus"
               >Save</ion-button
             >
           </form>
@@ -102,7 +118,7 @@
                   [(ngModel)]="passwordDataset.currentPassword"
                   name="currentPassword"
                   required
-                  type="text"
+                  type="password"
                   label="Current Password"
                   label-placement="floating"
                   fill="solid"
@@ -117,7 +133,7 @@
                   [(ngModel)]="passwordDataset.newPassword"
                   name="newPassword"
                   required
-                  type="text"
+                  type="password"
                   label="New Password"
                   label-placement="floating"
                   fill="solid"
@@ -132,13 +148,20 @@
                   [(ngModel)]="passwordDataset.confirmPassword"
                   name="confirmPassword"
                   required
-                  type="text"
+                  type="password"
                   label="Confirm Password"
                   label-placement="floating"
                   fill="solid"
                   placeholder="Enter Your Confirm Password"
                 ></ion-input>
               </ion-item>
+            </div>
+
+            <!-- Validation message -->
+            <div *ngIf="!passwordsMatch && passwordDataset.confirmPassword">
+              <p style="color: red; margin-top: 0; font-size: 13px">
+                Passwords do not match
+              </p>
             </div>
 
             <ion-button type="submit" [disabled]="!changePassword.valid"

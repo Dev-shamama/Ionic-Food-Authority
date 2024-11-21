@@ -155,18 +155,12 @@ ion-button {
                     grid-column: span 6 / span 6;
                 }
 
-                .cnic {
-                    grid-column: span 3 / span 3;
-                }
-
                 .email {
-                    grid-column: span 3 / span 3;
-                    grid-column-start: 4;
+                    grid-column: span 6 / span 6;
                 }
 
                 .phone {
                     grid-column: span 6 / span 6;
-                    grid-row-start: 3;
                 }
             }
         }

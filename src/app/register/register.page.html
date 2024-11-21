@@ -1,15 +1,13 @@
 <ion-content [fullscreen]="true">
   <div class="center-container">
-    
     <div class="logo">
       <img src="./assets/img/logo.png" alt="Logo" />
     </div>
     <!-- register -->
     <div class="login-content">
       <form #fullForm="ngForm" (ngSubmit)="onSubmitFullForm()">
-        <h1 style="text-align: center;">Create Your Account</h1>
+        <h1 style="text-align: center">Create Your Account</h1>
         <div id="login-form">
-
           <div class="profileAvatar" (click)="fileInput()">
             <div class="image">
               <ion-img src="{{profileLogo}}" alt="Avatar"></ion-img>
@@ -19,64 +17,124 @@
             </div>
           </div>
 
-          <input type="file" [(ngModel)]="dataset.logo" name="logo" id="logoFileInput" hidden
-            (change)="onFileChange($event)" required>
-
-
+          <input
+            type="file"
+            [(ngModel)]="dataset.logo"
+            name="logo"
+            id="logoFileInput"
+            hidden
+            (change)="onFileChange($event)"
+            required
+          />
 
           <div class="inputField">
             <ion-item class="no-border">
-              <ion-input [(ngModel)]="dataset.name" name="name" type="text" id="name" label="Name"
-                label-placement="floating" fill="solid" placeholder="Enter Your Name" required></ion-input>
+              <ion-input
+                [(ngModel)]="dataset.name"
+                name="name"
+                type="text"
+                id="name"
+                label="Name"
+                label-placement="floating"
+                fill="solid"
+                placeholder="Enter Your Name"
+                required
+              ></ion-input>
             </ion-item>
           </div>
 
           <div class="inputField">
             <ion-item class="no-border">
-              <ion-input [(ngModel)]="dataset.cnic" name="cnic" type="text" id="registerCNIC" label="CNIC"
-                label-placement="floating" fill="solid" placeholder="Enter Your CNIC" (input)="cnicMasking($event)"
-                required></ion-input>
+              <ion-input
+                [(ngModel)]="dataset.cnic"
+                name="cnic"
+                type="text"
+                id="registerCNIC"
+                label="CNIC"
+                label-placement="floating"
+                fill="solid"
+                placeholder="Enter Your CNIC"
+                (input)="cnicMasking($event)"
+                required
+              ></ion-input>
             </ion-item>
           </div>
 
           <div class="inputField">
             <ion-item class="no-border">
-              <ion-input [(ngModel)]="dataset.email" name="email" type="email" label="Email (optional)"
-                label-placement="floating" fill="solid" placeholder="Enter Your Email"></ion-input>
+              <ion-input
+                [(ngModel)]="dataset.email"
+                name="email"
+                type="email"
+                label="Email"
+                label-placement="floating"
+                fill="solid"
+                placeholder="Enter Your Email"
+                required
+              ></ion-input>
             </ion-item>
           </div>
 
           <div class="inputField">
             <ion-item class="no-border">
-              <ion-input [(ngModel)]="dataset.phone" name="phone" type="number" required label="Phone"
-                label-placement="floating" fill="solid" placeholder="Enter Your Phone"></ion-input>
+              <ion-input
+                [(ngModel)]="dataset.phone"
+                name="phone"
+                type="number"
+                required
+                label="Phone"
+                label-placement="floating"
+                fill="solid"
+                placeholder="Enter Your Phone"
+              ></ion-input>
             </ion-item>
           </div>
         </div>
 
         <div id="login-form">
+          <div class="inputField">
+            <ion-item class="no-border">
+              <ion-input
+                [(ngModel)]="dataset.password"
+                name="password"
+                type="password"
+                required
+                label="Password"
+                label-placement="floating"
+                fill="solid"
+                placeholder="Enter Your Password"
+              ></ion-input>
+            </ion-item>
+          </div>
 
           <div class="inputField">
             <ion-item class="no-border">
-              <ion-input [(ngModel)]="dataset.password" name="password" type="password" required label="Password"
-                label-placement="floating" fill="solid" placeholder="Enter Your Password"></ion-input>
+              <ion-input
+                [(ngModel)]="dataset.confirmPassword"
+                name="confirmPassword"
+                type="password"
+                required
+                label="Confirm Password"
+                label-placement="floating"
+                fill="solid"
+                placeholder="Enter Your Confirm Password"
+              ></ion-input>
             </ion-item>
           </div>
-          
-          <div class="inputField">
-            <ion-item class="no-border">
-              <ion-input [(ngModel)]="dataset.confirmPassword" name="confirmPassword" type="password" required
-                label="Confirm Password" label-placement="floating" fill="solid" placeholder="Enter Your Confirm Password"></ion-input>
-            </ion-item>
-          </div>
-
 
           <!-- Validation message -->
           <div *ngIf="!passwordsMatch && dataset.confirmPassword">
-            <p style="color: red; margin-top: 0; font-size: 13px;">Passwords do not match</p>
+            <p style="color: red; margin-top: 0; font-size: 13px">
+              Passwords do not match
+            </p>
           </div>
 
-          <ion-button type="submit" [disabled]="!fullForm.valid" class="form-btn">Sign Up</ion-button>
+          <ion-button
+            type="submit"
+            [disabled]="!fullForm.valid"
+            class="form-btn"
+            >Sign Up</ion-button
+          >
         </div>
       </form>
 
@@ -85,8 +143,5 @@
         <p class=""><a routerLink="/login">Login Your Account</a></p>
       </div>
     </div>
-
-
-
   </div>
 </ion-content>

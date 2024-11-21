@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="right-side">
-          <h2>2</h2>
+          <h2>{{dashboardStatus.approve}}</h2>
         </div>
       </div>
       <div class="quick-item quick-item-2">
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="right-side">
-          <h2>0</h2>
+          <h2>{{dashboardStatus.reject}}</h2>
         </div>
       </div>
       <div class="quick-item quick-item-3">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="right-side">
-          <h2>1</h2>
+          <h2>{{dashboardStatus.get_expired}}</h2>
         </div>
       </div>
     </div>
@@ -55,112 +55,59 @@
       </div>
 
       <div class="license-item-content">
-        <div class="license-item">
+        <div class="license-item" *ngFor="let license of licenseList">
           <div class="top-content">
             <div class="left-side">
               <h6>
-                License ID Number: <span class="license-id">0034322</span>
+                License ID Number:
+                <span class="license-id">{{license.License_ID}}</span>
               </h6>
-              <p>Name of Applicant: <span class="name">Ali Hussain</span></p>
               <p>
-                Name of Food Business: <span class="food-name">Wings Bite</span>
+                Name of Applicant:
+                <span class="name">{{license.Name_of_Applicant}}</span>
+              </p>
+              <p>
+                Name of Food Business:
+                <span class="food-name">{{license.Name_of_Food_Business}}</span>
               </p>
             </div>
             <div class="right-side">
               <h5>License Status</h5>
-              <h4 class="approved">Approved</h4>
+              <h4 class="approved">{{license.Status.Status_Name}}</h4>
             </div>
           </div>
 
           <div class="bottom-content">
             <div class="left-side">
-              <span class="item">Challan No: <span class="license-id">30432</span></span>
-              <span class="item">LICENSE FEE (RS.) : 60,000.0</span>
-              <span class="item">Expiry Date :<span class="license-expiry">10/20/2030</span></span
+              <span class="item"
+                >Challan No:
+                <span class="license-id"
+                  >{{license.license_challan[0].Challan_ID}}</span
+                ></span
+              >
+              <span class="item"
+                >LICENSE FEE (RS.) :
+                {{license.license_challan[0].challan[0].Amount}}</span
+              >
+              <span class="item"
+                >Expiry Date :
+                <span class="license-expiry"
+                  >{{license.Expiry_date}}</span
+                ></span
               >
             </div>
             <div class="right-side">
               <button type="button" class="btn btn-primary">
-                <div class="text" routerLink="/licensedetail">View Details</div>
+                <div class="text" routerLink="/licensedetail/{{license.id}}">
+                  View Details
+                </div>
                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
               </button>
               <button type="button" class="btn btn-secondary">
-                <div class="text">License</div>
-                <ion-icon name="arrow-forward-circle-outline"></ion-icon>  
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="license-item">
-          <div class="top-content">
-            <div class="left-side">
-              <h6>
-                License ID Number: <span class="license-id">0034322</span>
-              </h6>
-              <p>Name of Applicant: <span class="name">Ali Hussain</span></p>
-              <p>
-                Name of Food Business: <span class="food-name">Wings Bite</span>
-              </p>
-            </div>
-            <div class="right-side">
-              <h5>License Status</h5>
-              <h4 class="expired">Expired</h4>
-            </div>
-          </div>
-
-          <div class="bottom-content">
-            <div class="left-side">
-              <span class="item">Challan No: <span class="license-id">30432</span></span>
-              <span class="item">LICENSE FEE (RS.) : 60,000.0</span>
-              <span class="item">Expiry Date :<span class="license-expiry">10/20/2030</span></span
-              >
-            </div>
-            <div class="right-side">
-              <button type="button" class="btn btn-primary">
-                <div class="text" routerLink="/licensedetail">View Details</div>
+                <div class="text" routerLink="/licenseview/{{license.id}}">
+                  License
+                </div>
                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-              </button>
-              <button type="button" class="btn btn-secondary">
-                <div class="text">License</div>
-                <ion-icon name="arrow-forward-circle-outline"></ion-icon>  
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="license-item">
-          <div class="top-content">
-            <div class="left-side">
-              <h6>
-                License ID Number: <span class="license-id">0034322</span>
-              </h6>
-              <p>Name of Applicant: <span class="name">Ali Hussain</span></p>
-              <p>
-                Name of Food Business: <span class="food-name">Wings Bite</span>
-              </p>
-            </div>
-            <div class="right-side">
-              <h5>License Status</h5>
-              <h4 class="rejected">Rejected</h4>
-            </div>
-          </div>
-
-          <div class="bottom-content">
-            <div class="left-side">
-              <span class="item">Challan No: <span class="license-id">30432</span></span>
-              <span class="item">LICENSE FEE (RS.) : 60,000.0</span>
-              <span class="item">Expiry Date :<span class="license-expiry">10/20/2030</span></span
-              >
-            </div>
-            <div class="right-side">
-              <button type="button" class="btn btn-primary">
-                <div class="text" routerLink="/licensedetail">View Details</div>
-                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-              </button>
-              <button type="button" class="btn btn-secondary">
-                <div class="text">License</div>
-                <ion-icon name="arrow-forward-circle-outline"></ion-icon>  
               </button>
             </div>
           </div>

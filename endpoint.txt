@@ -157,7 +157,7 @@ payload_data {
   "Medical_reports": "base64"
 
 }
--------------------
+--------------------------------------
 
 16 url => License-challan/<license_id>/ 
 
@@ -165,7 +165,7 @@ header {
     Authorization:"Bearer  <Token>"
 }
 
--------------------
+--------------------------------------
 
 17 url => get-license-fee/ 
 
@@ -173,4 +173,26 @@ header {
     Authorization:"Bearer  <Token>"
 }
 
--------------------
+--------------------------------------
+
+
+
+get-profile/
+
+--------------------------------------
+
+
+update-profile/
+
+payload_data {
+        logo = request.data['logo']
+        name = request.data['name']
+        email = request.data['email']
+        phone = request.data['phone']
+}
+
+--------------------------------------
+
+get-status/
+get-bank/
+dashboard-details/

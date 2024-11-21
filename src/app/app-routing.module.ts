@@ -42,7 +42,7 @@ const routes: Routes = [
     canActivate: [PageguardGuard],
   },
   {
-    path: 'licensedetail',
+    path: 'licensedetail/:id',
     loadChildren: () =>
       import('./licensedetail/licensedetail.module').then(
         (m) => m.LicensedetailPageModule
@@ -124,7 +124,7 @@ const routes: Routes = [
       canActivate: [AuthguardGuard],
   },
   {
-    path: 'licenseview',
+    path: 'licenseview/:id',
     loadChildren: () =>
       import('./licenseview/licenseview.module').then(
         (m) => m.LicenseviewPageModule
