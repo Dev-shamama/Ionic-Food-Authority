@@ -133,6 +133,7 @@
 
 .challan-content .content .form .inputField input {
   width: 100%;
+  font-weight: 600;
   margin: 0;
   border: none;
   border-bottom: 1.5px solid #000000;
@@ -140,6 +141,7 @@
 
 .challan-content .content .form .inputField span {
   width: 100%;
+  font-weight: 600;
   margin: 0;
   border: none;
   border-bottom: 1.5px solid #000000;
@@ -220,6 +222,7 @@
 
 
 .challan-content .content .signature-bottom-content .inputField span {
+  font-weight: 600;
   width: 100%;
   margin: 0;
   border: none;

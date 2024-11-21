@@ -74,6 +74,19 @@ export class PaychallanPage {
               this.category = res.data.license[0].category;
               this.district = res.data.license[0].district;
               
+              this.getNature();
+              this.getCategory(this.category);
+              this.getDistric(this.district);
+
+
+            }else{
+              this.apiService.displayToast(
+                res.msg,
+                'bottom',
+                'toast-error',
+                'warning-outline',
+                'danger'
+              );
             }
           })
           .catch(async (err: any) => {
@@ -84,9 +97,6 @@ export class PaychallanPage {
         console.error(err);
       });
 
-    this.getNature();
-    this.getCategory(this.category);
-    this.getDistric(this.district);
   }
 
   getNature() {
@@ -99,6 +109,14 @@ export class PaychallanPage {
             console.log(res);
             if (res.reponse_type == 'success') {
               this.natureList = res.data;
+            }else {
+              this.apiService.displayToast(
+                res.data.msg,
+                'bottom',
+                'toast-error',
+                'warning-outline',
+                'danger'
+              );
             }
           })
           .catch(async (err: any) => {
@@ -111,12 +129,8 @@ export class PaychallanPage {
   }
 
   getCategory(_category: any) {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getCategoryList(e.access_token)
-          .then(async (res: any) => {
+    this.apiService.getToken().then((e: any) => {
+        this.apiService.getCategoryList(e.access_token).then(async (res: any) => {
             console.log(res);
             if (res.reponse_type == 'success') {
               res.data.map((item:any) => {
@@ -125,6 +139,14 @@ export class PaychallanPage {
 
                 }
               })
+            }else {
+              this.apiService.displayToast(
+                res.data.msg,
+                'bottom',
+                'toast-error',
+                'warning-outline',
+                'danger'
+              );
             }
           })
           .catch(async (err: any) => {
@@ -144,13 +166,21 @@ export class PaychallanPage {
           .getDistricList(e.access_token)
           .then(async (res: any) => {
             console.log(res);
+            
             if (res.reponse_type == 'success') {
               res.data.map((item:any) => {
                 if(this.district == item.id) {
                   this.districtName = item.District_Name
-
                 }
               })
+            }else {
+              this.apiService.displayToast(
+                res.data.msg,
+                'bottom',
+                'toast-error',
+                'warning-outline',
+                'danger'
+              );
             }
           })
           .catch(async (err: any) => {

@@ -179,7 +179,6 @@ ion-modal {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: repeat(8, 1fr);
       gap: 8px;
       margin-bottom: 60px;
 
@@ -221,26 +220,26 @@ ion-modal {
       }
       .inputField.secp {
         grid-column: span 2 / span 2;
-        grid-row-start: 6;
+        grid-row-start: 7;
       }
       .inputField.ntn {
         grid-column: span 2 / span 2;
         grid-column-start: 3;
-        grid-row-start: 6;
+        grid-row-start: 7;
       }
       .inputField.srb {
         grid-column: span 2 / span 2;
         grid-column-start: 5;
-        grid-row-start: 6;
+        grid-row-start: 7;
       }
       .inputField.tax {
         grid-column: span 2 / span 2;
         grid-column-start: 7;
-        grid-row-start: 6;
+        grid-row-start: 7;
       }
       .inputField.area {
         grid-column: span 8 / span 8;
-        grid-row-start: 7;
+        grid-row-start: 6;
       }
       .inputField.address {
         grid-column: span 8 / span 8;

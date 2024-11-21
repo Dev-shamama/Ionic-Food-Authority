@@ -188,6 +188,13 @@ ion-content {
             margin: 0;
             white-space: nowrap;
           }
+          input {
+            width: 100%;
+            margin: 0;
+            font-weight: 600;
+            border: none;
+            border-bottom: 1.5px solid #000000;
+          }
           span {
             width: 100%;
             margin: 0;
@@ -269,12 +276,14 @@ ion-content {
           }
           input {
             width: 100%;
+            font-weight: 600;
             margin: 0;
             border: none;
             border-bottom: 1.5px solid #000000;
           }
           span {
             width: 100%;
+            font-weight: 600;
             margin: 0;
             border: none;
             border-bottom: 1.5px solid #000000;

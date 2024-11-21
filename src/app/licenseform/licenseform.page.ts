@@ -18,7 +18,11 @@ export class LicenseformPage {
   categoryList: any[] = [];
   districList: any[] = [];
 
-  dataset = {
+  natureBusinessName:any;
+  categoryName:any;
+  districtName:any;
+
+  dataset:any = {
     applicant: null,
     cnic: null,
     phone: null,
@@ -131,11 +135,19 @@ export class LicenseformPage {
             areaMeasurement: this.dataset.areaMeasurement,
           })
           .then((res: any) => {
-            console.log(res);
-
+  
             if (res.reponse_type === 'success') {
               this.dataset.srb = res.data.Srb_in_percent;
+            }else{
+              this.dataset.srb = null
+              this.apiService.displayToast(
+                res.msg,  
+                'bottom', 
+                'toast-error', 
+                'close-circle-sharp', 
+                'danger')
             }
+
           })
           .catch((err: any) => {
             console.error('Error fetching Auto SRB:', err);
@@ -165,7 +177,7 @@ export class LicenseformPage {
 
   FormOnSubmitted() {
     this.MainApp.showLoading();
-
+    this.cancel(false);
     this.apiService
       .getToken()
       .then((e: any) => {
@@ -181,7 +193,6 @@ export class LicenseformPage {
                 'checkmark-circle-sharp',
                 'success'
               );
-              this.cancel(false);
               this.router.navigate([`/paychallan/${res.data.License_Id}`]);
             }
           })

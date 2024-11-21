@@ -40,17 +40,23 @@
 
           <div class="review-item nature">
             <h5>Nature of Business</h5>
-            <p>{{dataset.natureBusiness}}</p>
+            <div *ngFor="let nature of natureList">
+              <p *ngIf="nature.id == dataset.natureBusiness">{{nature.Nature_of_Business_Title}}</p>
+            </div>
           </div>
 
           <div class="review-item category">
             <h5>Category</h5>
-            <p>{{dataset.category}}</p>
+            <div *ngFor="let category of categoryList">
+              <p *ngIf="category.id == dataset.category">{{category.Category_Title}}</p>
+            </div>
           </div>
 
           <div class="review-item district">
             <h5>District</h5>
-            <p>{{dataset.district}}</p>
+            <div *ngFor="let district of districList">
+              <p *ngIf="district.id == dataset.district">{{district.District_Name}}</p>
+            </div>
           </div>
 
           <div class="review-item secp">

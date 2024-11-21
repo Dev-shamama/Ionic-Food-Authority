@@ -23,6 +23,12 @@
           </ion-item>
         </div>
 
+        <div class="resendOtp">
+          <div class="resendOtpBtn"  (click)="resetCountdown()">{{buttonLabel}}</div>
+          <div class="resendOtpTime">{{countdownDisplay}}</div>
+        </div>
+
+
         <ion-button type="submit"  [disabled]="!verifyotp.valid" class="form-btn">Verify OTP</ion-button>
        
       </form> 
