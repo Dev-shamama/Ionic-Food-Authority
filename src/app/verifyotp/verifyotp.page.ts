@@ -86,7 +86,7 @@ export class VerifyotpPage implements OnInit {
                     
             const s: any = document.getElementById('sidebar-main-container');
             // s.style.width = '0'
-            s.setAttribute('style', '--side-min-width: 18%; --side-max-width: 18%');
+            s.setAttribute('style', '--side-min-width: 350px; --side-max-width: 350px');
             this.route.navigate(['/home']);
           } else {
             this.apiService.displayToast(

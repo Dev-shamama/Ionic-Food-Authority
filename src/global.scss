@@ -45,5 +45,6 @@
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
 ion-split-pane {
-    --side-max-width: 18%;
+    --side-min-width: 350px;
+    --side-max-width: 350px;
 }

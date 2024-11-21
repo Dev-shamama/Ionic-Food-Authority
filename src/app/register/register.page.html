@@ -12,7 +12,7 @@
 
           <div class="profileAvatar" (click)="fileInput()">
             <div class="image">
-              <ion-img src="{{dataset.logo}}" alt="Avatar"></ion-img>
+              <ion-img src="{{profileLogo}}" alt="Avatar"></ion-img>
             </div>
             <div class="camera-logo">
               <ion-icon name="camera-outline"></ion-icon>
@@ -33,7 +33,7 @@
 
           <div class="inputField">
             <ion-item class="no-border">
-              <ion-input [(ngModel)]="dataset.cnic" name="cnic" type="text" id="cnic" label="CNIC"
+              <ion-input [(ngModel)]="dataset.cnic" name="cnic" type="text" id="registerCNIC" label="CNIC"
                 label-placement="floating" fill="solid" placeholder="Enter Your CNIC" (input)="cnicMasking($event)"
                 required></ion-input>
             </ion-item>

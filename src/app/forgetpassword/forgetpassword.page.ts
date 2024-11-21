@@ -69,7 +69,7 @@ export class ForgetpasswordPage implements OnInit {
 
     // Make sure to update the value only after the mask is applied
     const x: HTMLInputElement = document.getElementById(
-      'cnic'
+      'forgetCnic'
     ) as HTMLInputElement;
     if (x.value !== formattedValue) {
       x.value = formattedValue;

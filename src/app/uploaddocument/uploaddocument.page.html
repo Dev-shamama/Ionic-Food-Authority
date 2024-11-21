@@ -13,7 +13,7 @@
         <input
           type="file"
           (change)="cnicDocumentInput($event)"
-          accept="image/*"
+          
           id="cnic-input"
           hidden
         />
@@ -48,7 +48,7 @@
         <input
           type="file"
           (change)="tenancyDocumentInput($event)"
-          accept="image/*"
+          
           id="tenancy-input"
           hidden
         />
@@ -83,7 +83,7 @@
         <input
           type="file"
           (change)="certificateDocumentInput($event)"
-          accept="image/*"
+          
           id="certificate-input"
           hidden
         />
@@ -121,7 +121,7 @@
         <input
           type="file"
           (change)="challanDocumentInput($event)"
-          accept="image/*"
+          
           id="challan-input"
           hidden
         />
@@ -157,7 +157,7 @@
         <input
           type="file"
           (change)="labTestingDocumentInput($event)"
-          accept="image/*"
+          
           id="labTesting-input"
           hidden
         />
@@ -196,7 +196,7 @@
         <input
           type="file"
           (change)="medicalDocumentInput($event)"
-          accept="image/*"
+          
           id="medical-input"
           hidden
         />
@@ -226,7 +226,7 @@
 
 
     <div class="bottom-submit-button">
-        <ion-button>Submit For Review <span><ion-icon
+        <ion-button (click)="submitForUploadDocument()">Submit For Review <span><ion-icon
               name="chevron-forward-outline"></ion-icon></span></ion-button>
       </div>
   </div>

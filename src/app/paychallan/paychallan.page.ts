@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 export class PaychallanPage {
   @ViewChild('payChallan')
   payChallan: NgForm | undefined;
-
+  licenceId:any
 
 
   natureList: any[] = [];
@@ -37,13 +37,13 @@ export class PaychallanPage {
     private urlParam: ActivatedRoute,
     public MainApp: AppComponent
   ) {
-    const licenceId = this.urlParam.snapshot.paramMap.get('id');
+    this.licenceId = this.urlParam.snapshot.paramMap.get('id');
 
     this.apiService
       .getToken()
       .then((e: any) => {
         this.apiService
-          .getAllLicenseChallan(e.access_token, licenceId)
+          .getAllLicenseChallan(e.access_token, this.licenceId)
           .then(async (res: any) => {
             console.log(res);
             if (res.reponse_type == 'success') {

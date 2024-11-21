@@ -15,7 +15,7 @@ export class RegisterPage  {
   fullForm: NgForm | undefined;
   uid: any;
   constructor(private apiService: ApiService, private route: Router, public MainApp: AppComponent) {}
-
+  profileLogo = '/assets/img/profile.png'
 
   dataset = {
     logo: '',
@@ -33,6 +33,8 @@ export class RegisterPage  {
       const reader = new FileReader();
       reader.onload = () => {
         this.dataset.logo = reader.result as string;
+        this.profileLogo = reader.result as string;
+        
       };
       reader.readAsDataURL(file);
     }
@@ -76,7 +78,7 @@ export class RegisterPage  {
       )}-${value.slice(12, 13)}`;
     }
 
-    let x: any = document.getElementById('cnic');
+    let x: any = document.getElementById('registerCNIC');
     x.value = formattedValue;
   }
 

@@ -208,11 +208,6 @@
         <div
           class="challan-download-btn w-100 d-flex justify-content-center flex-direction-row align-items-center"
         >
-          <ion-button
-            ><span>Download</span>
-            <ion-icon name="cloud-download-outline"></ion-icon
-          ></ion-button>
-
           <ion-button (click)="myFunc()"
             ><span>Print Challan</span>
             <ion-icon name="print-outline"></ion-icon>
@@ -222,7 +217,7 @@
     </div>
 
     <div class="bottom-submit-button">
-      <ion-button routerLink="/uploaddocument"
+      <ion-button routerLink="/uploaddocument/{{licenceId}}"
         >Upload Document
         <span><ion-icon name="chevron-forward-outline"></ion-icon></span
       ></ion-button>

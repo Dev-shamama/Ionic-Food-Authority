@@ -725,6 +725,28 @@ export class ApiService {
   }
 
 
+  async uploadLicenseDocument(access_token: string, data: any, id:any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/upload-license-attachment/${id}/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
   // token handel
   async saveTokens(access: string, refresh: string): Promise<void> {
     await SecureStoragePlugin.set({ key: 'access_token', value: access });

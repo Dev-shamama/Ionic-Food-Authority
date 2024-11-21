@@ -72,7 +72,7 @@ const routes: Routes = [
     canActivate: [PageguardGuard],
   },
   {
-    path: 'uploaddocument',
+    path: 'uploaddocument/:id',
     loadChildren: () =>
       import('./uploaddocument/uploaddocument.module').then(
         (m) => m.UploaddocumentPageModule

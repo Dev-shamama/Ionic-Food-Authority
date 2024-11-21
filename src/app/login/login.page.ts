@@ -44,13 +44,13 @@ export class LoginPage implements OnInit {
       });
   }
 
+
   cnicMasking(event: any): void {
-    const input: HTMLInputElement = event.target as HTMLInputElement;
+    const input = event.target;
     const value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
 
     let formattedValue = value;
 
-    // Mask the value based on length
     if (value.length > 5 && value.length <= 12) {
       formattedValue = `${value.slice(0, 5)}-${value.slice(5, 12)}`;
     } else if (value.length > 12) {
@@ -60,12 +60,7 @@ export class LoginPage implements OnInit {
       )}-${value.slice(12, 13)}`;
     }
 
-    // Make sure to update the value only after the mask is applied
-    const x: HTMLInputElement = document.getElementById(
-      'cnic'
-    ) as HTMLInputElement;
-    if (x.value !== formattedValue) {
-      x.value = formattedValue;
-    }
+    let x: any = document.getElementById('loginCnic');
+    x.value = formattedValue;
   }
 }

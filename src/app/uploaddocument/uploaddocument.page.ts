@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ApiService } from 'api.service';
+import { AppComponent } from '../app.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-uploaddocument',
@@ -6,7 +9,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./uploaddocument.page.scss'],
 })
 export class UploaddocumentPage {
-  constructor() {}
+  licenceId: any;
+  constructor(
+    private apiService: ApiService,
+    private route: Router,
+    public MainApp: AppComponent,
+    private urlParam: ActivatedRoute
+  ) {
+    this.licenceId = this.urlParam.snapshot.paramMap.get('id');
+  }
+
+  uploadBase64: {
+    cnic: any;
+    document_of_property: any;
+    Previous_Registration: any;
+    Copy_of_Challan_form: any;
+    Lab_testing_reports: any;
+    Medical_reports: any;
+  } = {
+    cnic: null,
+    document_of_property: null,
+    Previous_Registration: null,
+    Copy_of_Challan_form: null,
+    Lab_testing_reports: null,
+    Medical_reports: null,
+  };
 
   // CNIC
   cnicDocument() {
@@ -29,6 +56,12 @@ export class UploaddocumentPage {
 
       imageName.textContent = `Name: ${file.name}`;
       imageSize.textContent = `Size: ${this.formatSizeUnits(file.size)}`;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadBase64.cnic = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -54,6 +87,12 @@ export class UploaddocumentPage {
 
       imageName.textContent = `Name: ${file.name}`;
       imageSize.textContent = `Size: ${this.formatSizeUnits(file.size)}`;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadBase64.document_of_property = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -79,6 +118,12 @@ export class UploaddocumentPage {
 
       imageName.textContent = `Name: ${file.name}`;
       imageSize.textContent = `Size: ${this.formatSizeUnits(file.size)}`;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadBase64.Previous_Registration = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -104,6 +149,12 @@ export class UploaddocumentPage {
 
       imageName.textContent = `Name: ${file.name}`;
       imageSize.textContent = `Size: ${this.formatSizeUnits(file.size)}`;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadBase64.Copy_of_Challan_form = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -129,6 +180,12 @@ export class UploaddocumentPage {
 
       imageName.textContent = `Name: ${file.name}`;
       imageSize.textContent = `Size: ${this.formatSizeUnits(file.size)}`;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadBase64.Lab_testing_reports = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -154,6 +211,12 @@ export class UploaddocumentPage {
 
       imageName.textContent = `Name: ${file.name}`;
       imageSize.textContent = `Size: ${this.formatSizeUnits(file.size)}`;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadBase64.Medical_reports = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -194,5 +257,44 @@ export class UploaddocumentPage {
       bytes = '0 bytes';
     }
     return bytes;
+  }
+
+  submitForUploadDocument() {
+    this.MainApp.showLoading();
+
+    this.apiService
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .uploadLicenseDocument(
+            e.access_token,
+            this.uploadBase64,
+            this.licenceId
+          )
+          .then(async (res: any) => {
+            this.MainApp.hideLoading();
+            if (res.reponse_type == "success") {
+              this.route.navigate(['/success'])
+        
+            } else {
+              this.apiService.displayToast(
+                res.msg,
+                'bottom',
+                'toast-error',
+                'warning-outline',
+                'danger'
+              );
+            }
+          })
+          .catch(async (err: any) => {
+            this.MainApp.hideLoading();
+
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        this.MainApp.hideLoading();
+        console.error(err);
+      });
   }
 }
