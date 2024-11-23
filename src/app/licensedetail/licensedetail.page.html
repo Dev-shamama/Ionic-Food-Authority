@@ -254,7 +254,7 @@
         >
           <div></div>
 
-          <ion-button  class="most-used" type="button"
+          <ion-button  class="most-used" (click)="uploadDocument()" type="button"
             ><ion-icon name="save-outline"></ion-icon>
             <span style="margin-left: 5px">Save</span>
           </ion-button>
@@ -296,14 +296,14 @@
     <div class="wrapper wrapper-two">
       <div class="item expiredDate">
         <h4 class="title">Expiry Date</h4>
-        <h2 class="date">10 , Oct , 2028</h2>
+        <h2 class="date">{{licenseDetail.Expiry_date}}</h2>
 
         <h4 class="totalRemaining">Total Remaining Days</h4>
-        <h4 class="totalDay">304 Day</h4>
+        <h4 class="totalDay">{{licenseDetail.remaingAllDays}} Day</h4>
 
         <div class="progress-container">
           <div class="progress-bar">
-            <div class="progress"></div>
+            <div class="progress" [style.width]="licenseDetail.expiry_percentage + '%'"></div>
           </div>
         </div>
 

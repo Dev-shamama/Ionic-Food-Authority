@@ -865,6 +865,27 @@ export class ApiService {
   }
 
 
+  
+  async getLicenseDetailsAPI(access_token: string, id: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      };
+      fetch(`${this.localhost}/get-license-details/${id}/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
 
   // token handel
   async saveTokens(access: string, refresh: string): Promise<void> {
