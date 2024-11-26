@@ -503,7 +503,6 @@ export class ApiService {
   }
 
   // Dashboard API
-
   async getLicense(access_token: string): Promise<any> {
     return new Promise<any>((resolve) => {
       const options = {
@@ -523,9 +522,6 @@ export class ApiService {
         });
     });
   }
-
-
-
   
   async getCategoryList(access_token: string): Promise<any> {
     return new Promise<any>((resolve) => {
@@ -622,7 +618,6 @@ export class ApiService {
     });
   }
 
-
   async getAutoSRB(access_token: string, data: any): Promise<any> {
     return new Promise<any>((resolve) => {
       const options = {
@@ -655,7 +650,6 @@ export class ApiService {
         });
     });
   }
-
 
   async AddLicenseAPI(access_token: string, data: any): Promise<any> {
     return new Promise<any>((resolve) => {
@@ -690,7 +684,6 @@ export class ApiService {
     });
   }
 
-
   async getAllLicenseChallan(access_token: string, id: any): Promise<any> {
     return new Promise<any>((resolve) => {
       const options = {
@@ -716,6 +709,30 @@ export class ApiService {
     });
   }
 
+  async getChallanFees(access_token: string): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/get-license-fee/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data)
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
 
   async uploadLicenseDocument(access_token: string, data: any, id:any): Promise<any> {
     return new Promise<any>((resolve) => {
@@ -737,7 +754,6 @@ export class ApiService {
         });
     });
   }
-
 
   async getStatusAPI(access_token: string): Promise<any> {
     return new Promise<any>((resolve) => {
@@ -798,7 +814,6 @@ export class ApiService {
         });
     });
   }
-
   
   async getProfileAPI(access_token: string): Promise<any> {
     return new Promise<any>((resolve) => {
@@ -841,8 +856,6 @@ export class ApiService {
     });
   }
 
-
-
   async changePasswordAPI(access_token: string, data: any): Promise<any> {
     return new Promise<any>((resolve) => {
       const options = {
@@ -864,8 +877,6 @@ export class ApiService {
     });
   }
 
-
-  
   async getLicenseDetailsAPI(access_token: string, id: any): Promise<any> {
     return new Promise<any>((resolve) => {
       const options = {
@@ -884,8 +895,6 @@ export class ApiService {
         });
     });
   }
-
-
 
   // token handel
   async saveTokens(access: string, refresh: string): Promise<void> {
