@@ -29,13 +29,12 @@ export class LicensedetailPage {
     lab: null,
   };
 
-  image: string;
   id: any;
 
   licenseDetail: any = {
     Expiry_date: null,
     date: null,
-    remaingAllDays: null,
+    remainingAllDays: null,
     expiry_percentage: null
   };
 
@@ -46,7 +45,6 @@ export class LicensedetailPage {
     public MainApp: AppComponent,
     private urlParam: ActivatedRoute
   ) {
-    this.image = 'http://localhost:8100/assets/img/certificate.png';
     this.id = this.urlParam.snapshot.paramMap.get('id');
 
     this.getLicenseDetails();
@@ -62,20 +60,25 @@ export class LicensedetailPage {
             console.log(res);
             if (res.reponse_type == 'success') {
               let asdad = res.data[0].date.slice(0, 10);
-              const startDate = new Date(asdad);
+              const ref = new Date(asdad);
+              const currentDate = new Date();
               const endDate = new Date(res.data[0].Expiry_date);
 
               this.licenseDetail.Expiry_date = this.convertDate(
                 res.data[0].Expiry_date
               );
-              const s: number = endDate.getTime() - startDate.getTime();
-              this.licenseDetail.remaingAllDays = Math.floor(
-                s / (1000 * 60 * 60 * 24)
-              );
-              const decimalValue = this.calculateProgress(startDate, endDate);
-              const percentage = decimalValue * 100;
+              
+              const s: number = endDate.getTime() - currentDate.getTime();
 
-              this.licenseDetail.expiry_percentage = percentage.toFixed(0);
+              // Check if the expiry date has passed
+              if (s <= 0) {
+                this.licenseDetail.remainingAllDays = 0; // If the expiry date has passed, set remaining days to 0
+              } else {
+                this.licenseDetail.remainingAllDays = Math.floor(s / (1000 * 60 * 60 * 24)); // Otherwise, calculate remaining days
+              }
+
+              const decimalValue = this.calculateElapsedPercentage(ref, endDate, currentDate);
+              this.licenseDetail.expiry_percentage = decimalValue.toFixed(2); 
 
             } else {
               this.apiService.displayToast(
@@ -250,19 +253,22 @@ export class LicensedetailPage {
     return `${day}, ${month}, ${year}`;
   }
 
-  calculateProgress(startDate: any, endDate: any) {
-    const currentDate = new Date();
-
-    // Calculate the total duration (in milliseconds)
-    const totalTime = endDate.getTime() - startDate.getTime();
-
-    // Calculate the time elapsed from the start date to the current date
+  calculateElapsedPercentage(startDate: any, endDate: any, currentDate: any) {
+    // Check if the expiry date has already passed
+    if (currentDate >= endDate) {
+      return 100; // Return 100% if the expiry date has passed
+    }
+  
+    // Total duration from startDate to endDate
+    const totalDuration = endDate.getTime() - startDate.getTime();
+  
+    // Elapsed time from startDate to currentDate
     const elapsedTime = currentDate.getTime() - startDate.getTime();
-
-    // Calculate the percentage of progress (time elapsed / total time)
-    const progress = elapsedTime / totalTime;
-
-    // Return the progress as a percentage, bounded between 0 and 100
-    return Math.min(Math.max(progress * 100, 0), 100); // Multiply by 100 to get the percentage
+  
+    // Calculate percentage elapsed (how much of the total duration has passed)
+    const elapsedPercentage = (elapsedTime / totalDuration) * 100;
+  
+    return elapsedPercentage;
   }
+  
 }

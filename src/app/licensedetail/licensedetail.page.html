@@ -296,18 +296,21 @@
     <div class="wrapper wrapper-two">
       <div class="item expiredDate">
         <h4 class="title">Expiry Date</h4>
-        <h2 class="date">{{licenseDetail.Expiry_date}}</h2>
+        <h2 class="date" *ngIf="licenseDetail.remainingAllDays != 0">{{licenseDetail.Expiry_date}}</h2>
+        <h4 class="totalDay" *ngIf="licenseDetail.remainingAllDays == 0">License Expired</h4>
 
         <h4 class="totalRemaining">Total Remaining Days</h4>
-        <h4 class="totalDay">{{licenseDetail.remaingAllDays}} Day</h4>
+        <h4 class="totalDay" >{{licenseDetail.remainingAllDays}} Day</h4>
+        
+
 
         <div class="progress-container">
           <div class="progress-bar">
-            <div class="progress" [style.width]="licenseDetail.expiry_percentage + '%'"></div>
+            <div class="progress" [style.width]="licenseDetail.expiry_percentage  + '%'"></div>
           </div>
         </div>
 
-        <div class="btn-container">
+        <div class="btn-container" *ngIf="licenseDetail.remainingAllDays == 0">
           <ion-button class="most-used">
             <span>Renew</span>
             <ion-icon name="refresh-outline"></ion-icon>

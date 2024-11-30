@@ -16,6 +16,7 @@
         </div>
 
         <ion-button
+        form="form"
         type="submit"
         *ngIf="userProfileStatus == false"
         [disabled]="userProfileBtnStatus"
@@ -30,6 +31,7 @@
             id="userProfile"
             #userProfile="ngForm"
             (ngSubmit)="onSubmitUserProfile()"
+            id="form"
           >
             <input
               type="file"

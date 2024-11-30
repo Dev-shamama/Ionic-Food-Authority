@@ -130,7 +130,11 @@ const routes: Routes = [
         (m) => m.LicenseviewPageModule
       ),
     canActivate: [PageguardGuard],
+  },  {
+    path: 'sfoc',
+    loadChildren: () => import('./sfoc/sfoc.module').then( m => m.SfocPageModule)
   },
+
 ];
 
 @NgModule({

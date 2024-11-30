@@ -2,56 +2,26 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="dashboard-container">
-    <h2 class="section-title">Dashboard</h2>
-
-    <div class="wrapper wrapper-one">
-      <div class="quick-item quick-item-1">
-        <div class="left-side">
-          <div class="text">
-            <h4>Total Approved</h4>
-          </div>
-          <div class="icon">
-            <ion-icon name="list-circle-outline"></ion-icon>
-          </div>
-        </div>
-        <div class="right-side">
-          <h2>{{dashboardStatus.approve}}</h2>
-        </div>
-      </div>
-      <div class="quick-item quick-item-2">
-        <div class="left-side">
-          <div class="text">
-            <h4>Total Rejected</h4>
-          </div>
-          <div class="icon">
-            <ion-icon name="close-circle-outline"></ion-icon>
-          </div>
-        </div>
-        <div class="right-side">
-          <h2>{{dashboardStatus.reject}}</h2>
-        </div>
-      </div>
-      <div class="quick-item quick-item-3">
-        <div class="left-side">
-          <div class="text">
-            <h4>Total Expired</h4>
-          </div>
-          <div class="icon">
-            <ion-icon name="calendar-outline"></ion-icon>
-          </div>
-        </div>
-        <div class="right-side">
-          <h2>{{dashboardStatus.get_expired}}</h2>
-        </div>
-      </div>
-    </div>
+    <h2 class="section-title">SFOC</h2>
 
     <div class="wrapper wrapper-two">
       <div class="top-heading-content">
-        <div class="title"><h3>My License</h3></div>
+        <div></div>
         <div class="search-inputField">
-          <!-- <input type="text" placeholder="Search License" /> -->
+          <ion-searchbar
+            [debounce]="1000"
+            (ionInput)="handleInput($event)"
+          ></ion-searchbar>
+
+          <ion-list
+            [ngClass]="searchStatus ? 'show-flex ion-list-search' : 'hide ion-list-search'"
+          >
+            <ion-item *ngFor="let result of results">
+              <ion-label>{{ result }}</ion-label>
+            </ion-item>
+          </ion-list>
         </div>
+        <div></div>
       </div>
 
       <div class="license-item-content">
@@ -94,7 +64,6 @@
                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
               </button>
 
-              
               <button type="button" class="btn btn-primary">
                 <div class="text" routerLink="/licenseview/{{license.id}}">
                   License
@@ -110,6 +79,10 @@
             </div>
           </div>
         </div>
+
+        <ion-infinite-scroll  (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content loadingText="Loading..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </div>
     </div>
   </div>
