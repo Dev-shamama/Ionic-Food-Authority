@@ -53,7 +53,7 @@ export class HomePage implements OnInit {
                   return licenseItem;
                 });
                 
-                console.log(this.licenseList); // Updated licenseList with appended Status data
+                console.log("licenseList", this.licenseList); // Updated licenseList with appended Status data
                 
               } else {
                 this.apiService.displayToast(

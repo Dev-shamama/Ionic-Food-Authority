@@ -372,16 +372,7 @@ ion-content {
 
 
 .bottom-submit-button {
-    width: calc(100% + 10px);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background: #ffffff;
-    padding: 12px;
-    margin-top: 15px;
-    position: absolute;
-    left: -10px;
-  
+   margin-right: 10px;
     ion-button {
       --background: #014122;
       --background-hover: #076a3a;

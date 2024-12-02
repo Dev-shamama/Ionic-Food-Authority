@@ -54,7 +54,9 @@
                 label-placement="floating"
                 fill="solid"
                 placeholder="Enter Your CNIC"
-                (input)="cnicMasking($event)"
+                [maskito]="cardMask"
+                [maskitoElement]="maskPredicate"
+                maxlength="15"
                 required
               ></ion-input>
             </ion-item>

@@ -13,7 +13,6 @@
         <input
           type="file"
           (change)="cnicDocumentInput($event)"
-          
           id="cnic-input"
           hidden
         />
@@ -48,7 +47,6 @@
         <input
           type="file"
           (change)="tenancyDocumentInput($event)"
-          
           id="tenancy-input"
           hidden
         />
@@ -83,7 +81,6 @@
         <input
           type="file"
           (change)="certificateDocumentInput($event)"
-          
           id="certificate-input"
           hidden
         />
@@ -121,7 +118,6 @@
         <input
           type="file"
           (change)="challanDocumentInput($event)"
-          
           id="challan-input"
           hidden
         />
@@ -157,7 +153,6 @@
         <input
           type="file"
           (change)="labTestingDocumentInput($event)"
-          
           id="labTesting-input"
           hidden
         />
@@ -191,12 +186,14 @@
 
       <div class="item">
         <div class="top-heading">
-          <h2>Medical reports of the staff/food handlers (where required as per SOPs)</h2>
+          <h2>
+            Medical reports of the staff/food handlers (where required as per
+            SOPs)
+          </h2>
         </div>
         <input
           type="file"
           (change)="medicalDocumentInput($event)"
-          
           id="medical-input"
           hidden
         />
@@ -223,11 +220,17 @@
         </div>
       </div>
     </div>
-
-
-    <div class="bottom-submit-button">
-        <ion-button (click)="submitForUploadDocument()">Submit For Review <span><ion-icon
-              name="chevron-forward-outline"></ion-icon></span></ion-button>
-      </div>
   </div>
 </ion-content>
+
+<ion-footer class="bottom-footer">
+  <ion-toolbar>
+    <ion-title slot="start"></ion-title>
+    <div class="bottom-submit-button" slot="end">
+      <ion-button (click)="submitForUploadDocument()"
+        >Submit For Review
+        <span><ion-icon name="chevron-forward-outline"></ion-icon></span
+      ></ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ForgetpasswordPageRoutingModule } from './forgetpassword-routing.module';
 
 import { ForgetpasswordPage } from './forgetpassword.page';
+import { MaskitoDirective } from '@maskito/angular';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ForgetpasswordPageRoutingModule
+    ForgetpasswordPageRoutingModule,
+    MaskitoDirective
   ],
   declarations: [ForgetpasswordPage]
 })

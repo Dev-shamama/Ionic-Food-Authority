@@ -8,6 +8,7 @@ import { LicenseformPageRoutingModule } from './licenseform-routing.module';
 
 import { LicenseformPage } from './licenseform.page';
 import { HeaderPageModule } from './../component/header/header.module';
+import { MaskitoDirective } from '@maskito/angular';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderPageModule } from './../component/header/header.module';
     FormsModule,
     IonicModule,
     LicenseformPageRoutingModule,
-    HeaderPageModule
+    HeaderPageModule,
+    MaskitoDirective
   ],
   declarations: [LicenseformPage]
 })

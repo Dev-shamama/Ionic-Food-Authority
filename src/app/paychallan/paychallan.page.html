@@ -216,12 +216,20 @@
       </div>
     </div>
 
-    <div class="bottom-submit-button">
+    
+  </div>
+
+</ion-content>
+
+
+<ion-footer class="bottom-footer">
+  <ion-toolbar>
+    <ion-title slot="start"></ion-title>
+    <div class="bottom-submit-button" slot="end">
       <ion-button routerLink="/uploaddocument/{{licenceId}}"
         >Upload Document
         <span><ion-icon name="chevron-forward-outline"></ion-icon></span
       ></ion-button>
     </div>
-  </div>
-
-</ion-content>
+  </ion-toolbar>
+</ion-footer>

@@ -5,7 +5,7 @@
     <h2 class="section-title">License View</h2>
 
     <div class="wrapper wrapper-one">
-      <div id="divContents">
+      <div id="divContents" [ngStyle]="{filter: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'none' : 'blur(5px)'}">
         <div class="border-image">
         <div class="challan-content">
 
@@ -22,7 +22,7 @@
 
             <div class="logo right-logo">
               <img
-                src="http://localhost:8100/assets/img/logo-2.png"
+                src="http://localhost:8100/assets/img/bg-logo.png"
                 alt="logo"
               />
             </div>

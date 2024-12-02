@@ -15,6 +15,10 @@ export class RegisterPage  {
   fullForm: NgForm | undefined;
   uid: any;
   constructor(private apiService: ApiService, private route: Router, public MainApp: AppComponent) {}
+  
+  cardMask = this.MainApp.cardMask
+  maskPredicate = this.MainApp.maskPredicate
+
   profileLogo = '/assets/img/profile.png'
 
   dataset = {
@@ -56,31 +60,12 @@ export class RegisterPage  {
         console.log(err);
       });
 
-    // console.log(this.dataset.cnic.slice(0, 15));
   }
 
   get passwordsMatch(): boolean {
     return this.dataset.password === this.dataset.confirmPassword;
   }
 
-  cnicMasking(event: any): void {
-    const input = event.target;
-    const value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
-
-    let formattedValue = value;
-
-    if (value.length > 5 && value.length <= 12) {
-      formattedValue = `${value.slice(0, 5)}-${value.slice(5, 12)}`;
-    } else if (value.length > 12) {
-      formattedValue = `${value.slice(0, 5)}-${value.slice(
-        5,
-        12
-      )}-${value.slice(12, 13)}`;
-    }
-
-    let x: any = document.getElementById('registerCNIC');
-    x.value = formattedValue;
-  }
 
   fileInput() {
     document.getElementById('logoFileInput')?.click();

@@ -322,7 +322,7 @@
         <div class="license-view-image">
           <h4 class="title">License View</h4>
           <div class="certificate-image">
-            <div id="divContents">
+            <div id="divContents"  [ngStyle]="{filter: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'none' : 'blur(5px)'}">
               <div class="border-image">
               <div class="challan-content">
       
@@ -436,11 +436,11 @@
         </div>
 
         <div class="license-operation">
-          <ion-button class="most-used" routerLink="/licenseview">
+          <ion-button class="most-used" routerLink="/licenseview/{{id}}"  [ngStyle]="{display: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'block' : 'none'}">
             <span>View</span>
             <ion-icon name="eye-outline"></ion-icon>
           </ion-button>
-          <ion-button class="most-used" (click)="myFunc()">
+          <ion-button class="most-used" (click)="myFunc()" [ngStyle]="{display: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'block' : 'none'}">
             <span>Print</span>
             <ion-icon name="print-outline"></ion-icon>
           </ion-button>

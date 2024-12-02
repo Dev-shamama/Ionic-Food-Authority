@@ -4,8 +4,11 @@
       <img src="./assets/img/logo.png" alt="Logo" />
     </div>
     <div class="login-content">
+
       <h1>Login Your Account</h1>
       <form id="login-form" #userLogin="ngForm" (ngSubmit)="onSubmit()">
+
+
         <div class="inputField">
           <ion-item class="no-border">
             <ion-input
@@ -18,11 +21,13 @@
               label-placement="floating"
               fill="solid"
               placeholder="Enter Your CNIC"
-              (input)="cnicMasking($event)"
+              [maskito]="cardMask"
+              [maskitoElement]="maskPredicate"
+              maxlength="15"
             ></ion-input>
           </ion-item>
         </div>
-
+        
         <div class="inputField">
           <ion-item class="no-border">
             <ion-input

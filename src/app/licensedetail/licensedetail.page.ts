@@ -35,8 +35,10 @@ export class LicensedetailPage {
     Expiry_date: null,
     date: null,
     remainingAllDays: null,
-    expiry_percentage: null
+    expiry_percentage: null,
   };
+
+  statusCheck: any = '';
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -46,7 +48,6 @@ export class LicensedetailPage {
     private urlParam: ActivatedRoute
   ) {
     this.id = this.urlParam.snapshot.paramMap.get('id');
-
     this.getLicenseDetails();
   }
 
@@ -59,6 +60,22 @@ export class LicensedetailPage {
           .then(async (res: any) => {
             console.log(res);
             if (res.reponse_type == 'success') {
+              // Fetch status data
+              this.apiService
+                .getStatusAPI(e.access_token)
+                .then(async (resf: any) => {
+                  if (res.reponse_type == 'success') {
+                    resf.data.map((stat: any) => {
+                      if (stat.id == res.data[0].Status) {
+                        this.statusCheck = stat.Status_Name;
+                      }
+                    });
+                  }
+                })
+                .catch(async (err: any) => {
+                  console.log(err);
+                });
+
               let asdad = res.data[0].date.slice(0, 10);
               const ref = new Date(asdad);
               const currentDate = new Date();
@@ -67,19 +84,24 @@ export class LicensedetailPage {
               this.licenseDetail.Expiry_date = this.convertDate(
                 res.data[0].Expiry_date
               );
-              
+
               const s: number = endDate.getTime() - currentDate.getTime();
 
               // Check if the expiry date has passed
               if (s <= 0) {
                 this.licenseDetail.remainingAllDays = 0; // If the expiry date has passed, set remaining days to 0
               } else {
-                this.licenseDetail.remainingAllDays = Math.floor(s / (1000 * 60 * 60 * 24)); // Otherwise, calculate remaining days
+                this.licenseDetail.remainingAllDays = Math.floor(
+                  s / (1000 * 60 * 60 * 24)
+                ); // Otherwise, calculate remaining days
               }
 
-              const decimalValue = this.calculateElapsedPercentage(ref, endDate, currentDate);
-              this.licenseDetail.expiry_percentage = decimalValue.toFixed(2); 
-
+              const decimalValue = this.calculateElapsedPercentage(
+                ref,
+                endDate,
+                currentDate
+              );
+              this.licenseDetail.expiry_percentage = decimalValue.toFixed(2);
             } else {
               this.apiService.displayToast(
                 res.msg,
@@ -99,6 +121,30 @@ export class LicensedetailPage {
       });
   }
 
+  // getLicense() {
+  //   this.apiService.getToken().then((e: any) => {
+  //     this.apiService.getLicense(e.access_token)
+  //       .then(async (res: any) => {
+  //         console.log(res);
+
+  //         if (res.reponse_type === 'success') {
+  //           this.licenseList = res.data;
+
+  //         } else {
+  //           this.apiService.displayToast(
+  //             res.msg,
+  //             'bottom',
+  //             'toast-error',
+  //             'warning-outline',
+  //             'danger'
+  //           );
+  //         }
+  //       })
+  //       .catch(async (err: any) => {
+  //         console.log(err);
+  //       });
+  //   });
+  // }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -144,45 +190,44 @@ export class LicensedetailPage {
 
   uploadDocument() {
     this.apiService
-    .getToken()
-    .then((e: any) => {
-      this.apiService
-        .uploadLicenseDocument(
-          e.access_token,
-          {
-            cnic: this.fileObject.cnic,
-            document_of_property: this.fileObject.documents,
-            Previous_Registration: this.fileObject.previous,
-            Copy_of_Challan_form: this.fileObject.challan,
-            Lab_testing_reports: this.fileObject.lab,
-            // Medical_reports: this.,
-          },
-          this.id
-        )
-        .then(async (res: any) => {
-          this.MainApp.hideLoading();
-          if (res.reponse_type == "success") {
-      
-          } else {
-            this.apiService.displayToast(
-              res.msg,
-              'bottom',
-              'toast-error',
-              'warning-outline',
-              'danger'
-            );
-          }
-        })
-        .catch(async (err: any) => {
-          this.MainApp.hideLoading();
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .uploadLicenseDocument(
+            e.access_token,
+            {
+              cnic: this.fileObject.cnic,
+              document_of_property: this.fileObject.documents,
+              Previous_Registration: this.fileObject.previous,
+              Copy_of_Challan_form: this.fileObject.challan,
+              Lab_testing_reports: this.fileObject.lab,
+              // Medical_reports: this.,
+            },
+            this.id
+          )
+          .then(async (res: any) => {
+            this.MainApp.hideLoading();
+            if (res.reponse_type == 'success') {
+            } else {
+              this.apiService.displayToast(
+                res.msg,
+                'bottom',
+                'toast-error',
+                'warning-outline',
+                'danger'
+              );
+            }
+          })
+          .catch(async (err: any) => {
+            this.MainApp.hideLoading();
 
-          console.log(err);
-        });
-    })
-    .catch((err: any) => {
-      this.MainApp.hideLoading();
-      console.error(err);
-    });
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        this.MainApp.hideLoading();
+        console.error(err);
+      });
   }
 
   openModel(event: any, modaltype: any) {
@@ -258,17 +303,16 @@ export class LicensedetailPage {
     if (currentDate >= endDate) {
       return 100; // Return 100% if the expiry date has passed
     }
-  
+
     // Total duration from startDate to endDate
     const totalDuration = endDate.getTime() - startDate.getTime();
-  
+
     // Elapsed time from startDate to currentDate
     const elapsedTime = currentDate.getTime() - startDate.getTime();
-  
+
     // Calculate percentage elapsed (how much of the total duration has passed)
     const elapsedPercentage = (elapsedTime / totalDuration) * 100;
-  
+
     return elapsedPercentage;
   }
-  
 }

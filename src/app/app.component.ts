@@ -1,15 +1,29 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'api.service';
 import { Router } from '@angular/router';
-
+import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
 import { LoadingController } from '@ionic/angular';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  
+  readonly cardMask: MaskitoOptions = {
+    mask: [
+      ...Array(5).fill(/\d/),
+      '-',
+      ...Array(7).fill(/\d/),
+      '-',
+      ...Array(1).fill(/\d/),
+    ],
+  };
+
+  readonly maskPredicate: MaskitoElementPredicate = async (el) => (el as HTMLIonInputElement).getInputElement();
+
+
   auth = false;
   constructor(
     private apiService: ApiService,

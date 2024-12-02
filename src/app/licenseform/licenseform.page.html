@@ -111,7 +111,7 @@
   </ion-modal>
 
   <div class="dashboard-container">
-    <form #licenseForm="ngForm" (ngSubmit)="onSubmit()">
+    <form #licenseForm="ngForm" (ngSubmit)="onSubmit()" id="form">
       <h2 class="section-title">License Registration Form</h2>
 
       <div class="wrapper wrapper-one">
@@ -146,7 +146,8 @@
             <div class="inputField cnic">
               <ion-item class="no-border">
                 <ion-input [(ngModel)]="dataset.cnic" name="cnic" label="CNIC #" type="text" label-placement="floating"
-                  fill="solid" placeholder="Enter Your CNIC #" id="cnic" (input)="cnicMasking($event)"
+                  fill="solid" placeholder="Enter Your CNIC #" id="cnic" maxlength="15" [maskito]="cardMask"
+                  [maskitoElement]="maskPredicate"
                   required></ion-input>
               </ion-item>
             </div>
@@ -305,12 +306,22 @@
         </div>
       </div>
 
-      <div class="bottom-submit-button">
-        <ion-button type="submit" expand="block" (click)="setOpen(true)" [disabled]="!licenseForm.valid">
-          Save and generate Challan
-          <span><ion-icon name="chevron-forward-outline"></ion-icon></span>
-        </ion-button>
-      </div>
+       
+
+
     </form>
   </div>
 </ion-content>
+
+
+<ion-footer class="bottom-footer">
+  <ion-toolbar>
+    <ion-title slot="start"></ion-title>
+    <div class="bottom-submit-button" slot="end" >
+      <ion-button type="submit"  form="form" expand="block" (click)="setOpen(true)" [disabled]="!licenseForm.valid">
+        Save and generate Challan
+        <span><ion-icon name="chevron-forward-outline"></ion-icon></span>
+      </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>
