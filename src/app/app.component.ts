@@ -50,6 +50,30 @@ export class AppComponent {
   }
 
 
+  getlicensestatus(id: any) {
+    console.log("id", id)
+     // Fetch status data
+     this.apiService.getToken().then((e: any) => {
+     this.apiService.getStatusAPI(e.access_token).then(async (resf: any) => {
+
+      if (resf.reponse_type === 'success') {
+        for(let i of resf.data) {
+          if(i.id == id) {
+            console.log("i.Status_Name", i.Status_Name)
+           return i.Status_Name
+          }
+        }
+        return null;
+      } else{
+        return null;
+      }
+    })
+    .catch(async (err: any) => {
+      return null;
+    });
+  });
+  }
+
   checklogin(){
     this.apiService.getToken().then((res:any) => {
 

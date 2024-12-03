@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from 'api.service';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-sfoc',
   templateUrl: './sfoc.page.html',
@@ -19,7 +20,7 @@ export class SfocPage implements OnInit {
     get_expired: '',
   };
 
-  constructor(public menuBar: MenuController, private apiService: ApiService) { }
+  constructor(public menuBar: MenuController, private apiService: ApiService , private MainApp : AppComponent) { }
 
 
 
@@ -31,56 +32,26 @@ export class SfocPage implements OnInit {
   }
 
 
-  FSOGetAllLicense(page = 0) {
-    console.log('page', page)
+
+  FSOGetAllLicense() {
+
     this.apiService.getToken().then((e: any) => {
-      this.apiService.FSOGetAllLicenseAPI(e.access_token, { current_filted: page })
+      this.apiService.FSOGetAllLicenseAPI(e.access_token, { current_filted: this.licenseList.length })
         .then(async (res: any) => {
-          console.log("response", res);
           if (res.reponse_type === 'success') {
-            console.log(res.data.license.length)
-            if (res.data.license.length == 0) {
-              this.noMoreDataStatus = true
-              console.log("Not More Data");
-              return;
-            } else {
-              if (page > 0) {
-                this.licenseList = this.licenseList.concat(res.data.license)
-              } else {
-                this.licenseList = res.data.license
-              }
+            // console.log("response", res);
+            console.log("response", this.licenseList);
+            for(let i of res.data.license){
+              // console.log("status_name", this.MainApp.getlicensestatus(i.Status))
+              // var status_name =  this.MainApp.getlicensestatus(i.Status).then((e: any) => {return e;});
+              
 
-              // Fetch status data
-              this.apiService.getStatusAPI(e.access_token).then(async (resf: any) => {
-
-                if (resf.reponse_type === 'success') {
-                  // Map through licenseList and match with resf.data based on Status
-                  this.licenseList = this.licenseList.map((licenseItem: any) => {
-                    const matchingStatus = resf.data.find((statusItem: any) => statusItem.id === licenseItem.Status);
-
-                    // Append matched status information to licenseItem if a match is found
-                    if (matchingStatus) {
-                      return {
-                        ...licenseItem,
-                        Status: matchingStatus // Replace or extend as needed
-                      };
-                    }
-                    return licenseItem;
-                  });
-                } else {
-                  this.apiService.displayToast(
-                    resf.msg,
-                    'bottom',
-                    'toast-error',
-                    'warning-outline',
-                    'danger'
-                  );
-                }
-              })
-                .catch(async (err: any) => {
-                  console.log(err);
-                });
+              // i.Status = status_name
+              this.licenseList.push(i)
+              // console.log("this.licenseList", this.licenseList)
             }
+             
+      
           } else {
             this.apiService.displayToast(
               res.msg,
@@ -151,7 +122,7 @@ export class SfocPage implements OnInit {
   onIonInfinite(ev: any) {
     if (this.noMoreDataStatus == false) {
       setTimeout(() => {
-        this.FSOGetAllLicense(this.counter++);
+        this.FSOGetAllLicense();
         // this.FSOGetAllLicense();
         (ev as InfiniteScrollCustomEvent).target.complete();
       }, 1000);
