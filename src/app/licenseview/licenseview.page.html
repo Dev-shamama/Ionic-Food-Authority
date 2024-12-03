@@ -118,7 +118,7 @@
 
       
 
-      <div class="bottom-content">
+      <div class="bottom-content" [ngStyle]="{display: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'block' : 'none'}">
         <div
           class="challan-download-btn w-100 d-flex justify-content-center flex-direction-row align-items-center"
         >

@@ -29,6 +29,7 @@ ion-content {
   .top-heading-content {
     width: 100%;
     margin-bottom: 18px;
+
     .title h3 {
       margin: 0 auto;
       font-weight: 600;
@@ -46,16 +47,19 @@ ion-content {
       justify-content: space-between;
       flex-direction: column;
       margin-bottom: 10px;
+
       .top-content {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         border-bottom: 1px solid gray;
         padding-bottom: 10px;
+
         .left-side {
           h6 {
             font-weight: 600;
           }
+
           p {
             margin: 0 auto;
             font-size: 13px;
@@ -63,8 +67,7 @@ ion-content {
           }
         }
 
-        .right-side {
-        }
+        .right-side {}
       }
 
       .bottom-content {
@@ -75,15 +78,18 @@ ion-content {
           justify-content: flex-start;
           flex-direction: row;
           padding: 10px 0 4px 0;
+
           .item {
             padding: 0 10px;
             border-right: 2px solid gray;
             font-weight: 600;
             font-size: 13px;
           }
+
           .item:first-child {
             padding: 0 10px 0 0;
           }
+
           .item:last-child {
             border: none;
           }
@@ -91,13 +97,14 @@ ion-content {
           .item .license-id {
             color: #00a9d8;
           }
+
           .item .license-expiry {
             color: #d90f0f;
           }
         }
       }
 
-      .subChallan-content{
+      .subChallan-content {
         width: 100%;
         padding: 10px;
         background-color: white;
@@ -106,12 +113,22 @@ ion-content {
         table {
           width: 100%;
           border-collapse: collapse;
+
           th {
             font-weight: 600;
           }
-          th, td {
+
+          th,
+          td {
             padding: 6px;
           }
+        }
+      }
+
+      @media screen and (max-width: 460px) {
+        .subChallan-content {
+          overflow: scroll;
+
         }
       }
 
@@ -134,6 +151,7 @@ ion-content {
         .bottom-content {
           .left-side {
             flex-direction: column;
+
             .item {
               padding: 0px;
               border: none;

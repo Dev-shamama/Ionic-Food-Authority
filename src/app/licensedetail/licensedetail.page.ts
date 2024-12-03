@@ -49,6 +49,7 @@ export class LicensedetailPage {
   ) {
     this.id = this.urlParam.snapshot.paramMap.get('id');
     this.getLicenseDetails();
+    this.checkDocumentStatus();
   }
 
   getLicenseDetails() {
@@ -121,30 +122,28 @@ export class LicensedetailPage {
       });
   }
 
-  // getLicense() {
-  //   this.apiService.getToken().then((e: any) => {
-  //     this.apiService.getLicense(e.access_token)
-  //       .then(async (res: any) => {
-  //         console.log(res);
+  checkDocumentStatus() {
+    this.apiService.getToken().then((e: any) => {
+      this.apiService.checkDocumentStatusAPI(e.access_token, this.id)
+        .then(async (res: any) => {
+          console.log("document res",res);
+          if (res.reponse_type === 'success') {
 
-  //         if (res.reponse_type === 'success') {
-  //           this.licenseList = res.data;
-
-  //         } else {
-  //           this.apiService.displayToast(
-  //             res.msg,
-  //             'bottom',
-  //             'toast-error',
-  //             'warning-outline',
-  //             'danger'
-  //           );
-  //         }
-  //       })
-  //       .catch(async (err: any) => {
-  //         console.log(err);
-  //       });
-  //   });
-  // }
+          } else {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+          }
+        })
+        .catch(async (err: any) => {
+          console.log(err);
+        });
+    });
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;

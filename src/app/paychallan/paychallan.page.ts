@@ -87,6 +87,7 @@ export class PaychallanPage {
                 'warning-outline',
                 'danger'
               );
+              this.router.navigate(['/home'])
             }
           })
           .catch(async (err: any) => {

@@ -311,7 +311,7 @@
         </div>
 
         <div class="btn-container" *ngIf="licenseDetail.remainingAllDays == 0">
-          <ion-button class="most-used">
+          <ion-button class="most-used" routerLink="/update-license/{{id}}">
             <span>Renew</span>
             <ion-icon name="refresh-outline"></ion-icon>
           </ion-button>

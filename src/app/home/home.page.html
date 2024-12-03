@@ -50,11 +50,13 @@
       <div class="top-heading-content">
         <div class="title"><h3>My License</h3></div>
         <div class="search-inputField">
-          <!-- <input type="text" placeholder="Search License" /> -->
         </div>
       </div>
 
       <div class="license-item-content">
+        <div class="notFound" *ngIf="licenseList.length == 0">
+          <h3>License Not Found</h3>
+        </div>
         <div class="license-item" *ngFor="let license of licenseList">
           <div class="top-content">
             <div class="left-side">

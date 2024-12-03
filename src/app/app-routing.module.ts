@@ -130,10 +130,16 @@ const routes: Routes = [
         (m) => m.LicenseviewPageModule
       ),
     canActivate: [PageguardGuard],
-  },  {
-    path: 'sfoc',
+  },
+  {
+    path: 'sfo',
     loadChildren: () => import('./sfoc/sfoc.module').then( m => m.SfocPageModule)
   },
+  {
+    path: 'update-license/:id',
+    loadChildren: () => import('./update-license/update-license.module').then( m => m.UpdateLicensePageModule)
+  },
+
 
 ];
 

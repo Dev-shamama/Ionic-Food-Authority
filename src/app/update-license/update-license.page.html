@@ -1,0 +1,327 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-modal trigger="open-modal" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title style="padding-left: 15px">Review Form</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel(false)">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding model-content">
+        <div class="review-item-container">
+          <div class="review-item applicant">
+            <h5>Name of Applicant</h5>
+            <p>{{dataset.applicant}}</p>
+          </div>
+
+          <div class="review-item cnic">
+            <h5>CNIC #</h5>
+            <p>{{dataset.cnic}}</p>
+          </div>
+
+          <div class="review-item phone">
+            <h5>Ph #</h5>
+            <p>{{dataset.phone}}</p>
+          </div>
+
+          <div class="review-item cell">
+            <h5>Cell #</h5>
+            <p>{{dataset.cell}}</p>
+          </div>
+
+          <div class="review-item food-name">
+            <h5>Name of Food Business</h5>
+            <p>{{dataset.foodBusiness}}</p>
+          </div>
+
+          <div class="review-item nature">
+            <h5>Nature of Business</h5>
+            <div *ngFor="let nature of natureList">
+              <p *ngIf="nature.id == dataset.natureBusiness">{{nature.Nature_of_Business_Title}}</p>
+            </div>
+          </div>
+
+          <div class="review-item category">
+            <h5>Category</h5>
+            <div *ngFor="let category of categoryList">
+              <p *ngIf="category.id == dataset.category">{{category.Category_Title}}</p>
+            </div>
+          </div>
+
+          <div class="review-item district">
+            <h5>District</h5>
+            <div *ngFor="let district of districList">
+              <p *ngIf="district.id == dataset.district">{{district.District_Name}}</p>
+            </div>
+          </div>
+
+          <div class="review-item secp">
+            <h5>NTN</h5>
+            <p>{{dataset.ntn}}</p>
+          </div>
+
+          <div class="review-item ntn">
+            <h5>SECP</h5>
+            <p>{{dataset.secp}}</p>
+          </div>
+
+          <div class="review-item srb">
+            <h5>SRB</h5>
+            <p>{{dataset.srb}}</p>
+          </div>
+
+          <div class="review-item tax">
+            <h5>SALES TAX</h5>
+            <p>{{dataset.salesTax}}</p>
+          </div>
+
+          <div class="review-item area">
+            <h5>Area Measurement (sq. ft)</h5>
+            <p>{{dataset.areaMeasurement}}</p>
+          </div>
+
+          <div class="review-item address">
+            <h5>Address</h5>
+            <p>{{dataset.address}}</p>
+          </div>
+
+          <div class="review-item sureAnswer">
+            <h5>Already Registered with Food Authority</h5>
+            <p>{{dataset.sureAnswer}}</p>
+          </div>
+
+          <div class="review-item registrationName">
+            <h5>Registration in the name of</h5>
+            <p>{{dataset.registrationName}}</p>
+          </div>
+         
+        </div>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-title slot="start"></ion-title>
+          <ion-button slot="end" (click)="FormOnSubmitted()" class="most-used" style="padding: 20px">Submit</ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
+  <div class="dashboard-container">
+    <form #licenseForm="ngForm" (ngSubmit)="onSubmit()" id="form">
+      <h2 class="section-title">License Renew Form</h2>
+
+      <div class="wrapper wrapper-one">
+        <div class="top-content-header">
+          <div class="logo-one">
+            <ion-img src="./assets/img/logo-1.png"
+              alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+          </div>
+
+          <div class="main-heading">
+            <h2>SINDH FOOD AUTHORITY</h2>
+            <p>APPLICATION FOR LICENSE OF FOOD BUSINESS</p>
+            <p>UNDER SECTION 19 OF SINDH FOOD AUTHORITY ACT 2016</p>
+          </div>
+
+          <div class="logo-two">
+            <ion-img src="./assets/img/logo-2.png"
+              alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+          </div>
+        </div>
+
+        <div class="main-content">
+          <div id="license_form">
+            <div class="inputField applicant">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.applicant" type="text" name="applicant" label="Name of Applicant"
+                  label-placement="floating" fill="solid" placeholder="Enter Your Name of Applicant"
+                  required></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField cnic">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.cnic" name="cnic" label="CNIC #" type="text" label-placement="floating"
+                  fill="solid" placeholder="Enter Your CNIC #" id="cnic" maxlength="15" [maskito]="cardMask"
+                  [maskitoElement]="maskPredicate"
+                  required></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField phone">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.phone" name="phone" required type="number" label="Ph #"
+                  label-placement="floating" fill="solid" placeholder="Enter Phone #"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField cell">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.cell" name="cell" required type="number" label="Cell #"
+                  label-placement="floating" fill="solid" placeholder="Enter Your Cell No"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField food-name">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.foodBusiness" name="foodBusiness" type="text" required
+                  label="Name of Food Business" label-placement="floating" fill="solid"
+                  placeholder="Enter Your Name of Food Business"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField nature">
+
+              <ion-select [(ngModel)]="dataset.natureBusiness" (input)="autoSRB()" name="natureBusiness" required label="Nature of Business"
+                interface="popover" fill="solid" label-placement="floating" fill="solid" >
+                <ion-select-option  *ngFor="let nature of natureList" value="{{ nature.id }}">{{ nature.Nature_of_Business_Title }}</ion-select-option>
+              </ion-select>
+
+
+            </div>
+
+            <div class="inputField category">
+
+
+              <ion-select [(ngModel)]="dataset.category" name="category" required label="Category" interface="popover"
+                fill="solid" label-placement="floating" fill="solid" >
+                <ion-select-option  *ngFor="let category of categoryList" value="{{ category.id }}">{{ category.Category_Title }}</ion-select-option>
+              </ion-select>
+
+            </div>
+
+            <div class="inputField district">
+              <ion-select [(ngModel)]="dataset.district" name="district" required label="District" interface="popover"
+                fill="solid" label-placement="floating" fill="solid">
+                <ion-select-option *ngFor="let distric of districList" value="{{ distric.id }}">{{ distric.District_Name }}</ion-select-option>
+
+              </ion-select>
+
+            </div>
+
+            <div class="inputField secp">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.secp" type="number" name="secp" required label="SECP"
+                  label-placement="floating" fill="solid" placeholder="Enter Your SECP"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField ntn">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.ntn" name="ntn" type="number" required label="NTN"
+                  label-placement="floating" fill="solid" placeholder="Enter NTN"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField srb">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.srb" name="srb" type="number" required label="SRB"
+                  label-placement="floating" fill="solid" placeholder="Auto SRB" readonly></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField tax">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.salesTax" name="salesTax" type="number" required label="SALES TAX"
+                  label-placement="floating" fill="solid" placeholder="Enter TAX"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField area">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="number" (input)="autoSRB()" required
+                  label="Area Measurement (sq. ft)" label-placement="floating" fill="solid"
+                  placeholder="Enter Your Area Measurement (sq. ft)"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="inputField address">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.address" type="text" name="address" required label="Address"
+                  label-placement="floating" fill="solid" placeholder="Enter Your Address"></ion-input>
+              </ion-item>
+            </div>
+          </div>
+
+          <div class="check-sure-question">
+            <p>Already Registered with Food Authority</p>
+            <div class="checkbox-content">
+              <ion-radio-group [(ngModel)]="dataset.sureAnswer" name="sureAnswer" required>
+                <div class="checkbox-btn">
+                  <ion-radio value="Yes" aria-label="Custom checkbox"></ion-radio>
+                  Yes
+                </div>
+                <div class="checkbox-btn">
+                  <ion-radio value="No" aria-label="Custom checkbox that is checked"></ion-radio>
+                  No
+                </div>
+              </ion-radio-group>
+            </div>
+          </div>
+
+          <div class="date-of-registration">
+            <div class="left-side">
+              <p>If yes date of Registration</p>
+            </div>
+            <div class="right-side">
+              <p>If registered with any other</p>
+              <p>Authority/organization,</p>
+              <p>attach the copy of certificate.</p>
+            </div>
+          </div>
+
+          <div id="license_form_bottom">
+            <div class="inputField registrationName">
+              <ion-item class="no-border">
+                <ion-input [(ngModel)]="dataset.registrationName" name="registrationName" type="text" required
+                  label="Registration in the name of" label-placement="floating" fill="solid"
+                  placeholder="Enter Your Registration in the name of"></ion-input>
+              </ion-item>
+            </div>
+
+    
+          </div>
+
+          <div class="restaurant-section">
+            <p>
+              Any other Restaurant / food business owned by the applicant, if
+              yes details thereof:
+            </p>
+          </div>
+
+          <div class="declaration-section">
+            <h5>Declaration</h5>
+            <p>
+              I hereby undertake that the information provided in this
+              registration form is correct and no material information and date
+              is concealed intentionally from the Authority. I request to kindly
+              register my food business and issue license as stipulated under
+              section 19 of the Sindh Food Authority Act 2016.
+            </p>
+          </div>
+        </div>
+      </div>
+
+       
+
+
+    </form>
+  </div>
+</ion-content>
+
+
+<ion-footer class="bottom-footer">
+  <ion-toolbar>
+    <ion-title slot="start"></ion-title>
+    <div class="bottom-submit-button" slot="end" >
+      <ion-button type="submit"  form="form" expand="block" (click)="setOpen(true)" [disabled]="!licenseForm.valid">
+        Save and generate Challan
+        <span><ion-icon name="chevron-forward-outline"></ion-icon></span>
+      </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

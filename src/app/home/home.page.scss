@@ -162,6 +162,13 @@ ion-content {
   }
 
   .license-item-content {
+
+    .notFound {
+      text-align: center; 
+      h3 {
+        margin: 0;
+      }
+    }
     .license-item {
       padding: 20px;
       border-radius: 18px;

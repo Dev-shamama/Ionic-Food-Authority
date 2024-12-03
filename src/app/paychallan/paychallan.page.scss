@@ -258,8 +258,6 @@ ion-content {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-
         .inputField {
           width: 100%;
           display: flex;

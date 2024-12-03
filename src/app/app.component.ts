@@ -10,6 +10,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class AppComponent {
 
+  designation: any = false; 
   
   readonly cardMask: MaskitoOptions = {
     mask: [
@@ -32,7 +33,7 @@ export class AppComponent {
   ) {
 
     this.checklogin();
-
+    this.getProfile()
 
   }
 
@@ -77,7 +78,28 @@ export class AppComponent {
     this.route.navigate(['/login']);
   }
 
-
-  
-
+  getProfile() {
+    this.apiService.getToken().then((e: any) => {
+      this.apiService
+        .getProfileAPI(e.access_token)
+        .then(async (res: any) => {
+          if (res.reponse_type == 'success') {
+            if(res.data[0].designation) {
+              this.designation = res.data[0].designation || "";
+            }
+          } else {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+          }
+        })
+        .catch(async (err: any) => {
+          console.log(err);
+        });
+    });
+  }
 }

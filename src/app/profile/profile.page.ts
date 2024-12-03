@@ -73,6 +73,7 @@ export class ProfilePage {
       this.apiService
         .getProfileAPI(e.access_token)
         .then(async (res: any) => {
+          console.log(res)
           if (res.reponse_type == 'success') {
             this.profileDetail = res.data[0];
             this.profileDataset.name = res.data[0].Name;

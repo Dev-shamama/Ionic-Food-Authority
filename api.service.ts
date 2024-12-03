@@ -139,7 +139,6 @@ export class ApiService {
       fetch(`${this.localhost}/check-uid/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log('user id check: ', data);
           if (data.reponse_type == 'success') {
             resolve(data);
           } else {
@@ -165,7 +164,6 @@ export class ApiService {
       fetch(`${this.localhost}/send-otp/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log('user id check: ', data);
           if (data.reponse_type == 'success') {
             resolve(data);
           } else {
@@ -314,7 +312,6 @@ export class ApiService {
       fetch(`${this.localhost}/login/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data);
           if (data.success) {
             var access_token = data.success.token.access;
             var refrash_token = data.success.token.refresh;
@@ -566,7 +563,6 @@ export class ApiService {
       fetch(`${this.localhost}/get-nature/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data)
           if (data.reponse_type) {
             resolve(data);
           } else {
@@ -598,7 +594,6 @@ export class ApiService {
       fetch(`${this.localhost}/get-distric/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data)
           if (data.reponse_type) {
             resolve(data);
           } else {
@@ -631,7 +626,6 @@ export class ApiService {
       fetch(`${this.localhost}/get-srb/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data)
           if (data.reponse_type) {
             resolve(data);
           } else {
@@ -664,7 +658,6 @@ export class ApiService {
       fetch(`${this.localhost}/add-license/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data)
           if (data.reponse_type) {
             resolve(data);
           } else {
@@ -684,6 +677,65 @@ export class ApiService {
     });
   }
 
+  async UpdateLicenseAPI(access_token: string, data: any, id: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/update-license/${id}/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
+
+  async checkDocumentStatusAPI(access_token: string, id: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`${this.localhost}/check-document-status/${id}/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+  
+
   async getAllLicenseChallan(access_token: string, id: any): Promise<any> {
     return new Promise<any>((resolve) => {
       const options = {
@@ -696,7 +748,6 @@ export class ApiService {
       fetch(`${this.localhost}/License-challan/${id}/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data)
           if (data.reponse_type) {
             resolve(data);
           } else {
@@ -721,7 +772,6 @@ export class ApiService {
       fetch(`${this.localhost}/get-license-fee/`, options)
         .then(async (response) => {
           const data = await response.json();
-          console.log(data)
           if (data.reponse_type) {
             resolve(data);
           } else {
@@ -895,6 +945,31 @@ export class ApiService {
         });
     });
   }
+
+
+    async FSOGetAllLicenseAPI(access_token: string, data: any): Promise<any> {
+      return new Promise<any>((resolve) => {
+        const options = {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        };
+        fetch(`${this.localhost}/fso-get-all-license/`, options)
+          .then(async (response) => {
+            const data = await response.json();
+            resolve(data);
+          })
+          .catch((e) => {
+            resolve(e);
+          });
+      });
+    }
+
+    
+
 
   // token handel
   async saveTokens(access: string, refresh: string): Promise<void> {
