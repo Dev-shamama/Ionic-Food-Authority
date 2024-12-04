@@ -48,7 +48,9 @@
 
     <div class="wrapper wrapper-two">
       <div class="top-heading-content">
-        <div class="title"><h3>My License</h3></div>
+        <div class="title">
+          <h3>My License</h3>
+        </div>
         <div class="search-inputField">
         </div>
       </div>
@@ -75,35 +77,35 @@
             </div>
             <div class="right-side">
               <h5>License Status</h5>
-              <h4 class="approved">{{license.Status.Status_Name}}</h4>
+              <h4 class="approved"
+                [ngStyle]="{ 'color': license.Status === 'Reject' || license.Status === 'Expired'? 'red' : 'green' }">
+                {{license.Status}}</h4>
             </div>
           </div>
 
           <div class="bottom-content">
             <div class="left-side">
-              <span class="item"
-                >Expiry Date :
-                <span class="license-expiry"
-                  >{{license.Expiry_date}}</span
-                ></span
-              >
+              <span class="item">Expiry Date :
+                <span class="license-expiry">{{license.Expiry_date}}</span></span>
             </div>
             <div class="right-side">
-              <button type="button" class="btn btn-primary">
+
+              <button type="button" class="btn btn-primary renew-btn" *ngIf="license.Status !== 'Renew'">
+                <div class="text" routerLink="/update-license/{{license.id}}">
+                  Renew
+                </div>
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+              </button>
+
+              <button type="button" class="btn btn-primary challan-btn">
                 <div class="text" routerLink="/paychallan/{{license.id}}">
                   Challan
                 </div>
                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
               </button>
 
-              
-              <button type="button" class="btn btn-primary">
-                <div class="text" routerLink="/licenseview/{{license.id}}">
-                  License
-                </div>
-                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-              </button>
-              <button type="button" class="btn btn-secondary">
+
+              <button type="button" class="btn btn-secondary view-btn">
                 <div class="text" routerLink="/licensedetail/{{license.id}}">
                   View
                 </div>

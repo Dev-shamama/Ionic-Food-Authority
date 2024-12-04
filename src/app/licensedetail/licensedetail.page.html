@@ -6,72 +6,42 @@
       <div class="modal-header">
         <div class="modal-logo">
           <span class="logo-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="25"
-              height="25"
-              viewBox="0 0 512 419.116"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25"
+              viewBox="0 0 512 419.116">
               <defs>
                 <clipPath id="clip-folder-new">
                   <rect width="512" height="419.116"></rect>
                 </clipPath>
               </defs>
               <g id="folder-new" clip-path="url(#clip-folder-new)">
-                <path
-                  id="Union_1"
-                  data-name="Union 1"
+                <path id="Union_1" data-name="Union 1"
                   d="M16.991,419.116A16.989,16.989,0,0,1,0,402.125V16.991A16.989,16.989,0,0,1,16.991,0H146.124a17,17,0,0,1,10.342,3.513L227.217,57.77H437.805A16.989,16.989,0,0,1,454.8,74.761v53.244h40.213A16.992,16.992,0,0,1,511.6,148.657L454.966,405.222a17,17,0,0,1-16.6,13.332H410.053v.562ZM63.06,384.573H424.722L473.86,161.988H112.2Z"
-                  fill="var(--c-action-primary)"
-                  stroke=""
-                  stroke-width="1"
-                ></path>
+                  fill="var(--c-action-primary)" stroke="" stroke-width="1"></path>
               </g>
             </svg>
           </span>
         </div>
         <button class="btn-close" (click)="closeModel()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path fill="none" d="M0 0h24v24H0V0z"></path>
             <path
               d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-              fill="var(--c-text-secondary)"
-            ></path>
+              fill="var(--c-text-secondary)"></path>
           </svg>
         </button>
       </div>
       <div class="modal-body">
         <p class="modal-title">Upload a file</p>
         <p class="modal-description">Attach the file below</p>
-        <input
-          type="file"
-          hidden
-          (change)="onFileSelected($event)"
-          #fileInput
-        />
+        <input type="file" hidden (change)="onFileSelected($event)" #fileInput />
         <button class="upload-area" (click)="fileInput.click()">
           <span class="upload-area-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="35"
-              height="35"
-              viewBox="0 0 340.531 419.116"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35" height="35"
+              viewBox="0 0 340.531 419.116">
               <g id="files-new" clip-path="url(#clip-files-new)">
-                <path
-                  id="Union_2"
-                  data-name="Union 2"
+                <path id="Union_2" data-name="Union 2"
                   d="M-2904.708-8.885A39.292,39.292,0,0,1-2944-48.177V-388.708A39.292,39.292,0,0,1-2904.708-428h209.558a13.1,13.1,0,0,1,9.3,3.8l78.584,78.584a13.1,13.1,0,0,1,3.8,9.3V-48.177a39.292,39.292,0,0,1-39.292,39.292Zm-13.1-379.823V-48.177a13.1,13.1,0,0,0,13.1,13.1h261.947a13.1,13.1,0,0,0,13.1-13.1V-323.221h-52.39a26.2,26.2,0,0,1-26.194-26.195v-52.39h-196.46A13.1,13.1,0,0,0-2917.805-388.708Zm146.5,241.621a14.269,14.269,0,0,1-7.883-12.758v-19.113h-68.841c-7.869,0-7.87-47.619,0-47.619h68.842v-18.8a14.271,14.271,0,0,1,7.882-12.758,14.239,14.239,0,0,1,14.925,1.354l57.019,42.764c.242.185.328.485.555.671a13.9,13.9,0,0,1,2.751,3.292,14.57,14.57,0,0,1,.984,1.454,14.114,14.114,0,0,1,1.411,5.987,14.006,14.006,0,0,1-1.411,5.973,14.653,14.653,0,0,1-.984,1.468,13.9,13.9,0,0,1-2.751,3.293c-.228.2-.313.485-.555.671l-57.019,42.764a14.26,14.26,0,0,1-8.558,2.847A14.326,14.326,0,0,1-2771.3-147.087Z"
-                  transform="translate(2944 428)"
-                  fill="var(--c-action-primary)"
-                ></path>
+                  transform="translate(2944 428)" fill="var(--c-action-primary)"></path>
               </g>
             </svg>
           </span>
@@ -91,40 +61,9 @@
     <div class="wrapper wrapper-one">
       <div class="item checklist">
         <h5>CHECKLIST</h5>
-
         <div class="checklist-content">
-          <div class="item-checklist {{activeCnic}}">
-            <div class="left-side">
-              <div class="icon">
-                <div *ngIf="activeCnic === 'active'">
-                  <ion-icon name="checkmark-circle-outline"></ion-icon>
-                </div>
-                <div *ngIf="activeCnic === ''">
-                  <ion-icon name="cloud-upload-outline"></ion-icon>
-                </div>
-              </div>
-              <div class="text">
-                <p>Copy of CNIC.</p>
-              </div>
-            </div>
-            <div class="right-side">
-              <ion-button
-                type="button"
-                (click)="openModel($event ,'cnic')"
-                aria-valuemax="cnic"
-                id="cnic"
-                value="cnic"
-              >
-                <ion-icon name="cloud-upload-outline"></ion-icon>
-                <span>
-                  <div *ngIf="activeCnic === 'active'">Uploaded</div>
-                  <div *ngIf="activeCnic === ''">Upload</div>
-                </span>
-              </ion-button>
-            </div>
-          </div>
 
-          <div class="item-checklist {{activeChallan}}">
+          <div class="item-checklist {{activeChallan}} {{licenseDetailDocument.Copy_of_Challan_form == '' ? '': 'active'}} ">
             <div class="left-side">
               <div class="icon">
                 <div *ngIf="activeChallan === 'active'">
@@ -139,21 +78,41 @@
               </div>
             </div>
             <div class="right-side">
-              <ion-button
-                (click)="openModel($event ,'challan')"
-                aria-valuemax="challan"
-                id="challan"
-                value="challan"
-                ><ion-icon name="cloud-upload-outline"></ion-icon>
-                <span
-                  ><div *ngIf="activeChallan === 'active'">Uploaded</div>
-                  <div *ngIf="activeChallan === ''">Upload</div></span
-                ></ion-button
-              >
+              <ion-button (click)="openModel($event ,'challan')" aria-valuemax="challan" id="challan"
+                value="challan"><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>
+                  <div *ngIf="activeChallan === 'active'">Uploaded</div>
+                  <div *ngIf="activeChallan === ''">Upload</div>
+                </span></ion-button>
             </div>
           </div>
 
-          <div class="item-checklist {{activeDocuments}}">
+          <div class="item-checklist {{activeCnic}} {{licenseDetailDocument.Upload_Copy_of_CNIC == '' ? '': 'active'}}">
+            <div class="left-side">
+              <div class="icon">
+                <div *ngIf="activeCnic === 'active'">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                </div>
+                <div *ngIf="activeCnic === ''">
+                  <ion-icon name="cloud-upload-outline"></ion-icon>
+                </div>
+              </div>
+              <div class="text">
+                <p>Copy of CNIC.</p>
+              </div>
+            </div>
+            <div class="right-side">
+              <ion-button type="button" (click)="openModel($event ,'cnic')" aria-valuemax="cnic" id="cnic" value="cnic">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>
+                  <div *ngIf="activeCnic === 'active'">Uploaded</div>
+                  <div *ngIf="activeCnic === ''">Upload</div>
+                </span>
+              </ion-button>
+            </div>
+          </div>
+
+          <div class="item-checklist {{activeDocuments}} {{licenseDetailDocument.Documents_of_property_or_tenancy == '' ? '': 'active'}} ">
             <div class="left-side">
               <div class="icon">
                 <div *ngIf="activeDocuments === 'active'">
@@ -171,21 +130,17 @@
               </div>
             </div>
             <div class="right-side">
-              <ion-button
-                (click)="openModel($event ,'documents')"
-                aria-valuemax="documents"
-                id="documents"
-                value="documents"
-                ><ion-icon name="cloud-upload-outline"></ion-icon>
-                <span
-                  ><div *ngIf="activeDocuments === 'active'">Uploaded</div>
-                  <div *ngIf="activeDocuments === ''">Upload</div></span
-                ></ion-button
-              >
+              <ion-button (click)="openModel($event ,'documents')" aria-valuemax="documents" id="documents"
+                value="documents"><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>
+                  <div *ngIf="activeDocuments === 'active'">Uploaded</div>
+                  <div *ngIf="activeDocuments === ''">Upload</div>
+                </span></ion-button>
             </div>
           </div>
 
-          <div class="item-checklist {{activePrevious}}">
+          <div
+            class="item-checklist {{activePrevious}} {{licenseDetailDocument.Previous_Registration_Certificate == '' ? '': 'active'}} ">
             <div class="left-side">
               <div class="icon">
                 <div *ngIf="activePrevious === 'active'">
@@ -202,22 +157,16 @@
               </div>
             </div>
             <div class="right-side">
-              <ion-button
-                type="button"
-                (click)="openModel($event ,'previous')"
-                aria-valuemax="previous"
-                id="previous"
-                value="previous"
-                ><ion-icon name="cloud-upload-outline"></ion-icon>
+              <ion-button type="button" (click)="openModel($event ,'previous')" aria-valuemax="previous" id="previous"
+                value="previous"><ion-icon name="cloud-upload-outline"></ion-icon>
                 <span>
                   <div *ngIf="activePrevious === 'active'">Uploaded</div>
-                  <div *ngIf="activePrevious === ''">Upload</div></span
-                ></ion-button
-              >
+                  <div *ngIf="activePrevious === ''">Upload</div>
+                </span></ion-button>
             </div>
           </div>
 
-          <div class="item-checklist {{activeLab}}">
+          <div class="item-checklist {{activeLab}} {{licenseDetailDocument.Lab_testing_reports == '' ? '': 'active'}}">
             <div class="left-side">
               <div class="icon">
                 <div *ngIf="activeLab === 'active'">
@@ -232,30 +181,47 @@
               </div>
             </div>
             <div class="right-side">
-              <ion-button
-                type="button"
-                (click)="openModel($event ,'lab')"
-                aria-valuemax="lab"
-                id="lab"
-                value="lab"
-                ><ion-icon name="cloud-upload-outline"></ion-icon>
+              <ion-button type="button" (click)="openModel($event ,'lab')" aria-valuemax="lab" id="lab"
+                value="lab"><ion-icon name="cloud-upload-outline"></ion-icon>
                 <span>
                   <div *ngIf="activeLab === 'active'">Uploaded</div>
-                  <div *ngIf="activeLab === ''">Upload</div></span
-                ></ion-button
-              >
+                  <div *ngIf="activeLab === ''">Upload</div>
+                </span></ion-button>
             </div>
           </div>
+
+          <div class="item-checklist {{activeMedical}} {{licenseDetailDocument.Medical_reports == '' ? '': 'active'}}">
+            <div class="left-side">
+              <div class="icon">
+                <div *ngIf="activeMedical === 'active'">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                </div>
+                <div *ngIf="activeMedical === ''">
+                  <ion-icon name="cloud-upload-outline"></ion-icon>
+                </div>
+              </div>
+              <div class="text">
+                <p>Medical</p>
+              </div>
+            </div>
+            <div class="right-side">
+              <ion-button type="button" (click)="openModel($event ,'medical')" aria-valuemax="medical" id="medical"
+                value="medical"><ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>
+                  <div *ngIf="activeMedical === 'active'">Uploaded</div>
+                  <div *ngIf="activeMedical === ''">Upload</div>
+                </span></ion-button>
+            </div>
+          </div>
+
+
         </div>
 
-        <div
-          class="s"
-          style="display: flex; justify-content: center; align-items: center"
-        >
+        <div class="s" style="display: flex; justify-content: center; align-items: center">
           <div></div>
 
-          <ion-button  class="most-used" (click)="uploadDocument()" type="button"
-            ><ion-icon name="save-outline"></ion-icon>
+          <ion-button class="most-used" (click)="uploadDocument()" type="button"><ion-icon
+              name="save-outline"></ion-icon>
             <span style="margin-left: 5px">Save</span>
           </ion-button>
         </div>
@@ -265,12 +231,12 @@
 
         <div class="completeIn-content">
           <h5 class="totalDay">Total Day 14</h5>
-          <h1 class="daysLeft">12</h1>
+          <h1 class="daysLeft">{{licenseDetail.past_days}}</h1>
           <h3 class="daysAreLeft">Days Are Left</h3>
 
           <div class="progress-container">
             <div class="progress-bar">
-              <div class="progress" style="width: 75%;"></div>
+              <div class="progress" [style.width]="licenseDetail.past_days_percentage + '%'"></div>
             </div>
           </div>
         </div>
@@ -279,16 +245,11 @@
         <h5>Document Status</h5>
 
         <div class="documentStatus-content">
-          <h4>1 Uploaded</h4>
+          <h4>{{licenseDetail.upload_docs_no}} Uploaded</h4>
           <p>Progress ratio</p>
 
-          <div
-            role="progressbar"
-            aria-valuenow="65"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style="--value: 65"
-          ></div>
+          <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--value: 0"
+            id="progressBar"></div>
         </div>
       </div>
     </div>
@@ -300,8 +261,8 @@
         <h4 class="totalDay" *ngIf="licenseDetail.remainingAllDays == 0">License Expired</h4>
 
         <h4 class="totalRemaining">Total Remaining Days</h4>
-        <h4 class="totalDay" >{{licenseDetail.remainingAllDays}} Day</h4>
-        
+        <h4 class="totalDay">{{licenseDetail.remainingAllDays}} Day</h4>
+
 
 
         <div class="progress-container">
@@ -310,7 +271,7 @@
           </div>
         </div>
 
-        <div class="btn-container" *ngIf="licenseDetail.remainingAllDays == 0">
+        <div class="btn-container" *ngIf="licenseDetail.remainingAllDays == 0 && statusCheck != 'Renew'">
           <ion-button class="most-used" routerLink="/update-license/{{id}}">
             <span>Renew</span>
             <ion-icon name="refresh-outline"></ion-icon>
@@ -322,137 +283,130 @@
         <div class="license-view-image">
           <h4 class="title">License View</h4>
           <div class="certificate-image">
-            <div id="divContents"  [ngStyle]="{filter: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'none' : 'blur(5px)'}">
+            <div id="divContents"
+              [ngStyle]="{filter: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'none' : 'blur(5px)'}">
               <div class="border-image">
-              <div class="challan-content">
-      
-                <div class="top-logo">
-                  <div class="logo left-logo">
-                    <img src="http://localhost:8100/assets/img/logo-1.png" alt="logo" />
+                <div class="challan-content">
+
+                  <div class="top-logo">
+                    <div class="logo left-logo">
+                      <img src="http://localhost:8100/assets/img/logo-1.png" alt="logo" />
+                    </div>
+
+                    <div class="heading center-text">
+                      <h2 class="heading">SINDH FOOD AUTHORITY</h2>
+                      <h2 class="subHeading">GOVERNMENT OF SINDH</h2>
+                    </div>
+
+
+                    <div class="logo right-logo">
+                      <img src="http://localhost:8100/assets/img/logo-2.png" alt="logo" />
+                    </div>
                   </div>
-      
-                  <div class="heading center-text">
-                    <h2 class="heading">SINDH FOOD AUTHORITY</h2>
-                    <h2 class="subHeading">GOVERNMENT OF SINDH</h2>
+
+                  <h2 class="foodBusinessHeading">FOOD BUSINESS LICENSE</h2>
+
+                  <div class="barCode">
+                    <img src="http://localhost:8100/assets/img/barcode.png" alt="logo" />
                   </div>
-      
-      
-                  <div class="logo right-logo">
-                    <img
-                      src="http://localhost:8100/assets/img/logo-2.png"
-                      alt="logo"
-                    />
+
+
+                  <div class="content">
+
+
+
+                    <div class="form">
+                      <div class="inputField mr-mrs">
+                        <label for="mr-mrs">License Number</label>
+                        <input type="text" />
+                      </div>
+
+                      <div class="inputField firm">
+                        <label for="firm">District</label>
+                        <input type="text" />
+                      </div>
+
+                      <div class="inputField category">
+                        <label for="firm">Owner's Name</label>
+                        <input type="text" />
+                      </div>
+
+                      <div class="inputField address">
+                        <label for="firm">CNIC Number</label>
+                        <input type="text" />
+                      </div>
+
+                      <div class="inputField cnic">
+                        <label for="firm">Business Name</label>
+                        <input type="text" />
+                      </div>
+
+                      <div class="inputField cnic">
+                        <label for="firm">Nature of Business</label>
+                        <input type="text" />
+                      </div>
+
+                      <div class="inputField cnic">
+                        <label for="firm">Address</label>
+                        <input type="text" />
+                      </div>
+
+                      <div class="inputField cnic">
+                        <label for="firm">This License is valid for</label>
+                        <input type="text" />
+                      </div>
+                    </div>
+
+                    <p class="important-message-license-view">
+                      This license is issued under section 19(i) of Sindh Food Authority Act 2016. This license can be
+                      canceled or suspended any time as per section 20(2) of Sindh Food Authority Act 2016, if the Food
+                      Business Operator fails to comply with the improvement notices.
+                    </p>
+
+
+                    <div class="bottom-stamp">
+                      <div class="qrCode">
+                        <img src="http://localhost:8100/assets/img/qrcode.webp" alt="logo" />
+                      </div>
+                      <div class="goldenStamp">
+                        <img src="http://localhost:8100/assets/img/goldenstamp.webp" alt="logo" />
+                      </div>
+                      <div class="ownerName">
+                        <h3>Director General</h3>
+                        <h3>SINDH FOOD AUTHORITY</h3>
+                      </div>
+                    </div>
+
+
                   </div>
+
+
                 </div>
-      
-                <h2 class="foodBusinessHeading">FOOD BUSINESS LICENSE</h2>
-      
-                <div class="barCode">
-                  <img
-                  src="http://localhost:8100/assets/img/barcode.png"
-                  alt="logo"
-                />
-                </div>
-      
-      
-                <div class="content">
-      
-             
-      
-                  <div class="form">
-                    <div class="inputField mr-mrs">
-                      <label for="mr-mrs">License Number</label>
-                      <input type="text" />
-                    </div>
-      
-                    <div class="inputField firm">
-                      <label for="firm">District</label>
-                      <input type="text" />
-                    </div>
-      
-                    <div class="inputField category">
-                      <label for="firm">Owner's Name</label>
-                      <input type="text" />
-                    </div>
-      
-                    <div class="inputField address">
-                      <label for="firm">CNIC Number</label>
-                      <input type="text" />
-                    </div>
-      
-                    <div class="inputField cnic">
-                      <label for="firm">Business Name</label>
-                      <input type="text" />
-                    </div>
-      
-                    <div class="inputField cnic">
-                      <label for="firm">Nature of Business</label>
-                      <input type="text" />
-                    </div>
-      
-                    <div class="inputField cnic">
-                      <label for="firm">Address</label>
-                      <input type="text" />
-                    </div>
-      
-                    <div class="inputField cnic">
-                      <label for="firm">This License is valid for</label>
-                      <input type="text" />
-                    </div>
-                  </div>
-      
-                  <p class="important-message-license-view">
-                    This license is issued under section 19(i) of Sindh Food Authority Act 2016. This license can be canceled or suspended any time as per section 20(2) of Sindh Food Authority Act 2016, if the Food Business Operator fails to comply with the improvement notices.
-                  </p>
-      
-      
-                  <div class="bottom-stamp">
-                    <div class="qrCode">
-                      <img
-                        src="http://localhost:8100/assets/img/qrcode.webp"
-                        alt="logo"
-                      />
-                    </div>
-                    <div class="goldenStamp">
-                      <img
-                        src="http://localhost:8100/assets/img/goldenstamp.webp"
-                        alt="logo"
-                      />
-                    </div>
-                    <div class="ownerName">
-                      <h3>Director General</h3>
-                      <h3>SINDH FOOD AUTHORITY</h3>
-                    </div>
-                  </div>
-      
-                
-                </div>
-      
-      
               </div>
-            </div>
             </div>
           </div>
         </div>
 
         <div class="license-operation">
-          <ion-button class="most-used" routerLink="/licenseview/{{id}}"  [ngStyle]="{display: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'block' : 'none'}">
+          <ion-button class="most-used" routerLink="/licenseview/{{id}}"
+            [ngStyle]="{display: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'block' : 'none'}">
             <span>View</span>
             <ion-icon name="eye-outline"></ion-icon>
           </ion-button>
-          <ion-button class="most-used" (click)="myFunc()" [ngStyle]="{display: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'block' : 'none'}">
+          <ion-button class="most-used" (click)="myFunc()"
+            [ngStyle]="{display: (statusCheck == 'Finalization' || statusCheck == 'Delivered' || statusCheck == '') ? 'block' : 'none'}">
             <span>Print</span>
             <ion-icon name="print-outline"></ion-icon>
           </ion-button>
 
-          <ion-button class="most-used" routerLink="/paychallan/{{id}}" >
+          <ion-button class="most-used" routerLink="/paychallan/{{id}}">
             <span>View Challan</span>
             <ion-icon name="eye-outline"></ion-icon>
           </ion-button>
 
         </div>
       </div>
-      
+
     </div>
   </div>
 </ion-content>

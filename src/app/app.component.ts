@@ -11,6 +11,7 @@ import { LoadingController } from '@ionic/angular';
 export class AppComponent {
 
   designation: any = false; 
+  status_list:any = []
   
   readonly cardMask: MaskitoOptions = {
     mask: [
@@ -34,7 +35,7 @@ export class AppComponent {
 
     this.checklogin();
     this.getProfile()
-
+    this.getlicensestatus();
   }
 
   async showLoading() {
@@ -50,22 +51,21 @@ export class AppComponent {
   }
 
 
-  getlicensestatus(id: any) {
-    console.log("id", id)
+  getlicensestatus() {
      // Fetch status data
      this.apiService.getToken().then((e: any) => {
      this.apiService.getStatusAPI(e.access_token).then(async (resf: any) => {
 
       if (resf.reponse_type === 'success') {
-        for(let i of resf.data) {
-          if(i.id == id) {
-            console.log("i.Status_Name", i.Status_Name)
-           return i.Status_Name
-          }
-        }
-        return null;
+        this.status_list = resf.data
       } else{
-        return null;
+        this.apiService.displayToast(
+          resf.msg,
+          'bottom',
+          'toast-error',
+          'warning-outline',
+          'danger'
+        );
       }
     })
     .catch(async (err: any) => {

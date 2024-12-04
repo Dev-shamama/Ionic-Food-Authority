@@ -64,6 +64,7 @@ ion-content {
       white-space: nowrap;
       margin: 0;
     }
+
     .icon {
       font-size: 80px;
       color: #dedede;
@@ -72,6 +73,7 @@ ion-content {
       display: flex;
     }
   }
+
   .right-side {
     h2 {
       font-size: 80px;
@@ -90,12 +92,14 @@ ion-content {
         font-size: 20px;
         white-space: unset;
       }
+
       .icon {
         font-size: 40px;
         color: #dedede;
         font-weight: bold;
       }
     }
+
     .right-side {
       h2 {
         font-size: 40px;
@@ -164,11 +168,13 @@ ion-content {
   .license-item-content {
 
     .notFound {
-      text-align: center; 
+      text-align: center;
+
       h3 {
         margin: 0;
       }
     }
+
     .license-item {
       padding: 20px;
       border-radius: 18px;
@@ -177,24 +183,29 @@ ion-content {
       justify-content: space-between;
       flex-direction: column;
       margin-bottom: 10px;
+
       .top-content {
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         border-bottom: 1px solid gray;
         padding-bottom: 10px;
+
         .left-side {
           h6 {
             margin: 0 auto 4px auto;
             font-weight: 700;
             font-size: 17px;
+
             .license-id {
               color: var(--primary-color);
             }
           }
+
           p {
             margin: 0 auto;
             font-size: 13px;
+
             .name,
             .food-name {
               font-weight: 700;
@@ -208,22 +219,27 @@ ion-content {
           align-items: flex-end;
           text-align: left;
           flex-direction: column;
+
           h5 {
             font-weight: 700;
             margin: 0;
           }
+
           h4 {
             margin: 0;
             margin-top: 6px;
             font-weight: 700;
             font-size: 22px;
           }
+
           h4.approved {
             color: #00bf62;
           }
+
           h4.expired {
             color: #ec0a0a;
           }
+
           h4.rejected {
             color: #e79600;
           }
@@ -241,15 +257,18 @@ ion-content {
           justify-content: space-between;
           flex-direction: row;
           padding: 10px 0 4px 0;
+
           .item {
             padding: 0 10px;
             border-right: 2px solid gray;
             font-weight: 600;
             font-size: 13px;
           }
+
           .item:first-child {
             padding: 0 10px 0 0;
           }
+
           .item:last-child {
             border: none;
           }
@@ -257,6 +276,7 @@ ion-content {
           .item .license-id {
             color: #00a9d8;
           }
+
           .item .license-expiry {
             color: #d90f0f;
           }
@@ -269,6 +289,7 @@ ion-content {
           text-align: center;
           flex-direction: row;
           gap: 10px;
+
           button {
             display: flex;
             justify-content: center;
@@ -281,18 +302,22 @@ ion-content {
             padding: 6px 12px;
             white-space: nowrap;
             border-radius: 6px;
+
             .text {
               font-size: 14px;
               font-weight: 400;
               padding-right: 4px;
             }
+
             ion-icon {
               font-size: 20px;
             }
           }
+
           button.btn.btn-primary {
             background: #014122;
           }
+
           button.btn.btn-secondary {
             background: #00974e;
           }
@@ -316,6 +341,7 @@ ion-content {
               font-weight: 500;
               font-size: 12px;
             }
+
             .item:first-child {
               padding: 0 4px 0 0;
             }
@@ -329,12 +355,15 @@ ion-content {
 @media only screen and (max-width: 590px) {
   .wrapper-two {
     padding: 12px;
+
     .license-item-content {
       .license-item {
         border-radius: 10px;
         padding: 12px;
+
         .top-content {
           flex-direction: column;
+
           .right-side {
             align-items: flex-start;
             margin-top: 10px;
@@ -342,6 +371,7 @@ ion-content {
             h5 {
               font-size: 16px;
             }
+
             h4 {
               font-size: 14px;
             }
@@ -358,24 +388,10 @@ ion-content {
               padding: 0 0px;
               border: none;
             }
+
             .item:first-child {
               padding: 0;
             }
-          }
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 354px) {
-  .wrapper-two {
-    .license-item-content {
-      .license-item {
-        .bottom-content {
-          .right-side {
-            flex-direction: column;
-            align-items: flex-start;
           }
         }
       }
@@ -397,6 +413,31 @@ ion-content {
         padding: 4px 6px;
         max-width: 145px;
         font-size: 14px;
+      }
+    }
+
+    .license-item-content {
+      .license-item {
+        .bottom-content {
+          display: unset;
+          .right-side {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+
+            .renew-btn {
+              grid-column: span 2 / span 2;
+            }
+
+            .challan-btn {
+              grid-row-start: 2;
+            }
+
+            .view-btn {
+              grid-row-start: 2;
+            }
+          }
+        }
       }
     }
   }

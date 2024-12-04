@@ -349,6 +349,31 @@ ion-content {
         font-size: 14px;
       }
     }
+
+    .license-item-content {
+      .license-item {
+        .bottom-content {
+          display: unset;
+          .right-side {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+
+            .renew-btn {
+              grid-column: span 2 / span 2;
+            }
+
+            .challan-btn {
+              grid-row-start: 2;
+            }
+
+            .view-btn {
+              grid-row-start: 2;
+            }
+          }
+        }
+      }
+    }
   }
 }
 

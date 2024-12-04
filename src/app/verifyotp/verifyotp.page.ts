@@ -188,7 +188,7 @@ export class VerifyotpPage implements OnInit, OnDestroy  {
             const s: any = document.getElementById('sidebar-main-container');
             // s.style.width = '0'
             s.setAttribute('style', '--side-min-width: 350px; --side-max-width: 350px');
-            this.route.navigate(['/home']);
+            window.location.href = '/home';
           } else {
             this.apiService.displayToast(
               res.msg,

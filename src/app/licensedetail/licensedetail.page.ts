@@ -20,6 +20,7 @@ export class LicensedetailPage {
   activeDocuments = '';
   activePrevious = '';
   activeLab = '';
+  activeMedical = '';
 
   fileObject: any = {
     cnic: null,
@@ -27,6 +28,7 @@ export class LicensedetailPage {
     documents: null,
     previous: null,
     lab: null,
+    medical: null,
   };
 
   id: any;
@@ -36,7 +38,21 @@ export class LicensedetailPage {
     date: null,
     remainingAllDays: null,
     expiry_percentage: null,
+    percentage: null,
+    percentageString: null,
+    past_days: null,
+    past_days_percentage: null,
+    upload_docs_no: null,
   };
+
+  licenseDetailDocument: any = {
+    Upload_Copy_of_CNIC: null,
+    Copy_of_Challan_form: null,
+    Documents_of_property_or_tenancy: null,
+    Lab_testing_reports: null,
+    Medical_reports: null,
+    Previous_Registration_Certificate: null,
+  }
 
   statusCheck: any = '';
 
@@ -126,9 +142,22 @@ export class LicensedetailPage {
     this.apiService.getToken().then((e: any) => {
       this.apiService.checkDocumentStatusAPI(e.access_token, this.id)
         .then(async (res: any) => {
-          console.log("document res",res);
+          console.log("document res", res);
           if (res.reponse_type === 'success') {
+            this.licenseDetailDocument.Copy_of_Challan_form = res.data.documents.Copy_of_Challan_form;
+            this.licenseDetailDocument.Documents_of_property_or_tenancy = res.data.documents.Documents_of_property_or_tenancy;
+            this.licenseDetailDocument.Lab_testing_reports = res.data.documents.Lab_testing_reports;
+            this.licenseDetailDocument.Medical_reports = res.data.documents.Medical_reports;
+            this.licenseDetailDocument.Previous_Registration_Certificate = res.data.documents.Previous_Registration_Certificate;
+            this.licenseDetailDocument.Upload_Copy_of_CNIC = res.data.documents.Upload_Copy_of_CNIC;
 
+            this.licenseDetail.past_days = 14 - res.data.past_days;
+            this.licenseDetail.past_days_percentage = this.licenseDetail.past_days * 100 / 14;
+
+            this.licenseDetail.upload_docs_no = res.data.upload_docs_no;
+            let progressBar = document.querySelector('#progressBar')
+            progressBar?.setAttribute('aria-valuenow', Math.round(Number(res.data.percentage)).toString());
+            progressBar?.setAttribute('style', `--value: ${Math.round(Number(res.data.percentage)).toString()}`);
           } else {
             this.apiService.displayToast(
               res.msg,
@@ -178,7 +207,11 @@ export class LicensedetailPage {
             this.fileObject.lab = reader.result;
           }
 
-          console.log(this.fileObject);
+
+          if (documentUniqueName === 'medical') {
+            this.activeMedical = 'active';
+            this.fileObject.medical = reader.result;
+          }
 
           this.closeModel();
         };
@@ -200,13 +233,14 @@ export class LicensedetailPage {
               Previous_Registration: this.fileObject.previous,
               Copy_of_Challan_form: this.fileObject.challan,
               Lab_testing_reports: this.fileObject.lab,
-              // Medical_reports: this.,
+              Medical_reports: this.fileObject.medical,
             },
             this.id
           )
           .then(async (res: any) => {
             this.MainApp.hideLoading();
             if (res.reponse_type == 'success') {
+              this.apiService.displayToast(res.msg, 'bottom', 'toast-success', 'checkmark-circle-sharp', 'success')
             } else {
               this.apiService.displayToast(
                 res.msg,

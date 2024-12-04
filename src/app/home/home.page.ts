@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
     get_expired: '',
   };
 
-  constructor(public menuBar: MenuController, private apiService: ApiService) {}
+  constructor(public menuBar: MenuController, private apiService: ApiService) { }
 
   ngOnInit() {
     this.menuBar.close();
@@ -29,32 +29,36 @@ export class HomePage implements OnInit {
     this.apiService.getToken().then((e: any) => {
       this.apiService.getLicense(e.access_token)
         .then(async (res: any) => {
-          console.log(res);
-          
+
+
           if (res.reponse_type === 'success') {
             this.licenseList = res.data;
-            
+
             // Fetch status data
             this.apiService.getStatusAPI(e.access_token).then(async (resf: any) => {
               console.log(resf);
-              
+
               if (resf.reponse_type === 'success') {
                 // Map through licenseList and match with resf.data based on Status
                 this.licenseList = this.licenseList.map((licenseItem: any) => {
+
+                  console.log("licenseItem", licenseItem);
+
                   const matchingStatus = resf.data.find((statusItem: any) => statusItem.id === licenseItem.Status);
-                  
+
                   // Append matched status information to licenseItem if a match is found
                   if (matchingStatus) {
                     return {
                       ...licenseItem,
-                      Status: matchingStatus // Replace or extend as needed
+                      Status: licenseItem.Review != "Pass" ? licenseItem.Review : licenseItem.Expiry_Status != "Valid" ? licenseItem.Expiry_Status : matchingStatus.Status_Name // Replace or extend as needed
                     };
+
                   }
                   return licenseItem;
                 });
-                
+
                 console.log("licenseList", this.licenseList); // Updated licenseList with appended Status data
-                
+
               } else {
                 this.apiService.displayToast(
                   resf.msg,
@@ -65,10 +69,10 @@ export class HomePage implements OnInit {
                 );
               }
             })
-            .catch(async (err: any) => {
-              console.log(err);
-            });
-            
+              .catch(async (err: any) => {
+                console.log(err);
+              });
+
           } else {
             this.apiService.displayToast(
               res.msg,
@@ -84,8 +88,6 @@ export class HomePage implements OnInit {
         });
     });
   }
-  
-
 
   getDashboardDetails() {
     this.apiService.getToken().then((e: any) => {

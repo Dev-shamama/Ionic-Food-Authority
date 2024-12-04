@@ -34,24 +34,28 @@ export class SfocPage implements OnInit {
 
 
   FSOGetAllLicense() {
-
     this.apiService.getToken().then((e: any) => {
       this.apiService.FSOGetAllLicenseAPI(e.access_token, { current_filted: this.licenseList.length })
         .then(async (res: any) => {
           if (res.reponse_type === 'success') {
-            // console.log("response", res);
-            console.log("response", this.licenseList);
-            for(let i of res.data.license){
-              // console.log("status_name", this.MainApp.getlicensestatus(i.Status))
-              // var status_name =  this.MainApp.getlicensestatus(i.Status).then((e: any) => {return e;});
-              
 
-              // i.Status = status_name
-              this.licenseList.push(i)
-              // console.log("this.licenseList", this.licenseList)
+            if (res.data.license.length == 0) {
+              this.noMoreDataStatus = true
+              console.log("Not More Data");
+              return;
             }
-             
-      
+
+            for(let i of res.data.license){
+              console.log("i", i);
+              for(let x of this.MainApp.status_list){
+                if (x.id == i.Status) {
+                  i.Status = i.Review != "Pass" ? i.Review : i.Expiry_Status != "Valid" ? i.Expiry_Status : x.Status_Name
+                  
+                }
+              }
+              this.licenseList.push(i)
+            }
+            console.log("response", this.licenseList);
           } else {
             this.apiService.displayToast(
               res.msg,
@@ -123,7 +127,6 @@ export class SfocPage implements OnInit {
     if (this.noMoreDataStatus == false) {
       setTimeout(() => {
         this.FSOGetAllLicense();
-        // this.FSOGetAllLicense();
         (ev as InfiniteScrollCustomEvent).target.complete();
       }, 1000);
     } else {

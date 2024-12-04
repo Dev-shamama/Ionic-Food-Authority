@@ -14,7 +14,7 @@ export class PaychallanPage {
   @ViewChild('payChallan')
   payChallan: NgForm | undefined;
   licenceId:any
-
+  renewStatus:any
 
   natureList: any[] = [];
   categoryList: any[] = [];
@@ -30,6 +30,7 @@ export class PaychallanPage {
   categoryName = null;
   district = null;
   districtName = null;
+  renew: boolean = false;
 
   constructor(
     private router: Router,
@@ -38,7 +39,19 @@ export class PaychallanPage {
     public MainApp: AppComponent
   ) {
     this.licenceId = this.urlParam.snapshot.paramMap.get('id');
+    
 
+    this.urlParam.queryParams.subscribe(params => {
+      if (params['renew'] === 'true') {
+        this.renew = true;
+        console.log('Renew parameter is true');
+      } else {
+        this.renew = false;
+        console.log('Renew parameter is false or not present');
+      }
+    });
+
+    
     this.apiService
       .getToken()
       .then((e: any) => {

@@ -139,6 +139,11 @@ const routes: Routes = [
     path: 'update-license/:id',
     loadChildren: () => import('./update-license/update-license.module').then( m => m.UpdateLicensePageModule)
   },
+  {
+    path: 'renewuploaddocument/:id',
+    loadChildren: () => import('./renewuploaddocument/renewuploaddocument.module').then( m => m.RenewuploaddocumentPageModule)
+  },
+
 
 
 ];

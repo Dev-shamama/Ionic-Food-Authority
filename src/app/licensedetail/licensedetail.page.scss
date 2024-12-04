@@ -256,28 +256,11 @@ ion-button.most-used {
           font-size: 14px;
         }
 
-        @keyframes growProgressBar {
-          0%,
-          33% {
-            --pgPercentage: 0;
-          }
-          100% {
-            --pgPercentage: var(--value);
-          }
-        }
-
-        @property --pgPercentage {
-          syntax: "<number>";
-          inherits: false;
-          initial-value: 0;
-        }
-
         div[role="progressbar"] {
           --size: 12rem;
           --fg: #1ca160;
           --bg: #ffebab;
           --pgPercentage: var(--value);
-          animation: growProgressBar 3s 1 forwards;
           width: var(--size);
           height: var(--size);
           border-radius: 50%;

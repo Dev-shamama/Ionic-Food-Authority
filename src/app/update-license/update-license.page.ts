@@ -200,7 +200,7 @@ export class UpdateLicensePage {
                 'checkmark-circle-sharp',
                 'success'
               );
-              this.router.navigate([`/paychallan/${res.data.License_Id}`]);
+              this.router.navigate([`/paychallan/${res.data.License_Id}`], { queryParams: { renew: 'true' } });
             }
           })
           .catch(async (err: any) => {
