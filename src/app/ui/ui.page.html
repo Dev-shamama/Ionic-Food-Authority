@@ -1,0 +1,240 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="payChallen-container">
+    <h2 class="section-title">Challan</h2>
+
+    <div class="wrapper wrapper-one">
+      <div class="top-heading-content">
+        <div class="title">
+          <h3>Challan Generated Successfully</h3>
+        </div>
+      </div>
+      <div id="divContents">
+        <div class="challan-content">
+          <div class="water-mark">
+            <img src="http://localhost:8100/assets/img/bg-logo.png" alt="" />
+          </div>
+
+          <div class="top-logo">
+            <div class="logo left-logo">
+              <img src="http://localhost:8100/assets/img/logo-1.png" alt="logo" />
+            </div>
+
+            <div class="centerHeading">
+              <h1>SINDH FOOD AUTHORITY</h1>
+              <h2>GOVERNMENT OF SINDH</h2>
+            </div>
+
+
+            <div class="logo right-logo">
+              <img src="http://localhost:8100/assets/img/bg-logo.png" alt="logo" />
+            </div>
+          </div>
+
+
+          <div class="content">
+            <div class="barCode-Controller d-flex justify-content-between w-100">
+              <div class="left-side">
+                <span>Deposit Slip No. </span><span class="b-1">123123</span>
+              </div>
+              <div class="barCode">
+                <img src="http://localhost:8100/assets/img/barcode2.jpg" alt="logo" />
+              </div>
+              <div class="right-side">
+                <span>Challan No. </span><strong style="color: #dd0000; width: 200px;" class="b-1">45345</strong>
+              </div>
+            </div>
+
+            <div class="mangerSindhBankLtd-container d-flex justify-content-between w-100">
+              <div class="left-side mangerSindhBankLtd">
+                <div class="textMangerSindhBankLtd">
+                  <p>The Manager,</p>
+                  <p>Sindh Bank Ltd.</p>
+                  <p>Bank Name</p>
+                </div>
+                <span>Branch</span>
+              </div>
+              <div class="right-side">
+                <div>
+                  <span>Issuance Date. </span><span class="b-1">25-11-2001</span>
+                </div>
+                <div>
+                  <span>Valid upto. </span><span class="b-1">25-11-2001</span>
+                </div>
+              </div>
+            </div>
+
+            <p style="text-align: justify;">
+              Please receive the following amount for the credit to Sindh Food Authority Account
+              No. <span style="background-color: black; color: white; border-radius: 10px 0px 10px 0px; padding: 1px 4px;">0303-509374-1000</span>, in title as "Establishment of Sindh Food Authority
+              Fund" being maintained at Sindh Bank Limited, Sindh Secretariat
+              branch karachi from,
+            </p>
+
+            <div class="form">
+              <div class="inputField mr-mrs">
+                <label for="mr-mrs">Ms./MS.</label>
+                <span>applicantName</span>
+              </div>
+
+              <div class="inputField firm">
+                <label for="firm">of M/S (firm)</label>
+                <span>Name_of_Food_Business</span>
+              </div>
+
+              <div class="inputField category">
+                <label for="firm">Category of Food Business.</label>
+                <span>categoryName</span>
+              </div>
+
+              <div class="inputField address">
+                <label for="firm">Address.</label>
+                <span>address</span>
+              </div>
+
+              <div class="inputField cnic">
+                <label for="firm">CNIC No.</label>
+                <div class="inputs">
+                  <ng-container *ngFor="let digit of cnic; let i = index">
+                    <div
+                      #inputRef
+                      class="editable"
+                      [attr.contenteditable]="i !== 5 && i !== 13 ? 'true' : 'false'"
+                      [class.separator]="i === 5 || i === 13"
+                      [textContent]="digit"
+                      (input)="onInput($event, i)"
+                      (keydown)="onKeyDown(i, $event)"
+                    >
+                      {{ i === 5 ? '-' : i === 13 ? '-' : '' }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Particulars of Payment</th>
+                    <th>Amount</th>
+                    <th>Details of Challan</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr>
+                    <td>License Fee (Annual Fee)</td>
+                    <td><strong>Rs.200</strong></td>
+                    <td></td>
+                  </tr>
+
+                  <tr>
+                    <td>Renewal Fee</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Penalty</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Laboratory Testing Fee</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Food Product Registration Fee</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+
+                  <tr>
+                    <td>Other</td>
+                    <td></td>
+                    <td style="text-align: center">Received Amount in cash P.O No</td>
+                  </tr>
+                  <tr>
+                    <td>Total Amount</td>
+                    <td></td>
+                    <td style="text-align: center">Cash Officer/Operation Manager</td>
+                  </tr>
+
+                  <tr>
+                    <td colspan="3">Amount to be paid Rs.200</td>
+                  </tr>
+
+                  <tr>
+                    <td colspan="3">
+                      In words Rupees : <strong>200</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="signature-bottom-content">
+              <div class="inputField signature-one">
+                <label for="signature-one">Receiver Signature</label>
+                <span>&zwnj;</span>
+              </div>
+
+              <div class="inputField signature-two">
+                <label for="signature-two">Name of Officer</label>
+                <span>&zwnj;</span>
+              </div>
+
+              <div class="inputField dd-ops">
+                <label for="dd-ops">Contact No</label>
+                <span>&zwnj;</span>
+              </div>
+
+              <div class="inputField officer">
+                <label for="dd-ops">Signature of Officer</label>
+                <span>&zwnj;</span>
+              </div>
+
+              <div class="inputField district">
+                <label for="district">District</label>
+                <span>districtName</span>
+              </div>
+              
+              <div class="inputField district2">
+                <label for="district">District</label>
+                <span>districtName</span>
+              </div>
+
+              
+            </div>
+
+
+            <div class="location-address">
+              <p>
+                NO.PAS/Legis-B-12/2016- The Sindh Food Authority Bill, 2016 having been passed by the Provincial Assembly of Sindh on 08th March, 2017 and assented to by the Governor of Sindh on 08th April, 2017 is hereby published as an Act of the Legislature of Sindh
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-content">
+        <p>
+          <strong class="note">Note: </strong>First, pay the challan, then in
+          the next process, your license will be issued. Thank you.
+        </p>
+
+        <div class="challan-download-btn w-100 d-flex justify-content-center flex-direction-row align-items-center">
+          <ion-button (click)="myFunc()"><span>Print Challan</span>
+            <ion-icon name="print-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</ion-content>

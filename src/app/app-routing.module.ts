@@ -143,6 +143,10 @@ const routes: Routes = [
     path: 'renewuploaddocument/:id',
     loadChildren: () => import('./renewuploaddocument/renewuploaddocument.module').then( m => m.RenewuploaddocumentPageModule)
   },
+  {
+    path: 'ui',
+    loadChildren: () => import('./ui/ui.module').then( m => m.UiPageModule)
+  },
 
 
 
