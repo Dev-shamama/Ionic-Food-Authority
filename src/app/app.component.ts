@@ -105,7 +105,7 @@ export class AppComponent {
       'checkmark-circle-sharp',
       'success'
     );
-    this.route.navigate(['/login']);
+    window.location.href = '/login';
   }
 
   getProfile() {
