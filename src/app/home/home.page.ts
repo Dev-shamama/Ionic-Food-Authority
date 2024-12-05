@@ -1,6 +1,7 @@
 import { ApiService } from 'api.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -9,6 +10,7 @@ import { MenuController } from '@ionic/angular';
 export class HomePage implements OnInit {
   licenseList: any[] = [];
   statusList: any[] = [];
+  domain: any;
 
   dashboardStatus: any = {
     approve: '',
@@ -16,13 +18,14 @@ export class HomePage implements OnInit {
     get_expired: '',
   };
 
-  constructor(public menuBar: MenuController, private apiService: ApiService) { }
+  constructor(public menuBar: MenuController, private apiService: ApiService, public MainApp: AppComponent) { }
 
   ngOnInit() {
     this.menuBar.close();
-
+    this.MainApp.getDistrict()
     this.getLicense();
     this.getDashboardDetails();
+    this.domain = this.apiService.domain
   }
 
   getLicense() {
@@ -42,15 +45,21 @@ export class HomePage implements OnInit {
                 // Map through licenseList and match with resf.data based on Status
                 this.licenseList = this.licenseList.map((licenseItem: any) => {
 
-                  console.log("licenseItem", licenseItem);
+                  let isExpired = this.MainApp.checkExpiryDate(licenseItem.Expiry_date || '')	
+                  let districtList = this.MainApp.districtList;
+
+                  licenseItem.district = districtList.find((d) => d.id == licenseItem.district)
+
 
                   const matchingStatus = resf.data.find((statusItem: any) => statusItem.id === licenseItem.Status);
+
 
                   // Append matched status information to licenseItem if a match is found
                   if (matchingStatus) {
                     return {
                       ...licenseItem,
-                      Status: licenseItem.Review != "Pass" ? licenseItem.Review : licenseItem.Expiry_Status != "Valid" ? licenseItem.Expiry_Status : matchingStatus.Status_Name // Replace or extend as needed
+                      Status: licenseItem.Review != "Pass" ? licenseItem.Review : matchingStatus.Status_Name,// Replace or extend as needed
+                      Expiry_date: isExpired.status == "Expired" ? isExpired.status : licenseItem.Expiry_date
                     };
 
                   }

@@ -48,21 +48,31 @@ ion-content {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    margin-bottom: 18px;
+    margin-bottom: 0px;
+    border-bottom:1px solid black;
 
     .title h3 {
       margin: 0 auto;
       font-weight: 600;
       font-size: 24px;
     }
-
     .search-inputField {
       min-width: 450px;
       position: relative;
-      padding: 20px 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-bottom: 20px;
+      
+
+      ion-searchbar {
+        --border-radius: 20px;
+        --icon-color: #006c38;
+        --placeholder-font-style: italic;
+        --placeholder-font-weight: 700;
+        --background: rgb(241, 241, 241);
+        transform: scale(1.3);
+      }
 
       .ion-list-search {
         position: absolute;
@@ -85,12 +95,26 @@ ion-content {
     }
   }
 
+  .totalSearch{
+    h4 {
+      margin: 15px 0;
+      font-style: italic;
+    }
+  }
+
+
   .license-item-content {
     .notFound {
       text-align: center;
-
+      img {
+        width: 130px;
+        margin-bottom: 10px;
+        filter: brightness(0) saturate(100%) invert(81%) sepia(14%) saturate(1267%) hue-rotate(96deg) brightness(92%) contrast(105%);
+        opacity: 0.8;
+      }
       h3 {
         margin: 0;
+        color: gray;
       }
     }
 
@@ -106,6 +130,7 @@ ion-content {
       .top-content {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         flex-direction: row;
         border-bottom: 1px solid gray;
         padding-bottom: 10px;
@@ -135,19 +160,40 @@ ion-content {
         .right-side {
           display: flex;
           justify-content: center;
-          align-items: flex-end;
+          align-items: center;
           text-align: left;
-          flex-direction: column;
+          flex-direction: row;
+          gap: 10px;
+
+          .qr-barcode{
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: left;
+            flex-direction: column;
+
+            .qrcode {
+              width: 100px;
+              height: 100px;
+
+            }
+            .barcode {
+              width: 100px;
+            }
+          }
 
           h5 {
             font-weight: 700;
             margin: 0;
+            text-align: right;
           }
+         
 
           h4 {
             margin: 0;
             margin-top: 6px;
             font-weight: 700;
+            text-align: right;
             font-size: 22px;
           }
 
@@ -281,10 +327,12 @@ ion-content {
         padding: 12px;
 
         .top-content {
+          align-items: unset;
           flex-direction: column;
 
           .right-side {
-            align-items: flex-start;
+            align-items: center;
+            justify-content: space-between;
             margin-top: 10px;
 
             h5 {

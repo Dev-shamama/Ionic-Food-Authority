@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ViewChild, Component, ElementRef, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'api.service';
 import { AppComponent } from '../app.component';
@@ -11,16 +11,58 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./paychallan.page.scss'],
 })
 export class PaychallanPage {
+
+  cnic: string[] = Array(15).fill('');
+  @ViewChildren('inputRef') inputRefs!: QueryList<ElementRef<HTMLDivElement>>;
+
   @ViewChild('payChallan')
   payChallan: NgForm | undefined;
-  licenceId:any
-  renewStatus:any
-
+  licenceId: any
+  renewStatus: any
+  domain: any;
   natureList: any[] = [];
   categoryList: any[] = [];
-  districList: any[] = [];
   challanList: any[] = [];
   numberToWordsValue: any;
+
+  particular = [
+    {
+      "Particulars":"License Fee",
+      "Amount":"",
+      "details":"",
+    },
+    {
+      "Particulars":"Renewal Fee",
+      "Amount":"",
+      "details":"",
+    },
+    {
+      "Particulars":"Penalty",
+      "Amount":"",
+      "details":"",
+    },
+    {
+      "Particulars":"Laboratory Testing Fee",
+      "Amount":"",
+      "details":"",
+    },
+    {
+      "Particulars":"Food Product Registration Fee",
+      "Amount":"",
+      "details":"",
+    },
+    {
+      "Particulars":"Other",
+      "Amount":"",
+      "details":"Received Amount in cash P.O No",
+    },
+    {
+      "Particulars":"Total Amount",
+      "Amount":"",
+      "details":"Cash Officer/Operation Manager",
+    },
+
+  ]
 
   applicantName = null;
   address = null;
@@ -39,7 +81,10 @@ export class PaychallanPage {
     public MainApp: AppComponent
   ) {
     this.licenceId = this.urlParam.snapshot.paramMap.get('id');
-    
+    this.MainApp.getDistrict();
+    this.MainApp.getCategory();
+    this.domain = this.apiService.domain
+
 
     this.urlParam.queryParams.subscribe(params => {
       if (params['renew'] === 'true') {
@@ -51,48 +96,42 @@ export class PaychallanPage {
       }
     });
 
-    
+
     this.apiService
       .getToken()
       .then((e: any) => {
         this.apiService
           .getAllLicenseChallan(e.access_token, this.licenceId)
           .then(async (res: any) => {
-            console.log(res);
             if (res.reponse_type == 'success') {
               this.challanList = res.data.challan;
+              let districtList = this.MainApp.districtList;
+              let categoryList = this.MainApp.categoryList;
 
-              for(let i of this.challanList){
+
+              for (let [index, i] of this.challanList.entries()) {
                 var total_amt = 0
-                for (let x of i.challan){
-                  total_amt +=  Number(x.Amount)
+                for (let x of i.challan) {
+                  total_amt += Number(x.Amount)
 
                 }
+                this.prefetchCNIC(i.CNIC, i)
+                i.district = districtList.find((d) => d.id == i.district)
+                i.category = categoryList.find((d) => d.id == i.category)
+
+                // i.table = i.challan.find((data:any) => data.id == index)
 
                 i.total_amount = total_amt
                 i.in_word = numberToWords
-                .toWords(total_amt)
-                .toUpperCase();
-
+                  .toWords(total_amt)
+                  .toUpperCase();
               }
-              
               this.numberToWordsValue = numberToWords
                 .toWords(res.data.challan[0].challan[0].Amount)
                 .toUpperCase();
 
-              this.address = res.data.license[0].Address;
-              this.applicantName = res.data.license[0].Name_of_Applicant;
-              this.CNIC = res.data.license[0].CNIC;
-              this.Name_of_Food_Business = res.data.license[0].Name_of_Food_Business;
-              this.category = res.data.license[0].category;
-              this.district = res.data.license[0].district;
-              
-              this.getNature();
-              this.getCategory(this.category);
-              this.getDistric(this.district);
-
-
-            }else{
+              console.log(this.challanList);
+            } else {
               this.apiService.displayToast(
                 res.msg,
                 'bottom',
@@ -101,6 +140,7 @@ export class PaychallanPage {
                 'danger'
               );
               this.router.navigate(['/home'])
+
             }
           })
           .catch(async (err: any) => {
@@ -113,104 +153,15 @@ export class PaychallanPage {
 
   }
 
-  getNature() {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getNatureList(e.access_token)
-          .then(async (res: any) => {
-            console.log(res);
-            if (res.reponse_type == 'success') {
-              this.natureList = res.data;
-            }else {
-              this.apiService.displayToast(
-                res.data.msg,
-                'bottom',
-                'toast-error',
-                'warning-outline',
-                'danger'
-              );
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
-
-  getCategory(_category: any) {
-    this.apiService.getToken().then((e: any) => {
-        this.apiService.getCategoryList(e.access_token).then(async (res: any) => {
-            console.log(res);
-            if (res.reponse_type == 'success') {
-              res.data.map((item:any) => {
-                if(this.category == item.id) {
-                  this.categoryName = item.Category_Title
-
-                }
-              })
-            }else {
-              this.apiService.displayToast(
-                res.data.msg,
-                'bottom',
-                'toast-error',
-                'warning-outline',
-                'danger'
-              );
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
-
-  getDistric(_district: any) {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getDistricList(e.access_token)
-          .then(async (res: any) => {
-            console.log(res);
-            
-            if (res.reponse_type == 'success') {
-              res.data.map((item:any) => {
-                if(this.district == item.id) {
-                  this.districtName = item.District_Name
-                }
-              })
-            }else {
-              this.apiService.displayToast(
-                res.data.msg,
-                'bottom',
-                'toast-error',
-                'warning-outline',
-                'danger'
-              );
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
 
   /**
    * Opens the print dialog for the current page.
    */
-  myFunc() {
-    var divContents = document.getElementById('divContents')?.innerHTML;
+  myFunc($event: any, id: any) {
+    console.log(id)
+    // var divContents = document.getElementById('divContents')?.innerHTML;
+    var divContents = document.getElementById(id)?.innerHTML;
+
     let printWindow: any = window.open('', '', 'height=800,width=1000');
     printWindow.document.write(`<html><head><title>Reports</title>
       <link rel="stylesheet" href="http://localhost:8100/assets/print.css">
@@ -239,6 +190,91 @@ export class PaychallanPage {
     printWindow.document.close();
     setTimeout(() => {
       printWindow.print();
-    }, 3500);
+    }, 2000);
+  }
+
+
+
+
+
+  prefetchCNIC(cnicNumber: string, i: any): void {
+    // console.log("id", id)
+    // let respo = this.challanList.filter(i => {i.id == id})
+    // console.log("respo")
+    const apiResponse = cnicNumber; // CNIC from API
+
+    if (apiResponse) {
+      this.setFullCNIC(apiResponse.replace(/-/g, ''), i); // Remove dashes for processing
+
+    } else {
+      i.cnic = ['', '', '', '', '', '-', '', '', '', '', '', '', '', '-', '']
+    }
+  }
+
+  setFullCNIC(newCNIC: string, i: any): void {
+    console.log("i", i)
+
+    if (/^\d{13}$/.test(newCNIC)) {
+      // Ensure formatting before setting CNIC
+      const formattedCNIC = [
+        ...newCNIC.slice(0, 5), // First 5 digits
+        '-', // Separator
+        ...newCNIC.slice(5, 12), // Next 7 digits
+        '-', // Separator
+        ...newCNIC.slice(12), // Last digit
+      ];
+
+      if (formattedCNIC) {
+        i.cnic = formattedCNIC;
+
+      } else {
+        i.cnic = ['', '', '', '', '', '-', '', '', '', '', '', '', '', '-', '']
+      }
+
+      // Check if inputRefs is initialized
+      if (this.inputRefs && this.inputRefs.length > 0) {
+        this.inputRefs.forEach((ref, index) => {
+          if (ref.nativeElement) {
+            ref.nativeElement.textContent = i.cnic[index];
+          }
+        });
+      }
+    }
+  }
+
+  onInput(event: any, index: number): void {
+    const value = (event.target as HTMLDivElement).textContent || '';
+
+    if (!/^\d?$/.test(value)) {
+      (event.target as HTMLDivElement).textContent = this.cnic[index];
+      return;
+    }
+
+    this.cnic[index] = value;
+
+    // Move focus to the next editable field
+    if (value && index < 14) {
+      const nextInput = this.inputRefs.get(index + 1)?.nativeElement;
+      nextInput?.focus();
+    }
+  }
+
+  onKeyDown(index: number, event: KeyboardEvent): void {
+    const currentContent = this.cnic[index];
+
+    // Backspace navigation
+    if (event.key === 'Backspace' && !currentContent && index > 0) {
+      const previousInput = this.inputRefs.get(index - 1)?.nativeElement;
+      previousInput?.focus();
+    }
+  }
+
+
+  navigateOtherPage(id: any) {
+    if (this.renew == true) {
+      this.router.navigate([`/renewuploaddocument/${id}`], { queryParams: { renew: 'true' } });
+    } else {
+      this.router.navigate([`/uploaddocument/${id}`]);
+    }
   }
 }

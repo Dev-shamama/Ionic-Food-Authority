@@ -6,7 +6,7 @@
 .w-100 {
   width: 100%;
 }
-
+`
 .d-flex {
   display: flex;
 }
@@ -82,8 +82,7 @@
 
 .border-image .challan-content .top-logo .logo img {
   object-fit: contain;
-  width: 100%;
-  height: 100%;
+  width: 120px;
 }
 
 .border-image .challan-content .top-logo .heading.center-text h2 {
@@ -176,7 +175,7 @@
   text-align: left;
 }
 
-.border-image .challan-content .content .form .inputField input {
+.border-image .challan-content .content .form .inputField span {
   width: 100%;
   margin: 0;
   border: none;
@@ -204,7 +203,7 @@
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: row;
-  padding: 80px 0px 0 38px;
+  padding: 50px 0px 0 38px;
 }
 
 .border-image .challan-content .content .bottom-stamp .qrCode {

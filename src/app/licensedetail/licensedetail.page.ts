@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./licensedetail.page.scss'],
 })
 export class LicensedetailPage {
+  domain: any;
   documentUniqueName = '';
 
   activeCnic = '';
@@ -43,16 +44,35 @@ export class LicensedetailPage {
     past_days: null,
     past_days_percentage: null,
     upload_docs_no: null,
+
+    License_ID: null,
+    Address: null,
+    district: null,
+    Name_of_Applicant: null,
+    CNIC: null,
+    Name_of_Food_Business: null,
+    Nature_of_Business: null,
+    Expiry_date_view: null,
+    Bar_code: null,
+    QR_code: null
   };
 
-  licenseDetailDocument: any = {
-    Upload_Copy_of_CNIC: null,
-    Copy_of_Challan_form: null,
-    Documents_of_property_or_tenancy: null,
-    Lab_testing_reports: null,
-    Medical_reports: null,
-    Previous_Registration_Certificate: null,
-  }
+  licenseDetailDocument: {
+    cnic: any;
+    document_of_property: any;
+    Previous_Registration: any;
+    Copy_of_Challan_form: any;
+    Lab_testing_reports: any;
+    Medical_reports: any;
+  } = {
+      cnic: null,
+      document_of_property: null,
+      Previous_Registration: null,
+      Copy_of_Challan_form: null,
+      Lab_testing_reports: null,
+      Medical_reports: null,
+    };
+
 
   statusCheck: any = '';
 
@@ -64,8 +84,11 @@ export class LicensedetailPage {
     private urlParam: ActivatedRoute
   ) {
     this.id = this.urlParam.snapshot.paramMap.get('id');
+    this.domain = this.apiService.domain
     this.getLicenseDetails();
     this.checkDocumentStatus();
+    this.MainApp.getDistrict()
+    this.MainApp.getNature()
   }
 
   getLicenseDetails() {
@@ -75,7 +98,6 @@ export class LicensedetailPage {
         this.apiService
           .getLicenseDetailsAPI(e.access_token, this.id)
           .then(async (res: any) => {
-            console.log(res);
             if (res.reponse_type == 'success') {
               // Fetch status data
               this.apiService
@@ -118,7 +140,29 @@ export class LicensedetailPage {
                 endDate,
                 currentDate
               );
+
+              this.licenseDetail.License_ID = res.data[0].License_ID
               this.licenseDetail.expiry_percentage = decimalValue.toFixed(2);
+              this.licenseDetail.Address = res.data[0].Address
+              this.licenseDetail.Name_of_Applicant = res.data[0].Name_of_Applicant
+              this.licenseDetail.CNIC = res.data[0].CNIC
+              this.licenseDetail.Name_of_Food_Business = res.data[0].Name_of_Food_Business
+              this.licenseDetail.Nature_of_Business = res.data[0].Nature_of_Business
+              this.licenseDetail.date = res.data[0].date.slice(0, 10)
+              this.licenseDetail.Expiry_date_view = res.data[0].Expiry_date
+              this.licenseDetail.Bar_code = res.data[0].Bar_code
+              this.licenseDetail.QR_code = res.data[0].QR_code
+              this.licenseDetail.district = res.data[0].district
+
+              let districtList = this.MainApp.districtList;
+              let natureList = this.MainApp.natureList;
+
+              this.licenseDetail.district = districtList.find((d) => d.id == this.licenseDetail.district)
+              this.licenseDetail.Nature_of_Business = natureList.find((d) => d.id == this.licenseDetail.Nature_of_Business)
+
+              console.log(this.licenseDetail)
+
+
             } else {
               this.apiService.displayToast(
                 res.msg,
@@ -145,11 +189,11 @@ export class LicensedetailPage {
           console.log("document res", res);
           if (res.reponse_type === 'success') {
             this.licenseDetailDocument.Copy_of_Challan_form = res.data.documents.Copy_of_Challan_form;
-            this.licenseDetailDocument.Documents_of_property_or_tenancy = res.data.documents.Documents_of_property_or_tenancy;
+            this.licenseDetailDocument.document_of_property = res.data.documents.Documents_of_property_or_tenancy;
             this.licenseDetailDocument.Lab_testing_reports = res.data.documents.Lab_testing_reports;
             this.licenseDetailDocument.Medical_reports = res.data.documents.Medical_reports;
-            this.licenseDetailDocument.Previous_Registration_Certificate = res.data.documents.Previous_Registration_Certificate;
-            this.licenseDetailDocument.Upload_Copy_of_CNIC = res.data.documents.Upload_Copy_of_CNIC;
+            this.licenseDetailDocument.Previous_Registration = res.data.documents.Previous_Registration_Certificate;
+            this.licenseDetailDocument.cnic = res.data.documents.Upload_Copy_of_CNIC;
 
             this.licenseDetail.past_days = 14 - res.data.past_days;
             this.licenseDetail.past_days_percentage = this.licenseDetail.past_days * 100 / 14;
@@ -158,6 +202,8 @@ export class LicensedetailPage {
             let progressBar = document.querySelector('#progressBar')
             progressBar?.setAttribute('aria-valuenow', Math.round(Number(res.data.percentage)).toString());
             progressBar?.setAttribute('style', `--value: ${Math.round(Number(res.data.percentage)).toString()}`);
+
+            console.log(this.licenseDetailDocument)
           } else {
             this.apiService.displayToast(
               res.msg,
@@ -175,6 +221,7 @@ export class LicensedetailPage {
   }
 
   onFileSelected(event: Event): void {
+
     const input = event.target as HTMLInputElement;
     const documentUniqueName = this.documentUniqueName;
     if (input && input.files) {
@@ -264,10 +311,14 @@ export class LicensedetailPage {
   }
 
   openModel(event: any, modaltype: any) {
-    console.log('data-pop value:', modaltype);
-    document.getElementById('model-container')?.classList.add('active');
+    if (this.statusCheck == 'New License' || this.statusCheck == 'Renew') {
+      document.getElementById('model-container')?.classList.add('active');
+      this.documentUniqueName = modaltype;
+    } else {
+      this.apiService.displayToast('Your document is already uploaded', 'bottom', 'toast-error', 'warning-outline', 'danger');
+      console.log('data-pop value:', modaltype);
+    }
 
-    this.documentUniqueName = modaltype;
   }
 
   closeModel() {
@@ -278,7 +329,7 @@ export class LicensedetailPage {
     var divContents = document.getElementById('divContents')?.innerHTML;
     let printWindow: any = window.open('', '', 'height=800,width=1000');
     printWindow.document.write(`<html><head><title>Reports</title>
-      <link rel="stylesheet" href="assets/licenseView.css">
+      <link rel="stylesheet" href="http://localhost:8100/assets/licenseView.css">
       <style>
       @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
       

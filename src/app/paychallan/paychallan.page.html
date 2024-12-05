@@ -10,89 +10,113 @@
           <h3>Challan Generated Successfully</h3>
         </div>
       </div>
-      <div id="divContents">
+
+      <div id="{{challan.id}}" class="{{challan.id}}">
         <div class="challan-content">
+
+          <div class="paid-unpaid" *ngIf="challan.Payment == 'Unpaid'">
+            <img src="http://localhost:8100/assets/img/unpaid.png" alt="" />
+          </div>
+
+          <div class="paid-unpaid" *ngIf="challan.Payment != 'Unpaid'">
+            <img src="http://localhost:8100/assets/img/paid.png" alt="" />
+          </div>
+
           <div class="water-mark">
-            <img src="http://localhost:8100/assets/img/watermark.png" alt="" />
+            <img src="http://localhost:8100/assets/img/bg-logo.png" alt="" />
           </div>
 
           <div class="top-logo">
             <div class="logo left-logo">
-              <img src="http://localhost:8100/assets/img/logo.png" alt="logo" />
+              <img src="http://localhost:8100/assets/img/logo-1.png" alt="logo" />
             </div>
+
+            <div class="centerHeading">
+              <h1>SINDH FOOD AUTHORITY</h1>
+              <h2>GOVERNMENT OF SINDH</h2>
+            </div>
+
+
             <div class="logo right-logo">
-              <img
-                src="http://localhost:8100/assets/img/logo-3.png"
-                alt="logo"
-              />
+              <img src="http://localhost:8100/assets/img/bg-logo.png" alt="logo" />
             </div>
           </div>
 
-          <h2>FOOD LICENSE FEE</h2>
 
           <div class="content">
-            <div class="d-flex justify-content-between w-100">
+            <div class="barCode-Controller d-flex justify-content-between w-100">
               <div class="left-side">
-                <strong>Deposit Slip No. </strong
-                ><span class="b-1">{{challan.Deposit_Slip_No}}</span>
+                <span>Deposit Slip No. </span><span class="b-1">{{challan.Deposit_Slip_No}}</span>
+              </div>
+              <div class="barCode">
+                <img src="{{domain}}{{challan.Bar_code}}" alt="logo" />
               </div>
               <div class="right-side">
-                <strong>Challan No. </strong
-                ><strong style="color: #dd0000" class="b-1">{{challan.Challan_ID}}</strong>
+                <span>Challan No. </span><strong style="color: #dd0000; width: 200px;"
+                  class="b-1">{{challan.Challan_ID}}</strong>
               </div>
             </div>
 
-            <div class="d-flex justify-content-between w-100">
+            <div class="mangerSindhBankLtd-container d-flex justify-content-between w-100">
               <div class="left-side mangerSindhBankLtd">
                 <div class="textMangerSindhBankLtd">
                   <p>The Manager,</p>
                   <p>Sindh Bank Ltd.</p>
                   <p>{{challan.challan[0].Bank_details}}</p>
                 </div>
-                <strong>Branch</strong>
+                <span>Branch</span>
               </div>
               <div class="right-side">
                 <div>
-                  <strong>Issue Date. </strong><span class="b-1">{{challan.issue_date}}</span>
+                  <span>Issuance Date. </span><span class="b-1">{{challan.issue_date}}</span>
                 </div>
                 <div>
-                  <strong>Valid Date. </strong><span class="b-1">{{challan.Valid_date}}</span>
+                  <span>Valid upto. </span><span class="b-1">{{challan.Valid_date}}</span>
                 </div>
               </div>
             </div>
 
-            <p>
-              Please receive the following am ato Sindh Food Authority account
-              No. 0303-509374-1000, title as ablishment of Sindh Food Authority
+            <p class="importanMessage" style="text-align: justify;">
+              Please receive the following amount for the credit to Sindh Food Authority Account
+              No. <span
+                style="background-color: black; color: white; border-radius: 10px 0px 10px 0px; padding: 1px 4px;">0303-509374-1000</span>,
+              in title as "Establishment of Sindh Food Authority
               Fund" being maintained at Sindh Bank Limited, Sindh Secretariat
               branch karachi from,
             </p>
 
             <div class="form">
               <div class="inputField mr-mrs">
-                <label for="mr-mrs">MR/Mrs</label>
-                <!-- <input type="text" value="{{applicantName}}" /> -->
-                 <span>{{applicantName}}</span>
+                <label for="mr-mrs">Ms./MS.</label>
+                <span>{{challan.Name_of_Applicant}}</span>
               </div>
 
               <div class="inputField firm">
-                <label for="firm">of M's (firm)</label>
-                 <span>{{Name_of_Food_Business}}</span>
-                </div>
+                <label for="firm">of M/S (firm)</label>
+                <span>{{challan.Name_of_Food_Business}}</span>
+              </div>
 
               <div class="inputField category">
-                <label for="firm">Category of Food Business</label>
-                 <span>{{categoryName}}</span>
-                </div>
+                <label for="firm">Category of Food Business.</label>
+                <span>{{challan.category.Category_Title}}</span>
+              </div>
 
               <div class="inputField address">
-                <label for="firm">Address</label>
-                 <span>{{address}}</span>
-                </div>
+                <label for="firm">Address.</label>
+                <span>{{challan.Address}}</span>
+              </div>
 
               <div class="inputField cnic">
-                <label for="firm">CNIC No#:</label>
-                 <span>{{CNIC}}</span>
+                <label for="firm">CNIC No.</label>
+                <div class="inputs">
+                  <ng-container *ngFor="let digit of challan.cnic; let i = index">
+                    <div #inputRef class="editable" [attr.contenteditable]="i !== 5 && i !== 13 ? 'true' : 'false'"
+                      [class.separator]="i === 5 || i === 13" [textContent]="digit" (input)="onInput($event, i)"
+                      (keydown)="onKeyDown(i, $event)">
+                      {{ i === 5 ? '-' : i === 13 ? '-' : '' }}
+                    </div>
+                  </ng-container>
+                </div>
               </div>
             </div>
 
@@ -102,59 +126,80 @@
                   <tr>
                     <th>Particulars of Payment</th>
                     <th>Amount</th>
-                    <th>Bank Details</th>
+                    <th>Details of Challan</th>
                   </tr>
                 </thead>
 
                 <tbody>
 
-                  <tr *ngFor="let sub_challan of challan.challan; let id = index">
-                    <td>{{id + 1}}. {{sub_challan.Particulars_of_Payment}}</td>
-                    <td><strong>Rs.{{sub_challan.Amount}}</strong></td>
+                  <tr *ngFor="let i of particular">
+                    <td>{{i.Particulars}}</td>
+
+                    <ng-container *ngIf="challan.challan.length > 0; else empty_td">
+                      
+                      <ng-container   *ngFor="let j of challan.challan">
+                        <td *ngIf="j.Particulars_of_Payment == i.Particulars">
+                          <strong>{{j.Amount}}</strong>
+                        </td>
+                        <td *ngIf="j.Particulars_of_Payment != i.Particulars">
+                         
+                        </td>
+                      </ng-container>
+                    </ng-container>
+                    
+                    <ng-template #empty_td>
+                      <td></td>
+                    </ng-template>
+             
+                    <td>{{i.details}}</td>
+                  </tr>
+
+                  <!-- <tr *ngFor="let challanFees of challan.challan">
+                    <td *ngIf="challanFees.Particulars_of_Payment == 'Renewal Fee'">License Fee</td>
+                    <td *ngIf="challanFees.Particulars_of_Payment == 'Renewal Fee'"><strong></strong></td>
+                    <td *ngIf="challanFees.Particulars_of_Payment == 'Renewal Fee'"></td>
+                  </tr>
+
+                  <tr *ngFor="let challanFees of challan.challan">
+                    <td>{{challanFees.Particulars_of_Payment}}</td>
+                    <td><strong>{{ challanFees.Amount}}</strong></td>
                     <td></td>
                   </tr>
 
+                  <tr *ngFor="let challanFees of challan.challan">
+                    <td *ngIf="challanFees.Particulars_of_Payment !== 'Renewal Fee'">Renewal Fee</td>
+                    <td *ngIf="challanFees.Particulars_of_Payment !== 'Renewal Fee'"><strong></strong></td>
+                    <td *ngIf="challanFees.Particulars_of_Payment !== 'Renewal Fee'"></td>
+                  </tr>
+                  
                   <tr>
-                    <td></td>
+                    <td>Penalty</td>
                     <td></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td rowspan="3" style="text-align: center">
-                      <div>
-                        <p style="font-size: 14px; margin: 0">
-                          Received Amount in cash P.O No
-                        </p>
-                      </div>
-                      <strong class="b-1">Rs.{{challan.total_amount}}/-</strong>
-                    </td>
-                  </tr>
-                  <tr>
+                    <td>Laboratory Testing Fee</td>
                     <td></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td>Total :</td>
-                    <td><strong>Rs.{{challan.total_amount}}</strong></td>
+                    <td>Food Product Registration Fee</td>
+                    <td></td>
+                    <td></td>
                   </tr>
-
+                  <tr>
+                    <td>Other</td>
+                    <td></td>
+                    <td style="text-align: center">Received Amount in cash P.O No</td>
+                  </tr>
+                  <tr>
+                    <td>Total Amount</td>
+                    <td></td>
+                    <td style="text-align: center">Cash Officer/Operation Manager</td>
+                  </tr> -->
                   <tr>
                     <td colspan="3">Amount to be paid Rs.{{challan.total_amount}}</td>
                   </tr>
-
                   <tr>
                     <td colspan="3">
                       In words Rupees : <strong>{{challan.in_word}}</strong>
@@ -166,57 +211,64 @@
 
             <div class="signature-bottom-content">
               <div class="inputField signature-one">
-                <label for="signature-one">Signature</label>
+                <label for="signature-one">Receiver Signature</label>
                 <span>&zwnj;</span>
               </div>
 
               <div class="inputField signature-two">
-                <label for="signature-two">Signature</label>
+                <label for="signature-two">Name of Officer</label>
                 <span>&zwnj;</span>
               </div>
 
               <div class="inputField dd-ops">
-                <label for="dd-ops">Name of DG OPS</label>
+                <label for="dd-ops">Contact No</label>
                 <span>&zwnj;</span>
               </div>
 
               <div class="inputField officer">
-                <label for="dd-ops">Officer</label>
+                <label for="dd-ops">Signature of Officer</label>
                 <span>&zwnj;</span>
               </div>
 
               <div class="inputField district">
                 <label for="district">District</label>
-                <span>{{districtName}}</span>
+                <span>&zwnj;</span>
               </div>
 
-              <div class="text">
-                <p style="margin: 0"><strong>Food Safety Officer</strong></p>
-                <p style="margin: 0"><strong>Authorized Officer</strong></p>
+              <div class="inputField district2">
+                <label for="district">District</label>
+                <span>{{challan.district.District_Name}}</span>
               </div>
+
+
+            </div>
+
+
+            <div class="location-address">
+              <p>
+                NO.PAS/Legis-B-12/2016- The Sindh Food Authority Bill, 2016 having been passed by the Provincial
+                Assembly of Sindh on 08th March, 2017 and assented to by the Governor of Sindh on 08th April, 2017 is
+                hereby published as an Act of the Legislature of Sindh
+              </p>
             </div>
           </div>
         </div>
       </div>
-
       <div class="bottom-content">
         <p>
           <strong class="note">Note: </strong>First, pay the challan, then in
           the next process, your license will be issued. Thank you.
         </p>
 
-        <div
-          class="challan-download-btn w-100 d-flex justify-content-center flex-direction-row align-items-center"
-        >
-          <ion-button (click)="myFunc()"
-            ><span>Print Challan</span>
+        <div class="challan-download-btn w-100 d-flex justify-content-center flex-direction-row align-items-center">
+          <ion-button (click)="myFunc($event, challan.id)"><span>Print Challan</span>
             <ion-icon name="print-outline"></ion-icon>
           </ion-button>
         </div>
       </div>
     </div>
 
-    
+
   </div>
 
 </ion-content>
@@ -226,10 +278,8 @@
   <ion-toolbar>
     <ion-title slot="start"></ion-title>
     <div class="bottom-submit-button" slot="end">
-      <ion-button routerLink="/uploaddocument/{{licenceId}}?renew=true"
-        >Upload Document
-        <span><ion-icon name="chevron-forward-outline"></ion-icon></span
-      ></ion-button>
+      <ion-button (click)="navigateOtherPage(licenceId)">Upload Document
+        <span><ion-icon name="chevron-forward-outline"></ion-icon></span></ion-button>
     </div>
   </ion-toolbar>
 </ion-footer>

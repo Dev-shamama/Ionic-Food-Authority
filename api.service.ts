@@ -18,8 +18,8 @@ import { Location } from '@angular/common';
 export class ApiService {
   // public domain = 'https://sfa.pythonanywhere.com';
   // localhost: string = 'https://sfa.pythonanywhere.com';
-  public domain = 'http://192.168.18.116:8888';
-  localhost: string = 'http://192.168.18.116:8888';
+  public domain = 'https://sfa.pythonanywhere.com';
+  localhost: string = 'https://sfa.pythonanywhere.com';
   
   previousUrl: string = '';
   plt: string;
@@ -54,7 +54,7 @@ export class ApiService {
       ? 'ios'
       : 'android';
     // this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
-    this.localhost = 'http://192.168.18.116:8888'; // put your IP here
+    this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
     
     // this.initStorage()
   }
@@ -967,6 +967,30 @@ export class ApiService {
           });
       });
     }
+
+    async FSOSearchLicenseAPI(access_token: string, data: any): Promise<any> {
+      return new Promise<any>((resolve) => {
+        const options = {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        };
+        fetch(`${this.localhost}/fso-search-license/`, options)
+          .then(async (response) => {
+            const data = await response.json();
+            resolve(data);
+          })
+          .catch((e) => {
+            resolve(e);
+          });
+      });
+    }
+
+
+    
 
     
 

@@ -33,7 +33,7 @@
                   <div class="item-icon">
                     <ion-icon name="cube-outline"></ion-icon>
                   </div>
-                  <div class="item-text">Apply For License</div>
+                  <div class="item-text">Apply For New License</div>
                 </div>
                 <div class="icon">
                   <ion-icon name="chevron-forward-outline"></ion-icon>
@@ -41,22 +41,7 @@
               </div>
             </ion-label>
           </ion-item>
-          <ion-item routerLink="/challanlist">
-            <ion-label>
-              <div class="item">
-                <div class="item-left-side">
-                  <div class="item-icon">
-                    <ion-icon name="list-outline"></ion-icon>
-                  </div>
-                  <div class="item-text">Challan List</div>
-                </div>
-                <div class="icon">
-                  <ion-icon name="chevron-forward-outline"></ion-icon>
-                </div>
-              </div>
-            </ion-label>
-          </ion-item>
-
+  
           <ion-item routerLink="/sfo" *ngIf="designation == 'FSO'">
             <ion-label>
               <div class="item">
@@ -72,7 +57,7 @@
               </div>
             </ion-label>
           </ion-item>
-          <ion-item routerLink="/licensedetail">
+          <!-- <ion-item routerLink="/licensedetail">
             <ion-label>
               <div class="item">
                 <div class="item-left-side">
@@ -86,7 +71,24 @@
                 </div>
               </div>
             </ion-label>
+          </ion-item> -->
+
+          <ion-item routerLink="/challanlist">
+            <ion-label>
+              <div class="item">
+                <div class="item-left-side">
+                  <div class="item-icon">
+                    <ion-icon name="list-outline"></ion-icon>
+                  </div>
+                  <div class="item-text">License Fees Details</div>
+                </div>
+                <div class="icon">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </div>
+              </div>
+            </ion-label>
           </ion-item>
+
           <ion-item routerLink="/verificationprocess">
             <ion-label>
               <div class="item">

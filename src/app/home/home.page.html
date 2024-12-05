@@ -8,7 +8,7 @@
       <div class="quick-item quick-item-1">
         <div class="left-side">
           <div class="text">
-            <h4>Total Approved</h4>
+            <h4>Finalized/Delivered</h4>
           </div>
           <div class="icon">
             <ion-icon name="list-circle-outline"></ion-icon>
@@ -57,6 +57,7 @@
 
       <div class="license-item-content">
         <div class="notFound" *ngIf="licenseList.length == 0">
+          <img src="./assets/img/licenseFound.png" alt="">
           <h3>License Not Found</h3>
         </div>
         <div class="license-item" *ngFor="let license of licenseList">
@@ -76,34 +77,37 @@
               </p>
             </div>
             <div class="right-side">
-              <h5>License Status</h5>
-              <h4 class="approved"
-                [ngStyle]="{ 'color': license.Status === 'Reject' || license.Status === 'Expired'? 'red' : 'green' }">
-                {{license.Status}}</h4>
+              <div><h5>License Status</h5>
+                <h4 class="approved" [ngStyle]="{ 'color': license.Status === 'Reject' ? 'red' : 'green' }">
+                  {{license.Status}}</h4></div>
+                  <div class="qr-barcode">
+                    <img  class="qrcode" src="{{domain}}{{license.QR_code}}" alt="">
+                    <img  class="barcode" src="{{domain}}{{license.Bar_code}}" alt="">
+                  </div>
             </div>
           </div>
 
           <div class="bottom-content">
             <div class="left-side">
+              <span class="item">Issue Date :
+                <span class="">{{license.date.slice(0, 10)}}</span>
+              </span>
               <span class="item">Expiry Date :
-                <span class="license-expiry">{{license.Expiry_date}}</span></span>
+                <span class="license-expiry">{{license.Expiry_date == null ? "0000-00-00" : license.Expiry_date}}</span>
+              </span>
+              <span class="item">District :
+                <span class="">{{license.district.District_Name}}</span>
+              </span>
             </div>
             <div class="right-side">
 
-              <button type="button" class="btn btn-primary renew-btn" *ngIf="license.Status !== 'Renew'">
+              <button type="button" class="btn btn-primary renew-btn" style="background-color: #ec0a0a"
+                *ngIf="license.Status !== 'Renew' && license.Expiry_date == 'Expired' ">
                 <div class="text" routerLink="/update-license/{{license.id}}">
                   Renew
                 </div>
                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
               </button>
-
-              <button type="button" class="btn btn-primary challan-btn">
-                <div class="text" routerLink="/paychallan/{{license.id}}">
-                  Challan
-                </div>
-                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-              </button>
-
 
               <button type="button" class="btn btn-secondary view-btn">
                 <div class="text" routerLink="/licensedetail/{{license.id}}">
@@ -111,6 +115,14 @@
                 </div>
                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>
               </button>
+
+              <button type="button" class="btn btn-primary challan-btn" style="background-color: #d29d21">
+                <div class="text" routerLink="/paychallan/{{license.id}}">
+                  Challan
+                </div>
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+              </button>
+
             </div>
           </div>
         </div>

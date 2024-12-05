@@ -22,10 +22,20 @@ export class RenewuploaddocumentPage {
   }
 
   uploadBase64: {
+    cnic: any;
+    document_of_property: any;
+    Previous_Registration: any;
     Copy_of_Challan_form: any;
+    Lab_testing_reports: any;
+    Medical_reports: any;
   } = {
-      Copy_of_Challan_form: null,
-    };
+    cnic: null,
+    document_of_property: null,
+    Previous_Registration: null,
+    Copy_of_Challan_form: null,
+    Lab_testing_reports: null,
+    Medical_reports: null,
+  };
 
 
 
@@ -113,6 +123,7 @@ export class RenewuploaddocumentPage {
             this.licenceId
           )
           .then(async (res: any) => {
+            console.log(res)
             this.MainApp.hideLoading();
             if (res.reponse_type == "success") {
               this.route.navigate(['/success'])
