@@ -123,7 +123,7 @@ ion-content {
 
     .paid-unpaid {
       position: absolute;
-      top: 87px;
+      top: 95px;
       left: 50%;
       transform: translate(-50%, 0px);
       width: 107px;
@@ -161,7 +161,9 @@ ion-content {
       .centerHeading {
         display: flex;
         flex-direction: column;
-
+        h5 {
+          margin: 0;
+        }
         h1 {
           font-weight: 800;
           font-size: 36px;

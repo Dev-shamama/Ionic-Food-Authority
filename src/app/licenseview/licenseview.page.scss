@@ -77,8 +77,8 @@ ion-content {
   align-items: center;
 
   .border-image {
-    width: 8.3in;
-    height: 11.7in;
+    width: 8.5in;
+    height: 11in;
     border: 1.5px solid #000000;
     padding: 78px;
     display: flex;
@@ -89,7 +89,7 @@ ion-content {
     position: relative;
     background-image: url(http://localhost:8100/assets/img/SFA_LICENSE_BG.png);
     background-repeat: none;
-    background-size: contain;
+    background-size: 100% 100%;
 
     .challan-content {
       width: 100%;
@@ -258,7 +258,7 @@ ion-content {
           flex-direction: row;
           // margin-top: 80px;
           // padding: 35px 30px 0 54px;
-          padding: 60px 0px 0 38px;
+          padding: 50px 0px 0 38px;
 
           .qrCode {
             margin-right: 20px;
@@ -272,10 +272,24 @@ ion-content {
             }
           }
           .ownerName {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .signature {
+              width: 120px;
+              img {
+                object-fit: contain;
+              }
+            }
+
             h3 {
               margin: 0;
               font-family: "Merriweather", serif;
               font-weight: bold;
+            }
+            p {
+              margin: 0;
             }
           }
         }

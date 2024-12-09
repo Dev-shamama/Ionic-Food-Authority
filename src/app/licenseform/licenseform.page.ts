@@ -37,7 +37,7 @@ export class LicenseformPage {
     salesTax: null,
     areaMeasurement: null,
     address: null,
-    sureAnswer: 'Yes',
+    // sureAnswer: 'Yes',
     registrationName: null,
   };
 

@@ -6,7 +6,6 @@
 .w-100 {
   width: 100%;
 }
-`
 .d-flex {
   display: flex;
 }
@@ -36,8 +35,8 @@
 }
 
 .border-image {
-  width: 8.3in;
-  height: 11.7in;
+  width: 8.5in;
+  height: 11in;
   border: 1.5px solid #000000;
   padding: 78px;
   display: flex;
@@ -48,7 +47,7 @@
   position: relative;
   background-image: url(http://localhost:8100/assets/img/SFA_LICENSE_BG.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
 }
 
 .border-image .challan-content {
@@ -64,7 +63,7 @@
   width: 700px;
 }
 
-.barCode{
+.barCode {
   margin: 20px 0;
 }
 
@@ -133,7 +132,11 @@
   margin: 10px 0;
 }
 
-.border-image .challan-content .content .mangerSindhBankLtd .textMangerSindhBankLtd {
+.border-image
+  .challan-content
+  .content
+  .mangerSindhBankLtd
+  .textMangerSindhBankLtd {
   text-align: left;
   border-bottom: 1.5px solid #000000;
   padding: 24px 0 17px 0;
@@ -222,4 +225,17 @@
   margin: 0;
   font-family: "Merriweather", serif;
   font-weight: bold;
+}
+
+.border-image .challan-content .content .bottom-stamp .ownerName p {
+  margin: 0;
+}
+.border-image
+  .challan-content
+  .content
+  .bottom-stamp
+  .ownerName
+  .signature
+  img {
+  width: 120px;
 }

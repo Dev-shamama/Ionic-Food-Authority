@@ -180,7 +180,6 @@ ion-modal {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
       gap: 8px;
-      margin-bottom: 60px;
 
       .inputField.applicant {
         grid-column: span 8 / span 8;
@@ -276,7 +275,6 @@ ion-modal {
     }
 
     .date-of-registration {
-      border-top: 1.5px solid black;
       border-bottom: 1.5px solid black;
       display: flex;
       justify-content: space-between;
@@ -298,7 +296,6 @@ ion-modal {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(3, 1fr);
       gap: 8px;
       margin: 15px auto;
 
