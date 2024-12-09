@@ -211,5 +211,35 @@ export class LicenseformPage {
       });
   }
 
+  getCategoryArea() {
+    this.apiService
+    .getToken()
+    .then((e: any) => {
+      this.apiService
+        .getCategoryAreaAPI(e.access_token, this.dataset.category)
+        .then(async (res: any) => {
+          this.MainApp.hideLoading();
+          console.log("res", res)
+          if (res.reponse_type == 'success') {
+            this.apiService.displayToast(
+              res.msg,
+              'bottom',
+              'toast-succes',
+              'checkmark-circle-sharp',
+              'success'
+            );
+          }
+        })
+        .catch(async (err: any) => {
+          this.MainApp.hideLoading();
+          console.log(err);
+        });
+    })
+    .catch((err: any) => {
+      this.MainApp.hideLoading();
+      console.error(err);
+    });
+  }
+
   
 }

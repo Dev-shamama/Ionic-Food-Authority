@@ -187,7 +187,7 @@
             <div class="inputField category">
 
 
-              <ion-select [(ngModel)]="dataset.category" name="category" required label="Category" interface="popover"
+              <ion-select [(ngModel)]="dataset.category" name="category" (ionChange)="getCategoryArea()" required label="Category" interface="popover"
                 fill="solid" label-placement="floating" fill="solid" >
                 <ion-select-option  *ngFor="let category of categoryList" value="{{ category.id }}">{{ category.Category_Title }}</ion-select-option>
               </ion-select>

@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from 'api.service';
 import { AppComponent } from '../app.component';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-profile',
@@ -58,7 +57,6 @@ export class ProfilePage {
     public menuBar: MenuController,
     private apiService: ApiService,
     public MainApp: AppComponent,
-    private recaptchaV3Service: ReCaptchaV3Service
   ) {
     this.getProfile();
   }
@@ -66,11 +64,6 @@ export class ProfilePage {
   editClick() {
     this.userProfileStatus = false;
     this.userProfileBtnStatus = false;
-
-    this.recaptchaV3Service.execute('importantAction')
-    .subscribe((token: string) => {
-      console.log(`Token [${token}] generated`);
-    });
   }
 
   normalClick() {
@@ -197,5 +190,6 @@ export class ProfilePage {
       this.passwordDataset.newPassword === this.passwordDataset.confirmPassword
     );
   }
+
 
 }

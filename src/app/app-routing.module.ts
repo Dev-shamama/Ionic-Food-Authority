@@ -146,7 +146,8 @@ const routes: Routes = [
   {
     path: 'ui',
     loadChildren: () => import('./ui/ui.module').then( m => m.UiPageModule)
-  },
+  }
+
 
 
 

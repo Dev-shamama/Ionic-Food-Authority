@@ -3,6 +3,7 @@ import { ApiService } from 'api.service';
 import { Router } from '@angular/router';
 import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
 import { LoadingController } from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -42,7 +43,11 @@ export class AppComponent {
     this.getDistrict()
     this.getCategory();
     this.getNature()
+
   }
+
+
+
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
