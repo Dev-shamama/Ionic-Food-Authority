@@ -120,9 +120,17 @@ export class LicensedetailPage {
               const currentDate = new Date();
               const endDate = new Date(res.data[0].Expiry_date);
 
-              this.licenseDetail.Expiry_date = this.convertDate(
-                res.data[0].Expiry_date
-              );
+              console.log(res.data[0].Expiry_date)
+
+              if (res.data[0].Expiry_date == null) {
+                this.licenseDetail.Expiry_date = null;
+              }else{
+    
+                  this.licenseDetail.Expiry_date = this.convertDate(
+                    res.data[0].Expiry_date
+                  );
+
+              }
 
               const s: number = endDate.getTime() - currentDate.getTime();
 
@@ -311,7 +319,7 @@ export class LicensedetailPage {
   }
 
   openModel(event: any, modaltype: any) {
-    if (this.statusCheck == 'New License' || this.statusCheck == 'Renew') {
+    if (this.statusCheck == 'In Process' || this.statusCheck == 'Renew') {
       document.getElementById('model-container')?.classList.add('active');
       this.documentUniqueName = modaltype;
     } else {

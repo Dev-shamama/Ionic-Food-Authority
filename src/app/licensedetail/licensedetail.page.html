@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="model-container" id="model-container" [ngStyle]="{'display': (statusCheck == 'New License' || statusCheck == 'Renew') ? 'block' : 'none'}">
+  <div class="model-container" id="model-container" [ngStyle]="{'display': (statusCheck == 'In Process' || statusCheck == 'Renew') ? 'block' : 'none'}">
     <div class="modal">
       <div class="modal-header">
         <div class="modal-logo">
@@ -216,7 +216,7 @@
 
         </div>
 
-        <div *ngIf="this.statusCheck == 'New License' || this.statusCheck == 'Renew'" class="s" style="display: flex; justify-content: center; align-items: center">
+        <div *ngIf="this.statusCheck == 'In Process' || this.statusCheck == 'Renew'" class="s" style="display: flex; justify-content: center; align-items: center">
           <div></div>
 
           <ion-button class="most-used" (click)="uploadDocument()" type="button"><ion-icon
@@ -257,7 +257,8 @@
       <div class="item expiredDate">
         <h4 class="title">Expiry Date</h4>
         <h2 class="date" *ngIf="licenseDetail.remainingAllDays != 0">{{licenseDetail.Expiry_date}}</h2>
-        <h4 class="totalDay" *ngIf="licenseDetail.remainingAllDays == 0">License Expired</h4>
+        <h4 class="totalDay" *ngIf="licenseDetail.Expiry_date != null && licenseDetail.remainingAllDays == 0">License Expired</h4>
+        <h4 class="totalDay" *ngIf="licenseDetail.Expiry_date == null">----/--/--</h4>
 
         <h4 class="totalRemaining">Total Remaining Days</h4>
         <h4 class="totalDay">{{licenseDetail.remainingAllDays}} Day</h4>
@@ -270,7 +271,7 @@
           </div>
         </div>
 
-        <div class="btn-container" *ngIf="licenseDetail.remainingAllDays == 0 && statusCheck != 'Renew'">
+        <div class="btn-container" *ngIf="licenseDetail.Expiry_date != null && licenseDetail.remainingAllDays == 0 && statusCheck != 'Renew'">
           <ion-button class="most-used" routerLink="/update-license/{{id}}">
             <span>Renew</span>
             <ion-icon name="refresh-outline"></ion-icon>

@@ -26,7 +26,7 @@ export class SfocPage implements OnInit {
   ngOnInit() {
     this.menuBar.close();
     this.domain = this.apiService.domain
-    this.FSOGetAllLicense();
+    // this.FSOGetAllLicense();
 
     this.getDashboardDetails();
   }

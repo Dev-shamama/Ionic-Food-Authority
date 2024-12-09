@@ -49,7 +49,10 @@
             <div class="right-side">
               <div><h5>License Status</h5>
                 <h4 class="approved" [ngStyle]="{ 'color': license.Status === 'Reject' ? 'red' : 'green' }">
-                  {{license.Status}}</h4></div>
+                  {{license.Status}}
+                  
+                  <div class="reject_info" *ngIf="license.Status === 'Reject'" >{{license.rejection_reasons}}</div>
+                </h4></div>
                   <div class="qr-barcode">
                     <img  class="qrcode" src="{{domain}}{{license.QR_code}}" alt="">
                     <img  class="barcode" src="{{domain}}{{license.Bar_code}}" alt="">

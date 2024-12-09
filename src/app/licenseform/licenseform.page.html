@@ -219,8 +219,8 @@
 
             <div class="inputField srb">
               <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.srb" name="srb" type="number" required label="SRB"
-                  label-placement="floating" fill="solid" placeholder="Auto SRB" readonly></ion-input>
+                <ion-input [(ngModel)]="dataset.srb" name="srb" type="number" required label="SRB %"
+                  label-placement="floating" fill="solid" placeholder="SRB" readonly></ion-input>
               </ion-item>
             </div>
 
@@ -233,7 +233,7 @@
 
             <div class="inputField area">
               <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="number" (input)="autoSRB()" required
+                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="number" (change)="autoSRB()" required
                   label="Area Measurement (sq. ft)" label-placement="floating" fill="solid"
                   placeholder="Enter Your Area Measurement (sq. ft)"></ion-input>
               </ion-item>
