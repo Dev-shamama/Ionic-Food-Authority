@@ -918,10 +918,24 @@ ion-button.most-used {
           }
         }
         .ownerName {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          .signature {
+            width: 120px;
+            img {
+              object-fit: contain;
+            }
+          }
+
           h3 {
             margin: 0;
             font-family: "Merriweather", serif;
             font-weight: bold;
+          }
+          p {
+            margin: 0;
           }
         }
       }

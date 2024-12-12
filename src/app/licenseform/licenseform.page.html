@@ -176,7 +176,7 @@
 
             <div class="inputField nature">
 
-              <ion-select [(ngModel)]="dataset.natureBusiness" (input)="autoSRB()" name="natureBusiness" required label="Nature of Business"
+              <ion-select [(ngModel)]="dataset.natureBusiness" name="natureBusiness" (ionChange)="getCategoryNature($event)" required label="Nature of Business"
                 interface="popover" fill="solid" label-placement="floating" fill="solid" >
                 <ion-select-option  *ngFor="let nature of natureList" value="{{ nature.id }}">{{ nature.Nature_of_Business_Title }}</ion-select-option>
               </ion-select>
@@ -195,12 +195,20 @@
             </div>
 
             <div class="inputField district">
+
               <ion-select [(ngModel)]="dataset.district" name="district" required label="District" interface="popover"
                 fill="solid" label-placement="floating" fill="solid">
                 <ion-select-option *ngFor="let distric of districList" value="{{ distric.id }}">{{ distric.District_Name }}</ion-select-option>
-
               </ion-select>
 
+            </div>
+
+            
+            <div class="inputField area">
+              <ion-select [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" (ionChange)="setSRBAndSalesTax($event)" required label="Enter Your Area Measurement (sq. ft)" interface="popover"
+                fill="solid" label-placement="floating" fill="solid">
+                <ion-select-option *ngFor="let areaMeasurement of AreaMeasurementList" value="{{ areaMeasurement.id }}">{{ areaMeasurement.Size_Covered_Area_SQ_FT_From }} To {{ areaMeasurement.Size_Covered_Area_SQ_FT_TO }}</ion-select-option>
+              </ion-select>
             </div>
 
             <div class="inputField secp">
@@ -227,15 +235,7 @@
             <div class="inputField tax">
               <ion-item class="no-border">
                 <ion-input [(ngModel)]="dataset.salesTax" name="salesTax" type="number" required label="SALES TAX"
-                  label-placement="floating" fill="solid" placeholder="Enter TAX"></ion-input>
-              </ion-item>
-            </div>
-
-            <div class="inputField area">
-              <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="number" (change)="autoSRB()" required
-                  label="Area Measurement (sq. ft)" label-placement="floating" fill="solid"
-                  placeholder="Enter Your Area Measurement (sq. ft)"></ion-input>
+                  label-placement="floating" fill="solid" placeholder="Enter TAX" readonly></ion-input>
               </ion-item>
             </div>
 
@@ -274,7 +274,7 @@
             </div>
           </div>
 
-          <div id="license_form_bottom">
+          <!-- <div id="license_form_bottom">
             <div class="inputField registrationName">
               <ion-item class="no-border">
                 <ion-input [(ngModel)]="dataset.registrationName" name="registrationName" type="text" required
@@ -284,7 +284,7 @@
             </div>
 
     
-          </div>
+          </div> -->
 
           <div class="restaurant-section">
             <p>

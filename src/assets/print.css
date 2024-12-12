@@ -41,6 +41,8 @@
   text-align: center;
   flex-direction: column;
   position: relative;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 
   .importanMessage {
     margin: 15px 0;
@@ -69,7 +71,7 @@
 
   .paid-unpaid {
     position: absolute;
-    top: 82px;
+    top: 92px;
     left: 50%;
     transform: translate(-50%, 0px);
   
@@ -311,10 +313,15 @@
 
     .location-address {
       border-top: 3px solid black;
-
       p {
         margin-top: 8px;
         text-align: justify;
+      }
+      p.computerized {
+        text-align: center !important;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
       }
     }
   }

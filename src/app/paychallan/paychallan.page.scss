@@ -2,13 +2,6 @@ ion-content {
   --background: #eaeaea;
 }
 
-// Challan Print Content
-// #divContents {
-//   display: none;
-// }
-
-// Challan Print Content
-
 .w-100 {
   width: 100%;
 }
@@ -98,6 +91,8 @@ ion-content {
     text-align: center;
     flex-direction: column;
     position: relative;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 
     .mangerSindhBankLtd-container {
       .right-side {
@@ -130,17 +125,6 @@ ion-content {
       z-index: 1;
       }
 
-    .water-mark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -10%);
-
-      img {
-        opacity: 0.1;
-        transform: scale(1.4)
-      }
-    }
 
     .top-logo {
       width: 100%;
@@ -376,7 +360,15 @@ ion-content {
 
         p {
           margin-top: 8px;
+          margin-bottom: 0;
           text-align: justify;
+        }
+
+        p.computerized {
+          text-align: center !important;
+          margin: 0;
+          font-size: 16px;
+          font-weight: 600;
         }
       }
     }

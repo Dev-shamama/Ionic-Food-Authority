@@ -12,7 +12,7 @@
       </div>
 
       <div id="{{challan.id}}" class="{{challan.id}}">
-        <div class="challan-content">
+        <div class="challan-content" style="background-image: url(http://localhost:8100/assets/img/challan-bg.png);">
 
           <div class="paid-unpaid" *ngIf="challan.Payment == 'Unpaid'">
             <img src="http://localhost:8100/assets/img/unpaid.png" alt="" />
@@ -20,10 +20,6 @@
 
           <div class="paid-unpaid" *ngIf="challan.Payment != 'Unpaid'">
             <img src="http://localhost:8100/assets/img/paid.png" alt="" />
-          </div>
-
-          <div class="water-mark">
-            <img src="http://localhost:8100/assets/img/bg-logo.png" alt="" />
           </div>
 
           <div class="top-logo">
@@ -111,9 +107,8 @@
                 <label for="firm">CNIC No.</label>
                 <div class="inputs">
                   <ng-container *ngFor="let digit of challan.cnic; let i = index">
-                    <div #inputRef class="editable" [attr.contenteditable]="i !== 5 && i !== 13 ? 'true' : 'false'"
-                      [class.separator]="i === 5 || i === 13" [textContent]="digit" (input)="onInput($event, i)"
-                      (keydown)="onKeyDown(i, $event)">
+                    <div #inputRef class="editable" [class.separator]="i === 5 || i === 13" [textContent]="digit" (input)="onInput($event, i)"
+                      (keydown)="onKeyDown(i, $event)" readonly>
                       {{ i === 5 ? '-' : i === 13 ? '-' : '' }}
                     </div>
                   </ng-container>
@@ -207,7 +202,10 @@
                 Assembly of Sindh on 08th March, 2017 and assented to by the Governor of Sindh on 08th April, 2017 is
                 hereby published as an Act of the Legislature of Sindh
               </p>
+              <p class="computerized">Computerized Challan Generated</p>
             </div>
+
+
           </div>
         </div>
       </div>

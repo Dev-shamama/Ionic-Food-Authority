@@ -16,8 +16,8 @@ import { Location } from '@angular/common';
   providedIn: 'root',
 })
 export class ApiService {
-  public domain = 'http://192.168.18.116:8888';
-  localhost: string = 'http://192.168.18.116:8888';
+  public domain = 'http://192.168.18.116:9999';
+  localhost: string = 'http://192.168.18.116:9999';
   // public domain = 'https://sfa.pythonanywhere.com';
   // localhost: string = 'https://sfa.pythonanywhere.com';
   
@@ -53,7 +53,7 @@ export class ApiService {
       : this.platform.is('ios')
       ? 'ios'
       : 'android';
-    this.localhost = 'http://192.168.18.116:8888'; // put your IP here
+    this.localhost = 'http://192.168.18.116:9999'; // put your IP here
     // this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
     
     // this.initStorage()
@@ -1000,6 +1000,27 @@ export class ApiService {
           },
         };
         fetch(`${this.localhost}/get-cate-area/${id}/`, options)
+          .then(async (response) => {
+            const data = await response.json();
+            resolve(data);
+          })
+          .catch((e) => {
+            resolve(e);
+          });
+      });
+    }
+
+
+    async getCategoryNatureAPI(access_token: string, id: any): Promise<any> {
+      return new Promise<any>((resolve) => {
+        const options = {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            'Content-Type': 'application/json',
+          },
+        };
+        fetch(`${this.localhost}/get-nature-cate/${id}/`, options)
           .then(async (response) => {
             const data = await response.json();
             resolve(data);

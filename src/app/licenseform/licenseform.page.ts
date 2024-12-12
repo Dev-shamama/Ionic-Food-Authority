@@ -17,12 +17,13 @@ export class LicenseformPage {
   natureList: any[] = [];
   categoryList: any[] = [];
   districList: any[] = [];
+  AreaMeasurementList: any[] = [];
 
-  natureBusinessName:any;
-  categoryName:any;
-  districtName:any;
+  natureBusinessName: any;
+  categoryName: any;
+  districtName: any;
 
-  dataset:any = {
+  dataset: any = {
     applicant: null,
     cnic: null,
     phone: null,
@@ -38,7 +39,7 @@ export class LicenseformPage {
     areaMeasurement: null,
     address: null,
     // sureAnswer: 'Yes',
-    registrationName: null,
+    // registrationName: null,
   };
 
   constructor(
@@ -49,12 +50,11 @@ export class LicenseformPage {
     this.getNature();
     this.getCategory();
     this.getDistric();
-    this.autoSRB();
+    // this.autoSRB();
   }
 
-  cardMask = this.MainApp.cardMask
-  maskPredicate = this.MainApp.maskPredicate
-
+  cardMask = this.MainApp.cardMask;
+  maskPredicate = this.MainApp.maskPredicate;
 
   getNature() {
     this.apiService
@@ -119,48 +119,6 @@ export class LicenseformPage {
       });
   }
 
-  autoSRB() {
-    if (!this.dataset.natureBusiness || !this.dataset.areaMeasurement) {
-      console.log('Input fields are empty. Skipping API call.');
-      return;
-    }
-    let s = {
-      nature_id: this.dataset.natureBusiness,
-      areaMeasurement: this.dataset.areaMeasurement,
-    };
-    console.log(s);
-
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getAutoSRB(e.access_token, {
-            nature_id: this.dataset.natureBusiness,
-            areaMeasurement: this.dataset.areaMeasurement,
-          })
-          .then((res: any) => {
-  
-            if (res.reponse_type === 'success') {
-              this.dataset.srb = res.data.Srb_in_percent;
-            }else{
-              this.dataset.srb = null
-              this.apiService.displayToast(
-                res.msg,  
-                'bottom', 
-                'toast-error', 
-                'close-circle-sharp', 
-                'danger')
-            }
-
-          })
-          .catch((err: any) => {
-            console.error('Error fetching Auto SRB:', err);
-          });
-      })
-      .catch((err: any) => {
-        console.error('Error getting token:', err);
-      });
-  }
 
   isModalOpen = false;
 
@@ -213,33 +171,71 @@ export class LicenseformPage {
 
   getCategoryArea() {
     this.apiService
-    .getToken()
-    .then((e: any) => {
-      this.apiService
-        .getCategoryAreaAPI(e.access_token, this.dataset.category)
-        .then(async (res: any) => {
-          this.MainApp.hideLoading();
-          console.log("res", res)
-          if (res.reponse_type == 'success') {
-            this.apiService.displayToast(
-              res.msg,
-              'bottom',
-              'toast-succes',
-              'checkmark-circle-sharp',
-              'success'
-            );
-          }
-        })
-        .catch(async (err: any) => {
-          this.MainApp.hideLoading();
-          console.log(err);
-        });
-    })
-    .catch((err: any) => {
-      this.MainApp.hideLoading();
-      console.error(err);
-    });
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .getCategoryAreaAPI(e.access_token, this.dataset.category)
+          .then(async (res: any) => {
+            this.MainApp.hideLoading();
+            if (res.reponse_type == 'success') {
+              console.log('res', res);
+              if (res.data.license_fee[0].licensefee.length > 0) {
+                this.AreaMeasurementList = res.data.license_fee[0].licensefee;
+                this.dataset.areaMeasurement = '';
+                this.dataset.srb = '';
+                this.dataset.salesTax = '';
+              } else {
+                let fromArea =
+                  res.data.license_fee[0].Size_Covered_Area_SQ_FT_From;
+                let toArea = res.data.license_fee[0].Size_Covered_Area_SQ_FT_TO;
+
+                this.AreaMeasurementList = res.data.license_fee;
+                this.dataset.areaMeasurement = `${fromArea} TO ${toArea}`;
+                this.dataset.srb = res.data.license_fee[0].SRB;
+                this.dataset.salesTax = res.data.license_fee[0].Total_License_Fee;
+              }
+            }
+          })
+          .catch(async (err: any) => {
+            this.MainApp.hideLoading();
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        this.MainApp.hideLoading();
+        console.error(err);
+      });
   }
 
-  
+  setSRBAndSalesTax(e: any) {
+    let id = e.detail.value;
+    let setAreaMeasurementListDummy = this.AreaMeasurementList.filter((item: any) =>item.id == id)
+    this.dataset.srb = setAreaMeasurementListDummy[0].SRB;
+    this.dataset.salesTax = setAreaMeasurementListDummy[0].Total_License_Fee;
+  }
+
+
+  getCategoryNature(id: any) {
+    this.apiService
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .getCategoryNatureAPI(e.access_token, id)
+          .then(async (res: any) => {
+            this.MainApp.hideLoading();
+            if (res.reponse_type == 'success') {
+              console.log('res', res);
+            }
+          })
+          .catch(async (err: any) => {
+            this.MainApp.hideLoading();
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        this.MainApp.hideLoading();
+        console.error(err);
+      });
+  }
+   
 }
