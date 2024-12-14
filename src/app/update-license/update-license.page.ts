@@ -10,6 +10,9 @@ import { AppComponent } from '../app.component';
 })
 export class UpdateLicensePage {
   formSubmitted = false;
+  updateForm = false;
+  id: any;
+  statusCheck: any = '';
 
   @ViewChild('licenseForm')
   licenseForm: NgForm | undefined;
@@ -17,13 +20,28 @@ export class UpdateLicensePage {
   natureList: any[] = [];
   categoryList: any[] = [];
   districList: any[] = [];
-  
-  id: any;
-  natureBusinessName:any;
-  categoryName:any;
-  districtName:any;
+  AreaMeasurementList: any[] = [];
 
-  dataset:any = {
+  natureBusinessName: any;
+  categoryName: any;
+  districtName: any;
+
+  dataset: {
+    applicant: any;
+    cnic: any;
+    phone: any;
+    cell: any;
+    foodBusiness: any;
+    natureBusiness: any;
+    category: any;
+    district: any;
+    secp: any;
+    ntn: any;
+    srb: any;
+    salesTax: any;
+    areaMeasurement: any;
+    address: any;
+  } = {
     applicant: null,
     cnic: null,
     phone: null,
@@ -38,132 +56,113 @@ export class UpdateLicensePage {
     salesTax: null,
     areaMeasurement: null,
     address: null,
-    // sureAnswer: 'Yes',
-    registrationName: null,
   };
 
   constructor(
     private router: Router,
     private apiService: ApiService,
     public MainApp: AppComponent,
-    private urlParam: ActivatedRoute,
+    private urlParam: ActivatedRoute
   ) {
-    this.id = this.urlParam.snapshot.paramMap.get('id');
-    this.getNature();
-    this.getCategory();
-    this.getDistric();
-    this.autoSRB();
+    this.urlParam.queryParams.subscribe((params) => {
+      if (params['update'] === 'true') {
+        this.updateForm = true;
+        this.id = params['id'];
+        this.getLicenseDetails(params['id']);
+      } else {
+        this.id = params['id'];
+        this.getLicenseDetails(params['id']);
+        this.updateForm = false;
+      }
+    });
+
+    this.districList = this.MainApp.districtList;
+    this.natureList = this.MainApp.natureList;
   }
 
-  cardMask = this.MainApp.cardMask
-  maskPredicate = this.MainApp.maskPredicate
-
-
-  getNature() {
+  getLicenseDetails(id: any) {
+    // this.MainApp.showLoading();
     this.apiService
       .getToken()
       .then((e: any) => {
         this.apiService
-          .getNatureList(e.access_token)
+          .getLicenseDetailsAPI(e.access_token, id)
           .then(async (res: any) => {
-            console.log(res);
-            if (res.reponse_type == 'success') {
-              this.natureList = res.data;
+            console.log('res', res);
+
+            let isExpired = this.MainApp.checkExpiryDate(
+              res.data[0].Expiry_date || ''
+            );
+
+            let statusList = this.MainApp.status_list;
+            let checkStatus = statusList.find(
+              (i: any) => i.id == res.data[0].Status
+            );
+
+            if (this.updateForm === true) {
+              if (checkStatus.Status_Name === 'Pending' || res.Review === 'Reject') {
+                return; // Prevent navigation
+              } else {
+                this.router.navigate(['/home']);
+              }
+            } else if (this.updateForm === false) {
+              if (isExpired.status === 'Expired') {
+                return; // Prevent navigation
+              } else {
+                this.router.navigate(['/home']);
+              }
             }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
-
-  getCategory() {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getCategoryList(e.access_token)
-          .then(async (res: any) => {
-            console.log(res);
+            
+            this.MainApp.hideLoading();
             if (res.reponse_type == 'success') {
-              this.categoryList = res.data;
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
+              // Fetch status data
+              let statusList = this.MainApp.status_list;
+              this.statusCheck = statusList.filter((stat: any) => {
+                if (stat.id == res.data[0].Status) {
+                  return stat.Status_Name;
+                }
+              });
 
-  getDistric() {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getDistricList(e.access_token)
-          .then(async (res: any) => {
-            console.log(res);
-            if (res.reponse_type == 'success') {
-              this.districList = res.data;
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
+              this.dataset.cnic = res.data[0].CNIC;
+              this.dataset.applicant = res.data[0].Name_of_Applicant;
+              this.dataset.phone = res.data[0].Phone;
+              this.dataset.cell = res.data[0].Cell;
+              this.dataset.foodBusiness = res.data[0].Name_of_Food_Business;
+              this.dataset.natureBusiness = res.data[0].Nature_of_Business;
+              this.dataset.category = res.data[0].category;
+              this.dataset.district = res.data[0].district;
+              this.dataset.secp = res.data[0].SECP;
+              this.dataset.ntn = res.data[0].NTN;
+              this.dataset.srb = res.data[0].SRB;
+              this.dataset.salesTax = res.data[0].SALES_TAX;
+              this.dataset.areaMeasurement = res.data[0].Area_Measurement_SQ_FT;
+              this.dataset.address = res.data[0].Address;
 
-  autoSRB() {
-    if (!this.dataset.natureBusiness || !this.dataset.areaMeasurement) {
-      console.log('Input fields are empty. Skipping API call.');
-      return;
-    }
-    let s = {
-      nature_id: this.dataset.natureBusiness,
-      areaMeasurement: this.dataset.areaMeasurement,
-    };
-    console.log(s);
-
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getAutoSRB(e.access_token, {
-            nature_id: this.dataset.natureBusiness,
-            areaMeasurement: this.dataset.areaMeasurement,
-          })
-          .then((res: any) => {
-  
-            if (res.reponse_type === 'success') {
-              this.dataset.srb = res.data.Srb_in_percent;
-            }else{
-              this.dataset.srb = null
+              this.getCategoryNature(true);
+              this.getCategoryArea(true);
+            } else {
               this.apiService.displayToast(
-                res.msg,  
-                'bottom', 
-                'toast-error', 
-                'close-circle-sharp', 
-                'danger')
+                res.msg,
+                'bottom',
+                'toast-error',
+                'warning-outline',
+                'danger'
+              );
             }
-
           })
-          .catch((err: any) => {
-            console.error('Error fetching Auto SRB:', err);
+          .catch(async (err: any) => {
+            this.MainApp.hideLoading();
+            console.log(err);
           });
       })
       .catch((err: any) => {
-        console.error('Error getting token:', err);
+        this.MainApp.hideLoading();
+        console.error(err);
       });
   }
+
+  cardMask = this.MainApp.cardMask;
+  maskPredicate = this.MainApp.maskPredicate;
 
   isModalOpen = false;
 
@@ -185,22 +184,102 @@ export class UpdateLicensePage {
   FormOnSubmitted() {
     this.MainApp.showLoading();
     this.cancel(false);
+
+    console.log({ ...this.dataset, id: this.id });
+    if (
+      this.statusCheck[0].Status_Name == 'Pending' ||
+      this.statusCheck[0].Status_Name == 'Reject'
+    ) {
+      // If Status (Reject) License Update
+      this.apiService
+        .getToken()
+        .then((e: any) => {
+          this.apiService
+            .changesUpdateLicenseAPI(
+              e.access_token,
+              { ...this.dataset, id: Number(this.id) },
+              this.id
+            )
+            .then(async (res: any) => {
+              this.MainApp.hideLoading();
+              console.log(res);
+              if (res.reponse_type == 'success') {
+                this.apiService.displayToast(
+                  res.msg,
+                  'bottom',
+                  'toast-succes',
+                  'checkmark-circle-sharp',
+                  'success'
+                );
+                this.router.navigate([`/paychallan/${res.data.License_Id}`], {
+                  queryParams: { renew: 'true' },
+                });
+              }
+            })
+            .catch(async (err: any) => {
+              this.MainApp.hideLoading();
+              console.log(err);
+            });
+        })
+        .catch((err: any) => {
+          this.MainApp.hideLoading();
+          console.error(err);
+        });
+    } else if (this.statusCheck[0].Status_Name == 'Renew') {
+      // If Status (Expired) License Update -> Renew
+      this.apiService
+        .getToken()
+        .then((e: any) => {
+          this.apiService
+            .UpdateLicenseAPI(e.access_token, this.dataset, this.id)
+            .then(async (res: any) => {
+              this.MainApp.hideLoading();
+              if (res.reponse_type == 'success') {
+                this.apiService.displayToast(
+                  res.msg,
+                  'bottom',
+                  'toast-succes',
+                  'checkmark-circle-sharp',
+                  'success'
+                );
+                this.router.navigate([`/paychallan/${res.data.License_Id}`], {
+                  queryParams: { renew: 'true' },
+                });
+              }
+            })
+            .catch(async (err: any) => {
+              this.MainApp.hideLoading();
+              console.log(err);
+            });
+        })
+        .catch((err: any) => {
+          this.MainApp.hideLoading();
+          console.error(err);
+        });
+    }
+  }
+
+  getCategoryArea(start = false) {
+    start == false ? this.MainApp.showLoading() : null;
+
     this.apiService
       .getToken()
       .then((e: any) => {
         this.apiService
-          .UpdateLicenseAPI(e.access_token, this.dataset, this.id)
+          .getCategoryAreaAPI(e.access_token, this.dataset.category)
           .then(async (res: any) => {
             this.MainApp.hideLoading();
-            if (res.reponse_type == 'success') {
-              this.apiService.displayToast(
-                res.msg,
-                'bottom',
-                'toast-succes',
-                'checkmark-circle-sharp',
-                'success'
-              );
-              this.router.navigate([`/paychallan/${res.data.License_Id}`], { queryParams: { renew: 'true' } });
+
+            if (res.reponse_type === 'success') {
+              if (!start) {
+                // Clear data only if it's not the first call
+                this.dataset.areaMeasurement = '';
+                this.dataset.srb = '';
+                this.dataset.salesTax = '';
+              }
+
+              // Populate AreaMeasurementList
+              this.AreaMeasurementList = res.data.license_fee[0].licensefee;
             }
           })
           .catch(async (err: any) => {
@@ -214,5 +293,39 @@ export class UpdateLicensePage {
       });
   }
 
+  setSRBAndSalesTax(e: any) {
+    let id = e.detail.value;
 
+    console.log(id);
+    let setAreaMeasurementListDummy = this.AreaMeasurementList.filter(
+      (item: any) => item.id == id
+    );
+    this.dataset.srb = setAreaMeasurementListDummy[0].SRB;
+    this.dataset.salesTax = setAreaMeasurementListDummy[0].Total_License_Fee;
+  }
+
+  getCategoryNature(start = false) {
+    start == false ? this.MainApp.showLoading() : null;
+    this.apiService
+      .getToken()
+      .then((e: any) => {
+        this.apiService
+          .getCategoryNatureAPI(e.access_token, this.dataset.natureBusiness)
+          .then(async (res: any) => {
+            this.MainApp.hideLoading();
+            console.log('res', res);
+            if (res.reponse_type == 'success') {
+              this.categoryList = res.data.category;
+            }
+          })
+          .catch(async (err: any) => {
+            this.MainApp.hideLoading();
+            console.log(err);
+          });
+      })
+      .catch((err: any) => {
+        this.MainApp.hideLoading();
+        console.error(err);
+      });
+  }
 }

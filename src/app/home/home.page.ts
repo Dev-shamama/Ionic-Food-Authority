@@ -39,8 +39,6 @@ export class HomePage implements OnInit {
 
             // Fetch status data
             this.apiService.getStatusAPI(e.access_token).then(async (resf: any) => {
-              console.log(resf);
-
               if (resf.reponse_type === 'success') {
                 // Map through licenseList and match with resf.data based on Status
                 this.licenseList = this.licenseList.map((licenseItem: any) => {
@@ -50,10 +48,8 @@ export class HomePage implements OnInit {
 
                   licenseItem.district = districtList.find((d) => d.id == licenseItem.district)
 
-
                   const matchingStatus = resf.data.find((statusItem: any) => statusItem.id === licenseItem.Status);
-
-
+                  
                   // Append matched status information to licenseItem if a match is found
                   if (matchingStatus) {
                     return {

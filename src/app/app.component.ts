@@ -66,7 +66,6 @@ export class AppComponent {
     // Fetch status data
     this.apiService.getToken().then((e: any) => {
       this.apiService.getStatusAPI(e.access_token).then(async (resf: any) => {
-
         if (resf.reponse_type === 'success') {
           this.status_list = resf.data
         } else {

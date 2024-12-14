@@ -81,24 +81,15 @@
 
           <div class="review-item area">
             <h5>Area Measurement (sq. ft)</h5>
-            <p>{{dataset.areaMeasurement}}</p>
+            <div *ngFor="let areaMeasurement of AreaMeasurementList">
+              <p *ngIf="areaMeasurement.id == dataset.areaMeasurement">{{areaMeasurement.Size_Covered_Area_SQ_FT_From}} TO {{areaMeasurement.Size_Covered_Area_SQ_FT_TO}}</p>
+            </div>
           </div>
 
           <div class="review-item address">
             <h5>Address</h5>
             <p>{{dataset.address}}</p>
           </div>
-
-          <div class="review-item sureAnswer">
-            <h5>Already Registered with Food Authority</h5>
-            <p>{{dataset.sureAnswer}}</p>
-          </div>
-
-          <div class="review-item registrationName">
-            <h5>Registration in the name of</h5>
-            <p>{{dataset.registrationName}}</p>
-          </div>
-         
         </div>
       </ion-content>
       <ion-footer>
@@ -175,32 +166,24 @@
             </div>
 
             <div class="inputField nature">
-
-              <ion-select [(ngModel)]="dataset.natureBusiness" name="natureBusiness" (ionChange)="getCategoryNature($event)" required label="Nature of Business"
+              <ion-select [(ngModel)]="dataset.natureBusiness" name="natureBusiness" (ionChange)="getCategoryNature()" required label="Nature of Business"
                 interface="popover" fill="solid" label-placement="floating" fill="solid" >
-                <ion-select-option  *ngFor="let nature of natureList" value="{{ nature.id }}">{{ nature.Nature_of_Business_Title }}</ion-select-option>
+                <ion-select-option  *ngFor="let nature of natureList" [value]="nature.id">{{ nature.Nature_of_Business_Title }}</ion-select-option>
               </ion-select>
-
-
             </div>
 
             <div class="inputField category">
-
-
               <ion-select [(ngModel)]="dataset.category" name="category" (ionChange)="getCategoryArea()" required label="Category" interface="popover"
                 fill="solid" label-placement="floating" fill="solid" >
-                <ion-select-option  *ngFor="let category of categoryList" value="{{ category.id }}">{{ category.Category_Title }}</ion-select-option>
+                <ion-select-option  *ngFor="let category of categoryList" [value]="category.id">{{ category.Category_Title }}</ion-select-option>
               </ion-select>
-
             </div>
 
             <div class="inputField district">
-
               <ion-select [(ngModel)]="dataset.district" name="district" required label="District" interface="popover"
                 fill="solid" label-placement="floating" fill="solid">
-                <ion-select-option *ngFor="let distric of districList" value="{{ distric.id }}">{{ distric.District_Name }}</ion-select-option>
+                <ion-select-option *ngFor="let distric of districList" [value]="distric.id">{{ distric.District_Name }}</ion-select-option>
               </ion-select>
-
             </div>
 
             

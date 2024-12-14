@@ -136,7 +136,7 @@ const routes: Routes = [
     loadChildren: () => import('./sfoc/sfoc.module').then( m => m.SfocPageModule)
   },
   {
-    path: 'update-license/:id',
+    path: 'update-license',
     loadChildren: () => import('./update-license/update-license.module').then( m => m.UpdateLicensePageModule)
   },
   {

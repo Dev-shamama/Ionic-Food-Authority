@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'api.service';
 import { AppComponent } from '../app.component';
 @Component({
@@ -23,7 +23,22 @@ export class LicenseformPage {
   categoryName: any;
   districtName: any;
 
-  dataset: any = {
+  dataset: {
+    applicant: any;
+    cnic: any;
+    phone: any;
+    cell: any;
+    foodBusiness: any;
+    natureBusiness: any;
+    category: any;
+    district: any;
+    secp: any;
+    ntn: any;
+    srb: any;
+    salesTax: any;
+    areaMeasurement: any;
+    address: any;
+  } = {
     applicant: null,
     cnic: null,
     phone: null,
@@ -38,87 +53,20 @@ export class LicenseformPage {
     salesTax: null,
     areaMeasurement: null,
     address: null,
-    // sureAnswer: 'Yes',
-    // registrationName: null,
   };
 
   constructor(
     private router: Router,
     private apiService: ApiService,
-    public MainApp: AppComponent
+    public MainApp: AppComponent,
+    private urlParam: ActivatedRoute
   ) {
-    this.getNature();
-    this.getCategory();
-    this.getDistric();
-    // this.autoSRB();
+    this.districList = this.MainApp.districtList;
+    this.natureList = this.MainApp.natureList;
   }
 
   cardMask = this.MainApp.cardMask;
   maskPredicate = this.MainApp.maskPredicate;
-
-  getNature() {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getNatureList(e.access_token)
-          .then(async (res: any) => {
-            console.log(res);
-            if (res.reponse_type == 'success') {
-              this.natureList = res.data;
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
-
-  getCategory() {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getCategoryList(e.access_token)
-          .then(async (res: any) => {
-            console.log(res);
-            if (res.reponse_type == 'success') {
-              this.categoryList = res.data;
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
-
-  getDistric() {
-    this.apiService
-      .getToken()
-      .then((e: any) => {
-        this.apiService
-          .getDistricList(e.access_token)
-          .then(async (res: any) => {
-            console.log(res);
-            if (res.reponse_type == 'success') {
-              this.districList = res.data;
-            }
-          })
-          .catch(async (err: any) => {
-            console.log(err);
-          });
-      })
-      .catch((err: any) => {
-        console.error(err);
-      });
-  }
-
 
   isModalOpen = false;
 
@@ -170,6 +118,7 @@ export class LicenseformPage {
   }
 
   getCategoryArea() {
+    this.MainApp.showLoading();
     this.apiService
       .getToken()
       .then((e: any) => {
@@ -192,7 +141,8 @@ export class LicenseformPage {
                 this.AreaMeasurementList = res.data.license_fee;
                 this.dataset.areaMeasurement = `${fromArea} TO ${toArea}`;
                 this.dataset.srb = res.data.license_fee[0].SRB;
-                this.dataset.salesTax = res.data.license_fee[0].Total_License_Fee;
+                this.dataset.salesTax =
+                  res.data.license_fee[0].Total_License_Fee;
               }
             }
           })
@@ -209,22 +159,25 @@ export class LicenseformPage {
 
   setSRBAndSalesTax(e: any) {
     let id = e.detail.value;
-    let setAreaMeasurementListDummy = this.AreaMeasurementList.filter((item: any) =>item.id == id)
+    let setAreaMeasurementListDummy = this.AreaMeasurementList.filter(
+      (item: any) => item.id == id
+    );
     this.dataset.srb = setAreaMeasurementListDummy[0].SRB;
     this.dataset.salesTax = setAreaMeasurementListDummy[0].Total_License_Fee;
   }
 
-
-  getCategoryNature(id: any) {
+  getCategoryNature() {
+    this.MainApp.showLoading();
     this.apiService
       .getToken()
       .then((e: any) => {
         this.apiService
-          .getCategoryNatureAPI(e.access_token, id)
+          .getCategoryNatureAPI(e.access_token, this.dataset.natureBusiness)
           .then(async (res: any) => {
             this.MainApp.hideLoading();
+            console.log('res', res);
             if (res.reponse_type == 'success') {
-              console.log('res', res);
+              this.categoryList = res.data.category;
             }
           })
           .catch(async (err: any) => {
@@ -237,5 +190,4 @@ export class LicenseformPage {
         console.error(err);
       });
   }
-   
 }

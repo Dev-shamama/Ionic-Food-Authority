@@ -103,6 +103,7 @@ export class PaychallanPage {
         this.apiService
           .getAllLicenseChallan(e.access_token, this.licenceId)
           .then(async (res: any) => {
+            console.log(res);
             if (res.reponse_type == 'success') {
               this.challanList = res.data.challan;
               let districtList = this.MainApp.districtList;
@@ -118,6 +119,8 @@ export class PaychallanPage {
                 this.prefetchCNIC(i.CNIC, i)
                 i.district = districtList.find((d) => d.id == i.district)
                 i.category = categoryList.find((d) => d.id == i.category)
+                
+                i.challanAmount = categoryList.find((d) => d.id == i.category)
 
                 // i.table = i.challan.find((data:any) => data.id == index)
 
@@ -277,4 +280,5 @@ export class PaychallanPage {
       this.router.navigate([`/uploaddocument/${id}`]);
     }
   }
+
 }

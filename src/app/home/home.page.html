@@ -105,8 +105,16 @@
             <div class="right-side">
 
               <button type="button" class="btn btn-primary renew-btn" style="background-color: #ec0a0a"
-                *ngIf="license.Status !== 'Renew' && license.Expiry_date == 'Expired' ">
-                <div class="text" routerLink="/update-license/{{license.id}}">
+                *ngIf="license.Status == 'Pending' || license.Status == 'Reject'">
+                <div class="text" [routerLink]="['/update-license/']" [queryParams]="{ id: license.id, update: true }">
+                  Update
+                </div>
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+              </button>
+
+              <button type="button" class="btn btn-primary renew-btn" style="background-color: #ec0a0a"
+                *ngIf="license.Expiry_date == 'Expired'">
+                <div class="text" [routerLink]="['/update-license/']" [queryParams]="{ id: license.id, update: false }">
                   Renew
                 </div>
                 <ion-icon name="arrow-forward-circle-outline"></ion-icon>

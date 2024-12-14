@@ -709,6 +709,39 @@ export class ApiService {
     });
   }
 
+  async changesUpdateLicenseAPI(access_token: string, data: any, id: any): Promise<any> {
+    return new Promise<any>((resolve) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      };
+      fetch(`${this.localhost}/changes-update-license/${id}/`, options)
+        .then(async (response) => {
+          const data = await response.json();
+          if (data.reponse_type) {
+            resolve(data);
+          } else {
+            this.displayToast(
+              data.errors.non_field_errors[0],
+              'bottom',
+              'toast-error',
+              'warning-outline',
+              'danger'
+            );
+            resolve(data);
+          }
+        })
+        .catch((e) => {
+          resolve(e);
+        });
+    });
+  }
+
+
 
 
   async checkDocumentStatusAPI(access_token: string, id: any): Promise<any> {

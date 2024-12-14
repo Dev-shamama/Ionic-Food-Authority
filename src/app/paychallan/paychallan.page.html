@@ -129,28 +129,35 @@
                 <tbody>
 
                   <tr *ngFor="let i of particular">
-                    <td>{{i.Particulars}}</td>
-
+                    <td>{{ i.Particulars }}</td>
+                  
                     <ng-container *ngIf="challan.challan.length > 0; else empty_td">
-                      
-                      <ng-container   *ngFor="let j of challan.challan">
-                        <td *ngIf="j.Particulars_of_Payment == i.Particulars">
-                          <strong>{{j.Amount}}</strong>
-                        </td>
-                        <td *ngIf="j.Particulars_of_Payment != i.Particulars">
-                         
-                        </td>
+                      <ng-container *ngFor="let j of challan.challan">
+                        <ng-container *ngIf="i.Particulars !== 'Total Amount'">
+                          <td *ngIf="j.Particulars_of_Payment == i.Particulars">
+                            {{ j.Amount }}
+                          </td>
+                          <td *ngIf="j.Particulars_of_Payment != i.Particulars"></td>
+                        </ng-container>
+                  
+                        <ng-container *ngIf="i.Particulars == 'Total Amount'">
+                          <!-- Only show the 'Total Amount' once -->
+                          <!-- <td *ngIf="j.Particulars_of_Payment == i.Particulars"> -->
+                            <strong>{{ j.Amount }}</strong>
+                          <!-- </td> -->
+                        </ng-container>
                       </ng-container>
                     </ng-container>
-                    
+                  
                     <ng-template #empty_td>
                       <td></td>
                     </ng-template>
-             
-                    <td>{{i.details}}</td>
+                  
+                    <td>{{ i.details }}</td>
                   </tr>
+                  
                   <tr>
-                    <td colspan="3">Amount to be paid Rs.{{challan.total_amount}}</td>
+                    <td colspan="3">Amount to be paid Rs. <strong>{{challan.total_amount}}</strong></td>
                   </tr>
                   <tr>
                     <td colspan="3">

@@ -54,7 +54,7 @@ export class LicensedetailPage {
     Nature_of_Business: null,
     Expiry_date_view: null,
     Bar_code: null,
-    QR_code: null
+    QR_code: null,
   };
 
   licenseDetailDocument: {
@@ -65,14 +65,13 @@ export class LicensedetailPage {
     Lab_testing_reports: any;
     Medical_reports: any;
   } = {
-      cnic: null,
-      document_of_property: null,
-      Previous_Registration: null,
-      Copy_of_Challan_form: null,
-      Lab_testing_reports: null,
-      Medical_reports: null,
-    };
-
+    cnic: null,
+    document_of_property: null,
+    Previous_Registration: null,
+    Copy_of_Challan_form: null,
+    Lab_testing_reports: null,
+    Medical_reports: null,
+  };
 
   statusCheck: any = '';
 
@@ -84,11 +83,11 @@ export class LicensedetailPage {
     private urlParam: ActivatedRoute
   ) {
     this.id = this.urlParam.snapshot.paramMap.get('id');
-    this.domain = this.apiService.domain
+    this.domain = this.apiService.domain;
     this.getLicenseDetails();
     this.checkDocumentStatus();
-    this.MainApp.getDistrict()
-    this.MainApp.getNature()
+    this.MainApp.getDistrict();
+    this.MainApp.getNature();
   }
 
   getLicenseDetails() {
@@ -98,6 +97,7 @@ export class LicensedetailPage {
         this.apiService
           .getLicenseDetailsAPI(e.access_token, this.id)
           .then(async (res: any) => {
+            console.log('dataasdasdd klas', res);
             if (res.reponse_type == 'success') {
               // Fetch status data
               this.apiService
@@ -120,16 +120,14 @@ export class LicensedetailPage {
               const currentDate = new Date();
               const endDate = new Date(res.data[0].Expiry_date);
 
-              console.log(res.data[0].Expiry_date)
+              console.log(res.data[0].Expiry_date);
 
               if (res.data[0].Expiry_date == null) {
                 this.licenseDetail.Expiry_date = null;
-              }else{
-    
-                  this.licenseDetail.Expiry_date = this.convertDate(
-                    res.data[0].Expiry_date
-                  );
-
+              } else {
+                this.licenseDetail.Expiry_date = this.convertDate(
+                  res.data[0].Expiry_date
+                );
               }
 
               const s: number = endDate.getTime() - currentDate.getTime();
@@ -149,28 +147,33 @@ export class LicensedetailPage {
                 currentDate
               );
 
-              this.licenseDetail.License_ID = res.data[0].License_ID
+              this.licenseDetail.License_ID = res.data[0].License_ID;
               this.licenseDetail.expiry_percentage = decimalValue.toFixed(2);
-              this.licenseDetail.Address = res.data[0].Address
-              this.licenseDetail.Name_of_Applicant = res.data[0].Name_of_Applicant
-              this.licenseDetail.CNIC = res.data[0].CNIC
-              this.licenseDetail.Name_of_Food_Business = res.data[0].Name_of_Food_Business
-              this.licenseDetail.Nature_of_Business = res.data[0].Nature_of_Business
-              this.licenseDetail.date = res.data[0].date.slice(0, 10)
-              this.licenseDetail.Expiry_date_view = res.data[0].Expiry_date
-              this.licenseDetail.Bar_code = res.data[0].Bar_code
-              this.licenseDetail.QR_code = res.data[0].QR_code
-              this.licenseDetail.district = res.data[0].district
+              this.licenseDetail.Address = res.data[0].Address;
+              this.licenseDetail.Name_of_Applicant =
+                res.data[0].Name_of_Applicant;
+              this.licenseDetail.CNIC = res.data[0].CNIC;
+              this.licenseDetail.Name_of_Food_Business =
+                res.data[0].Name_of_Food_Business;
+              this.licenseDetail.Nature_of_Business =
+                res.data[0].Nature_of_Business;
+              this.licenseDetail.date = res.data[0].date.slice(0, 10);
+              this.licenseDetail.Expiry_date_view = res.data[0].Expiry_date;
+              this.licenseDetail.Bar_code = res.data[0].Bar_code;
+              this.licenseDetail.QR_code = res.data[0].QR_code;
+              this.licenseDetail.district = res.data[0].district;
 
               let districtList = this.MainApp.districtList;
               let natureList = this.MainApp.natureList;
 
-              this.licenseDetail.district = districtList.find((d) => d.id == this.licenseDetail.district)
-              this.licenseDetail.Nature_of_Business = natureList.find((d) => d.id == this.licenseDetail.Nature_of_Business)
+              this.licenseDetail.district = districtList.find(
+                (d) => d.id == this.licenseDetail.district
+              );
+              this.licenseDetail.Nature_of_Business = natureList.find(
+                (d) => d.id == this.licenseDetail.Nature_of_Business
+              );
 
-              console.log(this.licenseDetail)
-
-
+              console.log(this.licenseDetail);
             } else {
               this.apiService.displayToast(
                 res.msg,
@@ -192,26 +195,40 @@ export class LicensedetailPage {
 
   checkDocumentStatus() {
     this.apiService.getToken().then((e: any) => {
-      this.apiService.checkDocumentStatusAPI(e.access_token, this.id)
+      this.apiService
+        .checkDocumentStatusAPI(e.access_token, this.id)
         .then(async (res: any) => {
-          console.log("document res", res);
+          console.log('document res', res);
           if (res.reponse_type === 'success') {
-            this.licenseDetailDocument.Copy_of_Challan_form = res.data.documents.Copy_of_Challan_form;
-            this.licenseDetailDocument.document_of_property = res.data.documents.Documents_of_property_or_tenancy;
-            this.licenseDetailDocument.Lab_testing_reports = res.data.documents.Lab_testing_reports;
-            this.licenseDetailDocument.Medical_reports = res.data.documents.Medical_reports;
-            this.licenseDetailDocument.Previous_Registration = res.data.documents.Previous_Registration_Certificate;
-            this.licenseDetailDocument.cnic = res.data.documents.Upload_Copy_of_CNIC;
+            this.licenseDetailDocument.Copy_of_Challan_form =
+              res.data.documents.Copy_of_Challan_form;
+            this.licenseDetailDocument.document_of_property =
+              res.data.documents.Documents_of_property_or_tenancy;
+            this.licenseDetailDocument.Lab_testing_reports =
+              res.data.documents.Lab_testing_reports;
+            this.licenseDetailDocument.Medical_reports =
+              res.data.documents.Medical_reports;
+            this.licenseDetailDocument.Previous_Registration =
+              res.data.documents.Previous_Registration_Certificate;
+            this.licenseDetailDocument.cnic =
+              res.data.documents.Upload_Copy_of_CNIC;
 
             this.licenseDetail.past_days = 14 - res.data.past_days;
-            this.licenseDetail.past_days_percentage = this.licenseDetail.past_days * 100 / 14;
+            this.licenseDetail.past_days_percentage =
+              (this.licenseDetail.past_days * 100) / 14;
 
             this.licenseDetail.upload_docs_no = res.data.upload_docs_no;
-            let progressBar = document.querySelector('#progressBar')
-            progressBar?.setAttribute('aria-valuenow', Math.round(Number(res.data.percentage)).toString());
-            progressBar?.setAttribute('style', `--value: ${Math.round(Number(res.data.percentage)).toString()}`);
+            let progressBar = document.querySelector('#progressBar');
+            progressBar?.setAttribute(
+              'aria-valuenow',
+              Math.round(Number(res.data.percentage)).toString()
+            );
+            progressBar?.setAttribute(
+              'style',
+              `--value: ${Math.round(Number(res.data.percentage)).toString()}`
+            );
 
-            console.log(this.licenseDetailDocument)
+            console.log(this.licenseDetailDocument);
           } else {
             this.apiService.displayToast(
               res.msg,
@@ -229,7 +246,6 @@ export class LicensedetailPage {
   }
 
   onFileSelected(event: Event): void {
-
     const input = event.target as HTMLInputElement;
     const documentUniqueName = this.documentUniqueName;
     if (input && input.files) {
@@ -262,7 +278,6 @@ export class LicensedetailPage {
             this.fileObject.lab = reader.result;
           }
 
-
           if (documentUniqueName === 'medical') {
             this.activeMedical = 'active';
             this.fileObject.medical = reader.result;
@@ -276,6 +291,7 @@ export class LicensedetailPage {
   }
 
   uploadDocument() {
+    this.MainApp.showLoading();
     this.apiService
       .getToken()
       .then((e: any) => {
@@ -295,7 +311,13 @@ export class LicensedetailPage {
           .then(async (res: any) => {
             this.MainApp.hideLoading();
             if (res.reponse_type == 'success') {
-              this.apiService.displayToast(res.msg, 'bottom', 'toast-success', 'checkmark-circle-sharp', 'success')
+              this.apiService.displayToast(
+                res.msg,
+                'bottom',
+                'toast-success',
+                'checkmark-circle-sharp',
+                'success'
+              );
             } else {
               this.apiService.displayToast(
                 res.msg,
@@ -319,14 +341,19 @@ export class LicensedetailPage {
   }
 
   openModel(event: any, modaltype: any) {
-    if (this.statusCheck == 'In Process' || this.statusCheck == 'Renew') {
+    if (this.statusCheck == 'Pending' || this.statusCheck == 'Renew') {
       document.getElementById('model-container')?.classList.add('active');
       this.documentUniqueName = modaltype;
     } else {
-      this.apiService.displayToast('Your document is already uploaded', 'bottom', 'toast-error', 'warning-outline', 'danger');
+      this.apiService.displayToast(
+        'Your document is already uploaded',
+        'bottom',
+        'toast-error',
+        'warning-outline',
+        'danger'
+      );
       console.log('data-pop value:', modaltype);
     }
-
   }
 
   closeModel() {

@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="model-container" id="model-container" [ngStyle]="{'display': (statusCheck == 'In Process' || statusCheck == 'Renew') ? 'block' : 'none'}">
+  <div class="model-container" id="model-container" [ngStyle]="{'display': (statusCheck == 'Pending' || statusCheck == 'Renew') ? 'block' : 'none'}">
     <div class="modal">
       <div class="modal-header">
         <div class="modal-logo">
@@ -216,7 +216,7 @@
 
         </div>
 
-        <div *ngIf="this.statusCheck == 'In Process' || this.statusCheck == 'Renew'" class="s" style="display: flex; justify-content: center; align-items: center">
+        <div *ngIf="this.statusCheck == 'Pending' || this.statusCheck == 'Renew'" class="s" style="display: flex; justify-content: center; align-items: center">
           <div></div>
 
           <ion-button class="most-used" (click)="uploadDocument()" type="button"><ion-icon

@@ -5,7 +5,7 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title style="padding-left: 15px">Review Form</ion-title>
+          <ion-title style="padding-left: 15px">{{updateForm == true ? 'Update Form' : 'Review Form'}}</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="cancel(false)">Cancel</ion-button>
           </ion-buttons>
@@ -78,27 +78,18 @@
             <h5>SALES TAX</h5>
             <p>{{dataset.salesTax}}</p>
           </div>
-
+          
           <div class="review-item area">
             <h5>Area Measurement (sq. ft)</h5>
-            <p>{{dataset.areaMeasurement}}</p>
+            <div *ngFor="let areaMeasurement of AreaMeasurementList">
+              <p *ngIf="areaMeasurement.id == dataset.areaMeasurement">{{areaMeasurement.Size_Covered_Area_SQ_FT_From}} TO {{areaMeasurement.Size_Covered_Area_SQ_FT_TO}}</p>
+            </div>
           </div>
 
           <div class="review-item address">
             <h5>Address</h5>
             <p>{{dataset.address}}</p>
           </div>
-
-          <div class="review-item sureAnswer">
-            <h5>Already Registered with Food Authority</h5>
-            <p>{{dataset.sureAnswer}}</p>
-          </div>
-
-          <div class="review-item registrationName">
-            <h5>Registration in the name of</h5>
-            <p>{{dataset.registrationName}}</p>
-          </div>
-         
         </div>
       </ion-content>
       <ion-footer>
@@ -112,7 +103,7 @@
 
   <div class="dashboard-container">
     <form #licenseForm="ngForm" (ngSubmit)="onSubmit()" id="form">
-      <h2 class="section-title">License Renew Form</h2>
+      <h2 class="section-title">{{updateForm == true ? 'License Update Form' : 'License Renew Form'}}</h2>
 
       <div class="wrapper wrapper-one">
         <div class="top-content-header">
@@ -175,32 +166,31 @@
             </div>
 
             <div class="inputField nature">
-
-              <ion-select [(ngModel)]="dataset.natureBusiness" (input)="autoSRB()" name="natureBusiness" required label="Nature of Business"
+              <ion-select [(ngModel)]="dataset.natureBusiness" name="natureBusiness" (ionChange)="getCategoryNature()" required label="Nature of Business"
                 interface="popover" fill="solid" label-placement="floating" fill="solid" >
-                <ion-select-option  *ngFor="let nature of natureList" value="{{ nature.id }}">{{ nature.Nature_of_Business_Title }}</ion-select-option>
+                <ion-select-option  *ngFor="let nature of natureList" [value]="nature.id">{{ nature.Nature_of_Business_Title }}</ion-select-option>
               </ion-select>
-
-
             </div>
 
             <div class="inputField category">
-
-
-              <ion-select [(ngModel)]="dataset.category" name="category" required label="Category" interface="popover"
+              <ion-select [(ngModel)]="dataset.category" name="category" (ionChange)="getCategoryArea()" required label="Category" interface="popover"
                 fill="solid" label-placement="floating" fill="solid" >
-                <ion-select-option  *ngFor="let category of categoryList" value="{{ category.id }}">{{ category.Category_Title }}</ion-select-option>
+                <ion-select-option  *ngFor="let category of categoryList" [value]="category.id">{{ category.Category_Title }}</ion-select-option>
               </ion-select>
-
             </div>
 
             <div class="inputField district">
               <ion-select [(ngModel)]="dataset.district" name="district" required label="District" interface="popover"
                 fill="solid" label-placement="floating" fill="solid">
-                <ion-select-option *ngFor="let distric of districList" value="{{ distric.id }}">{{ distric.District_Name }}</ion-select-option>
-
+                <ion-select-option *ngFor="let distric of districList" [value]="distric.id">{{ distric.District_Name }}</ion-select-option>
               </ion-select>
+            </div>
 
+            <div class="inputField area">
+              <ion-select [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" (ionChange)="setSRBAndSalesTax($event)" required label="Enter Your Area Measurement (sq. ft)" interface="popover"
+                fill="solid" label-placement="floating" fill="solid">
+                <ion-select-option *ngFor="let areaMeasurement of AreaMeasurementList" [value]="areaMeasurement.id">{{ areaMeasurement.Size_Covered_Area_SQ_FT_From }} To {{ areaMeasurement.Size_Covered_Area_SQ_FT_TO }}</ion-select-option>
+              </ion-select>
             </div>
 
             <div class="inputField secp">
@@ -231,13 +221,7 @@
               </ion-item>
             </div>
 
-            <div class="inputField area">
-              <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.areaMeasurement" name="areaMeasurement" type="number" (input)="autoSRB()" required
-                  label="Area Measurement (sq. ft)" label-placement="floating" fill="solid"
-                  placeholder="Enter Your Area Measurement (sq. ft)"></ion-input>
-              </ion-item>
-            </div>
+          
 
             <div class="inputField address">
               <ion-item class="no-border">
@@ -246,22 +230,6 @@
               </ion-item>
             </div>
           </div>
-
-          <!-- <div class="check-sure-question">
-            <p>Already Registered with Food Authority</p>
-            <div class="checkbox-content">
-              <ion-radio-group [(ngModel)]="dataset.sureAnswer" name="sureAnswer" required>
-                <div class="checkbox-btn">
-                  <ion-radio value="Yes" aria-label="Custom checkbox"></ion-radio>
-                  Yes
-                </div>
-                <div class="checkbox-btn">
-                  <ion-radio value="No" aria-label="Custom checkbox that is checked"></ion-radio>
-                  No
-                </div>
-              </ion-radio-group>
-            </div>
-          </div> -->
 
           <div class="date-of-registration">
             <div class="left-side">
@@ -273,19 +241,6 @@
               <p>attach the copy of certificate.</p>
             </div>
           </div>
-
-          <div id="license_form_bottom">
-            <div class="inputField registrationName">
-              <ion-item class="no-border">
-                <ion-input [(ngModel)]="dataset.registrationName" name="registrationName" type="text" required
-                  label="Registration in the name of" label-placement="floating" fill="solid"
-                  placeholder="Enter Your Registration in the name of"></ion-input>
-              </ion-item>
-            </div>
-
-    
-          </div>
-
           <div class="restaurant-section">
             <p>
               Any other Restaurant / food business owned by the applicant, if
@@ -319,7 +274,8 @@
     <ion-title slot="start"></ion-title>
     <div class="bottom-submit-button" slot="end" >
       <ion-button type="submit"  form="form" expand="block" (click)="setOpen(true)" [disabled]="!licenseForm.valid">
-        Save and generate Challan
+        
+        {{updateForm == true ? 'Update License' : 'Save and generate Challan'}}
         <span><ion-icon name="chevron-forward-outline"></ion-icon></span>
       </ion-button>
   </div>
