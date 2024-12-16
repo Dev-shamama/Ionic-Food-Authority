@@ -5,7 +5,7 @@
     </div>
     <!-- register -->
     <div class="login-content">
-      <form #fullForm="ngForm" (ngSubmit)="onSubmitFullForm()">
+      <form #form="ngForm" #fullForm="ngForm" (ngSubmit)="onSubmitFullForm(form)">
         <h1 style="text-align: center">Create Your Account</h1>
         <div id="login-form">
           <div class="profileAvatar" (click)="fileInput()">

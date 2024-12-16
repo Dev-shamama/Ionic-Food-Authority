@@ -4,11 +4,8 @@
       <img src="./assets/img/logo.png" alt="Logo" />
     </div>
     <div class="login-content">
-
       <h1>Login Your Account</h1>
-      <form id="login-form" #userLogin="ngForm" (ngSubmit)="onSubmit()">
-
-
+      <form id="login-form"  #form="ngForm" #userLogin="ngForm" (ngSubmit)="onSubmit(form)">
         <div class="inputField">
           <ion-item class="no-border">
             <ion-input
@@ -27,7 +24,7 @@
             ></ion-input>
           </ion-item>
         </div>
-        
+
         <div class="inputField">
           <ion-item class="no-border">
             <ion-input

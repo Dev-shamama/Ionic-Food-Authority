@@ -16,10 +16,10 @@ import { Location } from '@angular/common';
   providedIn: 'root',
 })
 export class ApiService {
-  public domain = 'http://192.168.18.116:9999';
-  localhost: string = 'http://192.168.18.116:9999';
-  // public domain = 'https://sfa.pythonanywhere.com';
-  // localhost: string = 'https://sfa.pythonanywhere.com';
+  // public domain = 'http://192.168.18.116:9999';
+  // localhost: string = 'http://192.168.18.116:9999';
+  public domain = 'https://sfa.pythonanywhere.com';
+  localhost: string = 'https://sfa.pythonanywhere.com';
   
   previousUrl: string = '';
   plt: string;
@@ -53,8 +53,8 @@ export class ApiService {
       : this.platform.is('ios')
       ? 'ios'
       : 'android';
-    this.localhost = 'http://192.168.18.116:9999'; // put your IP here
-    // this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
+    // this.localhost = 'http://192.168.18.116:9999'; // put your IP here
+    this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
     
     // this.initStorage()
   }
