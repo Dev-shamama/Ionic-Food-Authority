@@ -46,9 +46,6 @@ export class AppComponent {
 
   }
 
-
-
-
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Loading...',
@@ -60,7 +57,6 @@ export class AppComponent {
   async hideLoading() {
     await this.loadingCtrl.dismiss();
   }
-
 
   getlicensestatus() {
     // Fetch status data
@@ -81,6 +77,8 @@ export class AppComponent {
         .catch(async (err: any) => {
           return null;
         });
+    }).catch(async (err: any) => {
+      return null;
     });
   }
 
@@ -98,7 +96,6 @@ export class AppComponent {
       this.auth = false
     })
   }
-
 
   logout() {
     this.apiService.removeTokens();
@@ -157,11 +154,11 @@ export class AppComponent {
             }
           })
           .catch(async (err: any) => {
-            console.log(err);
+            return null
           });
       })
       .catch((err: any) => {
-        console.error(err);
+        return null
       });
   }
 
@@ -184,11 +181,11 @@ export class AppComponent {
         }
       })
         .catch(async (err: any) => {
-          console.log(err);
+          return null
         });
     })
       .catch((err: any) => {
-        console.error(err);
+        return null
       });
   }
 
@@ -212,11 +209,11 @@ export class AppComponent {
             }
           })
           .catch(async (err: any) => {
-            console.log(err);
+            return null
           });
       })
       .catch((err: any) => {
-        console.error(err);
+        return null
       });
   }
 

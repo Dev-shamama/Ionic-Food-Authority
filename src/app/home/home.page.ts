@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
     this.apiService.getToken().then((e: any) => {
       this.apiService.getLicense(e.access_token)
         .then(async (res: any) => {
-
+          console.log(res);
 
           if (res.reponse_type === 'success') {
             this.licenseList = res.data;
@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
                   if (matchingStatus) {
                     return {
                       ...licenseItem,
-                      Status: licenseItem.Review != "Pass" ? licenseItem.Review : matchingStatus.Status_Name,// Replace or extend as needed
+                      Status: licenseItem.Review != "Pass" ? licenseItem.Review : matchingStatus.Status_Name,
                       Expiry_date: isExpired.status == "Expired" ? isExpired.status : licenseItem.Expiry_date
                     };
 

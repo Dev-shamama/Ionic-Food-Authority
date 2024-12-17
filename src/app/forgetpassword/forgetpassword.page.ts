@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'api.service';
@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
   templateUrl: './forgetpassword.page.html',
   styleUrls: ['./forgetpassword.page.scss'],
 })
-export class ForgetpasswordPage implements OnInit {
+export class ForgetpasswordPage {
   @ViewChild('forgetPassword')
   forgetPassword: NgForm | undefined;
   constructor(private apiService: ApiService, private route: Router, public MainApp: AppComponent) {}
@@ -18,17 +18,11 @@ export class ForgetpasswordPage implements OnInit {
   cardMask = this.MainApp.cardMask
   maskPredicate = this.MainApp.maskPredicate
 
-
-  ngOnInit(): void {
-   
-  }
-
   dataset = {
     cnic: '',
   };
 
   onSubmit() {
-    // console.log(this.dataset.cnic.slice(0, 15));
     this.MainApp.showLoading();
 
     this.apiService

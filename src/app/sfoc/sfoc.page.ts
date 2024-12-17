@@ -46,7 +46,7 @@ export class SfocPage implements OnInit {
 
             for (let i of res.data.license) {
 
-              let isExpired = this.MainApp.checkExpiryDate(i.Expiry_date)
+              let isExpired = this.MainApp.checkExpiryDate(i.Expiry_date || '')
 
               if (isExpired.status == "Expired") {
                 i.Expiry_date = isExpired.status

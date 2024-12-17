@@ -13,6 +13,7 @@ export class UpdateLicensePage {
   updateForm = false;
   id: any;
   statusCheck: any = '';
+  expiredCheck: any = '';
 
   @ViewChild('licenseForm')
   licenseForm: NgForm | undefined;
@@ -42,21 +43,21 @@ export class UpdateLicensePage {
     areaMeasurement: any;
     address: any;
   } = {
-    applicant: null,
-    cnic: null,
-    phone: null,
-    cell: null,
-    foodBusiness: null,
-    natureBusiness: null,
-    category: null,
-    district: null,
-    secp: null,
-    ntn: null,
-    srb: null,
-    salesTax: null,
-    areaMeasurement: null,
-    address: null,
-  };
+      applicant: null,
+      cnic: null,
+      phone: null,
+      cell: null,
+      foodBusiness: null,
+      natureBusiness: null,
+      category: null,
+      district: null,
+      secp: null,
+      ntn: null,
+      srb: null,
+      salesTax: null,
+      areaMeasurement: null,
+      address: null,
+    };
 
   constructor(
     private router: Router,
@@ -68,10 +69,10 @@ export class UpdateLicensePage {
       if (params['update'] === 'true') {
         this.updateForm = true;
         this.id = params['id'];
-        this.getLicenseDetails(params['id']);
+        this.getLicenseDetails();
       } else {
         this.id = params['id'];
-        this.getLicenseDetails(params['id']);
+        this.getLicenseDetails();
         this.updateForm = false;
       }
     });
@@ -80,66 +81,67 @@ export class UpdateLicensePage {
     this.natureList = this.MainApp.natureList;
   }
 
-  getLicenseDetails(id: any) {
+  getLicenseDetails() {
     // this.MainApp.showLoading();
     this.apiService
       .getToken()
       .then((e: any) => {
         this.apiService
-          .getLicenseDetailsAPI(e.access_token, id)
+          .getLicenseDetailsAPI(e.access_token, this.id)
           .then(async (res: any) => {
-            console.log('res', res);
+            if (res.reponse_type === "success") {
 
-            let isExpired = this.MainApp.checkExpiryDate(
-              res.data[0].Expiry_date || ''
-            );
+              let isExpired = this.MainApp.checkExpiryDate(
+                res.data[0].Expiry_date || ''
+              );
 
-            let statusList = this.MainApp.status_list;
-            let checkStatus = statusList.find(
-              (i: any) => i.id == res.data[0].Status
-            );
-
-            if (this.updateForm === true) {
-              if (checkStatus.Status_Name === 'Pending' || res.Review === 'Reject') {
-                return; // Prevent navigation
-              } else {
-                this.router.navigate(['/home']);
-              }
-            } else if (this.updateForm === false) {
-              if (isExpired.status === 'Expired') {
-                return; // Prevent navigation
-              } else {
-                this.router.navigate(['/home']);
-              }
-            }
-            
-            this.MainApp.hideLoading();
-            if (res.reponse_type == 'success') {
-              // Fetch status data
               let statusList = this.MainApp.status_list;
-              this.statusCheck = statusList.filter((stat: any) => {
-                if (stat.id == res.data[0].Status) {
-                  return stat.Status_Name;
+              let checkStatus = statusList.find((i: any) => i.id == res.data[0].Status);
+
+              if (this.updateForm === true) {
+                if (
+                  checkStatus.Status_Name !== "Pending" &&
+                  checkStatus.Status_Name !== "Renew" &&
+                  res.data[0].Review !== "Reject"
+                ) {
+                  this.router.navigate(['/home']);
+                } else {
+                  // Continue with the desired logic
                 }
-              });
+              } else if (this.updateForm === false) {
+                if (isExpired.status !== 'Expired') {
+                  this.router.navigate(['/home']);
+                } else {
+                  this.expiredCheck = isExpired.status
+                }
+              }
 
-              this.dataset.cnic = res.data[0].CNIC;
-              this.dataset.applicant = res.data[0].Name_of_Applicant;
-              this.dataset.phone = res.data[0].Phone;
-              this.dataset.cell = res.data[0].Cell;
-              this.dataset.foodBusiness = res.data[0].Name_of_Food_Business;
-              this.dataset.natureBusiness = res.data[0].Nature_of_Business;
-              this.dataset.category = res.data[0].category;
-              this.dataset.district = res.data[0].district;
-              this.dataset.secp = res.data[0].SECP;
-              this.dataset.ntn = res.data[0].NTN;
-              this.dataset.srb = res.data[0].SRB;
-              this.dataset.salesTax = res.data[0].SALES_TAX;
-              this.dataset.areaMeasurement = res.data[0].Area_Measurement_SQ_FT;
-              this.dataset.address = res.data[0].Address;
+              this.MainApp.hideLoading();
+                // Fetch status data
+                this.statusCheck = statusList.filter((stat: any) => {
+                  if (stat.id == res.data[0].Status) {
+                    return stat.Status_Name;
+                  }
+                });
 
-              this.getCategoryNature(true);
-              this.getCategoryArea(true);
+                this.dataset.cnic = res.data[0].CNIC;
+                this.dataset.applicant = res.data[0].Name_of_Applicant;
+                this.dataset.phone = res.data[0].Phone;
+                this.dataset.cell = res.data[0].Cell;
+                this.dataset.foodBusiness = res.data[0].Name_of_Food_Business;
+                this.dataset.natureBusiness = res.data[0].Nature_of_Business;
+                this.dataset.category = res.data[0].category;
+                this.dataset.district = res.data[0].district;
+                this.dataset.secp = res.data[0].SECP;
+                this.dataset.ntn = res.data[0].NTN;
+                this.dataset.srb = res.data[0].SRB;
+                this.dataset.salesTax = res.data[0].SALES_TAX;
+                this.dataset.areaMeasurement = res.data[0].Area_Measurement_SQ_FT;
+                this.dataset.address = res.data[0].Address;
+
+                this.getCategoryNature(true);
+                this.getCategoryArea(true);
+
             } else {
               this.apiService.displayToast(
                 res.msg,
@@ -157,7 +159,7 @@ export class UpdateLicensePage {
       })
       .catch((err: any) => {
         this.MainApp.hideLoading();
-        console.error(err);
+        return null
       });
   }
 
@@ -185,15 +187,17 @@ export class UpdateLicensePage {
     this.MainApp.showLoading();
     this.cancel(false);
 
-    console.log({ ...this.dataset, id: this.id });
     if (
       this.statusCheck[0].Status_Name == 'Pending' ||
-      this.statusCheck[0].Status_Name == 'Reject'
+      this.statusCheck[0].Status_Name == 'Reject' ||
+      this.statusCheck[0].Status_Name == 'Renew'
     ) {
       // If Status (Reject) License Update
       this.apiService
         .getToken()
         .then((e: any) => {
+
+          console.log({...this.dataset, id: Number(this.id)})
           this.apiService
             .changesUpdateLicenseAPI(
               e.access_token,
@@ -225,7 +229,7 @@ export class UpdateLicensePage {
           this.MainApp.hideLoading();
           console.error(err);
         });
-    } else if (this.statusCheck[0].Status_Name == 'Renew') {
+    } else if (this.expiredCheck == 'Expired') {
       // If Status (Expired) License Update -> Renew
       this.apiService
         .getToken()

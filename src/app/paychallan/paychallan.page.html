@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div id="{{challan.id}}" class="{{challan.id}}">
+      <div id="{{challan.id}}" class="{{challan.id}} divContents">
         <div class="challan-content" style="background-image: url(http://localhost:8100/assets/img/challan-bg.png);">
 
           <div class="paid-unpaid" *ngIf="challan.Payment == 'Unpaid'">
@@ -143,7 +143,7 @@
                         <ng-container *ngIf="i.Particulars == 'Total Amount'">
                           <!-- Only show the 'Total Amount' once -->
                           <!-- <td *ngIf="j.Particulars_of_Payment == i.Particulars"> -->
-                            <strong>{{ j.Amount }}</strong>
+                            <td><strong>{{ j.Amount }}</strong></td>
                           <!-- </td> -->
                         </ng-container>
                       </ng-container>
@@ -216,6 +216,7 @@
           </div>
         </div>
       </div>
+
       <div class="bottom-content">
         <p>
           <strong class="note">Note: </strong>First, pay the challan, then in

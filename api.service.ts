@@ -16,10 +16,10 @@ import { Location } from '@angular/common';
   providedIn: 'root',
 })
 export class ApiService {
-  // public domain = 'http://192.168.18.116:9999';
-  // localhost: string = 'http://192.168.18.116:9999';
-  public domain = 'https://sfa.pythonanywhere.com';
-  localhost: string = 'https://sfa.pythonanywhere.com';
+  public domain = 'http://192.168.18.116:9999';
+  localhost: string = 'http://192.168.18.116:9999';
+  // public domain = 'https://sfa.pythonanywhere.com';
+  // localhost: string = 'https://sfa.pythonanywhere.com';
   
   previousUrl: string = '';
   plt: string;
@@ -53,28 +53,12 @@ export class ApiService {
       : this.platform.is('ios')
       ? 'ios'
       : 'android';
-    // this.localhost = 'http://192.168.18.116:9999'; // put your IP here
-    this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
+    this.localhost = 'http://192.168.18.116:9999'; // put your IP here
+    // this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
     
     // this.initStorage()
   }
 
-
-  getCookie(name: any) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
@@ -347,7 +331,9 @@ export class ApiService {
       fetch(`${this.localhost}/Tokenvalidcheck/`, options)
         .then(async (response) => {
           const data = await response.json();
-          resolve(data);
+          if(data.success == "You are authenticated!") {
+            resolve(data);
+          }
         })
         .catch((e) => {
           resolve(e);
@@ -399,7 +385,6 @@ export class ApiService {
           const data = await response.json();
           if (data.reponse_type == 'success') {
             resolve(data);
-            this.loadingCtrl.dismiss();
             this.displayToast(
               data.msg,
               'bottom',
@@ -409,7 +394,6 @@ export class ApiService {
             );
           } else {
             if (data.msg == 'login_not') {
-              this.loadingCtrl.dismiss();
               this.router.navigate(['/login']);
               this.displayToast(
                 'Session Expaired Login Again',
@@ -419,7 +403,6 @@ export class ApiService {
                 'danger'
               );
             } else {
-              this.loadingCtrl.dismiss();
               if (data.msg) {
                 this.displayToast(
                   data.msg,
@@ -433,7 +416,6 @@ export class ApiService {
           }
         })
         .catch(async (e) => {
-          this.loadingCtrl.dismiss();
           alert('Something went wrong');
           this.displayToast(
             e,
@@ -459,35 +441,9 @@ export class ApiService {
       fetch(`${this.localhost}/forgot-password/`, options)
         .then(async (response) => {
           const data = await response.json();
-          if (data.reponse_type == 'success') {
-            resolve(data);
-            this.loadingCtrl.dismiss();
-          } else {
-            if (data.msg == 'login_not') {
-              this.loadingCtrl.dismiss();
-              this.displayToast(
-                'Session Expaired Login Again',
-                'bottom',
-                'toast-error',
-                'warning-outline',
-                'danger'
-              );
-            } else {
-              this.loadingCtrl.dismiss();
-              if (data.msg) {
-                this.displayToast(
-                  data.msg,
-                  'bottom',
-                  'toast-error',
-                  'warning-outline',
-                  'danger'
-                );
-              }
-            }
-          }
+          resolve(data);
         })
         .catch(async (e) => {
-          this.loadingCtrl.dismiss();
           this.displayToast(
             e,
             'bottom',
@@ -1017,7 +973,7 @@ export class ApiService {
             resolve(data);
           })
           .catch((e) => {
-            resolve(e);
+            return []
           });
       });
     }
@@ -1038,7 +994,7 @@ export class ApiService {
             resolve(data);
           })
           .catch((e) => {
-            resolve(e);
+            return []
           });
       });
     }
@@ -1059,7 +1015,7 @@ export class ApiService {
             resolve(data);
           })
           .catch((e) => {
-            resolve(e);
+            return []
           });
       });
     }

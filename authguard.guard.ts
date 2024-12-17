@@ -33,12 +33,10 @@ export class AuthguardGuard implements CanActivate {
     this.api_service
       .getToken()
       .then((res: any) => {
-        console.log(res);
         if ((res.access_token, res.refrash_token)) {
           this.api_service
             .AccessTokenvalid(res.access_token, res.refrash_token)
             .then((resp) => {
-              console.log("resp", resp);
 
               if (resp.success === 'You are authenticated!') {
                 status = false;
@@ -84,6 +82,5 @@ export class AuthguardGuard implements CanActivate {
       });
 
     return status;
-    // return false;
   }
 }

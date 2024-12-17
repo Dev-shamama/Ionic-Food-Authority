@@ -9,14 +9,6 @@
         <div></div>
         <div class="search-inputField">
           <ion-searchbar [debounce]="1000" placeholder="Search license" (ionInput)="handleInput($event)"></ion-searchbar>
-
-          <!-- <ion-list
-            [ngClass]="searchStatus ? 'show-flex ion-list-search' : 'hide ion-list-search'"
-          >
-            <ion-item *ngFor="let result of results">
-              <ion-label>{{ result.License_ID }}</ion-label>
-            </ion-item>
-          </ion-list> -->
         </div>
         <div></div>
       </div>
@@ -26,7 +18,7 @@
       </div>
 
       <div class="license-item-content">
-        <div class="notFound" *ngIf="licenseList.length == 0">
+        <div class="notFound" *ngIf="licenseList.length === 0">
           <img src="./assets/img/licenseFound.png" alt="">
           <h3>License Not Found</h3>
         </div>
@@ -66,7 +58,7 @@
                 <span class="">{{license.date.slice(0, 10)}}</span>
               </span>
               <span class="item">Expiry Date :
-                <span class="license-expiry">{{license.Expiry_date}}</span>
+                <span class="license-expiry">{{license.Expiry_date === null ? "0000-00-00" : license.Expiry_date}}</span>
               </span>
               <span class="item">District :
                 <span class="">{{license.district?.District_Name}}</span>
@@ -74,7 +66,7 @@
             </div>
             <div class="right-side">
             <button type="button" class="btn btn-primary renew-btn" style="background-color: #ec0a0a"
-                *ngIf="license.Status == 'Pending' || license.Status == 'Reject'">
+                *ngIf="license.Status === 'Pending' || license.Status === 'Reject' || license.Status === 'Renew'">
                 <div class="text" [routerLink]="['/update-license/']" [queryParams]="{ id: license.id, update: true }">
                   Update
                 </div>
@@ -82,7 +74,7 @@
               </button>
 
               <button type="button" class="btn btn-primary renew-btn" style="background-color: #ec0a0a"
-                *ngIf="license.Expiry_date == 'Expired'">
+                *ngIf="license.Expiry_date === 'Expired'">
                 <div class="text" [routerLink]="['/update-license/']" [queryParams]="{ id: license.id, update: false }">
                   Renew
                 </div>
@@ -110,11 +102,11 @@
         </div>
         <div class="noMoreData">
 
-          <span [ngStyle]="{display: (noMoreDataStatus == true) ? 'block' : 'none'}" class="original-button">No More
+          <span [ngStyle]="{display: (noMoreDataStatus === true) ? 'block' : 'none'}" class="original-button">No More
             Data</span>
         </div>
 
-        <ion-infinite-scroll [ngStyle]="{display: (noMoreDataStatus == true) ? 'none' : 'block'}"
+        <ion-infinite-scroll [ngStyle]="{display: (noMoreDataStatus === true) ? 'none' : 'block'}"
           (ionInfinite)="onIonInfinite($event)">
           <ion-infinite-scroll-content loadingText="Loading..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>

@@ -38,9 +38,6 @@ export class PageguardGuard implements CanActivate {
 
           else{
             this.api_service.RefrashTokenvalid(res.refrash_token).then((ref) => {
-         
-              
-
               if (ref.reponse_type === 'success'){
                 if (ref.verification == "Unverified"){
                   status = false;

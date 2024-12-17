@@ -458,19 +458,19 @@ ion-content {
 }
 
 @media only screen and (max-width: 1234px) {
-  #divContents {
+  .divContents {
     zoom: 0.5;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  #divContents {
+  .divContents {
     zoom: 0.4;
   }
 }
 
 @media only screen and (max-width: 320px) {
-  #divContents {
+  .divContents {
     zoom: 0.34;
   }
 }

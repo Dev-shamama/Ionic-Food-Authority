@@ -5,17 +5,42 @@
     <h2 class="section-title">Upload Document</h2>
 
     <div class="wrapper wrapper-one">
+
+      <!-- Challan -->
+      <div class="item">
+        <div class="top-heading">
+          <h2>Copy of Challan form</h2>
+        </div>
+        <input type="file" (change)="challanDocumentInput($event)" id="challan-input" hidden />
+
+        <div class="uploaded-document" (click)="challanDocument()">
+          <div class="show" id="challan-show">
+            <h4 id="challan-text">Drag And Drop</h4>
+            <ion-icon id="challan-icon" name="cloud-upload-outline"></ion-icon>
+          </div>
+          <div class="hide" id="challan-hide">
+            <div class="image-detail">
+              <div class="image-name" id="challan-image-name"></div>
+              <div class="image-size" id="challan-image-size"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-message">
+          <strong>Note: </strong>
+          <div>
+            <p>* Documents should be properly signed and stamped</p>
+            <p>* Documents should be in legible writing and language</p>
+          </div>
+        </div>
+      </div>
+
       <!-- CNIC -->
       <div class="item">
         <div class="top-heading">
           <h2>Upload Copy of CNIC</h2>
         </div>
-        <input
-          type="file"
-          (change)="cnicDocumentInput($event)"
-          id="cnic-input"
-          hidden
-        />
+        <input type="file" (change)="cnicDocumentInput($event)" id="cnic-input" hidden />
 
         <div class="uploaded-document" (click)="cnicDocument()">
           <div class="show" id="cnic-show">
@@ -44,12 +69,7 @@
             ownership
           </h2>
         </div>
-        <input
-          type="file"
-          (change)="tenancyDocumentInput($event)"
-          id="tenancy-input"
-          hidden
-        />
+        <input type="file" (change)="tenancyDocumentInput($event)" id="tenancy-input" hidden />
 
         <div class="uploaded-document" (click)="tenancyDocument()">
           <div class="show" id="tenancy-show">
@@ -78,20 +98,12 @@
         <div class="top-heading">
           <h2>Previous registration certificate (if any) with any authority</h2>
         </div>
-        <input
-          type="file"
-          (change)="certificateDocumentInput($event)"
-          id="certificate-input"
-          hidden
-        />
+        <input type="file" (change)="certificateDocumentInput($event)" id="certificate-input" hidden />
 
         <div class="uploaded-document" (click)="certificateDocument()">
           <div class="show" id="certificate-show">
             <h4 id="certificate-text">Drag And Drop</h4>
-            <ion-icon
-              id="certificate-icon"
-              name="cloud-upload-outline"
-            ></ion-icon>
+            <ion-icon id="certificate-icon" name="cloud-upload-outline"></ion-icon>
           </div>
           <div class="hide" id="certificate-hide">
             <div class="image-detail">
@@ -110,60 +122,17 @@
         </div>
       </div>
 
-      <!-- Challan -->
-      <div class="item">
-        <div class="top-heading">
-          <h2>Copy of Challan form</h2>
-        </div>
-        <input
-          type="file"
-          (change)="challanDocumentInput($event)"
-          id="challan-input"
-          hidden
-        />
-
-        <div class="uploaded-document" (click)="challanDocument()">
-          <div class="show" id="challan-show">
-            <h4 id="challan-text">Drag And Drop</h4>
-            <ion-icon id="challan-icon" name="cloud-upload-outline"></ion-icon>
-          </div>
-          <div class="hide" id="challan-hide">
-            <div class="image-detail">
-              <div class="image-name" id="challan-image-name"></div>
-              <div class="image-size" id="challan-image-size"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="important-message">
-          <strong>Note: </strong>
-          <div>
-            <p>* Documents should be properly signed and stamped</p>
-            <p>* Documents should be in legible writing and language</p>
-          </div>
-        </div>
-      </div>
-
       <!-- Lab Testing -->
-
       <div class="item">
         <div class="top-heading">
           <h2>Lab testing reports (where required as per SOPs)</h2>
         </div>
-        <input
-          type="file"
-          (change)="labTestingDocumentInput($event)"
-          id="labTesting-input"
-          hidden
-        />
+        <input type="file" (change)="labTestingDocumentInput($event)" id="labTesting-input" hidden />
 
         <div class="uploaded-document" (click)="labTestingDocument()">
           <div class="show" id="labTesting-show">
             <h4 id="labTesting-text">Drag And Drop</h4>
-            <ion-icon
-              id="labTesting-icon"
-              name="cloud-upload-outline"
-            ></ion-icon>
+            <ion-icon id="labTesting-icon" name="cloud-upload-outline"></ion-icon>
           </div>
           <div class="hide" id="labTesting-hide">
             <div class="image-detail">
@@ -183,7 +152,6 @@
       </div>
 
       <!-- Medical -->
-
       <div class="item">
         <div class="top-heading">
           <h2>
@@ -191,12 +159,7 @@
             SOPs)
           </h2>
         </div>
-        <input
-          type="file"
-          (change)="medicalDocumentInput($event)"
-          id="medical-input"
-          hidden
-        />
+        <input type="file" (change)="medicalDocumentInput($event)" id="medical-input" hidden />
 
         <div class="uploaded-document" (click)="medicalDocument()">
           <div class="show" id="medical-show">
@@ -227,10 +190,8 @@
   <ion-toolbar>
     <ion-title slot="start"></ion-title>
     <div class="bottom-submit-button" slot="end">
-      <ion-button (click)="submitForUploadDocument()"
-        >Submit For Review
-        <span><ion-icon name="chevron-forward-outline"></ion-icon></span
-      ></ion-button>
+      <ion-button (click)="submitForUploadDocument()">Document Submit
+        <span><ion-icon name="chevron-forward-outline"></ion-icon></span></ion-button>
     </div>
   </ion-toolbar>
 </ion-footer>
