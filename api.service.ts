@@ -16,8 +16,9 @@ import { Location } from '@angular/common';
   providedIn: 'root',
 })
 export class ApiService {
-  public domain = 'http://192.168.18.116:9999';
-  localhost: string = 'http://192.168.18.116:9999';
+  public frontEndDomain = 'http://localhost:8100';
+  public domain = 'http://192.168.18.116:8888';
+  localhost: string = 'http://192.168.18.116:8888';
   // public domain = 'https://sfa.pythonanywhere.com';
   // localhost: string = 'https://sfa.pythonanywhere.com';
   
@@ -53,7 +54,7 @@ export class ApiService {
       : this.platform.is('ios')
       ? 'ios'
       : 'android';
-    this.localhost = 'http://192.168.18.116:9999'; // put your IP here
+    this.localhost = 'http://192.168.18.116:8888'; // put your IP here
     // this.localhost = 'https://sfa.pythonanywhere.com'; // put your IP here
     
     // this.initStorage()

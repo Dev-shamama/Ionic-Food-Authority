@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./licensedetail.page.scss'],
 })
 export class LicensedetailPage {
+  frontEndDomain = this.apiService.frontEndDomain;
   domain: any;
   documentUniqueName = '';
 
@@ -41,7 +42,7 @@ export class LicensedetailPage {
     expiry_percentage: null,
     percentage: null,
     percentageString: null,
-    past_days: null,
+    past_days: '0',
     past_days_percentage: null,
     upload_docs_no: null,
 
@@ -86,8 +87,6 @@ export class LicensedetailPage {
     this.domain = this.apiService.domain;
     this.getLicenseDetails();
     this.checkDocumentStatus();
-    this.MainApp.getDistrict();
-    this.MainApp.getNature();
   }
 
   getLicenseDetails() {

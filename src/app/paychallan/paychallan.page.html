@@ -12,19 +12,19 @@
       </div>
 
       <div id="{{challan.id}}" class="{{challan.id}} divContents">
-        <div class="challan-content" style="background-image: url(http://localhost:8100/assets/img/challan-bg.png);">
+        <div class="challan-content" style="background-image: url({{frontEndDomain}}/assets/img/challan-bg.png);">
 
           <div class="paid-unpaid" *ngIf="challan.Payment == 'Unpaid'">
-            <img src="http://localhost:8100/assets/img/unpaid.png" alt="" />
+            <img src="{{frontEndDomain}}/assets/img/unpaid.png" alt="" />
           </div>
 
           <div class="paid-unpaid" *ngIf="challan.Payment != 'Unpaid'">
-            <img src="http://localhost:8100/assets/img/paid.png" alt="" />
+            <img src="{{frontEndDomain}}/assets/img/paid.png" alt="" />
           </div>
 
           <div class="top-logo">
             <div class="logo left-logo">
-              <img src="http://localhost:8100/assets/img/logo-1.png" alt="logo" />
+              <img src="{{frontEndDomain}}/assets/img/logo-1.png" alt="logo" />
             </div>
 
             <div class="centerHeading">
@@ -35,7 +35,7 @@
 
 
             <div class="logo right-logo">
-              <img src="http://localhost:8100/assets/img/bg-logo.png" alt="logo" />
+              <img src="{{frontEndDomain}}/assets/img/bg-logo.png" alt="logo" />
             </div>
           </div>
 

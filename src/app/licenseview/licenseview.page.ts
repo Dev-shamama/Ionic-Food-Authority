@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./licenseview.page.scss'],
 })
 export class LicenseviewPage {
+  frontEndDomain = this.apiService.frontEndDomain;
+
   image = 'http://localhost:8100/assets/img/certificate.png';
   id: any;
   statusCheck: any = '';

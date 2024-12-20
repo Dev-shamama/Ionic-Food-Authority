@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./paychallan.page.scss'],
 })
 export class PaychallanPage {
+  frontEndDomain = this.apiService.frontEndDomain;
 
   cnic: string[] = Array(15).fill('');
   @ViewChildren('inputRef') inputRefs!: QueryList<ElementRef<HTMLDivElement>>;
